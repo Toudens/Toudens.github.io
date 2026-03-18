@@ -40,13 +40,13 @@ enableInlineShortcodes = true
   # 选项: "normal" (默认), "wide" (较宽), "full" (全屏)
   width = "normal"
 
-# 数学公式渲染
 [params.math]
   enable = true
-  engine = "katex"
-  # 如果默认 CDN 慢，可以换成国内源
-[params.math.katex]
-  base = "https://cdn.staticfile.net/KaTeX/0.16.9/"
+  engine = "mathjax"
+  
+#[params.math.katex]
+# 使用 unpkg 或者 jsdelivr，这两个在国内目前相对稳定
+#  base = "https://unpkg.com/katex@0.16.11/dist/"
 
   
 [params.flexsearch]
@@ -76,17 +76,17 @@ enableInlineShortcodes = true
 
 # Markdown 渲染配置（关键部分）
 [markup]
-  [markup.highlight]
-    noClasses = false
   [markup.goldmark]
     [markup.goldmark.renderer]
-      unsafe = true
-    [markup.goldmark.extensions.passthrough]
-      enable = true
-      [markup.goldmark.extensions.passthrough.delimiters]
-        block = [["$$", "$$"]]
-        inline = [["$", "$"]]
-
+      unsafe = true # 允许 HTML
+    [markup.goldmark.extensions]
+      [markup.goldmark.extensions.passthrough]
+        enable = true
+        [markup.goldmark.extensions.passthrough.delimiters]
+          # 修改为正确的 TOML 配置：[markup.goldmark.extensions.passthrough.delimiters]
+           block = [['$$', '$$'], ['\[', '\]']]
+            inline = [['$', '$'], ['\(', '\)']]
+            
 # 菜单配置
 [menu]
   [[menu.main]]

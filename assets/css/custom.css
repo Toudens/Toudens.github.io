@@ -1,0 +1,49 @@
+@import url("https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css");
+
+html {
+    /* 加一个 !important 确保字体设置生效 */
+    font-size: 16px !important; 
+}
+
+/* 暴力覆盖 Hextra (Tailwind) 的默认响应式表格样式 */
+.hextra-article table,
+.nx-article table,
+article table,
+main table {
+    width: 100% !important;
+    min-width: 100% !important;
+    display: table !important; /* 强行把 block 改回 table */
+    table-layout: auto !important;
+    word-break: break-word !important; /* 防止长串英文单词撑破表格 */
+}
+
+/* （可选）如果你想固定左侧 Operator 列的宽度，可以解除下面这段的注释 */
+/*
+.hextra-article table th:first-child,
+.hextra-article table td:first-child {
+    width: 25% !important;
+}
+*/
+
+/* ----------------------------------
+   缩小侧边栏 (Sidebar) 章节标题的间距
+----------------------------------- */
+
+/* 1. 缩小列表项之间的全局缝隙 (Flex Gap) */
+.hextra-sidebar-container ul {
+    gap: 2px !important; /* 默认通常是 4px 甚至更大，改为 2px 甚至 0 */
+}
+
+/* 2. 缩小每个选项（灰色高亮块）自身的上下内边距 */
+.hextra-sidebar-container li > a,
+.hextra-sidebar-container li > button {
+    padding-top: 0.2rem !important;    /* 默认通常是 0.5rem (8px)，这里调小 */
+    padding-bottom: 0.2rem !important;
+}
+
+/* （可选）如果你觉得侧边栏的字号也稍大了点，可以解除下面这段的注释 */
+/*
+.hextra-sidebar-container li > a {
+    font-size: 0.9rem !important; 
+}
+*/

@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "acee/infotheory/Ch-1 信息的度量.md",
+                "file": "acee/infotheory/_index.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Ch-1 信息的度量"
+              "title": "_index"
             }
           }
         ]
@@ -78,7 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 201.5
+    "width": 300.5
   },
   "right": {
     "id": "c569291f788890c9",
@@ -94,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "acee/infotheory/Ch-1 信息的度量.md",
+                "file": "acee/infotheory/_index.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Ch-1 信息的度量 的反向链接列表"
+              "title": "_index 的反向链接列表"
             }
           },
           {
@@ -113,12 +113,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "acee/infotheory/Ch-1 信息的度量.md",
+                "file": "acee/infotheory/_index.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Ch-1 信息的度量 的出链列表"
+              "title": "_index 的出链列表"
             }
           },
           {
@@ -156,13 +156,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "acee/infotheory/Ch-1 信息的度量.md",
+                "file": "acee/infotheory/_index.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Ch-1 信息的度量 的大纲"
+              "title": "_index 的大纲"
             }
           }
         ]
@@ -183,13 +183,15 @@
       "bases:新建数据库": false
     }
   },
-  "active": "235b7997c857e03f",
+  "active": "c92be4ccedee05d3",
   "lastOpenFiles": [
-    "phymath/Calculus II/Ch-1 级数及其应用.md",
+    "compsci/database/_index.md",
+    "acee/infotheory/_index.md",
+    "acee/_index.md",
+    "compsci/_index.md",
     "acee/infotheory/Ch-1 信息的度量.md",
     "compsci/database/Ch-2 Relational Model.md",
-    "acee/infotheory/_index.md.md",
-    "compsci/database/_index.md",
+    "phymath/Calculus II/Ch-1 级数及其应用.md",
     "acee/infotheory"
   ]
 }

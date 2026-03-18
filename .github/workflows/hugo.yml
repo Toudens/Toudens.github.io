@@ -15,6 +15,10 @@ concurrency:
   group: "pages"
   cancel-in-progress: false
 
+# 全局开启 Node 24 支持，消除弃用警告
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 defaults:
   run:
     shell: bash
@@ -33,13 +37,18 @@ jobs:
         uses: actions/setup-go@v5
         with:
           go-version: '>=1.20.0'
-          
+          cache: false # 💡 关键：关闭默认缓存，防止出现 "tar failed with exit code 2"
+
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v3
         with:
-          hugo-version: 'latest'
+          # 💡 建议固定版本，与你的 hugo.toml 中的 min = "0.146.0" 匹配
+          hugo-version: '0.146.0' 
           extended: true
           
+      - name: Install dependencies
+        run: hugo mod get -u # 确保 Hugo Modules (Hextra 主题) 成功拉取
+
       - name: Build with Hugo
         run: hugo --gc --minify
         

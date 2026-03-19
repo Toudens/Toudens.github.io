@@ -1,5 +1,5 @@
 ---
-title: Appendix 总结整理
+title: Appendix
 type: docs
 date: 2026-03-19
 weight: "7"

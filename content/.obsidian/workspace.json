@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "phymath/ode/_index.md",
+                "file": "phymath/phy II/Ch-13.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "_index"
+              "title": "Ch-13"
             }
           }
         ]
@@ -185,10 +185,18 @@
   },
   "active": "235b7997c857e03f",
   "lastOpenFiles": [
-    "compsci/dm/Ch-11.md",
+    "phymath/phy II/Ch-14.md",
+    "phymath/phy II/Summary.md",
+    "phymath/calc I/Summary.md",
+    "phymath/calc I/Ch-6.md",
+    "phymath/calc I/Ch-5.md",
+    "phymath/calc I/Ch-4.md",
+    "phymath/calc I/Ch-3.md",
+    "phymath/calc I/Ch-1.md",
+    "phymath/calc I/Ch-2.md",
     "phymath/ode/_index.md",
+    "compsci/dm/Ch-11.md",
     "phymath/ode",
-    "phymath/未命名.md",
     "compsci/dm/Ch-1.md",
     "compsci/dm/Ch-9.md",
     "compsci/dm/Ch-8.md",
@@ -200,7 +208,6 @@
     "compsci/dm/Ch-10.md",
     "compsci/db/Ch-3.md",
     "compsci/db/Ch-2.md",
-    "phymath/calc I/Ch-1.md",
     "phymath/Calculus I/Ch-2.md",
     "phymath/calc I/_index.md",
     "compsci/dm/_index.md",
@@ -209,15 +216,8 @@
     "compsci/dm/Graph/01.png",
     "ttneed/flower/_index.md",
     "compsci/dm/Graph",
-    "phymath/phy II/Summary.md",
     "compsci/dm",
-    "phymath/phy II/Ch-14.md",
-    "phymath/phy II/Ch-13.md",
-    "phymath/phy I/Ch-9.md",
-    "phymath/phy II/_index.md",
-    "phymath/phy I/_index.md",
     "phymath/phy II",
-    "phymath/phy I/Ch-8.md",
     "phymath/phy I",
     "ttneed/flower/20260313/09.jpg",
     "ttneed/flower/20260313/08.jpg",

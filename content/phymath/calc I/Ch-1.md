@@ -1,7 +1,8 @@
 ---
-title: "Ch-1 级数及其应用"
+title: Ch-1 级数及其应用
 date: 2026-03-18
-type: "docs"
+type: docs
+weight: "1"
 ---
 ### 数项级数的定义
 设 $u_1,u_2,\cdots,u_n,\cdots$ 是给定的数列，称 $\begin{aligned}\sum_{n=1}^\infty u_n=u_1+u_2+\cdots+u_n+\cdots\end{aligned}$ 为数项级数，称 $\begin{aligned}S_n=\sum_{i=1}^nu_i\end{aligned}$ 为 $\text{部分和}$，则有 $\begin{aligned}\sum_{n=1}^\infty u_n=\lim_{n\rightarrow\infty}S_n\end{aligned}$

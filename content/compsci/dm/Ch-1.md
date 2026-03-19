@@ -61,7 +61,7 @@ A compound proposition is satisfiable if there is an assignment of truth values 
 A compound proposition is unsatisfiable when it is false for all assignments of truth values to its variables.
 ### Logical Laws
 
-![](Graph/01.png)
+![](01.png)
 ### Normal Forms
 
 **Disjunctive Normal Form**: A formula is said to be in disjunctive normal form if it is written as a disjunction, in which all the terms are conjunctions of literals.

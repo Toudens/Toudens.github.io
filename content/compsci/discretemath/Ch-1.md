@@ -2,8 +2,9 @@
 title: Ch-1 Logic and Proofs
 date: 2026-03-19
 type: docs
+weight: "1"
 ---
-## Word Table
+### Word Table
 
 | 术语            | 翻译  | 术语             | 翻译   | 术语            | 翻译   |
 | ------------- | --- | -------------- | ---- | ------------- | ---- |
@@ -16,7 +17,7 @@ type: docs
 | contradiction | 永假式 | contingency    | 可能式  | predicate     | 谓词   |
 | axiom         | 公理  | corollary      | 推论   | conjecture    | 猜想   |
 | lemma         | 引理  | vacuous proof  | 空证明  | trivial proof | 平凡证明 |
-## Proposition
+### Proposition
 
 **proposition**:  a declarative sentence that is either true or false, but not both.
 
@@ -25,7 +26,7 @@ type: docs
 **atomic propositions**: Propositions that cannot be expressed in terms of simpler propositions.
 
 **compound propositions**: propositions formed from existing propositions using logical operators.
-## Logical Operators
+### Logical Operators
 
 | Connectives   | Expression           | Abbreviation   | Translation |
 | ------------- | -------------------- | -------------- | ----------- |
@@ -37,7 +38,7 @@ type: docs
 | biconditional | $p\leftrightarrow q$ | IF AND ONLY IF | 双条件         |
 
 The word "or" in English can represent both inclusive and exclusive.
-## Conditional Statements
+### Conditional Statements
 
 | Statement      | Expression                |
 | -------------- | ------------------------- |
@@ -47,7 +48,7 @@ The word "or" in English can represent both inclusive and exclusive.
 | contrapositive | $\neg q\rightarrow\neg p$ |
 
 The contrapositive has **the same truth values** as the original implication.
-## Propositional Equivalences
+### Propositional Equivalences
 
 **tautology**: A proposition which is always true.
 
@@ -58,10 +59,10 @@ The contrapositive has **the same truth values** as the original implication.
 A compound proposition is satisfiable if there is an assignment of truth values to make it true.
 
 A compound proposition is unsatisfiable when it is false for all assignments of truth values to its variables.
-## Logical Laws
+### Logical Laws
 
 ![](Graph/01.png)
-## Normal Forms
+### Normal Forms
 
 **Disjunctive Normal Form**: A formula is said to be in disjunctive normal form if it is written as a disjunction, in which all the terms are conjunctions of literals.
 
@@ -74,7 +75,7 @@ A compound proposition is unsatisfiable when it is false for all assignments of 
 **Full Disjunctive Normal Form**: Each term includes all variables.
 
 **Full Conjunctive Normal Form**: Each term includes all variables.
-## Predicate Logic
+### Predicate Logic
 $$
 \begin{align}
 &\begin{cases}
@@ -91,37 +92,37 @@ $$
 \end{cases}
 \end{align}
 $$
-## Nested Quantifiers
+### Nested Quantifiers
 
 Nest quantifiers are quantifiers that occur within the scope of other quantifiers
 The order of nested quantifiers matters if quantifiers are of different types.
-## Prenex Normal Form
+### Prenex Normal Form
 
 Any expression can be transformed into a prefix normal form.
 1.  Eliminate all occurrences of $\rightarrow$ and $\leftrightarrow$ from the formula in question
 2.  Move all negations inward such that negation only appear as part if literals
 3.  Standardize the variables a part (when necessary)
 4.  moving all quantifiers to the front of the formula
-## Rules of Inference
+### Rules of Inference
 
 An **argument** is a sequence of statements that end with a conclusion.
 
 By **valid** ,we mean the conclusion must follow from the truth of the preceding statements.
 
 We use **rules of inference** to construct valid arguments.
-## Direct Proof
+### Direct Proof
 
 A direct proof of a conditional statement $p\rightarrow q$ is constructed when the first step is the assumption that $p$ is true, subsequent steps are constructed using rules of inference, with the final step show that $q$ must also be true.
-## Vacuous Proof
+### Vacuous Proof
 
 The conditional statement $p\rightarrow q$ is true when we know that $p$ is false, consequently, if we can show that $p$ is false, then we have a proof called a vacuous proof.
-## Trivial Proof
+### Trivial Proof
 
 We can prove a conditional statement $p\rightarrow q$ if we know that the conclusion $q$ is true.
-## Proof by Contraposition
+### Proof by Contraposition
 
 To proof the conditional statement $p\rightarrow q$ ,we can proof that $\neg q\rightarrow\neg p$ .
-## Proof by Contradiction
+### Proof by Contradiction
 
 Proof $p$ by contradiction:
 1. assume $p$ is false
@@ -131,14 +132,14 @@ Proof $p$ by contradiction:
 Proof $p\rightarrow q$ by contradiction:
 1. assume that both $\neg q$ and $p$ are true
 2. show that $(p\land\neg q)\rightarrow\mathrm{F}$ 
-## Proof by cases
+### Proof by cases
 
 Convince the reader that the cases are inclusive and establish all implications
 Without Loss of Generality: WLOG.
-## Exhaustive Proof
+### Exhaustive Proof
 
 An **exhaustive proof** is a special type of proof by cases where each case involves checking a single example.
-## Uniqueness Proof
+### Uniqueness Proof
 
 To show that a theorem assert the existence of a unique element with a particular property:
 $$

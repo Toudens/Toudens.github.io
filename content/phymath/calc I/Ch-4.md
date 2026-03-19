@@ -32,16 +32,17 @@ type: docs
 
 ### 洛必达法则
 
-#### 形式1
+**形式1**
 
-如果函数 $f$ 和 $g$ 在 $x_0$ 的某去心邻域 $\mathring{U}(x_0)$ 内可导，且 $g'\neq0$ 
+函数 $f$ 和 $g$ 在 $x_0$ 的某去心邻域 $\mathring{U}(x_0)$ 内可导，且 $g'\neq0$ 
 
 如果 $\begin{aligned}\lim_{x\rightarrow x_0}f(x)=\lim_{x\rightarrow x_0}g(x)=0\end{aligned}$ ，且极限 $\begin{aligned}\lim_{x\rightarrow x_0}\frac{f'(x)}{g'(x)}\end{aligned}=A$ （或 $\infty$ ）
 
 那么有$\begin{aligned}\lim_{x\rightarrow x_0}\frac{f(x)}{g(x)}=\lim_{x\rightarrow x_0}\frac{f'(x)}{g'(x)}\end{aligned}$
-#### 形式2
 
-如果函数 $f$ 和 $g$ 在 $x_0$ 的某去心邻域 $\mathring{U}(x_0)$ 内可导，且 $g'\neq0$ 
+**形式2**
+
+函数 $f$ 和 $g$ 在 $x_0$ 的某去心邻域 $\mathring{U}(x_0)$ 内可导，且 $g'\neq0$ 
 
 如果 $\begin{aligned}\lim_{x\rightarrow x_0}g(x)=\infty\end{aligned}$ ，且极限 $\begin{aligned}\lim_{x\rightarrow x_0}\frac{f'(x)}{g'(x)}\end{aligned}=A$ （或 $\infty$ ）
 

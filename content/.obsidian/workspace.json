@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "ttneed/flower/_index.md",
+                "file": "acee/infotheory/Ch-1 信息的度量.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "_index"
+              "title": "Ch-1 信息的度量"
             }
           }
         ]
@@ -78,7 +78,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 347.5
+    "width": 200,
+    "collapsed": true
   },
   "right": {
     "id": "c569291f788890c9",
@@ -94,7 +95,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "ttneed/flower/_index.md",
+                "file": "acee/infotheory/Ch-1 信息的度量.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +105,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "_index 的反向链接列表"
+              "title": "Ch-1 信息的度量 的反向链接列表"
             }
           },
           {
@@ -113,12 +114,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "ttneed/flower/_index.md",
+                "file": "acee/infotheory/Ch-1 信息的度量.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "_index 的出链列表"
+              "title": "Ch-1 信息的度量 的出链列表"
             }
           },
           {
@@ -156,13 +157,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "ttneed/flower/_index.md",
+                "file": "acee/infotheory/Ch-1 信息的度量.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "_index 的大纲"
+              "title": "Ch-1 信息的度量 的大纲"
             }
           }
         ]
@@ -185,8 +186,8 @@
   },
   "active": "235b7997c857e03f",
   "lastOpenFiles": [
-    "ttneed/flower/20260313/09.jpg",
     "ttneed/flower/_index.md",
+    "ttneed/flower/20260313/09.jpg",
     "ttneed/flower/20260313/08.jpg",
     "ttneed/flower/20260313/07.jpg",
     "ttneed/flower/20260313/06.jpg",

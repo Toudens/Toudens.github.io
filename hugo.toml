@@ -79,6 +79,7 @@ enableInlineShortcodes = true
   [markup.goldmark]
     [markup.goldmark.renderer]
       unsafe = true # 允许 HTML
+      hardWraps = true  # 开启硬换行
     [markup.goldmark.extensions]
       [markup.goldmark.extensions.passthrough]
         enable = true
@@ -86,7 +87,7 @@ enableInlineShortcodes = true
           # 修改为正确的 TOML 配置：[markup.goldmark.extensions.passthrough.delimiters]
            block = [['$$', '$$'], ['\[', '\]']]
             inline = [['$', '$'], ['\(', '\)']]
-            
+
 # 菜单配置
 [menu]
   [[menu.main]]

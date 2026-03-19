@@ -15,25 +15,26 @@ type: docs
 * $\mathcal{X}=\{x_k|k=1,2,\cdots,K\},\mathcal{Y}=\{y_j|j=1,2,\cdots,J\}$
 ### 事件的自信息
 
-对于概率空间 $\{X,\mathcal{X},q(x)\}$ ，事件 $\{X=x_k\}$ 的 **自信息** 定义为：
-$$
+对于概率空间 $\{X,\mathcal{X},q(x)\}$ ，事件 $\{X=x_k\}$ 的 **自信息** 定义为：$$
 I(x_k)=-\log_aq(x_k)
-$$
-当 $a=2$ 时单位为 **比特** bit ，当$a=e$ 时单位为 **奈特** nat。
+$$ 当 $a=2$ 时单位为 **比特** bit ，当$a=e$ 时单位为 **奈特** nat。
 
 > [!Note]**定义为概率的负对数的优点：**
-> 1、符合概率越小，信息量越大的要求；
-> 2、对数函数是比较简单的函数，容易进行数学处理；
+> 1、符合概率越小，信息量越大的要求；\
+> 2、对数函数是比较简单的函数，容易进行数学处理；\
 > 3、对数函数的可加性符合生活中信息可叠加的经验。
 
 > [!Note]**事件自信息的本质：**
-> 1、事件发生后对外界所提供的信息量；
-> 2、事件发生前外界为确证该事件发生所需的信息量；
+> 1、事件发生后对外界所提供的信息量；\
+> 2、事件发生前外界为确证该事件发生所需的信息量；\
 > 3、事件的自信息 **不代表** 事件的不确定性。
 
 **性质1**：$q(x_k)$ 越大，$I(x_k)$ 越小，概率越小的事件其自信息越大。
+
 **性质2**：$q(x_k)=1$ , $I(x_k)=0$ ，确定事件的自信息为零。
-**性质3**：$q(x_k)\rightarrow0$ , $I(x_k)=\infty$ 。
+
+**性质3**：$q(x_k)\rightarrow0$ , $I(x_k)=\infty$。
+
 ### 事件的条件自信息
 
 二维随机变量 $\{(X,Y),\mathcal{X}\times\mathcal{Y},p(x,y)\}$ ，事件 $\{Y=y_j\}$ 发生的条件下事件 $\{X=x_k\}$ 的**条件自信息定义**为：
@@ -42,10 +43,11 @@ I(x_k|y_j)=-\log p(x_k|y_j)
 $$
 
 > [!Note]**事件条件自信息的本质：**
-> 1、事件 $\{Y=y_j\}$ 发生后，$\{X=x_k\}$ 如果再发生需要的新的信息量；
+> 1、事件 $\{Y=y_j\}$ 发生后，$\{X=x_k\}$ 如果再发生需要的新的信息量；\
 > 2、事件 $\{Y=y_j\}$ 发生后，如果 $\{X=x_k\}$ 再发生提供给外界的信息量。
 
-**性质1**：若 $\{Y=y_j\}$ 与 $\{X=x_k\}$ 为 **无关事件**，则有 $I(x_k)=I(x_k|y_j)$ 。
+**性质1**：若 $\{Y=y_j\}$ 与 $\{X=x_k\}$ 为 **无关事件**，则有 $I(x_k)=I(x_k|y_j)$。
+
 ### 事件的互信息
 
 二维随机变量 $\{(X,Y),\mathcal{X}\times\mathcal{Y},p(x,y)\}$ ，事件 $\{Y=y_j\}$ 与事件 $\{X=x_k\}$ 之间的 **互信息** 定义为：
@@ -68,7 +70,9 @@ $$
 >$$I(x_k;y_j)=I(x_k)+I(y_j)-I(x_k,y_j)$$ 即事件 $\{X=x_k\}$ 与 $\{Y=y_j\}$ 的自信息之和与二者的联合自信息（见下文）之差，因此互信息应解释为：两个信息同时发生时，是产生了新信息（负）还是产生了冗余信息（正），或解释为两个信息同时发生时产生冗余信息的程度。
 
 **性质1**：$I(x_k;y_j)=I(y_j;x_k)$ 用条件概率的定义展开即可证明。
-**性质2**：若 $\{Y=y_j\}$ 与 $\{X=x_k\}$ 为 **无关事件**，则有 $I(x_k;y_j)=0$ 。
+
+**性质2**：若 $\{Y=y_j\}$ 与 $\{X=x_k\}$ 为 **无关事件**，则有 $I(x_k;y_j)=0$。
+
 ### 事件的联合自信息
 
 二维随机变量 $\{(X,Y),\mathcal{X}\times\mathcal{Y},p(x,y)\}$ ，事件 $\{Y=y_j\}$ 与事件 $\{X=x_k\}$ 之间的 **联合自信息**定义为：
@@ -87,6 +91,7 @@ $$
 $$
 I(x;y,z)=\log\frac{p(x|y,z)}{p(x)}=\log\frac{p(x,y,z)}{p(x)\cdot p(y,z)}
 $$
+
 $$
 \begin{align}
 I(x;y,z)
@@ -96,6 +101,7 @@ I(x;y,z)
 &=I(x;y)+I(x;z|y)
 \end{align}
 $$
+
 ## 随机变量的熵及性质
 ### 随机变量的熵
 
@@ -106,8 +112,10 @@ H(X)
 =\sum_{x\in\mathcal{X}}q(x)I(x)
 =-\sum_{x\in\mathcal{X}}q(x)\log q(x)
 $$
+
 > [!Note]**熵与自信息的区别：**
 > 熵针对的是随机变量，自信息针对具体的事件。熵是随机 **变量不确定性** 的度量。
+
 ### 随机变量的联合熵
 
 随机变量的 **联合熵** 定义为随机变量各个事件的平均联合自信息：
@@ -122,14 +130,20 @@ H(X|y)
 =\sum_{x\in\mathcal{X}}p(x|y)I(x|y)
 =-\sum_{x\in\mathcal{X}}p(x|y)\log p(x|y)
 $$
+
 **定义2**：随机变量 $X$ 相对于随机变量 $Y$ 的 **条件熵** 为：
 $$
 H(X|Y)
 =E[H(X|y)]
 =-\sum_{x\in\mathcal{X}}\sum_{y\in\mathcal{Y}}p(x,y)\log p(x|y)
 $$
-**性质1**：$X$ 和 $Y$ **统计独立** 时，有 $H(X|Y)=H(X)$ 。
-**性质2**：$X$ 和 $Y$ 的联合熵满足 **链式法则** $H(X,Y)=H(X)+H(Y|X)=H(Y)+H(X|Y)$ 。
+
+**性质1**：$X$ 和 $Y$ **统计独立** 时，有 $H(X|Y)=H(X)$。
+
+**性质2**：$X$ 和 $Y$ 的联合熵满足 **链式法则**。
+$$
+H(X,Y)=H(X)+H(Y|X)=H(Y)+H(X|Y)
+$$
 $$
 \begin{align}
 H(X,Y)&=E[I(X,Y)]
@@ -142,7 +156,9 @@ $$
 $$
 H(X,Y,Z)=H(X)+H(Y,Z|X)=H(X)+H(Y|Z)+H(Z|X,Y)
 $$
-**性质3**：$X$ 和 $Y$ **统计独立** 时，有 $H(X,Y)=H(X)+H(Y)$ 。
+
+**性质3**：$X$ 和 $Y$ **统计独立** 时，有 $H(X,Y)=H(X)+H(Y)$。
+
 ### 熵的性质
 $$
 X\sim
@@ -158,22 +174,23 @@ H(X)
 =-\sum_{k=1}^{K}p_k\log p_k
 $$
 1. $H_K(P)$ 对概率矢量 $P$ 的分量是 **对称** 的；
-2. **非负性** ，即 $H_K(P)\geq 0$ ；
-3. **确定性** ，即若 $P=(p_1,p_2,\cdots,p_K)$ 中有一个分量为 $1$ ，其余均为零，则 $H_K(P)=0$ ；
-4. **可扩展性** ，即 $\lim_{\epsilon\rightarrow0}H_{K+1}(p_1,p_2,\cdots,p_K-\epsilon,\epsilon)=H_K(p_1,p_2,\cdots,p_K)$ ；
-5. **可加性** ，$H(X_2)|_{X_2\in\mathcal{X}_2}=H(X_1)|_{X_1\in\mathcal{X}_1}+H(X_2|X_1)|_{X_2\in\mathcal{X}_2}^{X_1\in\mathcal{X}_1}$ ；
+2. **非负性** ，即 $H_K(P)\geq 0$；
+3. **确定性** ，若 $P=(p_1,p_2,\cdots,p_K)$ 中有一个分量为 $1$ ，其余均为零，则 $H_K(P)=0$；
+4. **可扩展性** ，即 $\lim_{\epsilon\rightarrow0}H_{K+1}(p_1,p_2,\cdots,p_K-\epsilon,\epsilon)=H_K(p_1,p_2,\cdots,p_K)$；
+5. **可加性** ，$H(X_2)|_{X_2\in\mathcal{X}_2}=H(X_1)|_{X_1\in\mathcal{X}_1}+H(X_2|X_1)|_{X_2\in\mathcal{X}_2}^{X_1\in\mathcal{X}_1}$；
 
 > [!Note] **链式法则**
 > 对变量 $X$ 可以进行多步分层的观察，每一步都可从上一步的观察结果中得到更为细致的结果，变量 $X$ 在最后的观察结果集合中的不确定性等于第一次观察结果的不确定性，加上其后每次观察结果在前一次观察结果已知的前提下的条件不确定性。
 
-6. **极值性** ，$H_K(p_1,p_2,\cdots,p_K)\leq H_K(\frac{1}{K},\frac{1}{K},\cdots,\frac{1}{K})=\log K$ ；
+6. **极值性** ，$H_K(p_1,p_2,\cdots,p_K)\leq H_K(\frac{1}{K},\frac{1}{K},\cdots,\frac{1}{K})=\log K$；
+
 $$
 \begin{align}
 &H_K(p_1,p_2,\cdots,p_K)+\sum_{k=1}^Kp_k\log q_k=\sum_{k=1}^K p_k\log\frac{q_k}{p_k}\leq\log\mathrm{e}\cdot\sum_{k=1}^Kp_k(\frac{q_k}{p_k}-1)=0\\
 &\Rightarrow H_K(p_1,p_2,\cdots,p_K)\leq-\sum_{k=1}^Kp_k\log q_k
 \end{align}
 $$
-7. **条件熵小于熵**，增加条件使熵减少 $H(X|Y)\leq H(X)$ ；
+7. **条件熵小于熵**，增加条件使熵减少 $H(X|Y)\leq H(X)$；
 $$
 \begin{align}
 H(X|Y)
@@ -191,16 +208,18 @@ $$
 
 令 $\alpha=(\alpha_1,\alpha_2,\cdots,\alpha_k),\beta=(\beta_1,\beta_2,\cdots,\beta_k)$ 是 $k$ 维矢量空间集合 $R$ 中的任何两个矢量，如果对于任何实数 $\theta (0\leq\theta\leq1)$ 有：$\theta\alpha+(1-\theta)\beta\in R$ ，则称 $R$ 为 **凸集合**。
 
-定义在凸集合 $R$ 上的实值矢量函数 $f$ 被称为 **上凸函数**，当且仅当对任何两个矢量 $\alpha,\beta$ 以及实数 $\theta (0\leq\theta\leq1)$ 有 $\theta f(\alpha)+(1-\theta)f(\beta)\leq f[\theta\alpha+(1-\theta)\beta]$ 。若不等号翻转为下凸函数。
+定义在凸集合 $R$ 上的实值矢量函数 $f$ 被称为 **上凸函数**，当且仅当对任何两个矢量 $\alpha,\beta$ 以及实数 $\theta (0\leq\theta\leq1)$ 有 $\theta f(\alpha)+(1-\theta)f(\beta)\leq f[\theta\alpha+(1-\theta)\beta]$。若不等号翻转为下凸函数。
 
-**性质1**：如果 $f_1(\alpha),f_2(\alpha),\cdots,f_L(\alpha)$ 是上凸函数，$C_1,C_2,\cdots,C_L$ 为正，则有上凸函数：
+**性质1**：若 $f_1(\alpha),f_2(\alpha),\cdots,f_L(\alpha)$ 是上凸函数，$C_1,C_2,\cdots,C_L$ 为正，有上凸函数：
 $$
 \sum_{l=1}^L C_lf_l(\alpha)
 $$
+
 **性质2**：一元函数 $f(\alpha)$ 上凸的充要条件是在所定义的区间中满足：
 $$
 \frac{\mathrm{d}^2f(\alpha)}{\mathrm{d}\alpha^2}\leq 0
 $$
+
 **性质3**：Jensen 不等式，令 $(\alpha_1,\alpha_2,\cdots,\alpha_L)$ 是凸集中的一组矢量， $f(\alpha)$ 是该凸集中的一个上凸函数，$(\theta_1,\theta_2,\cdots,\theta_L)$ 是一组概率分布，则有：
 $$
 \sum_{l=1}^L\theta_lf(\alpha_l)\leq f

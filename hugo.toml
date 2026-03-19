@@ -79,7 +79,7 @@ enableInlineShortcodes = true
   [markup.goldmark]
     [markup.goldmark.renderer]
       unsafe = true # 允许 HTML
-      hardWraps = true  # 开启硬换行
+      hardWraps = false  # 开启硬换行
     [markup.goldmark.extensions]
       [markup.goldmark.extensions.passthrough]
         enable = true

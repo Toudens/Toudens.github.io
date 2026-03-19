@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "phymath/physics II/Summary.md",
+                "file": "phymath/Calculus I/Ch-1.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Summary"
+              "title": "Ch-1"
             }
           }
         ]
@@ -78,8 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200,
-    "collapsed": true
+    "width": 200
   },
   "right": {
     "id": "c569291f788890c9",
@@ -186,8 +185,19 @@
   },
   "active": "235b7997c857e03f",
   "lastOpenFiles": [
-    "phymath/physics II/Ch-14.md",
+    "phymath/Calculus I/_index.md",
+    "phymath/Calculus I/Ch-1.md",
+    "compsci/discretemath/Ch-1.md",
+    "compsci/discretemath/_index.md",
+    "compsci/discretemath/Graph/03.png",
+    "compsci/discretemath/Graph/02.png",
+    "compsci/discretemath/Graph/01.png",
+    "ttneed/flower/_index.md",
+    "compsci/discretemath/Graph",
+    "compsci/database/Ch-2.md",
     "phymath/physics II/Summary.md",
+    "compsci/discretemath",
+    "phymath/physics II/Ch-14.md",
     "phymath/physics II/Ch-13.md",
     "phymath/physics I/Ch-9.md",
     "phymath/physics II/_index.md",
@@ -199,12 +209,9 @@
     "phymath/physics I/Ch-5.md",
     "phymath/physics I/Ch-4.md",
     "phymath/physics I/Ch-3.md",
-    "phymath/Calculus II/_index.md",
     "compsci/database/Ch-3.md",
     "phymath/physics I",
-    "compsci/database/Ch-2.md",
     "acee/infotheory/Ch-1.md",
-    "ttneed/flower/_index.md",
     "ttneed/flower/20260313/09.jpg",
     "ttneed/flower/20260313/08.jpg",
     "ttneed/flower/20260313/07.jpg",
@@ -212,9 +219,6 @@
     "ttneed/flower/20260313/05.jpg",
     "ttneed/flower/20260313/04.jpg",
     "ttneed/flower/20260313/03.jpg",
-    "ttneed/flower/20260313/02.jpg",
-    "ttneed/flower/20260313/01.jpg",
-    "ttneed/zjgflower/20260313/DSC00281.JPG",
     "ttneed/flower/20260313",
     "acee/infotheory/Ch-1 信息的度量.md",
     "ttneed/flower",
@@ -223,7 +227,6 @@
     "acee/_index.md",
     "compsci/_index.md",
     "compsci/database/Ch-2 Relational Model.md",
-    "phymath/Calculus II/Ch-1 级数及其应用.md",
     "acee/infotheory"
   ]
 }

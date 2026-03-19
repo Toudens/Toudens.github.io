@@ -159,12 +159,21 @@ $\begin{aligned}e^{\text{i}x}&=\sum_{n=0}^\infty\frac{(\text{i}x)^n}{n!}=1+\text
 * $\begin{aligned}\cos x=\frac{1}{2}(e^{\text{i}x}+e^{-\text{i}x})\end{aligned}$
 
 ### 函数的傅里叶展开
-周期 $T=2l$ 的函数 $f(x)$ 可以表示成 $\begin{aligned}\frac{a_0}{2}+\sum_{n=1}^\infty(a_n\cos\frac{n\pi x}{l}+b_n\sin\frac{n\pi x}{l})\end{aligned}$
-在标准区间 $[-l,l]$ 上的三角解函数系：
-    $\begin{aligned}1,\quad\cos\frac{\pi x}{l},\quad\sin\frac{\pi x}{l},\quad\cos\frac{2\pi x}{l},\quad\sin\frac{2\pi x}{l},\quad\cdots,\quad\cos\frac{n\pi x}{l},\quad\sin\frac{n\pi x}{l},\quad\dots\end{aligned}$
-$\begin{cases}\begin{aligned}a_n=\frac{1}{l}\int_{-l}^lf(x)\cos\frac{n\pi x}{l}\mathrm{d}x\end{aligned},\quad n=0,1,2,\cdots\\\begin{aligned}b_n=\frac{1}{l}\int_{-l}^lf(x)\sin\frac{n\pi x}{l}\mathrm{d}x\end{aligned},\quad n=1,2,3,\cdots\end{cases}$
-当 $f(x)$ 为奇函数，则 $a_n=0$ , 称为 $\text{傅里叶正弦级数}$
-当 $f(x)$ 为偶函数，则 $b_n=0$ ，称为 $\text{傅里叶余弦级数}$
+周期 $T=2l$ 的函数 $f(x)$ 可以表示成 $\begin{aligned}\frac{a_0}{2}+\sum_{n=1}^\infty(a_n\cos\frac{n\pi x}{l}+b_n\sin\frac{n\pi x}{l})\end{aligned}$，在标准区间 $[-l,l]$ 上的三角解函数系：
+$$
+\begin{aligned}1,\quad\cos\frac{\pi x}{l},\quad\sin\frac{\pi x}{l},\quad\cos\frac{2\pi x}{l},\quad\sin\frac{2\pi x}{l},\quad\cdots,\quad\cos\frac{n\pi x}{l},\quad\sin\frac{n\pi x}{l},\quad\dots\end{aligned}
+$$
+$$
+\begin{cases}
+\begin{aligned}
+a_n=\frac{1}{l}\int_{-l}^lf(x)\cos\frac{n\pi x}{l}\mathrm{d}x
+\end{aligned},\quad n=0,1,2,\cdots\\\begin{aligned}b_n=\frac{1}{l}\int_{-l}^lf(x)\sin\frac{n\pi x}{l}\mathrm{d}x\end{aligned},\quad n=1,2,3,\cdots
+\end{cases}
+$$
+
+当 $f(x)$ 为奇函数，则 $a_n=0$ , 称为傅里叶正弦级数。
+
+当 $f(x)$ 为偶函数，则 $b_n=0$ ，称为傅里叶余弦级数。
 
 ### 狄利克雷定理
 如果 $f(x)$ 是以 $T=2l$ 为周期的周期函数，且 $f(x)$ 在 $[-l,l]$ 上逐段光滑，那么 $f(x)$ 的傅里叶级数在任意点 $x$ 处都收敛，并且收敛于 $f(x)$ 在该点左右极限的平均值，即

@@ -163,7 +163,7 @@ const Integer operator--(int); // postfix--
 3. `const_cast<type>()` is used to modify the const or volatile property.
 4. `reinterperet_cast<type>()` is used to convert pointers or reference into integer or backforth. Cannot be used for converting between non-pointer variables of the same type (int to int).
 
-### Stream IO
+### Stream I/O
 
 stream random access on file, but not on `std::cin/cout`
 

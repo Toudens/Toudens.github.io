@@ -110,22 +110,28 @@ enableInlineShortcodes = true
     name = "工高课程"
     pageRef = "/acee"
     weight = 3
+
+  [[menu.main]]
+    identifier = "gened"
+    name = "通识课程"
+    pageRef = "/gened"
+    weight = 4
   
   [[menu.main]]
     identifier = "ttneed"
     name = "偷一偷QwQ"
     pageRef = "/ttneed"
-    weight = 4
+    weight = 5
   
   [[menu.main]]
     name = "搜索"
-    weight = 5
+    weight = 6
     [menu.main.params]
       type = "search"
   
   [[menu.main]]
     name = "GitHub"
-    weight = 6
+    weight = 7
     url = "https://github.com/Toudens/Toudens.github.io"
     [menu.main.params]
       icon = "github"

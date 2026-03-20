@@ -3,12 +3,12 @@ title: 线性代数
 date: 2026-03-19
 type: docs
 ---
-### 线性代数的几何解释
+### 一、线性代数的几何解释
 
-#### 矩阵与线性变换的几何意义
+#### 1.1 矩阵与线性变换
 
-对于方阵 $A,B$ ，表达式 $B(AX)$ 表示在新基 $B$ 下坐标为在新基 $A$ 下坐标为 $X$ 的坐标的坐标。
-$(BA)X$ 表示 $A$ 中的每一个列向量在新基 $B$ 下对应的向量构成的一组基下坐标为 $X$ 的坐标。
+方阵 $A,B$ ，表达式 $B(AX)$ 表示在新基 $B$ 下坐标为在新基 $A$ 下坐标为 $X$ 的坐标的坐标。\
+$(BA)X$ 表示 $A$ 中的每一个列向量在新基 $B$ 下对应的向量构成的一组基下坐标为 $X$ 的坐标。\
 这表明矩阵的乘法是线性变换依次进行的等价线性变换。
 
 对于非方阵的矩阵乘法，一个 $m\times n$ 的矩阵：
@@ -17,7 +17,7 @@ $(BA)X$ 表示 $A$ 中的每一个列向量在新基 $B$ 下对应的向量构�
 
 对于矩阵的相似 $A=PBP^{-1}$ ，可以解读为：将基更换为 $P$ 后再进行线性变换 $B$ ，再更换为原来的基。
 
-#### 行列式的几何意义
+#### 1.2 行列式
 
 一个 $2\times2$ 的方阵 $A$ 的行列式反应了面积被放大了几倍，即原来在正交基下面积为 $S$ 的图形在经过该方阵线性变换后，面积变为了 $\det(A)\cdot S$。
 
@@ -32,16 +32,17 @@ $(BA)X$ 表示 $A$ 中的每一个列向量在新基 $B$ 下对应的向量构�
 
 根据以上几条性质展开 $V(\vec{v_1},\vec{v_2},\cdots,\vec{v_n})$ ，得到的结果与行列式的定义推导是一致的，由此还可以推导克拉默法则。
 
-#### 向量点乘的理解
+#### 1.3 向量点乘
 可以将 $\alpha\cdot\beta$ 中的向量 $\alpha$ 看作线性变换，设 $\alpha=\begin{bmatrix}x_1\\y_1\end{bmatrix},\beta=\begin{bmatrix}x_2\\y_2\end{bmatrix}$ ，则有：
-$\begin{aligned}\alpha\cdot\beta&=\begin{bmatrix}x_1\\y_1\end{bmatrix}\cdot\begin{bmatrix}x_2\\y_2\end{bmatrix}=\begin{bmatrix}x_1&y_1\end{bmatrix}\begin{bmatrix}x_2\\y_2\end{bmatrix}=\sqrt{x_1^2+y_1^2}\begin{bmatrix}u_x&u_y\end{bmatrix}\begin{bmatrix}x_2\\y_2\end{bmatrix}\\&=\sqrt{x_1^2+y_1^2}\times\sqrt{x_2^2+y_2^2}\times\cos{\theta}=x_1\cdot x_2+y_1\cdot y_2\end{aligned}$
+$$\begin{aligned}\alpha\cdot\beta&=\begin{bmatrix}x_1\\y_1\end{bmatrix}\cdot\begin{bmatrix}x_2\\y_2\end{bmatrix}=\begin{bmatrix}x_1&y_1\end{bmatrix}\begin{bmatrix}x_2\\y_2\end{bmatrix}=\sqrt{x_1^2+y_1^2}\begin{bmatrix}u_x&u_y\end{bmatrix}\begin{bmatrix}x_2\\y_2\end{bmatrix}\\&=\sqrt{x_1^2+y_1^2}\times\sqrt{x_2^2+y_2^2}\times\cos{\theta}=x_1\cdot x_2+y_1\cdot y_2\end{aligned}$$
 其中 $u_x,u_y$ 分别代表了 $x,y$ 轴上的单位向量在经过线性变换后在向量 $x$ 所在直线上的坐标。
 
-#### 特征值与特征向量的几何意义
+#### 1.4 特征值与特征向量
 特征向量是在经过方阵对应的线性变换之后，方向保持不变的向量；特征值则是该向量在该方向上缩放的倍数。
-### 行列式及其计算
+___
+### 二、行列式及其计算
 
-#### 行列式的定义与特殊形式
+#### 2.1 行列式的定义与特殊形式
 
 **行列式的定义**：
 
@@ -51,7 +52,7 @@ $\begin{aligned}\begin{vmatrix}a_{11}&a_{12}&\cdots&a_{1n}\\a_{21}&a_{22}&\cdots
 
 $\begin{aligned}\begin{vmatrix}1&1&\cdots&1\\a_1&a_2&\cdots&a_n\\a_1^2&a_2^2&\cdots&a_n^2\\\vdots&\vdots&&\vdots\\a_1^{n-1}&a_2^{n-1}&\cdots&a_n^{n-1}\end{vmatrix}=\prod_{1\leq i\leq j\leq n}(a_j-a_i)\end{aligned}$
 
-#### 行列式的基本性质
+#### 2.2 行列式的基本性质
 
 **性质1** 转置不改变行列式。
 
@@ -79,31 +80,33 @@ $$\begin{vmatrix}O&A_{r\times r}\\B_{s\times s}&C_{s\times r}\end{vmatrix}=\begi
 
 **性质12** 两个 $n$ 阶方阵乘积的行列式等于行列式的乘积，即 $|AB|=|A||B|$。证明方法：$$|A||B|=\begin{vmatrix}A&O\\-E&B\end{vmatrix}=\begin{vmatrix}A&AB\\-E&O\end{vmatrix}=|AB|$$
 **性质13** 设 $A_1,A_2,\cdots,A_m$ 都是 $n$ 阶方阵，则 $|A_1A_2\cdots A_m|=|A_1||A_2|\cdots|A_m|$。
-### 矩阵及其基本运算
+___
+### 三、矩阵及其基本运算
 
-#### 矩阵的基本性质
+#### 3.1 矩阵的基本性质
 
 **矩阵转置**：
-$\begin{aligned}&(A^\mathrm{T})^\mathrm{T}=A\qquad(A+B)^\mathrm{T}=A^\mathrm{T}+B^\mathrm{T}\qquad(kA)^\mathrm{T}=kA^\mathrm{T}\\&|A|=|A^\mathrm{T}|\qquad(AB)^\mathrm{T}=B^\mathrm{T}A^\mathrm{T}\end{aligned}$  
+$$\begin{aligned}&(A^\mathrm{T})^\mathrm{T}=A\qquad(A+B)^\mathrm{T}=A^\mathrm{T}+B^\mathrm{T}\qquad(kA)^\mathrm{T}=kA^\mathrm{T}\\&|A|=|A^\mathrm{T}|\qquad(AB)^\mathrm{T}=B^\mathrm{T}A^\mathrm{T}\end{aligned}$$ 
 
-**对称与反对称矩阵**：
-对称矩阵的和、数量乘积、方幂仍为对称矩阵；反对称矩阵的和、数量乘积仍为反对称矩阵。
-反对称矩阵的奇数次幂为反对称矩阵，偶数次幂为对称矩阵。
-对于任意方阵 $A$ ，$A+A^\mathrm{T}$ 为对称矩阵，$A-A^\mathrm{T}$ 为反对称矩阵。奇数阶反对称矩阵的行列式为 $0$。
+**对称与反对称矩阵**：\
+对称矩阵的和、数量乘积、方幂仍为对称矩阵；反对称矩阵的和、数量乘积仍为反对称矩阵。\
+反对称矩阵的奇数次幂为反对称矩阵，偶数次幂为对称矩阵。\
+对于任意方阵 $A$ ，$A+A^\mathrm{T}$ 为对称矩阵，$A-A^\mathrm{T}$ 为反对称矩阵。\
+奇数阶反对称矩阵的行列式为 $0$。
 
-**矩阵的迹（Trace）**：
+**矩阵的迹（Trace）**：\
 $n$ 阶方阵 $A=[a_{ij}]_{n\times n}$ 主对角线上元素之和称为矩阵 $A$ 的迹，记为 $\begin{aligned}\mathrm{tr}(A)=\sum_{i=1}^na_{ii}\end{aligned}$。设 $A,B$ 分别为 $m\times n$ 及 $n\times m$ 矩阵，则有 $\mathrm{tr}(AB)=\mathrm{tr}(BA)$。不存在 $n$ 阶方阵 $A,B$ 满足 $AB-BA=E$。
 
-**逆矩阵**：
-$n$ 阶方阵 $A$ 可逆 $\Leftrightarrow$ $|A|\not=0$ ，且当 $A$ 可逆时有 $A^{-1}=\dfrac{1}{|A|}A^*$。
+**逆矩阵**：\
+$n$ 阶方阵 $A$ 可逆 $\Leftrightarrow$ $|A|\not=0$ ，且当 $A$ 可逆时有 $A^{-1}=\dfrac{1}{|A|}A^*$。\
 相关运算法则：$(A^{-1})^{-1}=A\qquad(kA)^{-1}=\dfrac{1}{k}A^{-1}\qquad(A^\mathrm{T})^{-1}=(A^{-1})^{\mathrm{T}}\qquad|A^{-1}|=|A|^{-1}$
 
-**准对角矩阵**：
-$A=\mathrm{diag}[A_1,A_2,\cdots,A_t]$，有运算法则：
-$AB=\mathrm{diag}[A_1B_1,A_2B_2,\cdots,A_tB_t]\qquad|A|=|A_1||A_2|\cdots|A_t|$
+**准对角矩阵**：\
+$A=\mathrm{diag}[A_1,A_2,\cdots,A_t]$，有运算法则：\
+$AB=\mathrm{diag}[A_1B_1,A_2B_2,\cdots,A_tB_t]\qquad|A|=|A_1||A_2|\cdots|A_t|$\
 $A^{-1}=\mathrm{diag}[A_1^{-1},A_2^{-1},\cdots,A_t^{-1}]$
 
-#### 初等变换与初等矩阵
+#### 3.2 初等变换与初等矩阵
 
 **初等矩阵定义与逆**：
 * 互换：$E(i,j)\qquad E^{-1}(i,j)=E(i,j)$
@@ -113,6 +116,7 @@ $A^{-1}=\mathrm{diag}[A_1^{-1},A_2^{-1},\cdots,A_t^{-1}]$
 对矩阵 $A_{m\times n}$ 施行一次初等行变换相当于在左侧乘相应初等矩阵；施行一次列变换相当于在右侧乘相应初等矩阵。
 
 **初等变换的性质**：
+
 **性质1** 设 $A_{m\times n}$ 是秩为 $r$ 的矩阵，则存在一系列初等矩阵使得 $P_s\cdots P_1AQ_1\cdots Q_t=\begin{bmatrix}E_r&O\\O&O\end{bmatrix}$。
 
 **性质2** 设 $A_{m\times n}$ 秩为 $r$ ，存在可逆矩阵 $P,Q$ 使 $PAQ=\begin{bmatrix}E_r&O\\O&O\end{bmatrix}$。
@@ -121,7 +125,7 @@ $A^{-1}=\mathrm{diag}[A_1^{-1},A_2^{-1},\cdots,A_t^{-1}]$
 
 **性质4** 若 $A,B$ 均为可逆矩阵，则有 $r(AC)=r(C),r(CB)=r(C),r(ACB)=r(C)$。若 $C$ 可逆而 $A,B$ 不一定，则 $r(ACB)$ 和 $r(AB)$ 不一定相等。
 
-#### 矩阵的秩
+#### 3.3 矩阵的秩
 **性质1** $r(A+B)\leq r(A)+r(B)$。
 
 **性质2** $r(A)+r(B)-n\leq r(AB)\leq\min\{r(A),r(B)\}$。
@@ -131,10 +135,12 @@ $A^{-1}=\mathrm{diag}[A_1^{-1},A_2^{-1},\cdots,A_t^{-1}]$
 **性质4** 若 $A$ 列满秩，则 $r(AB)=r(B)$；若 $B$ 行满秩，则 $r(AB)=r(A)$。
 
 **性质5** $r(AB)+r(BC)\leq r(B)+r(ABC)$。
-### 线性空间与欧氏空间
+___
+### 四、线性空间与欧氏空间
 
-#### 向量组与子空间
+#### 4.1 向量组与子空间
 **向量组的线性相关性**：
+
 **性质1** 一个向量组中有部分向量组线性相关，则整体必线性相关。
 
 **性质2** 一个向量组线性无关，则其任何一个部分向量组必线性无关。
@@ -151,25 +157,34 @@ $A^{-1}=\mathrm{diag}[A_1^{-1},A_2^{-1},\cdots,A_t^{-1}]$
 **生成子空间**：
 由 $\alpha_1,\alpha_2,\cdots,\alpha_t$ 生成的子空间记为 $L(\alpha_1,\cdots,\alpha_t)=\{k_1\alpha_1+\cdots+k_t\alpha_t|k_i\in P\}$。
 
-#### 基变换与过渡矩阵
-设 $(\mathrm{I}):\varepsilon_1,\cdots,\varepsilon_n$ 与 $(\mathrm{II}):\varepsilon'_1,\cdots,\varepsilon'_n$ 是 $n$ 维空间的两组基，矩阵 $M$ 满足 $[\varepsilon'_1,\cdots\varepsilon'_n]=[\varepsilon_1,\cdots\varepsilon_n]M$，则 $M$ 称为从基 $(\mathrm{I})$ 到基 $(\mathrm{II})$ 的过渡矩阵（理解为用 $(\mathrm{I})$ 的语言解读 $(\mathrm{II})$）。
-若向量 $\alpha$ 在两组基下坐标为 $X_\mathrm{I}$ 和 $X_\mathrm{II}$，则坐标变换公式为 $X_\mathrm{I}=MX_\mathrm{II}$ 或 $X_\mathrm{II}=M^{-1}X_\mathrm{I}$。
+#### 4.2 基变换与过渡矩阵
 
-#### 欧氏空间与内积
+设 $(\mathrm{I}):\varepsilon_1,\cdots,\varepsilon_n$ 与 $(\mathrm{II}):\varepsilon'_1,\cdots,\varepsilon'_n$ 是 $n$ 维空间的两组基，矩阵 $M$ 满足
+$$[\varepsilon'_1,\cdots\varepsilon'_n]=[\varepsilon_1,\cdots\varepsilon_n]M$$
+则 $M$ 称为从基 $(\mathrm{I})$ 到基 $(\mathrm{II})$ 的过渡矩阵（理解为用 $(\mathrm{I})$ 的语言解读 $(\mathrm{II})$）。
+
+向量 $\alpha$ 在两组基下坐标为 $X_\mathrm{I}$ 和 $X_\mathrm{II}$，则坐标变换公式为 $X_\mathrm{I}=MX_\mathrm{II}$ 或 $X_\mathrm{II}=M^{-1}X_\mathrm{I}$。
+
+#### 4.3 欧氏空间与内积
+
 **欧氏空间定义**：
+
 实线性空间 $V$ 若定义了满足对称性、双线性性和正定性（$(\alpha,\alpha)\geq0$ 且等于 $0\Leftrightarrow\alpha=\theta$）的实数映射 $(\alpha,\beta)$，则称为欧氏空间。欧氏空间中恒有柯西不等式：$|(\alpha,\beta)|\leq||\alpha||\cdot||\beta||$。
 
 **常用不等式形式**：
+
 代数形式：$(a_1b_1+\cdots+a_nb_n)^2\leq(a_1^2+\cdots+a_n^2)(b_1^2+\cdots+b_n^2)$
 积分形式：$\begin{aligned}\left|\int_a^bf(x)g(x)\mathrm{d}x\right|\leq\sqrt{\int_a^bf^2(x)\mathrm{d}x\int_a^bg^2(x)\mathrm{d}x}\end{aligned}$
 
 **度量矩阵与格拉姆行列式**：
+
 取基 $\varepsilon_1,\cdots,\varepsilon_n$ ，记 $(\varepsilon_i,\varepsilon_j)=a_{ij}$，则实对称矩阵 $A$ 称为该基的度量矩阵。
 内积可表示为：$\sum\sum x_iy_j(\varepsilon_i,\varepsilon_j)=X^{\mathrm{T}}AY$。
 度量矩阵对应的行列式称为格拉姆（Gram）行列式，几何意义为基围成的平行体体积的平方。
-### 特征值、特征向量与相似
+___
+### 五、特征值、特征向量与相似
 
-#### 特征值与特征向量的性质
+#### 5.1 特征值与特征向量的性质
 
 **性质1** $\lambda_0$ 是 $A$ 特征值的充要条件是 $|\lambda_0E-A|=0$。属于 $\lambda_0$ 的特征向量全体是 $(\lambda_0E-A)X=O$ 的非零解。特征向量个数为 $n-r(\lambda_0 E-A)$。
 
@@ -183,7 +198,7 @@ $A^{-1}=\mathrm{diag}[A_1^{-1},A_2^{-1},\cdots,A_t^{-1}]$
 
 **性质6** 设 $A$ 可逆，若 $\lambda_0$ 是 $A$ 特征值（必不为 $0$），$\xi$ 是其特征向量，则 $\lambda_0^{-1}$ 是 $A^{-1}$ 的特征值，$\xi$ 仍是 $A^{-1}$ 的特征向量。
 
-#### 矩阵的相似与对角化
+#### 5.2 矩阵的相似与对角化
 **性质1** 相似矩阵有相同的特征多项式：$|\lambda E-A|=|\lambda E-B|$。
 
 **性质2** 相似矩阵有相同的迹和行列式。
@@ -192,21 +207,22 @@ $A^{-1}=\mathrm{diag}[A_1^{-1},A_2^{-1},\cdots,A_t^{-1}]$
 
 **性质4** 若 $A$ 可对角化即 $P^{-1}AP=\mathrm{diag}[\lambda_1,\cdots,\lambda_n]$，则 $f(A)=P\mathrm{diag}[f(\lambda_1),\cdots,f(\lambda_n)]P^{-1}$。
 
-#### 实对称矩阵的对角化
+#### 5.3 实对称矩阵的对角化
 
 **性质1** 实对称矩阵的特征值都是实数，特征向量都是实向量。
 
 **性质2** 实对称矩阵的不同特征值的特征向量一定互相正交。
-### 二次型与矩阵的合同
+___
+### 六、二次型与矩阵的合同
 
-#### 二次型及其矩阵表示
+#### 6.1 二次型及其矩阵表示
 **性质1** 数域 $P$ 上任意一个二次型均可经非退化线性替换化为标准型 $d_1y_1^2+\cdots+d_ny_n^2$。
 
 **性质2** 二次型 $f=\sum\sum a_{ij}x_ix_j=X^\mathrm{T}AX$ 中，$A$ 必为对称矩阵，称为该二次型的矩阵。
 
 **性质3** 任意对称阵 $A$ ，存在可逆矩阵 $C$ 使 $C^\mathrm{T}AC$ 为对角阵。
 
-#### 矩阵的合同
+#### 6.2 矩阵的合同
 
 **性质1** 若存在可逆阵 $C$ 使 $C^{\mathrm{T}}AC=B$，称 $A,B$ 合同。
 
@@ -223,12 +239,12 @@ $A^{-1}=\mathrm{diag}[A_1^{-1},A_2^{-1},\cdots,A_t^{-1}]$
 | **等价** | $PAQ=B$ | $\begin{bmatrix}E_r&O\\O&O\end{bmatrix}$ | $r(A)=r(B)$ | $r(A)=r(B)$ |
 | **同阶实对称矩阵合同** | $C^{\mathrm{T}}AC=B$ | $\begin{bmatrix}E_p&O&O\\O&-E_q&O\\O&O&O\end{bmatrix}$ | 秩相等且正负惯性指数相同 | 秩与惯性指数不变 |
 
-#### 二次型的规范性
+#### 6.3 二次型的规范性
 二次型标准形中，系数不为 $0$ 的平方项个数等于其矩阵的秩。
 * **复数域**：任何复二次型可化为规范形 $z_1^2+\cdots+z_r^2$，规范形唯一，完全由秩决定。
 * **实数域**：规范形为 $z_1^2+\cdots+z_p^2-z_{p+1}^2-\cdots-z_r^2$。正数项数 $p$ 为正惯性系数，负数项数 $r-p$ 为负惯性系数。实二次型的秩、正负惯性指数在非退化实替换下保持不变。
 
-#### 正定二次型与正定矩阵
+#### 6.4 正定二次型与正定矩阵
 对于任意实向量 $X\not=O$，若 $X^{\mathrm{T}}AX>0$ 则正定；$<0$ 则负定；$\geq0$ 半正定；$\leq0$ 半负定。
 
 **性质1** $f$ 负定（半负定） $\Leftrightarrow$ $-f$ 正定（半正定）。
@@ -242,9 +258,10 @@ $A^{-1}=\mathrm{diag}[A_1^{-1},A_2^{-1},\cdots,A_t^{-1}]$
 **性质5** 若 $A,B$ 同阶正定，则 $A+B$ 及分块对角阵 $\mathrm{diag}[A,B]$ 均为正定矩阵。
 
 **性质6（半正定）** 秩为 $r$ 的二次型半正定 $\Leftrightarrow$ 正惯性指数为 $r$ $\Leftrightarrow$ 特征值均 $\geq 0$ $\Leftrightarrow$ 存在实矩阵 $C$ 使 $A=C^\mathrm{T}C$ $\Leftrightarrow$ 所有主子式非负。
-### 解题技巧与易错点总结
+___
+### 七、解题技巧与易错点总结
 
-#### 特殊矩阵计算技巧
+#### 7.1 特殊矩阵计算技巧
 
 **爪型行列式求法**：当 $a_i\not=0$ 时：
 $\begin{aligned}\begin{vmatrix}a_0&b_1&b_2&\cdots&b_n\\c_1&a_1\\c_2&&a_2\\\vdots&&&\ddots\\c_n&&&&a_n\end{vmatrix}=(a_0-\sum_{i=1}^n\frac{b_ic_i}{a_i})\prod_{i=1}^na_i\end{aligned}$
@@ -255,14 +272,14 @@ $\begin{aligned}\begin{vmatrix}a_0&b_1&b_2&\cdots&b_n\\c_1&a_1\\c_2&&a_2\\\vdots
 
 若 $A$ 特征值为 $\lambda$，特征向量为 $\xi$：
 
-| 矩阵形式 | $aA+bE$ | $A^k$ | $f(A)$ | $A^{-1}$ | $A^*$ | $P^{-1}AP$ | $A^\mathrm{T}$ |
-| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| **特征值** | $a\lambda+b$ | $\lambda^k$ | $f(\lambda)$ | $\lambda^{-1}$ | $|A|/\lambda$ | $\lambda$ | $\lambda$ |
-| **特征向量**| $\xi$ | $\xi$ | $\xi$ | $\xi$ | $\xi$ | $P^{-1}\xi$| 视情况而定 |
+|   矩阵形式   |   $aA+bE$    |    $A^k$    |    $f(A)$    |    $A^{-1}$    |    $A^*$    | $P^{-1}AP$  | $A^\mathrm{T}$ |
+| :------: | :----------: | :---------: | :----------: | :------------: | :---------: | :---------: | :------------: |
+| **特征值**  | $a\lambda+b$ | $\lambda^k$ | $f(\lambda)$ | $\lambda^{-1}$ | $A/\lambda$ |  $\lambda$  |   $\lambda$    |
+| **特征向量** |    $\xi$     |    $\xi$    |    $\xi$     |     $\xi$      |    $\xi$    | $P^{-1}\xi$ |     视情况而定      |
 
 若 $A$ 为分块对角阵（或分块上/下三角阵），则 $A$ 的特征值是主对角线上所有子方阵特征值的并集。
 
-#### 常见解题思路与易错点
+#### 7.2 常见解题思路与易错点
 
 **易错点1（秩与零特征值）**：
 

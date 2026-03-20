@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "gened/morality/__index.md",
+                "file": "phymath/prob/Ch-1.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "__index"
+              "title": "Ch-1"
             }
           }
         ]
@@ -78,8 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200,
-    "collapsed": true
+    "width": 200
   },
   "right": {
     "id": "c569291f788890c9",
@@ -186,9 +185,9 @@
   },
   "active": "235b7997c857e03f",
   "lastOpenFiles": [
+    "gened/morality/__index.md",
     "Pasted image 20260320113758.png",
     "gened/militheory/_index.md",
-    "gened/morality/__index.md",
     "gened/morality/_index",
     "gened/morality",
     "gened/marxism/__index.md",
@@ -230,7 +229,6 @@
     "ttneed/flower/20260313/07.jpg",
     "ttneed/flower/20260313/06.jpg",
     "ttneed/flower/20260313/05.jpg",
-    "ttneed/flower/20260313/04.jpg",
-    "ttneed/flower/20260313/03.jpg"
+    "ttneed/flower/20260313/04.jpg"
   ]
 }

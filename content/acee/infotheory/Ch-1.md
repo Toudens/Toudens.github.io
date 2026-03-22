@@ -19,12 +19,12 @@ type: docs
 I(x_k)=-\log_aq(x_k)
 $$ 当 $a=2$ 时单位为 **比特** bit ，当$a=e$ 时单位为 **奈特** nat。
 
-> [!Note]**定义为概率的负对数的优点：**
+> [!Note] **定义为概率的负对数的优点：**
 > 1、符合概率越小，信息量越大的要求；\
 > 2、对数函数是比较简单的函数，容易进行数学处理；\
 > 3、对数函数的可加性符合生活中信息可叠加的经验。
 
-> [!Note]**事件自信息的本质：**
+> [!Note] **事件自信息的本质：**
 > 1、事件发生后对外界所提供的信息量；\
 > 2、事件发生前外界为确证该事件发生所需的信息量；\
 > 3、事件的自信息 **不代表** 事件的不确定性。
@@ -42,7 +42,7 @@ $$
 I(x_k|y_j)=-\log p(x_k|y_j)
 $$
 
-> [!Note]**事件条件自信息的本质：**
+> [!Note] **事件条件自信息的本质：**
 > 1、事件 $\{Y=y_j\}$ 发生后，$\{X=x_k\}$ 如果再发生需要的新的信息量；\
 > 2、事件 $\{Y=y_j\}$ 发生后，如果 $\{X=x_k\}$ 再发生提供给外界的信息量。
 
@@ -63,7 +63,7 @@ I(x_k;y_j)
 \end{align}
 $$
 
-> [!Important]**事件互信息的本质：**
+> [!Important] **事件互信息的本质：**
 > 事件 $\{Y=y_j\}$ 发生后对事件 $\{X=x_k\}$ 不确定性的 **降低量（可正可负）**。
 >
 > **注：** 此处的解释不甚完美，在事件的自信息的解释中不将 $I(x_k)$ 视为不确定性的表现，此处却引入了不确定性。由于 $x_k$ 和 $y_j$ 的位置互换不影响互信息的值，不妨观察上述定义式，对于等式第二行的中间结果可以得到：
@@ -79,7 +79,7 @@ $$
 $$
 I(x_k,y_j)=-\log p(x_k,y_j)
 $$
-> [!Note]**事件的联合自信息的本质：**
+> [!Note] **事件的联合自信息的本质：**
 > 事件 $\{X=x_k\}$ 和 $\{Y=y_i\}$ 同时发生需要的或同时发生后对外界提供的信息量。
 
 在给定 $Z=z$ 的条件下，事件 $X=x$ 与 $Y=y$ 之间的 **条件互信息** 为：
@@ -113,7 +113,7 @@ H(X)
 =-\sum_{x\in\mathcal{X}}q(x)\log q(x)
 $$
 
-> [!Note]**熵与自信息的区别：**
+> [!Note] **熵与自信息的区别：**
 > 熵针对的是随机变量，自信息针对具体的事件。熵是随机 **变量不确定性** 的度量。
 
 ### 随机变量的联合熵
@@ -208,14 +208,13 @@ $$
 
 令 $\alpha=(\alpha_1,\alpha_2,\cdots,\alpha_k),\beta=(\beta_1,\beta_2,\cdots,\beta_k)$ 是 $k$ 维矢量空间集合 $R$ 中的任何两个矢量，如果对于任何实数 $\theta (0\leq\theta\leq1)$ 有：$\theta\alpha+(1-\theta)\beta\in R$ ，则称 $R$ 为 **凸集合**。
 
-定义在凸集合 $R$ 上的实值矢量函数 $f$ 被称为 **上凸函数**，当且仅当对任何两个矢量 $\alpha,\beta$ 以及实数 $\theta (0\leq\theta\leq1)$ 有 $\theta f(\alpha)+(1-\theta)f(\beta)\leq f[\theta\alpha+(1-\theta)\beta]$。若不等号翻转为下凸函数。
+定义在凸集合 $R$ 上的实值矢量函数 $f$ 被称为 **上凸函数**，当且仅当对任何两个矢量 $\alpha,\beta$ 及实数 $\theta (0\leq\theta\leq1)$ 有 $\theta f(\alpha)+(1-\theta)f(\beta)\leq f[\theta\alpha+(1-\theta)\beta]$。若不等号翻转为下凸函数。
 
 **性质1**：若 $f_1(\alpha),f_2(\alpha),\cdots,f_L(\alpha)$ 是上凸函数，$C_1,C_2,\cdots,C_L$ 为正，有上凸函数：
 $$
 \sum_{l=1}^L C_lf_l(\alpha)
 $$
-
-**性质2**：一元函数 $f(\alpha)$ 上凸的充要条件是在所定义的区间中满足：
+**性质2**：**一元函数** $f(\alpha)$ 上凸的充要条件是在所定义的区间中满足：
 $$
 \frac{\mathrm{d}^2f(\alpha)}{\mathrm{d}\alpha^2}\leq 0
 $$
@@ -227,3 +226,167 @@ $$
 \sum_{l=1}^L\theta_l\alpha_l
 \end{bmatrix}
 $$
+> [!Note] **Jensen 不等式的证明**
+> 1. $L=2$ 时，由上凸函数定义，有 $\theta_1 f(\alpha_1)+\theta_2 f(\alpha_2)\leq f(\theta_1\alpha_1+\theta_2\alpha_2)$ 成立；
+> 2. 假设对于 $L=k,(k\geq 2)$ 原式成立，即对任意非负 $\theta_1,\theta_2,\cdots\theta_k$ 满足 $\sum_{i=1}^k\theta_i=1$ 及任意 $\alpha_1,\alpha_2,\cdots,\alpha_k$ 有：$$\sum_{i=1}^k\theta_if(\alpha_i)\leq f(\sum_{i=1}^k\theta_i\alpha_i)$$
+> 3. $L=k+1$ 时，设 $\theta_1,\cdots,\theta_{k+1}\geq0,\sum_{i=1}^{k+1}\theta_i=1$ 且 $\alpha_1,\cdots,\alpha_{k+1}$ 在定义域内。 令 $\lambda=\sum_{i=1}^k\theta_i$ ，则 $\lambda\in[0,1]$ ；
+> 4. 若 $\lambda=0$ 或 $\lambda=1$ 则退化为 $L=1$ 或 $L=k$ 情形，结论成立；
+> 5. 若 $0<\lambda<1$ ，定义 $\beta_i=\frac{\theta_i}{\lambda},(i=1,2,\cdots,k)$，则 $\beta_i\geq 0$，$\sum_{i=1}^k\beta_i=1$ ，有：$$f(\sum_{i=1}^{k+1}\theta_i\alpha_i)=f(\lambda\sum_{i=1}^k\beta_i\alpha_i+\theta_{k+1}\alpha_{k+1})\geq\lambda f(\sum_{i=1}^k\beta_i\alpha_i)+\theta_{k+1}f(\alpha_{k+1})$$ 对 $k$ 个点应用归纳假设：$$f(\sum_{i=1}^k\beta_i\alpha_i)\geq\sum_{i=1}^k\beta_if(\alpha_i)$$ 代入上式得：$$\begin{align}f(\sum_{i=1}^{k+1}\theta_i\alpha_i)\geq\lambda\sum_{i=1}^{k}\beta_if(\alpha_i)+\theta_{k+1}f(\alpha_{k+1})&=\sum_{i=1}^k\theta_if(\alpha_i)+\theta_{k+1}f(\alpha_{k+1})\\&=\sum_{i=1}^{k+1}\theta_if(\alpha_i)\end{align}$$ 证毕。
+
+
+
+**非负凸集**： $f(\alpha)$ 是定义在 $K$ 维非负凸集 $\{\mathcal{R}^+\}^K$ 上的上凸函数，若 $f(\alpha)$ 对于任一分量连续可导，则 $f(\alpha)$ 在 $\alpha=(\alpha_1,\alpha_2,\cdots,\alpha_K)$ 处取得极大值的充要条件为：
+$$
+\frac{\partial f(\alpha)}{\partial\alpha_k}
+\begin{cases}
+=0,&\forall\alpha_k>0\\
+<0,&\forall\alpha_k=0
+\end{cases}
+$$
+**概率空间**： $f(\alpha)$ 是定义在 $K$ 维概率空间上的上凸函数，若 $f(\alpha)$ 对于任一分量连续可导，则 $f(\alpha)$ 在 $\alpha=(\alpha_1,\alpha_2,\cdots,\alpha_K)$ 处取得极大值的充要条件为：
+$$
+\frac{\partial f(\alpha)}{\partial\alpha_k}
+\begin{cases}
+=\lambda,&\forall\alpha_k>0\\
+<\lambda,&\forall\alpha_k=0
+\end{cases}
+$$
+### 随机变量的加权熵
+
+香农熵仅考虑事件发生的客观概率，无法描述主观意义上对事件判断的差别。
+$$
+X\sim\begin{pmatrix}
+x_1 & x_2 & \cdots & x_K\\
+w_1 & w_2 & \cdots & w_K\\
+p_1 & p_2 & \cdots & p_K
+\end{pmatrix}
+$$
+$$
+H_W(X)=-\sum_{k=1}^Kw_kp_k\log p_k
+$$
+>[!Note] Note
+>即对于香农熵，上式中的 $w_k=1,k=1,2,\cdots,K$ 成立。
+
+### 随机变量的 Rényi 熵
+$$
+H_\alpha(X)=\frac{1}{1-\alpha}\log(\sum_{k=1}^Kp_k^\alpha)
+$$
+当 $\alpha=0$ 时：
+$$
+H_0(X)=\log K
+$$
+当 $\alpha\rightarrow1$ 时：
+$$
+H_1(X)=-\sum_{k=1}^Kp_k\log p_k
+$$
+
+## 平均互信息
+### 平均互信息
+
+两个事件 $X=x$ 与 $Y=y$ 之间相互提供的信息量定义为：
+$$
+I(x,y)=I(x)-I(x|y)=\log\frac{p(x|y)}{q(x)}
+$$
+随机变量 $\{(X,Y),\mathcal{X}\times\mathcal{Y},p(x,y)\}$ 相互提供的平均互信息量称为二者之间的 **平均互信息**，简称互信息：
+$$
+I(X;Y)=E\{I(x;y)\}=\sum_x\sum_yp(x,y)\log\frac{p(x|y)}{q(x)}
+$$
+**性质 1** 非负性 $I(X;Y)\geq0$ ；\
+**性质 2** 对称性 $I(X;Y)=I(Y;X)$ ；\
+**性质 3** $I(X;Y)=H(X)+H(Y)-H(X,Y)$ ；\
+**性质 4** $I(X;Y)\leq H(X)$ 等号成立当且仅当 $X$ 是 $Y$ 的 **确定函数**。
+### 条件互信息
+
+事件的 **条件互信息** 为：
+$$
+I(x;y\vert z)=\log\frac{p(x|y,z)}{p(x|z)}=\log\frac{p(x,y\vert z)}{p(x\vert z)p(y\vert z)}
+$$
+在随机变量 $Z$ 已知的条件下变量 $X$ 与 $Y$ 相互提供的信息量为：
+$$
+\begin{align}
+I(X;Y\vert Z)
+&=E\{I(x;y\vert z)\}\\
+&=\sum_x\sum_y\sum_zp(x,y,z)\log\frac{p(x\vert y,z)}{p(x\vert z)}
+\end{align}
+$$
+### 联合互信息
+
+事件的 **联合互信息** 为：
+$$
+I(x;y,z)=I(x)-I(x|y,z)=\log\frac{p(x\vert y,z)}{p(x)}=\log\frac{p(x,y,z)}{p(x)p(y,z)}
+$$
+随机变量 $Y$ 和 $Z$ 共同提供给变量 $X$ 的信息量为：
+$$
+\begin{align}
+I(X;Y,Z)&=\sum_x\sum_y\sum_zp(x,y,z)\log\frac{p(x\vert y,z)}{p(x)}\\
+&=\sum_x\sum_y\sum_zp(x,y,z)\log\frac{p(x\vert z)p(x\vert y,z)}{p(x)p(x\vert z)}\\
+&=I(X;Z)+I(X;Y|Z)
+\end{align}
+$$
+### 相对熵
+
+定义在相同字符表 $\mathcal{X}$ 上的两个概率分布 $\{p(x)\}$ 和 $\{q(x)\}$ 之间的 **相对熵**，表示为：
+$$
+D(p//q)=\sum_xp(x)\log\frac{p(x)}{q(x)}=E_p\{\log\frac{p(x)}{q(x)}\}
+$$
+表示实际分布 $\{p(x)\}$ 与假定分布$\{q(x)\}$ 之间的平均差距，也称 **鉴别熵**。
+
+**性质 1** $$\begin{align}D(p//q)&=\sum_{x}p(x)\log\frac{p(x)}{q(x)}=-\sum_xp(x)\log\frac{q(x)}{p(x)}\\&\geq-\sum_{x}p(x)(\frac{q(x)}{p(x)}-1)=0\end{align}$$
+**性质 2** $D(p//q)\neq D(q//p)$
+**性质 3** $$\begin{align}I(X;Y)&=\sum_{x,y}p(xy)\log\frac{p(xy)}{p(x)p(y)}\\&=D(p(xy)//p(x)p(y))\geq0\end{align}$$
+**性质 4** 若 $U$ 为 **均匀分布**，则有：
+$$
+\begin{align}
+H(X)
+&=-\sum_xp(x)\log p(x)\\
+&=-\sum_xp(x)\log\frac{p(x)}{1/K}+\log K\\
+&=H(U)-D(X//U)
+\end{align}
+$$
+**性质 5** 如果 $P_1,P_2$ 是 **独立分布**，并且联合分布是 $P=P_1P_2$ ，如果 $Q_1,Q_2$ 是独立分布，并且联合分布是 $Q=Q_1Q_2$ ，那么：
+$$
+D(P//Q)=D(P_1//Q_1)+D(P_2//Q_2)
+$$
+### 疑义度 Fano 不等式
+
+定义在相同字符表 $\{0,1,\cdots,K-1\}$ 上的两个随机变量 $X$ 和 $\hat{X}$ ，其中 $\hat{X}$ 是对 $X$ 的某种估计，估计 **错误** 概率定义为：
+$$
+P_E=\sum_{k=0}^{K-1}\sum_{\begin{align}j=0\\j\neq k\end{align}}^{K-1}\mathrm{Pr}\{X=k,\hat{X}=j\}
+$$
+则 $\hat{X}$ 已知条件下 $X$ 的疑义度 $H(X\vert\hat{X})$ 满足下述不等式：
+$$
+H(X\vert\hat{X})\leq H(P_E)+P_E\log(K-1)
+$$
+### 马尔可夫过程
+
+如果随机变量序列 $X_1,X_2,\cdots,X_n$ 的联合概率分布可以写成如下形式：
+$$
+p(x_1,x_2,\cdots,x_n)=p(x_1)p(x_2\vert x_1)\cdots p(x_n\vert x_{n-1})
+$$
+则称这 $n$ 个随机变量构成马尔可夫链，记为：
+$$
+X_1\rightarrow X_2\rightarrow\cdots\rightarrow X_n
+$$
+### 数据处理定理
+
+如果 $X\rightarrow Y\rightarrow Z$ 则：
+$$
+\begin{align}
+&I(X;Y)\geq I(X;Z)\\
+&I(X;Y)\geq I(X;Y\vert Z)
+\end{align}
+$$
+### 互信息的凸性
+
+互信息 $I(X;Y)$ 是关于输入分布 $\{q(x)\}$ 和转移概率矩阵 $\{p(y\vert x)\}$ 的函数：
+$$
+\begin{align}
+I(X;Y)
+&=\sum_x\sum_yp(xy)\log\frac{p(x\vert y)}{q(x)}\\
+&=\sum_x\sum_yq(x)p(y\vert x)\log\frac{p(y\vert x)}{\omega(y)}\\
+&=\sum_x\sum_yq(x)p(y\vert x)\log\frac{p(y\vert x)}{\sum_xq(x)p(y\vert x)}\\
+&=I(\{q(x)\},\{p(y\vert x)\})
+\end{align}
+$$
+**定理 1** 转移概率矩阵 $\{p(y\vert x)\}$ 给定时， $I(X;Y)=I(\{q(x)\})$ 是输入分布的上凸函数\
+**定理 2** 输入分布 $\{q(x)\}$ 给定时， $I(X;Y)=I(\{P(y\vert x)\})$ 是转移概率矩阵的下凸函数

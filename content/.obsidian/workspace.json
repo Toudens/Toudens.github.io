@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "ttneed/cloud/_index.md",
+                "file": "acee/infotheory/Ch-1.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "_index"
+              "title": "Ch-1"
             }
           }
         ]
@@ -78,7 +78,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 200,
+    "collapsed": true
   },
   "right": {
     "id": "c569291f788890c9",
@@ -185,9 +186,16 @@
   },
   "active": "235b7997c857e03f",
   "lastOpenFiles": [
+    "acee/infotheory/_index.md",
+    "phymath/calc I/_index.md",
+    "2026-03-22.md",
+    "compsci/db/Ch-3.md",
+    "compsci/db/Ch-2.md",
+    "compsci/db/_index.md",
+    "Pasted image 20260320113758.png",
+    "ttneed/cloud/_index.md",
     "ttneed/flower/_index.md",
     "ttneed/cloud/graph/03.jpg",
-    "ttneed/cloud/_index.md",
     "ttneed/cloud/graph/20250719-3.jpg",
     "ttneed/cloud/graph/04.jpg",
     "ttneed/cloud/graph/20250709-1.jpg",
@@ -199,7 +207,6 @@
     "phymath/prob/Ch-1.md",
     "ttneed/cloud",
     "gened/morality/__index.md",
-    "Pasted image 20260320113758.png",
     "gened/militheory/_index.md",
     "gened/morality/_index",
     "gened/morality",
@@ -224,11 +231,6 @@
     "phymath/phy II/Summary.md",
     "phymath/calc II/Ch-11.md",
     "phymath/calc II/Ch-10.md",
-    "phymath/calc II/Ch-9.md",
-    "phymath/calc II/Ch-8.md",
-    "phymath/calc II/Ch-7.md",
-    "phymath/calc II/_index.md",
-    "phymath/calc I/_index.md",
     "compsci/dm/Graph/03.png"
   ]
 }

@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "acee/infotheory/Ch-1.md",
+                "file": "_index.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Ch-1"
+              "title": "_index"
             }
           }
         ]
@@ -78,8 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200,
-    "collapsed": true
+    "width": 200
   },
   "right": {
     "id": "c569291f788890c9",
@@ -186,8 +185,21 @@
   },
   "active": "235b7997c857e03f",
   "lastOpenFiles": [
-    "acee/infotheory/_index.md",
-    "acee/infotheory/Ch-1.md",
+    "friends/_index.md",
+    "_index.md",
+    "friends",
+    "gened/ecolaw/Ch-1.md",
+    "gened/ecolaw/_index.md",
+    "phymath/infotheory/Ch-1.md",
+    "gened/ecolaw",
+    "acee/_index.md",
+    "compsci/ca/Ch-2.md",
+    "compsci/ca/tmp.md",
+    "Pasted image 20260323154310.png",
+    "Pasted image 20260323154856.png",
+    "compsci/ca/_index.md",
+    "compsci/ca",
+    "phymath/infotheory/_index.md",
     "phymath/calc I/_index.md",
     "2026-03-22.md",
     "compsci/db/Ch-3.md",
@@ -203,7 +215,6 @@
     "ttneed/cloud/graph/02.jpg",
     "ttneed/cloud/graph/20250719-4.jpg",
     "ttneed/cloud/graph/01.jpg",
-    "ttneed/cloud/graph/20250704.jpg",
     "ttneed/cloud/graph",
     "phymath/prob/Ch-1.md",
     "ttneed/cloud",
@@ -218,19 +229,7 @@
     "gened/_index.md",
     "gened/menhealth",
     "compsci/oop/_index.md",
-    "gened/_index",
-    "gened",
     "compsci/_index.md",
-    "phymath/ode/_index.md",
-    "phymath/linear/_index.md",
-    "phymath/prob/_index.md",
-    "phymath/linear",
-    "compsci/oop/未命名.md",
-    "phymath/prob/Ch-2.md",
-    "phymath/calc II/Summary.md",
-    "phymath/calc I/Summary.md",
-    "phymath/phy II/Summary.md",
-    "phymath/calc II/Ch-11.md",
-    "compsci/dm/Graph/03.png"
+    "phymath/ode/_index.md"
   ]
 }

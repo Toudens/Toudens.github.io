@@ -104,23 +104,23 @@ enableInlineShortcodes = true
     name = "计算机科学"
     pageRef = "/compsci"
     weight = 2
-  
-  [[menu.main]]
-    identifier = "acee"
-    name = "工高课程"
-    pageRef = "/acee"
-    weight = 3
 
   [[menu.main]]
     identifier = "gened"
     name = "通识课程"
     pageRef = "/gened"
-    weight = 4
+    weight = 3
   
   [[menu.main]]
     identifier = "ttneed"
     name = "偷一偷QwQ"
     pageRef = "/ttneed"
+    weight = 4
+  
+  [[menu.main]]
+    identifier = "friends"
+    name = "友情链接"
+    pageRef = "/friends"
     weight = 5
   
   [[menu.main]]

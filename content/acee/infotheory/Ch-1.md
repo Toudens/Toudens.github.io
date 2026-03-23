@@ -227,19 +227,25 @@ $$
 \end{bmatrix}
 $$
 > [!Note] **Jensen 不等式的证明**
-> 1. $L=2$ 时，由上凸函数定义，有 $\theta_1 f(\alpha_1)+\theta_2 f(\alpha_2)\leq f(\theta_1\alpha_1+\theta_2\alpha_2)$ 成立；
-> 2. 假设对于 $L=k,(k\geq 2)$ 原式成立，即对任意非负 $\theta_1,\theta_2,\cdots\theta_k$ 满足 $\sum_{i=1}^k\theta_i=1$ 及任意 $\alpha_1,\alpha_2,\cdots,\alpha_k$ 
-> $$\sum_{i=1}^k\theta_if(\alpha_i)\leq f(\sum_{i=1}^k\theta_i\alpha_i)$$
-> 3. $L=k+1$ 时，设 $\theta_1,\cdots,\theta_{k+1}\geq0,\sum_{i=1}^{k+1}\theta_i=1$ 且 $\alpha_1,\cdots,\alpha_{k+1}$ 在定义域内。 令 $\lambda=\sum_{i=1}^k\theta_i$ ，则 $\lambda\in[0,1]$ ；
-> 4. 若 $\lambda=0$ 或 $\lambda=1$ 则退化为 $L=1$ 或 $L=k$ 情形，结论成立；
-> 5. 若 $0<\lambda<1$ ，定义 $\beta_i=\frac{\theta_i}{\lambda},(i=1,2,\cdots,k)$，则 $\beta_i\geq 0$，$\sum_{i=1}^k\beta_i=1$ ，有：
->$$f(\sum_{i=1}^{k+1}\theta_i\alpha_i)=f(\lambda\sum_{i=1}^k\beta_i\alpha_i+\theta_{k+1}\alpha_{k+1})\geq\lambda f(\sum_{i=1}^k\beta_i\alpha_i)+\theta_{k+1}f(\alpha_{k+1})$$ 
->对 $k$ 个点应用归纳假设：
->$$f(\sum_{i=1}^k\beta_i\alpha_i)\geq\sum_{i=1}^k\beta_if(\alpha_i)$$ 
->代入上式得：
->$$\begin{align}f(\sum_{i=1}^{k+1}\theta_i\alpha_i)\geq\lambda\sum_{i=1}^{k}\beta_if(\alpha_i)+\theta_{k+1}f(\alpha_{k+1})&=\sum_{i=1}^k\theta_if(\alpha_i)+\theta_{k+1}f(\alpha_{k+1})\\&=\sum_{i=1}^{k+1}\theta_if(\alpha_i)\end{align}$$ 
->证毕。
-
+> 1. $L=2$ 时，由上凸函数定义，有 $\theta_1 f(\alpha_1) + \theta_2 f(\alpha_2) \leq f(\theta_1\alpha_1 + \theta_2\alpha_2)$ 成立；
+> 2. 假设对于 $L=k, (k\geq 2)$ 原式成立，即对任意非负 $\theta_1, \theta_2, \cdots, \theta_k$ 满足 $\sum_{i=1}^k\theta_i=1$ 及任意 $\alpha_1, \alpha_2, \cdots, \alpha_k$：
+>    $$ \sum_{i=1}^k \theta_i f(\alpha_i) \leq f \left( \sum_{i=1}^k \theta_i \alpha_i \right) $$
+> 3. $L=k+1$ 时，设 $\theta_1, \cdots, \theta_{k+1} \geq 0, \sum_{i=1}^{k+1}\theta_i=1$ 且 $\alpha_1, \cdots, \alpha_{k+1}$ 在定义域内。令 $\lambda = \sum_{i=1}^k \theta_i$，则 $\lambda \in [0,1]$；
+> 4. 若 $\lambda=0$ 或 $\lambda=1$，则退化为 $L=1$ 或 $L=k$ 情形，结论成立；
+> 5. 若 $0 < \lambda < 1$，定义 $\beta_i = \frac{\theta_i}{\lambda}, (i=1,2,\cdots,k)$，则 $\beta_i \geq 0$，$\sum_{i=1}^k \beta_i = 1$，有：
+>    $$ f \left( \sum_{i=1}^{k+1} \theta_i \alpha_i \right) = f \left( \lambda \sum_{i=1}^k \beta_i \alpha_i + \theta_{k+1} \alpha_{k+1} \right) \geq \lambda f \left( \sum_{i=1}^k \beta_i \alpha_i \right) + \theta_{k+1} f(\alpha_{k+1}) $$
+>    对 $k$ 个点应用归纳假设：
+>    $$ f \left( \sum_{i=1}^k \beta_i \alpha_i \right) \geq \sum_{i=1}^k \beta_i f(\alpha_i) $$
+>    代入上式得：
+>    $$
+>    \begin{aligned}
+>    f \left( \sum_{i=1}^{k+1} \theta_i \alpha_i \right) \geq \lambda \sum_{i=1}^{k} \beta_i f(\alpha_i) + \theta_{k+1} f(\alpha_{k+1})
+>    &= \sum_{i=1}^k \theta_i f(\alpha_i) + \theta_{k+1} f(\alpha_{k+1}) \\
+>    &= \sum_{i=1}^{k+1} \theta_i f(\alpha_i)
+>    \end{aligned}
+>    $$
+> 
+> 证毕。
 
 
 **非负凸集**： $f(\alpha)$ 是定义在 $K$ 维非负凸集 $\{\mathcal{R}^+\}^K$ 上的上凸函数，若 $f(\alpha)$ 对于任一分量连续可导，则 $f(\alpha)$ 在 $\alpha=(\alpha_1,\alpha_2,\cdots,\alpha_K)$ 处取得极大值的充要条件为：

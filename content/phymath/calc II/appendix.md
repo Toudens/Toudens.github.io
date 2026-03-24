@@ -1,5 +1,5 @@
 ---
-title: Appendix
+title: Appendix 积分技巧
 date: 2026-03-19
 weight: "6"
 type: docs

@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_index.md",
+                "file": "phymath/phy I/_index.md",
                 "mode": "source",
                 "source": false
               },
@@ -78,7 +78,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 200,
+    "collapsed": true
   },
   "right": {
     "id": "c569291f788890c9",
@@ -185,8 +186,21 @@
   },
   "active": "235b7997c857e03f",
   "lastOpenFiles": [
-    "friends/_index.md",
+    "phymath/calc I/_index.md",
+    "phymath/infotheory/_index.md",
+    "phymath/calc II/_index.md",
+    "phymath/calc I/appendix.md",
+    "phymath/calc II/appendix.md",
+    "phymath/calc II/Ch-11.md",
+    "phymath/calc I/Ch-6.md",
+    "Ch-1 级数及其应用.md",
+    "phymath/calc I/Ch-1.md",
+    "phymath/phy II/Summary.md",
+    "compsci/db/Ch-4.md",
+    "compsci/db/Ch-3.md",
+    "compsci/db/Ch-2.md",
     "_index.md",
+    "friends/_index.md",
     "friends",
     "gened/ecolaw/Ch-1.md",
     "gened/ecolaw/_index.md",
@@ -199,11 +213,7 @@
     "Pasted image 20260323154856.png",
     "compsci/ca/_index.md",
     "compsci/ca",
-    "phymath/infotheory/_index.md",
-    "phymath/calc I/_index.md",
     "2026-03-22.md",
-    "compsci/db/Ch-3.md",
-    "compsci/db/Ch-2.md",
     "compsci/db/_index.md",
     "Pasted image 20260320113758.png",
     "ttneed/cloud/_index.md",
@@ -216,20 +226,11 @@
     "ttneed/cloud/graph/20250719-4.jpg",
     "ttneed/cloud/graph/01.jpg",
     "ttneed/cloud/graph",
-    "phymath/prob/Ch-1.md",
     "ttneed/cloud",
-    "gened/morality/__index.md",
-    "gened/militheory/_index.md",
     "gened/morality/_index",
     "gened/morality",
-    "gened/marxism/__index.md",
     "gened/militheory",
-    "gened/menhealth/_index.md",
     "gened/marxism",
-    "gened/_index.md",
-    "gened/menhealth",
-    "compsci/oop/_index.md",
-    "compsci/_index.md",
-    "phymath/ode/_index.md"
+    "gened/menhealth"
   ]
 }

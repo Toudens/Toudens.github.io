@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "compsci/ca/Ch-2.md",
+                "file": "ttneed/flower/_index.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Ch-2"
+              "title": "_index"
             }
           }
         ]
@@ -186,8 +186,20 @@
   },
   "active": "235b7997c857e03f",
   "lastOpenFiles": [
-    "compsci/ca/Ch-1.md",
+    "ttneed/flower/graph/16.JPG",
+    "ttneed/flower/graph/15.JPG",
+    "ttneed/flower/graph/14.JPG",
+    "ttneed/flower/graph/13.JPG",
+    "ttneed/flower/graph/12.JPG",
+    "ttneed/flower/graph/11.JPG",
+    "ttneed/flower/graph/10.JPG",
+    "ttneed/flower/graph/DSC00453.JPG",
+    "ttneed/flower/graph/DSC00438.JPG",
+    "ttneed/flower/graph/DSC00482.JPG",
+    "ttneed/flower/graph/DSC00471.JPG",
+    "ttneed/_index.md",
     "compsci/ca/Ch-2.md",
+    "compsci/ca/Ch-1.md",
     "compsci/ca/_index.md",
     "compsci/db/_index.md",
     "phymath/linear/_index.md",
@@ -211,21 +223,9 @@
     "compsci/dm/Ch-8.md",
     "compsci/dm/Ch-6.md",
     "compsci/dm/Ch-5.md",
-    "compsci/dm/Ch-4.md",
-    "compsci/dm/Ch-3.md",
     "friends",
     "gened/ecolaw",
-    "Pasted image 20260323154310.png",
-    "Pasted image 20260323154856.png",
     "compsci/ca",
-    "Pasted image 20260320113758.png",
-    "ttneed/cloud/graph/03.jpg",
-    "ttneed/cloud/graph/20250719-3.jpg",
-    "ttneed/cloud/graph/04.jpg",
-    "ttneed/cloud/graph/20250709-1.jpg",
-    "ttneed/cloud/graph/02.jpg",
-    "ttneed/cloud/graph/20250719-4.jpg",
-    "ttneed/cloud/graph/01.jpg",
     "ttneed/cloud/graph",
     "ttneed/cloud",
     "gened/morality/_index",

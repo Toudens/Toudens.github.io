@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "compsci/db/Ch-4.md",
+                "file": "compsci/ca/Ch-1.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Ch-4"
+              "title": "Ch-1"
             }
           }
         ]
@@ -78,8 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200,
-    "collapsed": true
+    "width": 200
   },
   "right": {
     "id": "c569291f788890c9",
@@ -186,11 +185,24 @@
   },
   "active": "235b7997c857e03f",
   "lastOpenFiles": [
-    "compsci/db/Ch-3.md",
+    "compsci/ca/Ch-2.md",
+    "phymath/linear/_index.md",
+    "phymath/ode/_index.md",
+    "phymath/infotheory/Ch-1.md",
+    "phymath/calc I/Ch-1.md",
+    "compsci/oop/_index.md",
+    "compsci/dm/Ch-1.md",
+    "compsci/dd/Ch-2.md",
+    "compsci/dd/Ch-1.md",
+    "compsci/dd/_index.md",
     "compsci/db/Ch-4.md",
+    "compsci/db/Ch-3.md",
     "compsci/db/Ch-2.md",
     "compsci/db/Ch-1.md",
     "compsci/db/_index.md",
+    "compsci/ca/Ch-1.md",
+    "compsci/ca/_index.md",
+    "compsci/dd",
     "compsci/dm/_index.md",
     "compsci/dm/Ch-11.md",
     "compsci/dm/Ch-10.md",
@@ -200,18 +212,6 @@
     "compsci/dm/Ch-5.md",
     "compsci/dm/Ch-4.md",
     "compsci/dm/Ch-3.md",
-    "compsci/dm/Ch-2.md",
-    "compsci/dm/Ch-1.md",
-    "phymath/phy I/_index.md",
-    "phymath/calc II/_index.md",
-    "phymath/calc I/_index.md",
-    "phymath/phy II/_index.md",
-    "phymath/ode/_index.md",
-    "phymath/linear/_index.md",
-    "phymath/infotheory/_index.md",
-    "phymath/phy I/Ch-9.md",
-    "phymath/phy I/Ch-8.md",
-    "phymath/calc I/appendix.md",
     "friends",
     "gened/ecolaw",
     "Pasted image 20260323154310.png",
@@ -230,7 +230,6 @@
     "gened/morality/_index",
     "gened/morality",
     "gened/militheory",
-    "gened/marxism",
-    "gened/menhealth"
+    "gened/marxism"
   ]
 }

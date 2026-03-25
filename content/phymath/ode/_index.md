@@ -3,7 +3,7 @@ title: 常微分方程
 date: 2026-03-19
 type: docs
 ---
-### 一、基础概念
+### 1. 基础概念
 
 #### 1.1 常用术语
 | 术语                   | 翻译   | 术语             | 翻译   | 术语          | 翻译  |
@@ -46,7 +46,7 @@ To prove the existence and uniqueness theorem rigorously, the typical Picard ite
 5. Show that the solution is unique. 
 
 ---
-### 二、一阶方程解法
+### 2. 一阶方程解法
 
 #### 2.1 分离变量法
 The first-order differential equation $\begin{aligned}\frac{\mathrm{d}y}{\mathrm{d}x}=H(x,y)\end{aligned}$ is called separable provided that $H(x,y)$ can be written as the product of a function of $x$ and a function of $y$: $\begin{aligned}\frac{\mathrm{d}y}{\mathrm{d}x}=g(x)h(y)=\frac{g(x)}{f(y)}\end{aligned}$.
@@ -122,7 +122,7 @@ Solution: Introduce the substitution $v = \dfrac{y}{x}$, so $y = vx$ and $\frac{
 Substituting gives $x\frac{\mathrm{d}v}{\mathrm{d}x} = F(v) - v$, which is a separable equation in $x$ and $v$.
 
 ---
-### 三、奇解与p-判别式法
+### 3. 奇解与p-判别式法
 
 #### 3.1 奇解与包络
 
@@ -151,7 +151,7 @@ For the differential equation $F(x,y,p)=0$, the envelope (singular solution) of 
 
 ---
 
-### 四、高阶线性方程
+### 4. 高阶线性方程
 
 #### 4.1 二阶方程降阶
 Consider $F(x,y,y',y'')=0$. Two common cases allow reduction to a first‑order problem:
@@ -206,7 +206,7 @@ $$\begin{aligned}y_p(x)=-y_1(x)\int\frac{y_2(x)f(x)}{W(x)}dx+y_2(x)\int\frac{y_1
 
 ---
 
-### 五、级数解法
+### 5. 级数解法
 
 #### 5.1 幂级数与收敛半径
 Given $\sum c_nx^n$, suppose the limit $\begin{aligned}\rho=\lim_{n\rightarrow\infty}\left|\frac{c_n}{c_{n+1}}\right|\end{aligned}$ exists.
@@ -238,7 +238,7 @@ Let $r_1 \geq r_2$ and $r_1-r_2=N$. The first solution is always $y_1(x)=x^{r_1}
 
 ---
 
-### 六、微分方程组
+### 6. 微分方程组
 
 #### 6.1 高阶转一阶
 For $x^{(n)}=f(t,x,x',\cdots,x^{(n-1)})$, introduce variables $x_1=x, x_2=x', \cdots, x_n=x^{(n-1)}$.
@@ -263,7 +263,7 @@ Let $\Phi(t)$ be a fundamental matrix for $x'=Ax$.
 $$\begin{aligned}x(t)=\Phi(t)\Phi(a)^{-1}x_a+\Phi(t)\int_a^t\Phi(s)^{-1}f(s)ds\end{aligned}$$
 
 ---
-### 七、边值问题
+### 7. 边值问题
 
 #### 7.1 边值与特征函数
 For the boundary value problem $y''+p(x)y'+q(x)y=0$ subject to $y(a)=0, y(b)=0$, the goal is to find solutions defined on $(a,b)$ satisfying conditions at endpoints.

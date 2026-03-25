@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "compsci/ca/Ch-1.md",
+                "file": "compsci/ca/Ch-2.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Ch-1"
+              "title": "Ch-2"
             }
           }
         ]
@@ -78,7 +78,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 200,
+    "collapsed": true
   },
   "right": {
     "id": "c569291f788890c9",
@@ -185,7 +186,10 @@
   },
   "active": "235b7997c857e03f",
   "lastOpenFiles": [
+    "compsci/ca/Ch-1.md",
     "compsci/ca/Ch-2.md",
+    "compsci/ca/_index.md",
+    "compsci/db/_index.md",
     "phymath/linear/_index.md",
     "phymath/ode/_index.md",
     "phymath/infotheory/Ch-1.md",
@@ -199,9 +203,6 @@
     "compsci/db/Ch-3.md",
     "compsci/db/Ch-2.md",
     "compsci/db/Ch-1.md",
-    "compsci/db/_index.md",
-    "compsci/ca/Ch-1.md",
-    "compsci/ca/_index.md",
     "compsci/dd",
     "compsci/dm/_index.md",
     "compsci/dm/Ch-11.md",

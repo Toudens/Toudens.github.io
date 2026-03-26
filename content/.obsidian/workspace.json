@@ -11,14 +11,12 @@
             "id": "f81934e4f3174ce0",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "image",
               "state": {
-                "file": "friends/_index.md",
-                "mode": "source",
-                "source": false
+                "file": "ttneed/cloud/graph/06.jpg"
               },
-              "icon": "lucide-file",
-              "title": "_index"
+              "icon": "lucide-image",
+              "title": "06"
             }
           }
         ]
@@ -185,15 +183,16 @@
   },
   "active": "f81934e4f3174ce0",
   "lastOpenFiles": [
+    "ttneed/cloud/_index.md",
+    "ttneed/_index.md",
+    "_index.md",
+    "friends/_index.md",
     "ttneed/cloud/graph/01.jpg",
     "ttneed/cloud/graph/06.jpg",
     "ttneed/cloud/graph/05.jpg",
     "ttneed/cloud/graph/04.jpg",
     "ttneed/cloud/graph/03.jpg",
     "ttneed/cloud/graph/02.jpg",
-    "ttneed/_index.md",
-    "_index.md",
-    "ttneed/cloud/_index.md",
     "ttneed/cloud/graph/微信图片_20260326193051.jpg",
     "ttneed/cloud/graph/微信图片_20260326193038.jpg",
     "ttneed/flower/_index.md",

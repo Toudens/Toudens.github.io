@@ -91,7 +91,7 @@ title: "偷一偷QwQ"
   {{< hextra/feature-card
     title="云"
     link="/ttneed/cloud"
-    image="/images/cloud.JPG"
+    image="/images/cloud.jpg"
     class="art-card"
     imageClass="custom-bg-full"
   >}}

@@ -265,7 +265,6 @@ $$\begin{aligned}x(t)=\Phi(t)\Phi(a)^{-1}x_a+\Phi(t)\int_a^t\Phi(s)^{-1}f(s)ds\e
 ---
 ### 7. 边值问题
 
-#### 7.1 边值与特征函数
 For the boundary value problem $y''+p(x)y'+q(x)y=0$ subject to $y(a)=0, y(b)=0$, the goal is to find solutions defined on $(a,b)$ satisfying conditions at endpoints.
 When introducing a parameter $\lambda$: $y''+p(x)y'+\lambda q(x)y=0$, it is called an **eigenvalue problem**.
 Values of $\lambda_*$ that yield non-trivial solutions are called **eigenvalues**, and the corresponding non-trivial solutions $y_*$ are **eigenfunctions**.

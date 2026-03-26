@@ -3,7 +3,7 @@ title: 面向对象程序设计
 date: 2026-03-19
 type: docs
 ---
-### References and Pointer
+### 1. Ref and Pointer
 
 No references to references.\
 No pointers to references `int&\*p`, but reference to pointer is ok `int\*&p`.\
@@ -25,7 +25,7 @@ Don't mix-use new/delete and malloc/free.
 | new int;     | delete p;   |
 | new Stash;   | delete[] p; |
 | new int[10]; |             |
-### Const Qualifier
+### 2. Const Qualifier
 
 A const in C++ defaults to internal linkage.\
 The compiler tries to avoid creating storage for a const,\
@@ -43,7 +43,7 @@ char s[]="Hello, world";// s is an array
 ```
 can always treat a non-const value as const.\
 cannot treat a constant object as non-constant without an explicit cast.
-### Constructors Destructors
+### 3. Ctors and Dtors
 
 A default constructor is one that can be called with no arguments.\
 The destructor is named after the name of the class with a leading tilde. The destructor never has any arguments.\
@@ -87,7 +87,7 @@ static const int size=100; // Legal
 const int size=100; // Illegal
 enum {size=1000}; // Legal
 ```
-### Inline Functions
+### 4. Inline Functions
 
 An inline function is expanded in place, like preprocessor macro in C, so the overhead of the function call is eliminated. 
 
@@ -99,7 +99,7 @@ An inline function definition may not generate any code in  `.obj` file.
 It is declaration rather than definition.
 
 Any function you define inside a class declaration is automatically an inline.
-### Inheritance Basics
+### 5. Inheritance Basics
 
 All embedded objects must be initialized. The default constructor is called if you don't supply the arguments, and there is a default constructor.
 
@@ -112,7 +112,7 @@ not inherited: constructor, destructor, assignment operation, private data is hi
 | **public**    | public    | protected | private |
 | **protected** | protected | protected | private |
 | **private**   | private   | private   | private |
-### Friend Functions
+### 6. Friend Functions
 
 friends to explicitly grant access to a function that isn't a member of structure.
 The class itself controls which code has access to its members.
@@ -121,7 +121,7 @@ Can declare a global function as a friend, as well as a member function of anoth
 
 先构造父类再构造子类，析构顺序与之相反。存储中先存父类再存子类的新内容
 A是B的友元类，B不一定是A的友元类
-### Virtual Functions
+### 7. Virtual Functions
 
 Upcasting is the act of converting from a derived reference or pointer to a base class reference or pointer.
 
@@ -131,7 +131,7 @@ If you override an overloaded function, you should  override all of the variants
 
 Never redefine an inherited non-virtual function.
 Never redefine an inherited parameter value.
-### Abstract Classes
+### 8. Abstract Classes
 
 An abstract base class has pure virtual functions.
 Abstract base classes cannot be instantiated.
@@ -141,7 +141,7 @@ virtual void render()=0; // 纯虚函数
 ```
 
 C++ builds a copy ctor for you if you don't provide one, copies each member variable, copies each pointer, data may become shared.
-### Operator Overloading
+### 9. Operator Overloading
 
 不允许重载的运算符：`.` `.*` （成员指针访问运算符） `::` `?:` `sizeof` `typeid` `static_cast` `dynamic_cast` `const_cast` `reinterpret_cast`
 
@@ -154,7 +154,7 @@ const Integer& operator--();   // prefix--
 const Integer operator--(int); // postfix--
 ```
 
-### Type Casting
+### 10. Type Casting
 
 构造函数前加 `explicit` 来防止隐式转换，强制显式构造
 
@@ -163,7 +163,7 @@ const Integer operator--(int); // postfix--
 3. `const_cast<type>()` is used to modify the const or volatile property.
 4. `reinterperet_cast<type>()` is used to convert pointers or reference into integer or backforth. Cannot be used for converting between non-pointer variables of the same type (int to int).
 
-### Stream I/O
+### 11. Stream I/O
 
 stream random access on file, but not on `std::cin/cout`
 
@@ -178,7 +178,7 @@ stream random access on file, but not on `std::cin/cout`
 `cout` - standard output
 `cerr` - unbuffered error (debugging) output
 `clog` - buffered error (debugging) output
-### Templates
+### 12. Templates
 
 Template instantiation (实例化) generating a definition from a template class/function and template arguments.
 

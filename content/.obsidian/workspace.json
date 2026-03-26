@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "f1de6fc00bf51cce",
+        "id": "ceaff3e5184fb7c7",
         "type": "tabs",
         "children": [
           {
-            "id": "235b7997c857e03f",
+            "id": "f81934e4f3174ce0",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "ttneed/flower/_index.md",
+                "file": "compsci/ca/_index.md",
                 "mode": "source",
                 "source": false
               },
@@ -78,8 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200,
-    "collapsed": true
+    "width": 200
   },
   "right": {
     "id": "c569291f788890c9",
@@ -184,23 +183,30 @@
       "bases:新建数据库": false
     }
   },
-  "active": "235b7997c857e03f",
+  "active": "f81934e4f3174ce0",
   "lastOpenFiles": [
+    "compsci/ca/Ch-2.md",
+    "compsci/ca/Ch-2 副本.md",
+    "compsci/ca/graph/Ch-2-TLB-2.png",
+    "compsci/ca/graph/Ch-2-TLB.png",
+    "compsci/ca/graph/未命名.md",
+    "compsci/ca/graph/Ch-2-Cache.png",
+    "ttneed/flower/_index.md",
+    "graph.md",
+    "Pasted image 20260326110414.png",
+    "compsci/ca/graph",
+    "compsci/ca/新建文件夹",
+    "compsci/ca/Graph",
+    "compsci/ca/_index.md",
+    "compsci/ca/Ch-1.md",
+    "gened/ecolaw/Ch-1.md",
     "ttneed/flower/graph/16.JPG",
     "ttneed/flower/graph/15.JPG",
     "ttneed/flower/graph/14.JPG",
     "ttneed/flower/graph/13.JPG",
     "ttneed/flower/graph/12.JPG",
     "ttneed/flower/graph/11.JPG",
-    "ttneed/flower/graph/10.JPG",
-    "ttneed/flower/graph/DSC00453.JPG",
-    "ttneed/flower/graph/DSC00438.JPG",
-    "ttneed/flower/graph/DSC00482.JPG",
-    "ttneed/flower/graph/DSC00471.JPG",
     "ttneed/_index.md",
-    "compsci/ca/Ch-2.md",
-    "compsci/ca/Ch-1.md",
-    "compsci/ca/_index.md",
     "compsci/db/_index.md",
     "phymath/linear/_index.md",
     "phymath/ode/_index.md",
@@ -218,19 +224,11 @@
     "compsci/dd",
     "compsci/dm/_index.md",
     "compsci/dm/Ch-11.md",
-    "compsci/dm/Ch-10.md",
-    "compsci/dm/Ch-9.md",
-    "compsci/dm/Ch-8.md",
-    "compsci/dm/Ch-6.md",
-    "compsci/dm/Ch-5.md",
     "friends",
     "gened/ecolaw",
     "compsci/ca",
     "ttneed/cloud/graph",
     "ttneed/cloud",
-    "gened/morality/_index",
-    "gened/morality",
-    "gened/militheory",
-    "gened/marxism"
+    "gened/morality/_index"
   ]
 }

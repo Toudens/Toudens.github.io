@@ -2,7 +2,7 @@
 title: 偷一偷的偷学小窝
 layout: hextra-home
 ---
-<div style="margin-top: 0.5rem; margin-bottom: 1.5rem;"> <h2 style="font-size: 2.25rem; font-weight: 800; letter-spacing: 0.05em; margin: 0;"> 偷一偷的偷学小窝！ </h2> </div>
+<div style="margin-top: 0.5rem; margin-bottom: 1.5rem;"> <h2 style="font-size: 2.25rem; font-weight: 800; letter-spacing: 0.05em; margin: 0;"> 偷一偷的偷学小窝！！ </h2> </div>
 
 {{< hextra/feature-grid >}}
 

@@ -95,5 +95,19 @@ title: "偷一偷QwQ"
     class="art-card"
     imageClass="custom-bg-full"
   >}}
+  {{< hextra/feature-card
+    title="华山"
+    link="/ttneed/huashan"
+    image="/images/huashan.jpg"
+    class="art-card"
+    imageClass="custom-bg-full"
+  >}}
+    {{< hextra/feature-card
+    title="武汉"
+    link="/ttneed/wuhan"
+    image="/images/wuhan.jpg"
+    class="art-card"
+    imageClass="custom-bg-full"
+  >}}
 {{< /cards >}}
 </div>

@@ -1,21 +1,21 @@
 ---
 title: 偷一偷的花
 ---
-![](graph/01.jpg)
+![](ttneed/flower/graph/01.jpg)
 
-![](graph/02.jpg)
+![](ttneed/flower/graph/02.jpg)
 
-![](graph/03.jpg)
+![](ttneed/flower/graph/03.jpg)
 
-![](graph/04.jpg)
+![](ttneed/flower/graph/04.jpg)
 
-![](graph/05.jpg)
+![](ttneed/flower/graph/05.jpg)
 
-![](graph/06.jpg)
+![](ttneed/flower/graph/06.jpg)
 
-![](graph/07.jpg)
+![](ttneed/flower/graph/07.jpg)
 
-![](graph/08.jpg)
+![](ttneed/flower/graph/08.jpg)
 
 ![](graph/09.jpg)
 

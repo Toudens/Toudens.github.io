@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "ttneed/wuhan/_index.md",
+                "file": "compsci/dd/Ch-2.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "_index"
+              "title": "Ch-2"
             }
           }
         ]
@@ -185,10 +185,19 @@
   },
   "active": "9469ad67dd9df8d5",
   "lastOpenFiles": [
+    "compsci/dd/_index.md",
+    "compsci/dd/graph/ch-2-tpd.png",
+    "compsci/dd/Ch-3.md",
+    "compsci/dd/Ch-2.md",
+    "compsci/dd/Ch-1.md",
+    "compsci/ca/Ch-2.md",
+    "compsci/ca/Ch-1.md",
+    "ttneed/flower/_index.md",
+    "compsci/dd/graph/ch-1-signal.png",
+    "compsci/dd/graph",
+    "ttneed/wuhan/_index.md",
     "ttneed/huashan/_index.md",
     "ttneed/cloud/_index.md",
-    "ttneed/flower/_index.md",
-    "ttneed/wuhan/_index.md",
     "ttneed/_index.md",
     "_index.md",
     "ttneed/wuhan/graph/09.jpg",
@@ -199,10 +208,8 @@
     "ttneed/wuhan/graph/03.jpg",
     "ttneed/wuhan/graph/04.jpg",
     "ttneed/wuhan/graph/02.jpg",
-    "ttneed/wuhan/graph/01.jpg",
     "ttneed/wuhan/graph",
     "ttneed/wuhan",
-    "ttneed/huashan/graph/01.jpg",
     "ttneed/huashan/graph",
     "未命名.md",
     "ttneed/huashan",
@@ -219,16 +226,9 @@
     "phymath/calc I/Ch-1.md",
     "phymath/linear/_index.md",
     "phymath/ode/_index.md",
-    "compsci/oop/_index.md",
-    "compsci/dd/Ch-2.md",
-    "compsci/dd/Ch-1.md",
-    "compsci/ca/_index.md",
-    "compsci/ca/Ch-2.md",
-    "compsci/ca/Ch-2 副本.md",
     "compsci/ca/graph",
     "compsci/ca/新建文件夹",
     "compsci/ca/Graph",
-    "compsci/dd",
-    "friends"
+    "compsci/dd"
   ]
 }

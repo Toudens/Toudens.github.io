@@ -224,3 +224,5 @@ L1 缓存中的数据和 L2 缓存中的数据有包含或互斥两种处理策�
 $$
 \text{Virtual Memory}=\text{main Memory}+\text{Secondary Storage}
 $$
+### 5. 十种 Cache 进阶优化
+

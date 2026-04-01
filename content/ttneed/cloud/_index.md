@@ -2,14 +2,14 @@
 title: 偷一偷的云
 weight: "2"
 ---
-![](/ttneed/cloud/graph/01.jpg)
+![](https://toudens-images.s3.bitiful.net/cloud/01.jpg)
 
-![](/ttneed/cloud/graph/02.jpg)
+![](https://toudens-images.s3.bitiful.net/cloud/02.jpg)
 
-![](/ttneed/cloud/graph/03.jpg)
+![](https://toudens-images.s3.bitiful.net/cloud/03.jpg)
 
-![](/ttneed/cloud/graph/04.jpg)
+![](https://toudens-images.s3.bitiful.net/cloud/04.jpg)
 
-![](/ttneed/cloud/graph/05.jpg)
+![](https://toudens-images.s3.bitiful.net/cloud/05.jpg)
 
-![](/ttneed/cloud/graph/06.jpg)
+![](https://toudens-images.s3.bitiful.net/cloud/06.jpg)

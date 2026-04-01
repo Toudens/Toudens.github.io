@@ -1,5 +1,6 @@
 ---
 title: 通识课
+comments: "false"
 ---
 <!-- 直接把卡片放在这个 div 里，不要再用 feature-grid -->
 <div style="display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(max(280px, calc(50% - 16px)), 1fr)); margin-top: 1.5rem;">

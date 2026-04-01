@@ -136,20 +136,20 @@ enableInlineShortcodes = true
     [menu.main.params]
       icon = "github"
 
-# Giscus 评论系统配置
-[params.giscus]
+[params.comments]
   enable = true
-  # 替换为你实际用于存评论的 GitHub 仓库名
-  repo = "Toudens/toudens-blog-comments" 
-  # 下面两个 ID 填入你在第三步获取的值
-  repoId = "R_kgDOR2lW9g" 
-  category = "Announcements" # 推荐使用 Announcements 分类
+  type = "giscus"
+
+[params.comments.giscus]
+  repo = "Toudens/toudens-blog-comments"
+  repoId = "R_kgDOR2lW9g"
+  category = "Announcements"
   categoryId = "DIC_kwDOR2lW9s4C5wBU"
-  mapping = "pathname"       # 以文章 URL 路径作为评论关联标准
+  mapping = "pathname"
   strict = "0"
-  reactionsEnabled = "1"     # 开启点赞/表情回应
+  reactionsEnabled = "0"
   emitMetadata = "0"
-  inputPosition = "top"      # 评论框在顶部还是底部（top 或 bottom）
-  # 关键设置：这会让评论区自动跟随 Hextra 的亮/暗色模式切换！
-  theme = "preferred_color_scheme" 
+  inputPosition = "top"
+  theme = "preferred_color_scheme"
   lang = "zh-CN"
+  loading = "lazy"

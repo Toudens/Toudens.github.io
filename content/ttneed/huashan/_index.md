@@ -2,7 +2,8 @@
 title: 偷一偷的华山行
 weight: "3"
 ---
-![](/ttneed/huashan/graph/01.jpg)
+![](https://toudens-images.s3.bitiful.net/2026/04/01/01.jpg)
+
 
 ![](/ttneed/huashan/graph/02.jpg)
 

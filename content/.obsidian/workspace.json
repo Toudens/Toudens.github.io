@@ -185,6 +185,12 @@
   },
   "active": "9469ad67dd9df8d5",
   "lastOpenFiles": [
+    "ttneed/2ndbrain/Ch-1.md",
+    "ttneed/2ndbrain/_index.md",
+    "ttneed/cloud/_index.md",
+    "ttneed/_index.md",
+    "ttneed/2ndbrain",
+    "ttneed/未命名.md",
     "_index.md",
     "phymath/_index.md",
     "phymath/prob/_index.md",
@@ -204,17 +210,12 @@
     "compsci/ca/_index.md",
     "compsci/ca/Ch-1.md",
     "ttneed/huashan/_index.md",
-    "ttneed/cloud/_index.md",
     "ttneed/cloud/graph/03.jpg",
     "ttneed/flower/_index.md",
     "ttneed/flower/graph/01.jpg",
     "ttneed/flower/graph/15.JPG",
     "ttneed/huashan/graph/01.jpg",
     "ttneed/wuhan/_index.md",
-    "compsci/db/Ch-5.md",
-    "gened/ecolaw/_index.md",
-    "gened/ecolaw/Ch-1.md",
-    "phymath/calc I/Ch-1.md",
     "compsci/dd/graph/ch-2-tpd.png",
     "compsci/dd/graph/ch-1-signal.png",
     "compsci/dd/graph",
@@ -229,7 +230,6 @@
     "ttneed/新建文件夹",
     "compsci/ca/graph",
     "compsci/ca/新建文件夹",
-    "compsci/ca/Graph",
-    "compsci/dd"
+    "compsci/ca/Graph"
   ]
 }

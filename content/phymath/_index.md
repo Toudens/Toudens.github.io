@@ -1,6 +1,6 @@
 ---
 title: 数理方法
-comments: "false"
+comments: false
 ---
 <div style="display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(max(280px, calc(50% - 16px)), 1fr)); margin-top: 1.5rem;">
 

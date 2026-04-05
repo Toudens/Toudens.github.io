@@ -69,36 +69,37 @@ html[class~="dark"] .friend-card:hover {
 .friend-name {
     font-size: 1.15rem;
     font-weight: 800;
-    color: inherit;
+    color: #000000;   /* 亮色模式黑色 */
     margin-bottom: 0.2rem;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
+html[class~="dark"] .friend-name {
+    color: #ffffff;   /* 暗色模式白色 */
+}
 .friend-desc {
     font-size: 0.9rem;
-    color: #666;
+    color: #000000;   /* 亮色模式黑色 */
     line-height: 1.4;
     display: -webkit-box;
     -webkit-line-clamp: 2; 
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
-html[class~="dark"] .friend-desc { 
-    color: #aaa; 
+html[class~="dark"] .friend-desc {
+    color: #ffffff;   /* 暗色模式白色 */
 }
 
 /* ===== 右侧图片区域（占比更大，无分割线） ===== */
 .friend-avatar-wrapper {
-    width: 120px;               /* 从 85px 增加到 120px，头像占比更大 */
+    width: 120px;
     flex-shrink: 0;          
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 8px 0;
-    /* 去掉 border-left，删除分割竖线 */
 }
-/* 图片：不裁剪、不放缩，保持原始比例 */
 .friend-avatar {
     width: 100%;
     height: auto;
@@ -109,13 +110,11 @@ html[class~="dark"] .friend-desc {
 .friend-card:hover .friend-avatar { 
     transform: scale(1.02);
 }
-
-/* 移动端无特殊处理（已无分割线） */
 </style>
 
 <div class="friends-grid">
     <!-- 偷一偷 -->
-    <a href="/ttneed" class="friend-card" target="_blank" rel="noopener noreferrer">
+    <a href="https://Toudens.com" class="friend-card" target="_blank" rel="noopener noreferrer">
         <div class="friend-info">
             <div class="friend-name">偷一偷</div>
             <div class="friend-desc">偷学统治世界！</div>
@@ -124,7 +123,7 @@ html[class~="dark"] .friend-desc {
             <img src="/images/Tou.jpg" alt="偷一偷" class="friend-avatar">
         </div>
     </a>
-    <!-- 舔一舔合众国（修正拼写错误） -->
+    <!-- 舔一舔合众国 -->
     <a href="https://licking.life" class="friend-card" target="_blank" rel="noopener noreferrer">
         <div class="friend-info">
             <div class="friend-name">舔一舔合众国</div>
@@ -134,5 +133,16 @@ html[class~="dark"] .friend-desc {
             <img src="/headimg/Tui.jpg" alt="舔一舔" class="friend-avatar">
         </div>
     </a>
-    <!-- 凑数测试 -->
+    <!-- 如果需要第三个卡片，取消注释并修改即可 -->
+    <!--
+    <a href="javascript:void(0)" class="friend-card" target="_blank" rel="noopener noreferrer">
+        <div class="friend-info">
+            <div class="friend-name">凑数测试</div>
+            <div class="friend-desc">这次图片绝对严丝合缝、完全居中！</div>
+        </div>
+        <div class="friend-avatar-wrapper">
+            <img src="/images/flower.jpg" alt="测试" class="friend-avatar">
+        </div>
+    </a>
+    -->
 </div>

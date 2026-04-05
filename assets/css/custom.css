@@ -48,3 +48,19 @@ main table {
 }
 */
 
+/* 让整个页面主容器占满宽度，去掉最大宽度限制和内边距 */
+.hextra-page-container {
+    max-width: 100% !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+/* 让内容区域完全延伸（取决于主题结构，这两个类也常见） */
+.hextra-main {
+    max-width: 100% !important;
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+/* 如果你希望内容区域的文字/卡片仍保留舒适的阅读宽度，可以单独控制内部容器 */
+/* 例如你之前的 .friends-grid 可以设定最大宽度，或者评论区设定最大宽度 */

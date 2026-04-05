@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_index.md",
+                "file": "friends/_index.md",
                 "mode": "source",
                 "source": false
               },
@@ -185,11 +185,11 @@
   },
   "active": "72a8b1404cefe512",
   "lastOpenFiles": [
-    "Tou.jpg",
     "_index.md",
-    "ttneed/_index.md",
-    "compsci/db/Ch-5.md",
     "friends/_index.md",
+    "ttneed/_index.md",
+    "Tou.jpg",
+    "compsci/db/Ch-5.md",
     "compsci/ca/Ch-2B.md",
     "compsci/db/Ch-4.md",
     "compsci/ca/Ch-1.md",

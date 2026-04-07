@@ -83,28 +83,28 @@ comments: false
 <div class="seamless-gallery">
 {{< cards >}}
   {{< hextra/feature-card
-    title="花"
+    title=""
     link="/ttneed/flower"
     image="/images/flower.jpg"
     class="art-card"
     imageClass="custom-bg-full"
   >}}
   {{< hextra/feature-card
-    title="云"
+    title=""
     link="/ttneed/cloud"
     image="/images/cloud.jpg"
     class="art-card"
     imageClass="custom-bg-full"
   >}}
   {{< hextra/feature-card
-    title="华山"
+    title=""
     link="/ttneed/huashan"
     image="/images/huashan.jpg"
     class="art-card"
     imageClass="custom-bg-full"
   >}}
     {{< hextra/feature-card
-    title="武汉"
+    title=""
     link="/ttneed/wuhan"
     image="/images/wuhan.jpg"
     class="art-card"

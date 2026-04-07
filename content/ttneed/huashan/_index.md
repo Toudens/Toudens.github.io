@@ -1,5 +1,5 @@
 ---
-title: 偷一偷的华山行
+title: 偷一偷华山论剑
 weight: "3"
 ---
 ![](https://toudens-images.s3.bitiful.net/huashan/01.jpg?w=1200&q=80&fmt=webp)

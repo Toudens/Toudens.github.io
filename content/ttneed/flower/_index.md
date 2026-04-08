@@ -37,5 +37,3 @@ weight: "1"
 ![](https://toudens-images.s3.bitiful.net/flower/14.JPG?no-wait=on&w=1200&q=80&fmt=webp)
 
 ![](https://toudens-images.s3.bitiful.net/flower/15.JPG?no-wait=on&w=1200&q=80&fmt=webp)
-
-!

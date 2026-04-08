@@ -11,5 +11,3 @@ weight: "2"
 ![](https://toudens-images.s3.bitiful.net/cloud/04.jpg?w=1200&q=80&fmt=webp)
 
 ![](https://toudens-images.s3.bitiful.net/cloud/05.jpg?w=1200&q=80&fmt=webp)
-
-!

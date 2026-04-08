@@ -67,8 +67,8 @@ weight: "3"
 3. **消除成对反相 (Canceling inverter pairs)**：同一连线上相邻的两个反相器相互抵消。
 
 <div style="display: flex; justify-content: center; align-items: center; gap: 10px;">
-    <img src="./Ch-3-nand1.png" width="240" />
-    <img src="./Ch-3-nand2.png" width="320" />
+    <img src="./ch-3-nand1.png" width="240" />
+    <img src="./ch-3-nand2.png" width="320" />
 </div>
 
 #### 3.2 映射或非门
@@ -76,8 +76,8 @@ weight: "3"
 映射为**或非门 (NOR)** 的过程与同样基于等效替换、节点推移和反相器消除的规则来进行。
 
 <div style="display: flex; justify-content: center; align-items: center; gap: 10px;">
-    <img src="./Ch-3-nor.png" width="240" />
-    <img src="./Ch-3-nand2.png" width="320" />
+    <img src="./ch-3-nor.png" width="240" />
+    <img src="./ch-3-nand2.png" width="320" />
 </div>
 
 ### 4. 电路验证
@@ -110,13 +110,13 @@ $$
 $$
 重复以上步骤直到 $n=1$，当 $n=1$ 时使用 1-to-2 译码器即可完成构建。3-8译码器如下：
 
-<div align="center"> <img src="./Ch-3-38.png" width="420" /> </div>
+<div align="center"> <img src="./ch-3-38.png" width="420" /> </div>
 
 #### 6.2 带使能的译码器
 
 在译码器的基础上加入 **使能信号 EN** 来控制：当 EN 为 0 时无论输入，输出全为零；当 EN 为 1 时，输出对应的最小项。下图中为带使能的 2-4 译码器结构。
 
-<div align="center"> <img src="./Ch-3-de1.png" width="360" /> </div>
+<div align="center"> <img src="./ch-3-de1.png" width="360" /> </div>
 
 带使能的译码器又称为 **解复用器 (demultiplexer)** 。可以通过解复用器，将来自一条输入线上的信息传送到 $2^n$ 条输入线中的指定一条，实现分配功能。一个带使能的 $n\text{-}2^n$ 译码器同时又是一个 $1\text{-}2^n$ 解复用器，输入为使能信号。 
 ### 7. 编码器
@@ -126,17 +126,17 @@ $$
 
 **优先编码器 (priority encoder)** 的作用是解决多个输入同时为 $1$ 时普通编码器输出不确定的问题，它会优先处理优先级最高的输入。以下表为例，当 $D_0$ 为 $1$ 时，无论剩余的输入是怎样的，输出的结果均为 $000$ 。该表有很多的无关项可以用于化简。
 
-<div align="center"> <img src="./Ch-3-en1.png" width="420" /> </div>
+<div align="center"> <img src="./ch-3-en1.png" width="420" /> </div>
 
 #### 7.2 多路选择器
 
 **多路选择器 (multiplexer)** 的功能是用一组 $n$ 位的输入信号，选择 $2^n$ 位的输入信号中的一路分配到输出。一般来说一个 $2^n\text{-}1$ 多路选择器需要有 $n\text{-}2^n$ 译码器和 $2^n$ 个与门及 $1$ 个或门。 
 
-<div align="center"> <img src="./Ch-3-mux.png" width="420" /> </div>
+<div align="center"> <img src="./ch-3-mux.png" width="420" /> </div>
 
 对于一些场合，多选器需要选择的输入不止一位，下图是 $\text{4 bits 4-1 MUX}$ 的例子：
 
-<div align="center"> <img src="./Ch-3-mux4.png" width="420" /> </div>
+<div align="center"> <img src="./ch-3-mux4.png" width="420" /> </div>
 
 可以通过一个 $m$ 位宽的 $2^n\text{-}1$ 多路选择器和一个反相器实现 $n+1$ 个变量的任意 $m$ 个函数：
 1. 列出函数的真值表；
@@ -145,24 +145,24 @@ $$
 4. 以前 $n$ 个变量作为索引，将相应的初等函数固定到多路选择器的输入；
 5. 使用反相器生成基本逻辑函数 $\overline{X}$ 。
 
-<div align="center"> <img src="./Ch-3-gray.png" width="420" /> </div>
+<div align="center"> <img src="./ch-3-gray.png" width="420" /> </div>
 
-<div align="center"> <img src="./Ch-3-gray2.png" width="420" /> </div>
+<div align="center"> <img src="./ch-3-gray2.png" width="420" /> </div>
 
 ### 8. 加法器
 #### 8.1 半加器
 
 **半加器 (half-adder)** 是实现两位相加的组合电路，定义 $X,Y$ 为输入，$S$ 为加和，$C$ 为进位，则根据真值表可以推导出输出 $S,C$ 的组合逻辑表达式和电路实现。
 
-<div align="center"> <img src="./Ch-3-ha.png" width="360" /> </div>
+<div align="center"> <img src="./ch-3-ha.png" width="360" /> </div>
 
 #### 8.2 全加器
 
 **全加器 (full-adder)**：是实现三位相加的组合逻辑电路，在半加器的基础上还引入进位。定义 $X,Y,Z$ 为输入，$S$ 为加和， $C$ 为进位，可以推导出 $S,C$ 的组合逻辑表达式和电路实现。
 
 <div style="display: flex; justify-content: center; align-items: center; gap: 10px;">
-    <img src="./Ch-3-fa.png" width="360" />
-    <img src="./Ch-3-fa2.png" width="150" />
+    <img src="./ch-3-fa.png" width="360" />
+    <img src="./ch-3-fa2.png" width="150" />
 </div>
 
 $$
@@ -179,7 +179,7 @@ $$
 
 从低位开始，每一位等待低一位的进位计算完成后进行计算，并向高一位返回进位。
 
-<div align="center"> <img src="./Ch-3-adder1.png" width="400" /> </div>
+<div align="center"> <img src="./ch-3-adder1.png" width="400" /> </div>
 
 #### 8.4 超前进位加法器
 
@@ -193,7 +193,7 @@ $$
 \end{align}
 $$
 
-<div align="center"> <img src="./Ch-3-adder2.png" width="480" /> </div>
+<div align="center"> <img src="./ch-3-adder2.png" width="480" /> </div>
 
 考虑 4bit **超前进位加法器 (Carry Look-ahead Adder)** 的最大延迟：
 1. 全加器部分：计算 $P_i$ 和 $G_i$ ，其中 $P_i$ 的异或门速度较慢，消耗 $3$ 单位时间； 
@@ -204,7 +204,7 @@ $$
 
 对于位数更多的超前进位加法器，由于逻辑门的扇入限制，无法只用一个逻辑门完成单一的与、或操作，且 CLA 的部分会以 $\mathcal{O}(n^2)$ 的复杂度上升，消耗的成本会很高。如果用分组超前进位加法器，将上图中的全加器用 4bit 超前进位加法器替代，就能实现 16bit 超前进位加法器。该分组超前进位加法器的最大延迟为：$3+2+2+2+3=12$ 个单位时间。
 
-<div align="center"> <img src="./Ch-3-adder3.png" width="360" /> </div>
+<div align="center"> <img src="./ch-3-adder3.png" width="360" /> </div>
 
 #### 8.5 无符号减法
 
@@ -213,7 +213,7 @@ $$
 
 减法可以通过加上补码来完成，对每一位 **减数(subtrahend)** 的每一位取反后加上 **被减数(minuend)** 再加上 $1$ 即可得到结果。具体地，加法和减法通过控制是否取反的信号 $S$ 进行控制，下图为 4bit 支持减法的加法器实现。
 
-<div align="center"> <img src="./Ch-3-sub.png" width="420" /> </div>
+<div align="center"> <img src="./ch-3-sub.png" width="420" /> </div>
 
 当上图电路执行减法 ($S=1$) 时，实际结果和输出结果具有以下关系：
 * 当 $C_4=0$ 时，则 $A-B>0$ ，此时得到的结果就是实际结果；

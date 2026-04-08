@@ -183,10 +183,12 @@
       "bases:新建数据库": false
     }
   },
-  "active": "c92be4ccedee05d3",
+  "active": "48e0092666cb12b0",
   "lastOpenFiles": [
-    "compsci/dm/_index.md",
+    "compsci/db/_index.md",
+    "compsci/db/Ch-1.md",
     "compsci/dd/_index.md",
+    "compsci/dm/_index.md",
     "compsci/_index.md",
     "compsci/dd/Ch-3/index.md",
     "compsci/dd/Ch-2/index.md",
@@ -222,8 +224,6 @@
     "compsci/db/Ch-4.md",
     "compsci/ca/Ch-1.md",
     "compsci/ca/Ch-2A.md",
-    "compsci/ca/tmp.md",
-    "Pasted.md",
     "ttneed/2ndbrain",
     "compsci/dd/graph",
     "ttneed/wuhan/graph",

@@ -14,7 +14,7 @@ weight: "1"
 	* **同步 (Synchronous)**：时间和取值均是离散的，受时钟脉冲控制。
 
 <div style="text-align: center;">
-  <img src="/compsci/dd/graph/ch-1-signal.png" width="400" alt="signal">
+  <img src="./ch-1-signal.png" width="360" alt="signal">
 </div>
 
 > [!Note] **阈值区间与正逻辑**

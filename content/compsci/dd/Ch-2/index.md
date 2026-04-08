@@ -144,5 +144,5 @@ $$
 * **扇出 (Fan-out)**：一个门电路的输出端能直接驱动的后级标准负载的数量。扇出越大意味着负载越重，传播延迟越长（固定延迟加单个标准负载延迟乘以驱动的标准延迟负载数量）。
 
 <div style="text-align: center;">
-  <img src="/compsci/dd/graph/ch-2-tpd.png" width="500" alt="signal">
+  <img src="./ch-2-tpd.png" width="500" alt="signal">
 </div>

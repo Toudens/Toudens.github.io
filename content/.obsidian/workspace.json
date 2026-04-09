@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "ttneed/wuhan/_index.md",
+                "file": "compsci/dd/Ch-3/index.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "_index"
+              "title": "index"
             }
           }
         ]
@@ -78,7 +78,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 302.5
+    "width": 200,
+    "collapsed": true
   },
   "right": {
     "id": "c569291f788890c9",
@@ -185,6 +186,7 @@
   },
   "active": "48e0092666cb12b0",
   "lastOpenFiles": [
+    "ttneed/wuhan/_index.md",
     "ttneed/huashan/_index.md",
     "ttneed/flower/_index.md",
     "ttneed/cloud/_index.md",
@@ -228,7 +230,6 @@
     "compsci/dd/Ch-3",
     "compsci/dd/Ch-2",
     "compsci/dd/Ch-1",
-    "tmp.md",
     "ttneed/2ndbrain",
     "compsci/dd/graph"
   ]

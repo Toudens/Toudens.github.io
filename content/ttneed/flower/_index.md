@@ -1,5 +1,5 @@
 ---
-title: 偷一偷偷的花
+title: 偷一偷的花
 weight: "1"
 ---
 ![](https://toudens-images.s3.bitiful.net/flower/DSC00598.JPG?no-wait=on&w=1200&q=80&fmt=webp)

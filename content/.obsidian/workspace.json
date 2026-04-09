@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "gened/marxism/_index.md",
+                "file": "gened/militheory/_index.md",
                 "mode": "source",
                 "source": false
               },
@@ -78,8 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200,
-    "collapsed": true
+    "width": 200
   },
   "right": {
     "id": "c569291f788890c9",
@@ -186,6 +185,7 @@
   },
   "active": "48e0092666cb12b0",
   "lastOpenFiles": [
+    "gened/marxism/_index.md",
     "compsci/dd/Ch-3/index.md",
     "ttneed/wuhan/_index.md",
     "ttneed/huashan/_index.md",
@@ -225,7 +225,6 @@
     "compsci/dd/Ch-1/ch-1-signal.png",
     "compsci/dd/Ch-1/index.md",
     "compsci/_index.md",
-    "compsci/dd/Ch-2/index.md",
     "compsci/dd/Ch-2/ch-2-tpd.png",
     "compsci/dd/Ch-3",
     "compsci/dd/Ch-2",

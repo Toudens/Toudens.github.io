@@ -78,8 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200,
-    "collapsed": true
+    "width": 200
   },
   "right": {
     "id": "c569291f788890c9",
@@ -186,8 +185,9 @@
   },
   "active": "48e0092666cb12b0",
   "lastOpenFiles": [
-    "ttneed/memento/rain/index.md",
+    "DSC00609.jpg",
     "ttneed/hangzhou/liangzhu/index.md",
+    "ttneed/memento/rain/index.md",
     "ttneed/huashan/_index.md",
     "DSC00627 1.jpg",
     "DSC00627.jpg",

@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "ttneed/hangzhou/liangzhu/index.md",
+                "file": "compsci/_index.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "index"
+              "title": "_index"
             }
           }
         ]
@@ -185,8 +185,10 @@
   },
   "active": "48e0092666cb12b0",
   "lastOpenFiles": [
-    "DSC00609.jpg",
+    "compsci/dip/_index.md",
+    "_index.md",
     "ttneed/hangzhou/liangzhu/index.md",
+    "DSC00609.jpg",
     "ttneed/memento/rain/index.md",
     "ttneed/huashan/_index.md",
     "DSC00627 1.jpg",
@@ -199,14 +201,11 @@
     "DSC00642.jpg",
     "DSC00641.jpg",
     "DSC00640.jpg",
-    "DSC00639.jpg",
     "ttneed/memento/_index.md",
-    "_index.md",
     "ttneed/flower/_index.md",
     "ttneed/hangzhou/liangzhu",
     "compsci/dip/Ch-1/index.md",
     "ttneed/hangzhou",
-    "compsci/dip/_index.md",
     "compsci/dm/_index.md",
     "compsci/_index.md",
     "compsci/db/Ch-6/index.md",

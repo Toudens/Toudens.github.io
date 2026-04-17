@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "compsci/dip/Ch-2/index.md",
+                "file": "compsci/dip/_index.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "index"
+              "title": "_index"
             }
           }
         ]
@@ -78,8 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200,
-    "collapsed": true
+    "width": 200
   },
   "right": {
     "id": "c569291f788890c9",
@@ -186,9 +185,11 @@
   },
   "active": "3262a0f711175315",
   "lastOpenFiles": [
-    "compsci/dd/Ch-1/index.md",
-    "compsci/dip/Ch-1/index.md",
     "compsci/dip/Ch-2/index.md",
+    "compsci/dip/_index.md",
+    "compsci/dip/Ch-1/index.md",
+    "compsci/dd/_index.md",
+    "compsci/dd/Ch-1/index.md",
     "compsci/dip/Ch-2/output_3-4.bmp",
     "compsci/dip/Ch-2/output_3-3.bmp",
     "compsci/dip/Ch-2/output_3-2.bmp",
@@ -203,7 +204,6 @@
     "gened/ecolaw/_index.md",
     "compsci/ca/Ch-2A/index.md",
     "compsci/dip/Ch-2",
-    "compsci/dip/_index.md",
     "compsci/db/Ch-7/index.md",
     "compsci/db/Ch-6/index.md",
     "compsci/db/Ch-7",
@@ -227,7 +227,6 @@
     "ttneed/flower/_index.md",
     "ttneed/hangzhou/liangzhu",
     "ttneed/hangzhou",
-    "compsci/dm/_index.md",
     "compsci/dip/Ch-1",
     "compsci/dip",
     "ttneed/memento/rain",

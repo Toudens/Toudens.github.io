@@ -205,3 +205,12 @@ VMM必须具备三个基本特征：1、为程序提供与原硬件基本一致�
 <div align="center"> <img src="./Ch-2-ARM.png" width="520" /> </div>
 <div align="center"> <img src="./Ch-2-DDP.png" width="520" /> </div>
 
+**处理器的经典设计：L1 指令 / 数据 Cache 分离 (Harvard架构)**：现代 CPU 的 L1 Cache 普遍使用分离式设计：
+* **L1 指令 Cache (L1 I-Cache)**：专门存指令，大小为 32KB；
+* **L2 指令 Cache (L2 D-Cache)**：专门存数据，大小为 32 KB；
+* 两者是完全独立的硬件，各自有自己的`tag`,`index`和`offset`划分，不能混用。
+
+在数据访问路径里计算的是 **数据 Cache 自己的 32 KB** ，而不是 L1 Cache 总体的 64 KB。
+#### 7.5 Intel Core i7-6700
+
+<div align="center"> <img src="./Ch-2-intel.png" width="520" /> </div>

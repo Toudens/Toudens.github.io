@@ -1,0 +1,147 @@
+{{ $id := .Ordinal }}
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+
+<div class="relative w-full my-8">
+    <div id="china-travel-map-{{ $id }}" 
+         class="map-gallery-frame transition-colors duration-300" 
+         style="width: 100%; height: 65vh; min-height: 480px; margin: 0 auto;">
+        <div id="map-loading-{{ $id }}" class="absolute inset-0 flex items-center justify-center text-gray-400">
+            地图加载中...
+        </div>
+    </div>
+</div>
+
+<textarea id="travel-data-input-{{ $id }}" style="display:none;">{{ .Inner }}</textarea>
+
+<style>
+.map-gallery-frame {
+    background-color: #ffffff !important;
+    border: 1px solid #e5e7eb !important; 
+    border-radius: 8px !important;
+    padding: 10px !important; 
+    box-shadow: none !important; 
+    overflow: hidden; /* 保持裁切边缘 */
+}
+
+.dark .map-gallery-frame {
+    background-color: #171717 !important;
+    border-color: #262626 !important;
+}
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const chartDom = document.getElementById('china-travel-map-{{ $id }}');
+    const loadingText = document.getElementById('map-loading-{{ $id }}');
+    const dataInput = document.getElementById('travel-data-input-{{ $id }}');
+    
+    if (!chartDom) return;
+    const myChart = echarts.init(chartDom);
+    
+    let rawData = [];
+    try {
+        if (dataInput) {
+            let cleanText = dataInput.value.replace(/<[^>]+>/g, '').replace(/“|”/g, '"').trim();
+            rawData = JSON.parse(cleanText || "[]");
+        }
+    } catch (e) { console.error("数据解析失败", e); }
+
+    fetch('/map/china-cities.json')
+        .then(response => response.json())
+        .then(geoJson => {
+            if (loadingText) loadingText.style.display = 'none';
+            echarts.registerMap('china-cities', geoJson);
+
+            const isDark = document.documentElement.classList.contains('dark');
+            const unvisitedColor = isDark ? '#262626' : '#ffffff'; 
+
+            const option = {
+                backgroundColor: 'transparent',
+                tooltip: {
+                    show: true,
+                    trigger: 'item',
+                    backgroundColor: isDark ? '#171717' : '#fff',
+                    borderColor: isDark ? '#3f3f46' : '#e4e4e7',
+                    textStyle: { color: isDark ? '#e4e4e7' : '#27272a' },
+                    formatter: function (params) { return `<b>${params.name}</b>`; }
+                },
+                visualMap: {
+                    show: false, 
+                    type: 'piecewise',
+                    pieces: [
+                        { value: 2, color: '#3b82f6' },
+                        { value: 1, color: '#93c5fd' },
+                        { value: 0, color: unvisitedColor } 
+                    ]
+                },
+                series: [{
+                    name: '我的足迹',
+                    type: 'map',
+                    map: 'china-cities',
+                    roam: false,
+                    selectedMode: false, 
+
+                    /* 布局保持之前优化的比例 */
+                    layoutCenter: ['50%', '48%'], 
+                    layoutSize: '115%', 
+                    aspectScale: 0.75, 
+
+                    // 1. 彻底禁用默认状态下的文字标签
+                    label: { 
+                        show: false 
+                    }, 
+
+                    itemStyle: {
+                        areaColor: unvisitedColor,
+                        borderColor: isDark ? '#404040' : '#d1d5db',
+                        borderWidth: 0.5
+                    },
+
+                    // 2. 核心修复：彻底禁用鼠标悬浮（高亮）时的文字标签
+                    emphasis: {
+                        label: { 
+                            show: false // 这里设为 false 就会去掉那个红色的纯文字
+                        },
+                        itemStyle: {
+                            areaColor: '#60a5fa'
+                        }
+                    },
+
+                    // 3. 彻底禁用选中状态下的文字标签（双重保险）
+                    select: {
+                        disabled: true,
+                        label: {
+                            show: false
+                        },
+                        itemStyle: {
+                            areaColor: 'inherit' 
+                        }
+                    },
+                    data: rawData
+                }]
+            };
+
+            myChart.setOption(option);
+            myChart.on('click', function (params) {
+                if (params.data && params.value === 2 && params.data.url) {
+                    window.location.href = params.data.url; 
+                }
+            });
+
+            window.addEventListener('resize', () => myChart.resize());
+
+            const observer = new MutationObserver(function() {
+                const newIsDark = document.documentElement.classList.contains('dark');
+                myChart.setOption({
+                    series: [{
+                        itemStyle: {
+                            areaColor: newIsDark ? '#262626' : '#ffffff',
+                            borderColor: newIsDark ? '#404040' : '#d1d5db'
+                        }
+                    }]
+                });
+            });
+            observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+        });
+});
+</script>

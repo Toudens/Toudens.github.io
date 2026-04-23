@@ -3,111 +3,155 @@ title: 偷一偷QwQ
 comments: false
 weight: "4"
 ---
+\
+{{< travel-map >}}
+[
+  {"name": "西安", "value": 1},
+  {"name": "温州", "value": 1},
+  {"name": "金华", "value": 1},
+  {"name": "丽水", "value": 1},
+  {"name": "上海", "value": 1},
+  {"name": "衢州", "value": 1},
+  {"name": "舟山", "value": 1},
+  {"name": "绍兴", "value": 1},
+  {"name": "宁波", "value": 1},
+  {"name": "南京", "value": 1},
+  {"name": "青岛", "value": 1},
+  {"name": "大连", "value": 1},
+  {"name": "北京", "value": 1},
+  { "name": "武汉", "value": 2,  "url": "/ttneed/wuhan/"},
+  { "name": "杭州", "value": 2, "url": "/ttneed/hangzhou/" },
+  { "name": "渭南", "value": 2, "url": "/ttneed/weinan/" }
+]
+{{< /travel-map >}}
+
 <style>
-  /* 引入谷歌免费开源中文字体：只莽行书 */
   @import url('https://fonts.googleapis.com/css2?family=Zhi+Mang+Xing&display=swap');
 
-  /* 1. 外层无缝画廊大画框 */
-  .seamless-gallery {
-    border-radius: 16px;       
-    overflow: hidden;          
-    box-shadow: 0 10px 30px rgba(0,0,0,0.15); 
-    margin-top: 1.5rem;
-    background-color: #000;    
+  .polaroid-gallery {
+    margin-top: 2rem;
+    padding: 1rem;
+    /* 增加一个最大宽度限制，防止大屏缩放时图片由于比例关系变得巨大 */
+    max-width: 1100px;
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
 
-  /* 2. 强制抹除 Hextra 默认的属性 */
-  .seamless-gallery > div {
-    gap: 0 !important;
-    margin-top: 0 !important; /* 【核心修复1】抹除 Hextra 自带的顶部外边距，消灭顶端黑框 */
-    padding: 0 !important;
+  /* 强制 3 列布局 */
+  .polaroid-gallery > div {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important; 
+    gap: 2.5rem 1.5rem !important;
   }
 
-  /* 3. 卡片本身：削平圆角，去除边框，严丝合缝 */
   .art-card {
-    border-radius: 0 !important; 
-    border: none !important;
-    box-shadow: none !important;
-    margin: 0 !important;
+    background-color: #ffffff !important;
+    /* 1. 减少底部内边距：从 50px 减为 42px */
+    padding: 10px 10px 42px 10px !important; 
+    border-radius: 2px !important;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1) !important;
     
-    /* 【核心修复2】统一在这里增加高度！400px 觉得不够可以改成 450px 或 500px */
-    min-height: 180px !important; 
+    /* 2. 优化比例：从 4 / 5.2 缩短为 4 / 4.9，让卡片没那么长 */
+    min-height: auto !important; 
+    aspect-ratio: 4 / 4.9 !important; 
     
     display: flex !important;
     flex-direction: column !important;
-    align-items: center !important;
-    justify-content: center !important;
-    overflow: hidden !important;
-    position: relative !important; /* 确保背景图只在卡片内部绝对定位 */
+    overflow: visible !important;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
   }
 
-  /* 4. 背景图铺满 */
+  /* 背景图比例优化 */
   .custom-bg-full {
+    position: relative !important;
+    width: 100% !important;
+    /* 3. 提高图片高度占比：从 82% 提升到 86% */
+    height: 86% !important; 
+    object-fit: cover !important;
+    filter: brightness(0.95) contrast(90%);
+    transition: all 0.4s ease;
+    display: block !important;
+    border: 1px solid #f0f0f0; /* 给图片加一个极淡的边框更有质感 */
+  }
+
+  /* 标题样式优化 */
+  .art-card span, 
+  .art-card h3, 
+  .art-card div[class*="title"],
+  .art-card .hextra-feature-card-title {
+    display: block !important;
     position: absolute !important;
-    top: 0 !important;
+    /* 4. 调整文字位置，使其垂直居中在底部留白区 */
+    bottom: 6px !important; 
     left: 0 !important;
     width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important;
-    filter: brightness(0.7);
-    z-index: 0;
-    pointer-events: none;
-    transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+    text-align: center !important;
+    
+    font-family: 'Zhi Mang Xing', serif !important;
+    font-size: 1.8rem !important; /* 稍微缩小一点点字号，更显精致 */
+    color: #222 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    z-index: 10 !important;
+    font-weight: normal !important;
+  }
+
+  /* 倾斜效果保持不变 */
+  .polaroid-gallery > div > :nth-child(3n+1) { transform: rotate(-2deg); }
+  .polaroid-gallery > div > :nth-child(3n+2) { transform: rotate(1.5deg) translateY(-8px); }
+  .polaroid-gallery > div > :nth-child(3n+3) { transform: rotate(-1deg) translateY(5px); }
+
+  .art-card:hover {
+    transform: rotate(0deg) scale(1.06) translateY(-10px) !important;
+    z-index: 100 !important;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15) !important;
   }
 
   .art-card:hover .custom-bg-full {
-    transform: scale(1.08);
+    filter: brightness(1) contrast(100%);
   }
 
-  /* 5. 艺术字 */
-  .art-card div[class*="font-bold"], 
-  .art-card h3 {
-    position: relative;
-    z-index: 10;
-    font-size: 4rem !important; /* 图片变高了，字也可以稍微调大一点点 */
-    line-height: 1 !important;
-    font-weight: normal !important;
-    font-family: 'Zhi Mang Xing', 'Xingkai SC', 'STXingkai', '华文行楷', 'KaiTi', serif !important;
-    color: #ffffff !important;
-    text-shadow: 
-      0px 3px 8px rgba(0, 0, 0, 0.9),
-      0px 0px 25px rgba(0, 0, 0, 0.6);
-    margin: 0 !important;
-  }
+  .art-card svg { display: none !important; }
 
-  .art-card svg {
-    display: none !important;
+  @media (max-width: 768px) {
+    .polaroid-gallery > div { grid-template-columns: 1fr 1fr !important; }
   }
 </style>
 
-<!-- html 结构部分 -->
-<div class="seamless-gallery">
+<div class="polaroid-gallery">
 {{< cards >}}
   {{< hextra/feature-card
-    title=""
+    title="繁花"
     link="/ttneed/flower"
-    image="/images/flower.jpg"
+    image="https://toudens-images.s3.bitiful.net/flower/01.jpg?no-wait=on&w=1200&q=80&fmt=webp"
     class="art-card"
     imageClass="custom-bg-full"
   >}}
   {{< hextra/feature-card
-    title=""
+    title="流云"
     link="/ttneed/cloud"
-    image="/images/cloud.jpg"
+    image="https://toudens-images.s3.bitiful.net/cloud/04.jpg?w=1200&q=80&fmt=webp"
     class="art-card"
     imageClass="custom-bg-full"
   >}}
   {{< hextra/feature-card
-    title=""
-    link="/ttneed/huashan"
-    image="/images/huashan.jpg"
+    title="渭南"
+    link="/ttneed/weinan"
+    image="https://toudens-images.s3.bitiful.net/huashan/01.jpg?w=1200&q=80&fmt=webp"
     class="art-card"
     imageClass="custom-bg-full"
   >}}
-    {{< hextra/feature-card
-    title=""
+  {{< hextra/feature-card
+    title="武汉"
     link="/ttneed/wuhan"
-    image="/images/wuhan.jpg"
+    image="https://toudens-images.s3.bitiful.net/wuhan/02.jpg?w=1200&q=80&fmt=webp"
+    class="art-card"
+    imageClass="custom-bg-full"
+  >}}
+  {{< hextra/feature-card
+    title="杭州"
+    link="/ttneed/hangzhou"
+    image="https://toudens-images.s3.bitiful.net/liangzhu/DSC00622.jpg?w=1200&q=80&fmt=webp" 
     class="art-card"
     imageClass="custom-bg-full"
   >}}

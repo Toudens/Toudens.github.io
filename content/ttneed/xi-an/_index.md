@@ -1,30 +1,7 @@
 ---
-title: 偷一偷QwQ
-comments: false
-weight: "4"
+weight: "6"
+title: 偷一偷在西安
 ---
-\
-{{< travel-map >}}
-[
-  {"name": "西安", "value": 2,  "url": "/ttneed/xi-an/"},
-  {"name": "温州", "value": 1},
-  {"name": "金华", "value": 1},
-  {"name": "丽水", "value": 1},
-  {"name": "上海", "value": 1},
-  {"name": "衢州", "value": 1},
-  {"name": "舟山", "value": 1},
-  {"name": "绍兴", "value": 1},
-  {"name": "宁波", "value": 1},
-  {"name": "南京", "value": 1},
-  {"name": "青岛", "value": 1},
-  {"name": "大连", "value": 1},
-  {"name": "北京", "value": 1},
-  { "name": "武汉", "value": 2,  "url": "/ttneed/wuhan/"},
-  { "name": "杭州", "value": 2, "url": "/ttneed/hangzhou/" },
-  { "name": "渭南", "value": 2, "url": "/ttneed/weinan/" }
-]
-{{< /travel-map >}}
-
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Zhi+Mang+Xing&display=swap');
 
@@ -110,12 +87,10 @@ weight: "4"
   }
 
   /* --- 交互与布局 --- */
-  .polaroid-gallery > div > :nth-child(3n+1) { transform: rotate(-2deg); }
-  .polaroid-gallery > div > :nth-child(3n+2) { transform: rotate(1.5deg) translateY(-8px); }
-  .polaroid-gallery > div > :nth-child(3n+3) { transform: rotate(-1deg) translateY(5px); }
+  /* 已移除倾斜（rotate）效果，所有卡片保持水平 */
 
   .art-card:hover {
-    transform: rotate(0deg) scale(1.06) translateY(-10px) !important;
+    transform: scale(1.05) translateY(-10px) !important;
     z-index: 100 !important;
     box-shadow: 0 20px 40px rgba(0,0,0,0.15) !important;
   }
@@ -139,44 +114,23 @@ weight: "4"
 <div class="polaroid-gallery">
 {{< cards >}}
   {{< hextra/feature-card
-    title="繁花"
-    link="/ttneed/flower"
-    image="https://toudens-images.s3.bitiful.net/flower/01.jpg?no-wait=on&w=1200&q=80&fmt=webp"
+    title="陕西历史博物馆"
+    link="/ttneed/xi-an/Shaanxi-Historical-Museum"
+    image="https://toudens-images.s3.bitiful.net/xi-an/Shaanxi-Historical-Museum/08.jpg?w=1200&q=100&fmt=webp&no-wait=on"
     class="art-card"
     imageClass="custom-bg-full"
   >}}
   {{< hextra/feature-card
-    title="流云"
-    link="/ttneed/cloud"
-    image="https://toudens-images.s3.bitiful.net/cloud/04.jpg?w=1200&q=80&fmt=webp"
+    title="兵马俑"
+    link="/ttneed/xi-an/Terracotta-Warriors"
+    image="https://toudens-images.s3.bitiful.net/xi-an/Terracotta-Warriors/02.jpg?w=1200&q=100&fmt=webp&no-wait=on"
     class="art-card"
     imageClass="custom-bg-full"
   >}}
   {{< hextra/feature-card
-    title="渭南"
-    link="/ttneed/weinan"
-    image="https://toudens-images.s3.bitiful.net/huashan/01.jpg?w=1200&q=80&fmt=webp"
-    class="art-card"
-    imageClass="custom-bg-full"
-  >}}
-  {{< hextra/feature-card
-    title="武汉"
-    link="/ttneed/wuhan"
-    image="https://toudens-images.s3.bitiful.net/wuhan/02.jpg?w=1200&q=80&fmt=webp"
-    class="art-card"
-    imageClass="custom-bg-full"
-  >}}
-  {{< hextra/feature-card
-    title="杭州"
-    link="/ttneed/hangzhou"
-    image="https://toudens-images.s3.bitiful.net/hangzhou/qiantang/01.jpg?w=1200&q=80&fmt=webp" 
-    class="art-card"
-    imageClass="custom-bg-full"
-  >}}
-  {{< hextra/feature-card
-    title="西安"
-    link="/ttneed/xi-an"
-    image="https://toudens-images.s3.bitiful.net/xi-an/Changan-Miscellany/01.jpg?w=1200&q=100&fmt=webp&no-wait=on" 
+    title="长安拾遗"
+    link="/ttneed/xi-an/Changan-Miscellany"
+    image="https://toudens-images.s3.bitiful.net/xi-an/Changan-Miscellany/01.jpg?w=1200&q=100&fmt=webp&no-wait=on"
     class="art-card"
     imageClass="custom-bg-full"
   >}}

@@ -115,21 +115,21 @@ title: 偷一偷在西安
 {{< cards >}}
   {{< hextra/feature-card
     title="陕西历史博物馆"
-    link="/ttneed/xi-an/Shaanxi-Historical-Museum"
+    link="/ttneed/xi-an/shaanxi-historical-museum"
     image="https://toudens-images.s3.bitiful.net/xi-an/Shaanxi-Historical-Museum/08.jpg?w=1200&q=100&fmt=webp&no-wait=on"
     class="art-card"
     imageClass="custom-bg-full"
   >}}
   {{< hextra/feature-card
     title="兵马俑"
-    link="/ttneed/xi-an/Terracotta-Warriors"
+    link="/ttneed/xi-an/terracotta-warriors"
     image="https://toudens-images.s3.bitiful.net/xi-an/Terracotta-Warriors/02.jpg?w=1200&q=100&fmt=webp&no-wait=on"
     class="art-card"
     imageClass="custom-bg-full"
   >}}
   {{< hextra/feature-card
     title="长安拾遗"
-    link="/ttneed/xi-an/Changan-Miscellany"
+    link="/ttneed/xi-an/changan-miscellany"
     image="https://toudens-images.s3.bitiful.net/xi-an/Changan-Miscellany/01.jpg?w=1200&q=100&fmt=webp&no-wait=on"
     class="art-card"
     imageClass="custom-bg-full"

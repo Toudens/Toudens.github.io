@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "compsci/db/_index.md",
+                "file": "compsci/db/Ch-7/index.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "_index"
+              "title": "index"
             }
           }
         ]
@@ -78,7 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 268.5
   },
   "right": {
     "id": "c569291f788890c9",
@@ -185,6 +185,7 @@
   },
   "active": "3262a0f711175315",
   "lastOpenFiles": [
+    "compsci/ca/Ch-2B/index.md",
     "compsci/db/Ch-7/index.md",
     "compsci/db/_index.md",
     "compsci/db/Ch-7/Ch-7-4NF.png",

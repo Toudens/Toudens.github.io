@@ -10,3 +10,4 @@ comments: false
 | **[Ch-4 Intermediate SQL]({{<relref "Ch-4/index.md">}})** | 已完成  | 已完成  |
 | **[Ch-5 Advanced SQL]({{<relref "Ch-5/index.md">}})**     |      |      |
 | **[Ch-6 ER Model]({{<relref "Ch-6/index.md">}})**         | 已完成  | 已完成  |
+| **[Ch-7 Rel-DB Design]({{<relref "Ch-7/index.md">}})**    | 已完成  | 已完成  |

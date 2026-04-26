@@ -95,7 +95,7 @@ $$
 
 在函数依赖的背景下，给定属性集 $\alpha$ ，我们将其在函数依赖集 $F$ 下的 **属性集闭包 (Closure of Attribute Sets)** 记作 $\alpha^+$ 定义为：在 $F$ 的约束下，所有由 $\alpha$ 函数决定的属性集合，即从 $\alpha$ 出发，利用已有的依赖规则所能推导出来的全部属性。 ./ch-7-closure.png
 
-<div align="center"> <img src="./ch-7-closure.png" width="520" /> </div>
+<div align="center"> <img src="./Ch-7-closure.png" width="520" /> </div>
 
 属性集闭包有如下应用：
 - **判定超键**：要判断属性集 $\alpha$ 是否为超键，只要验证 $\alpha^+$ 是否包含关系模式中的所有属性；
@@ -114,7 +114,7 @@ $$
 - **极小化**：$F_c$ 中不包含任何无关属性；
 - **左侧唯一**：$F_c$ 中每个依赖的左侧必须唯一， $\alpha\rightarrow\beta_1,\alpha\rightarrow\beta_2$ 要合并为 $\alpha\rightarrow\beta_1\beta_2$ 。
 
-<div align="center"> <img src="./ch-7-canonical.png" width="520" /> </div>
+<div align="center"> <img src="./Ch-7-canonical.png" width="520" /> </div>
 
 #### 3.6 多值依赖
 
@@ -151,7 +151,7 @@ $$
 
 【注】由于保证了 $\alpha\cap\beta=\emptyset$ ，直接在原模式中剔除 $\beta$ 不会剔除 $\alpha$ 中的属性。严格来说，模式二应该表述为：原模式中剔除 $\beta$ 中不与 $\alpha$ 重合的属性后得到的剩余属性。
 
-<div align="center"> <img src="./ch-7-BCNFAlg.png" width="520" /> </div>
+<div align="center"> <img src="./Ch-7-BCNFAlg.png" width="520" /> </div>
 
 >[!Note] **Note**
 >将关系模式分解到 BCNF 有明显的优缺点，是数据库设计中必须权衡的理论基础：
@@ -172,7 +172,7 @@ $$
 
 显然如果一个关系模式满足 BCNF，那么它也一定满足 3NF，即 BCNF 是 3NF 的 **真子集**。
 
-<div align="center"> <img src="./ch-7-3NFAlg.png" width="520" /> </div>
+<div align="center"> <img src="./Ch-7-3NFAlg.png" width="520" /> </div>
 
 **算法正确性证明**：从极小函数依赖集 $F_c$ 中取出 $\alpha\rightarrow\beta$ 构造模式 $R_k=\alpha\cup\beta$。显然 $\alpha$ 是 $R_k$ 的候选键，$\alpha$ 包含的属性均是**主属性**。
 
@@ -196,7 +196,7 @@ $$
 - **范式层级**：4NF 是一级更强的规范化标准。若一个关系满足 4NF，则它必然满足 **BCNF**
 - **设计目标**：4NF 的本质是消除由于多个独立的“一对多”关系导致的非平凡多值依赖，从而解决 3NF 和 BCNF 无法处理的数据冗余问题。
 
-<div align="center"> <img src="./ch-7-4NF.png" width="520" /> </div>
+<div align="center"> <img src="./Ch-7-4NF.png" width="520" /> </div>
 
 #### 4.5 非规范化策略
 

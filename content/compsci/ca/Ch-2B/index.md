@@ -213,4 +213,9 @@ VMM必须具备三个基本特征：1、为程序提供与原硬件基本一致�
 在数据访问路径里计算的是 **数据 Cache 自己的 32 KB** ，而不是 L1 Cache 总体的 64 KB。
 #### 7.5 Intel Core i7-6700
 
+指令 Cache 和数据 Cache 的差异：
+- **指令 Cache**：所有程序的指令缺失率都远低于数据 Cache，且随着 Cache 扩容下降更快，最终趋近于零，因为指令的局部性天然优于数据；
+- **数据 Cache**：不同程序的缺失率差距极大，是 Cache 性能的核心瓶颈。
+
+
 <div align="center"> <img src="./Ch-2-intel.png" width="520" /> </div>

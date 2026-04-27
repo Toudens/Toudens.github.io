@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "compsci/db/Ch-7/index.md",
+                "file": "compsci/ca/Ch-3/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -78,7 +78,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 200,
+    "collapsed": true
   },
   "right": {
     "id": "c569291f788890c9",
@@ -185,30 +186,34 @@
   },
   "active": "3262a0f711175315",
   "lastOpenFiles": [
+    "compsci/ca/Ch-3/Ch-3-RAW2.png",
+    "compsci/ca/Ch-3/Ch-3-RAW.png",
+    "compsci/ca/Ch-3/index.md",
+    "compsci/ca/Ch-3/Ch-3-WAW.png",
     "compsci/ca/Ch-2B/index.md",
+    "compsci/ca/_index.md",
+    "Pasted image 20260427152206.png",
+    "compsci/ca/Ch-3/Ch-3-structure.png",
+    "compsci/ca/Ch-3/Ch-3-EX2.png",
+    "compsci/ca/Ch-3/Ch-3-latency.png",
+    "compsci/ca/Ch-3/Ch-3-EX.png",
+    "compsci/ca/Ch-1/index.md",
+    "compsci/ca/Ch-3",
     "compsci/db/Ch-7/index.md",
     "compsci/db/_index.md",
     "compsci/db/Ch-7/Ch-7-4NF.png",
     "compsci/db/Ch-7/Ch-7-canonical.png",
-    "compsci/db/Ch-7/Ch-7-closure.png",
-    "compsci/db/Ch-7/Ch-7-3NFAlg.png",
     "ttneed/wuhan/_index.md",
     "ttneed/xi-an/_index.md",
     "ttneed/_index.md",
     "ttneed/hangzhou/_index.md",
-    "ttneed/hangzhou/qiantang/01.jpg",
     "ttneed/hangzhou/qiantang/index.md",
     "ttneed/hangzhou/liangzhu/index.md",
     "ttneed/xi-an/Changan-Miscellany/index.md",
-    "ttneed/hangzhou/qiantang/05.jpg",
-    "ttneed/hangzhou/qiantang/04.jpg",
-    "ttneed/hangzhou/qiantang/03.jpg",
-    "ttneed/hangzhou/qiantang/02.jpg",
     "ttneed/hangzhou/qiantang",
     "ttneed/xi-an/Shaanxi-Historical-Museum/index.md",
     "ttneed/xi-an/Terracotta-Warriors/index.md",
     "_index.md",
-    "ttneed/xi-an/Changan-Miscellany/01.jpg",
     "ttneed/xi-an/Changan-Miscellany",
     "ttneed/xi-an/Terracotta-Warriors",
     "ttneed/memento/_index.md",
@@ -222,14 +227,9 @@
     "ttneed/未命名.md",
     "compsci/db/Ch-6/index.md",
     "compsci/dd/Ch-4/index.md",
-    "compsci/dd/Ch-1/index.md",
-    "compsci/dd/Ch-2/index.md",
-    "compsci/dd/Ch-3/index.md",
-    "compsci/db/Ch-3/index.md",
     "compsci/dd/Ch-4",
     "compsci/dip/Ch-2",
     "compsci/db/Ch-7",
-    "compsci/paper/DaS",
-    "compsci/paper"
+    "compsci/paper/DaS"
   ]
 }

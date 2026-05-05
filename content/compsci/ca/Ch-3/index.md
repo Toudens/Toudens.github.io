@@ -244,3 +244,324 @@ MIPS R4000 的浮点单元不是一条固定的流水线，而是把运算过程
 <div align="center"> <img src="./Ch-3-FP2.png" width="520" /> </div>
 
 <div align="center"> <img src="./Ch-3-FP3.png" width="520" /> </div>
+
+### 5. 指令集并行
+
+#### 5.1 技术路线
+
+**基于编译器的静态并行 (Compiler-Based Static Parallelism)** 将提取并行性的负担完全交由软件（编译器）承担。在程序编译阶段，通过静态代码分析，提前发现无依赖关系的指令并对其进行重排与打包调度。目前，该路线仅在特定领域环境，或具备大量规则循环、具有显著数据级并行性的高度结构化科学计算应用程序中才能发挥有效作用。
+
+**基于硬件的动态并行 (Hardware-Based Dynamic Parallelism)** 依赖处理器内部的微架构控制逻辑，在程序运行时动态地检测指令间的数据/控制依赖，并利用硬件调度器实时提取并行指令进行乱序发射与执行。该路线是现代通用计算的主流。
+#### 5.2 依赖指令
+
+**并行指令 (parallel instructions)**：两条指令可以在任意深度的流水线中同时执行，且不会引起任何停顿，前提是资源充足不存在结构冒险。
+
+**依赖指令 (dependent instructions)**：两条指令存在依赖关系，由于数据或控制上的关联，指令无法完全同时执行，后一条指令必须等待前一条指令的结果产出后才能继续。虽然需要按序，但在流水线技术下，执行过程可以部分交叠，无需完全串行。
+
+指令的依赖关系分为三类：**数据依赖 (data dependence)、名字依赖 (name dependence)、控制依赖 (control dependence)**。
+
+指令 $j$ **数据依赖** 于指令 $i$ 通常满足以下任一条件：
+
+* **直接依赖**：指令 $i$ 产生的结果可能被指令 $j$ 使用，即 $i\rightarrow j$；
+* **传递依赖**：指令 $j$ 依赖于指令 $k$ ，而指令 $k$ 又依赖于指令 $i$ ，即 $i\rightarrow k\rightarrow j\Rightarrow i\rightarrow j$ 。
+
+本质上是 $\text{Write}\rightarrow\text{Read}$ ，即前指令写，后指令读， RAW 关系构成了程序底层逻辑顺序。
+
+需要注意的是**单条指令不存在数据依赖**，例如 `add x1,x1,x1` 虽然它同时读写 `x1`，但是在体系结构定义中这不被视为指令间的依赖，因为不存在指令间的流水线冲突。
+
+```asm
+Loop: fld    f0, 0(x1)
+	  fadd.d f4, f0, f2   # fadd.d 依赖于 fld 取出的 f0
+	  fsd    f4, 0(x1)    # fsd 依赖于 fadd.d 计算的 f4
+	  addi   x1, x1, -8
+	  bne    x1, x2, Loop # bne 依赖于 addi 对 x1 的更新
+	
+```
+
+当两条指令使用相同的寄存器或内存位置，但这两条指令之间并没有真实的数据流动时就发生了 **名字依赖 (name dependence)** ，名依赖可以分为以下两种类型：
+- **反依赖 (antidependence)**：后面的指令 $j$ 写入了一个寄存器或内存位置，而这个位置正是前面的指令 $i$ 需要读取的。必须保持原有的执行顺序，确保在 $j$ 覆盖之前指令 $i$ 能够读取到正确的值（本质上是 $\text{Read}\rightarrow\text{Write}$）；
+- **输出依赖 (output dependence)**：前面的指令 $i$ 和后面的指令 $j$ 都要写入同一个寄存器或内存位置。必须保持指令间的执行顺序，确保寄存器或内存位置最终保留的值是程序顺序中排在后面的指令 $j$ 所写入的那个值（本质上是 $\text{Write}\rightarrow\text{Write}$）。
+
+```asm
+Loop: fld    f0, 0(x1)
+	  fadd.d f0, f1, f2 # f0 的值输出依赖于 fld
+	  fsd    f4, 0(x1)
+	  addi   x1, x1, -8 # x1 的值反依赖于 fsd 的 f4
+	  bne    x1, x2, Loop
+```
+
+反依赖不是真正的数据依赖，可以通过 **寄存器重命名 (register renaming)** 来解决反依赖。在上例中，编译器或硬件可以把 `addi` 里的 `x1` 临时重命名为一个新的寄存器如 `x1_new` ，这样 `fsd` 读的还是原来的 `x1` ，`addi` 写的是 `x1_new`，两者就没有冲突了，两条指令就可以并行执行，完全消除了 stall 。
+
+```asm
+Loop: fld    f0, 0(x1)
+	  fadd.d f0, f1, f2
+	  fsd    f4, 0(x1)
+	  addi   x1_new, x1, -8 # 将原来的 x1 更改为 x1_new
+	  bne    x1_new, x2, Loop
+```
+
+>[!Note] **Note**
+>**Q：如上代码，如果用 `x1_new` 去替代原有的 `x1` ，在循环的 Loop 后理应要将新的 `x1_new` 覆盖到 `x1` 上才能让 `x1` 的值保证正确，而这样又增加了指令数，并有可能与循环体开头的指令又产生 data hazard，这样处理是否是划算的？**
+>
+>A：事实上，处理器通过内部映射表将架构寄存器重命名为底层的物理寄存器。在执行上述代码时，`fsd` 指令读取的是 `x1` 当前映射的物理寄存器；随后的 `addi` 指令在更新 `x1` 时，硬件不会覆盖原寄存器，而是分配一个新的物理寄存器来存储减 8 后的结果，并将 `x1` 的映射关系更新为指向该新寄存器。这种仅修改底层映射指针的机制，使得 `fsd` 的读操作与 `addi` 的写操作在物理层面上分离，不仅消除了反依赖造成的流水线阻塞，且无需在指令流中增加任何额外的拷贝指令，后续的循环语句会自动读取更新后的映射地址。
+
+当且仅当以下三个条件同时满足时，系统中就会存在 **数据冒险**：
+- **存在依赖**：指令之间存在数据依赖或名字依赖；
+- **举例够近**：这些依赖指令在执行时间或空间上够近，会同时处于流水线中；
+- **执行重叠改变了访问顺序**：重叠导致程序改变对相关操作的实际访问顺序。
+
+**控制依赖 (control dependence)** 是由程序中的控制流指令引起的，它决定了某条指令 $i$ 与分支指令之间的执行顺序，以确保指令 $i$ 仅在程序逻辑要求其执行时才被执行。
+
+```asm
+if p1 S1; # S1 对 p1 存在控制依赖
+if p2 S2; # S2 对 p2 存在控制依赖
+ 
+```
+
+在流水线处理器中，实际的平均每条指令的时钟周期数 (CPI) 等于理想 CPI 与各类冒险停顿造成的额外周期数之和，有公式：
+$$
+\text{实际流水线 CPI}
+=\text{理想流水线 CPI}
++\text{结构冒险停顿}
++\text{数据冒险停顿}
++\text{控制冒险停顿}
+$$
+#### 5.3 属性约束
+
+在优化流水线性能时，为了保证程序的正确性，必须遵守两大关键 **属性约束 (property constraints)**：异常行为和数据流。通常系统通过维护数据相关和控制相关保证它们不受破坏。
+
+**异常行为 (exception behavior)** 指对指令执行顺序所做的任何改变，都不能改变程序中异常的触发方式（即原来会触发的异常依然要精准触发，原来不触发的绝对不能触发）。实际的高级流水线实现中经常被适当放宽为：指令执行的重排序绝对不能在程序中引发任何新的异常。
+```asm
+add x2, x3, x4
+beq x2, x0, L1
+ld  x1, 0(x2)
+L1: ...
+```
+
+在上例中，如果 `x2` 为零，`beq` 会跳转到 `L1` ，按照逻辑 `ld` 本不该执行，但此时 `ld` 已经执行了，如果 `x2` 是非法地址（如 0 ），就会出发内存访问异常，这种异常被称为 **伪异常 (false exception)** ，会破坏程序的精确异常模型。
+
+**数据流 (data flow)** 指数据值在产生结果的指令与消耗该结果的指令之间的实际流动过程，无论底层指令如何重排序或并行执行，指令之间真实的数据依赖和传递关系必须得到严格维护。
+```asm
+   add x1, x2, x3
+   beq x4, x0, L
+   sub x1, x5, x6
+L: ...
+   or x7, x1, x8
+```
+
+在上例中，`or`  指令的 `x1` 值同时受数据依赖（`add`/`sub`）和控制依赖（`beq`）的影响，只处理数据依赖不足以保证程序正确执行，必须同时控制依赖分支路径上的指令，避免提前修改状态。
+#### 5.4 静态并行
+
+**静态并行 (static scheduling)** 有以下两种技术：
+- **流水线调度 (pipeline scheduling)**：指令重排来避免流水线停顿；
+- **循环展开 (loop unrolling)**：将循环体复制多次以增加相对于分支和开销指令的指令数量。
+```C
+for(int i=999;i>=0;i--)
+	x[i]=x[i]+s;
+```
+
+<div align="center"> <img src="./Ch-3-cc.png" width="360" /> </div>
+
+```asm
+# 8cc per loop
+Loop: fld    f0, 0(x1)   
+	  fadd.d f4, f0, f2  # 1cc latency
+	  fsd    f4, 0(x1)   # 2cc latency
+	  addi   x1, x1, -8
+	  bne    x1, x2, Loop
+
+# 7cc per loop after pipeline scheduling
+Loop: fld    f0, 0(x1)   
+	  addi   x1, x1, -8
+	  fadd.d f4, f0, f2  
+	  fsd    f4, 8(x1)  # 2cc latency
+	  bne    x1, x2, Loop 
+
+# 26cc per four ops after loop unrolling	  
+Loop: fld    f0, 0(x1)
+      fadd.d f4, f0, f2
+      fsd    f4, 0(x1)   # 6cc per fld+fadd.d+fsd
+      fld    f6, -8(x1)
+      fadd.d f8, f6, f2
+      fsd    f8, -8(x1)
+      fld    f10, -16(x1) 
+      fadd.d f12, f10, f2  
+      fsd    f12, -16(x1)
+      fld    f14, -24(x1)
+      fadd.d f16, f14, f2
+      fsd    f16, -24(x1)
+      addi   x1, x1, -32
+      bne    x1, x2, Loop
+	  
+# 14cc per four ops after pipeling scheduling and loop unrolling
+Loop: fld    f0, 0(x1)
+	  fld    f6, -8(x1)
+	  fld    f10, -16(x1)
+	  fld    f14, -24(x1)
+	  fadd.d f4, f0, f2
+	  fadd.d f8, f6, f2
+	  fadd.d f12, f10, f2
+	  fadd.d f16, f14, f2
+	  fsd    f4, 0(x1)
+	  fsd    f8, -8(x1)
+	  fsd    f12, -16(x1)
+	  fsd    f16, -24(x1)
+	  addi   x1, x1, -32
+	  bne    x1, x2, Loop
+```
+
+#### 5.5 轨迹调度与超块
+
+**轨迹 (trace)** 是程序执行中极有可能发生的一系列基本块序列，可以利用轨迹将原本分散在多个基本块中的操作组合在一起，通过重新排序和压缩，将它们放入更少更宽的指令槽中。
+
+**轨迹选择 (trace selection)** 指在控制流图中找到那条最经常执行的路径 (frequent critical path) ，编译器利用静态分支预测或性能分析数据来确定概率。
+
+**轨迹压缩 (trace compaction)** 指将选定路径上的指令压缩进更少更宽的指令字中，包含指令重排、并行化等手段。
+
+<div align="center"> <img src="./Ch-3-trace.png" width="240" /> </div>
+
+在轨迹调度的基础上，通过 **循环展开** 可以进一步扩大调度范围。
+
+- **轨迹出口 (trace exit)**：执行流由于分支预测失败，跳离了预期的高频路径；
+- **轨迹入口 (trace entrance)**：执行流从外部跳转进入轨迹的中间位置；
+- **局限性**：轨迹调度允许多入多出。虽然它增加了并行度，但多个入口点会让编译器生成补偿代码变得极其复杂，难以评估成本。
+
+<div align="center"> <img src="./Ch-3-superblock.png" width="360" /> </div>
+
+为了解决轨迹调度中多入口带来的复杂性，引入了 **超块 (superblock)** 的概念。超块是一种特殊的扩展基本块，它具有唯一入口点，但允许有多个出口点：
+- 它是一条长长的、顺序的指令序列；
+- 可以从头进入，但在执行过程中可能会因为某个条件不满足而中途从不同的出口跳出；
+- 没有外部跳转可以进入超块的中间。
+
+```C
+for(int i=0;i<1000;i++)
+{
+	A[i]=A[i]+B[i];
+	if(A[i]>0) // 90% true
+		C[i]=C[i]*2;
+}
+```
+
+```asm
+# basic
+Loop:
+    fld    f0, 0(x1)       # A[i]
+    fld    f1, 0(x2)       # B[i]
+    fadd.d f0, f0, f1      # f0=A[i]+B[i]
+    fsd    f0, 0(x1)
+    flt.d  x3, f31, f0     # f31=0
+    beqz   x3, Skip        
+    fld    f2, 0(x4)       # C[i]
+    fadd.d f2, f2, f10     # C[i]=C[i]+f10
+    fsd    f2, 0(x4)
+Skip:
+    addi   x1, x1, 8      
+    addi   x2, x2, 8
+    addi   x4, x4, 8
+    bne    x1, x5, Loop  
+```
+
+```asm
+# trace scheduling
+Loop:
+    fld    f0, 0(x1)
+    fld    f1, 0(x2)
+    fld    f3, 0(x3)           # C[i]
+    fadd.d f0, f0, f1
+    flt.d  t0, f31, f0
+    beqz   t0, TraceExit      
+    fmul.d f3, f3, f2        
+    fsd    f3, 0(x3)
+    fsd    f0, 0(x1)
+
+Next:
+    addi   x1, x1, 8
+    addi   x2, x2, 8
+    addi   x3, x3, 8
+    bne    x1, x4, Loop
+    j      Done
+
+TraceExit:                    
+    fsd    f0, 0(x1)  
+    j      Next
+```
+
+```asm
+# superblock
+Superblock_Loop:
+    fld    f0, 0(x1)
+    fld    f1, 0(x2)
+    fld    f3, 0(x3)
+    fld    f10, 8(x1)
+    fld    f11, 8(x2)
+    fld    f13, 8(x3)
+    fadd.d f0, f0, f1
+    fadd.d f10, f10, f11
+    fmul.d f3, f3, f2
+    fmul.d f13, f13, f2
+    flt.d  t0, f31, f0
+    flt.d  t1, f31, f10
+    fsd    f0, 0(x1)
+    fsd    f10, 8(x1)
+    fsd    f3, 0(x3)
+    fsd    f13, 8(x3)
+    beqz   t0, SideExit1
+    beqz   t1, SideExit2
+    addi   x1, x1, 16
+    addi   x2, x2, 16
+    addi   x3, x3, 16
+    blt    x1, x4, Superblock_Loop
+    j      Done
+
+SideExit1:
+    fsd    f0, 0(x1)
+    addi   x1, x1, 8
+    addi   x2, x2, 8
+    addi   x3, x3, 8
+    j      ScalarLoop
+
+SideExit2:
+    fsd    f10, 8(x1)
+    addi   x1, x1, 16
+    addi   x2, x2, 16
+    addi   x3, x3, 16
+    j      ScalarLoop
+
+ScalarLoop:
+    bge    x1, x4, Done
+    fld    f0, 0(x1)
+    fld    f1, 0(x2)
+    fadd.d f0, f0, f1
+    fsd    f0, 0(x1)
+    flt.d  t0, f31, f0
+    beqz   t0, SkipScalar
+    fld    f3, 0(x3)
+    fmul.d f3, f3, f2
+    fsd    f3, 0(x3)
+SkipScalar:
+    addi   x1, x1, 8
+    addi   x2, x2, 8
+    addi   x3, x3, 8
+    j      ScalarLoop
+
+Done:
+```
+
+【注】在一些激进的编译器在 `SideExit` 处理完特殊情况后，如果剩余元素还很多，会尝试重新跳回 `Superblock` 的头部以求进一步加速。
+#### 5.6 分支冒险
+
+ - **冻结或冲刷流水线**：流水线会进入等待状态，直到确定下一条该执行哪条指令。在这种方案下，分支指令带来的性能损失是固定的；
+ - **预测不跳转**：假设分支永远不会发生。流水线始终按顺序抓取下一条指令。如果分支真的没发生，流水线完全没有性能损失；如果分支最后确定要跳转，必须清空流水线中错误的指令，并从跳转的目标地址重新取指；
+ - **预测跳转**：为了让这种预测有意义，硬件必须在流水线的早期（通常是 ID 阶段）就计算出目标地址。对于循环结构非常有效，因为循环底部的跳转指令通常是发生的；
+ - **延迟分支 (delayed branch)**：改变分支指令生效的时间点。规定分支指令后面紧跟的那条指令无论分支最终是否跳转都必须执行，若能找到合适的指令，那么分支惩罚就变成了零，否则填入一条空指令会浪费一个时钟周期。
+
+>[!Note] **Note**
+>**延迟分支**在早期的 RISC 架构中非常流行，因为它用极小的硬件成本换取了很高的效率。但在现代复杂的超标量处理器中，由于流水线太深，单个延迟槽已经不够用了，现在更多采用的是复杂的**动态分支预测**。
+
+<div align="center"> <img src="./Ch-3-BTB.png" width="400" /> </div>
+
+上图是 **动态分支预测** 的原理图，具体组成如下：
+- 上方的小表是 **Branch History Table, BHT** 记录历史倾向，通常由 1~2 位状态机组成（强跳转、弱跳转、弱不跳转、强不跳转），输出预测信号 `taken?` 表示预测是否跳转；
+- 下方的大框是 **Branch Target Table, BTB** 是一个特殊的 Cache，一行存储两个信息，即分支指令的地址和跳转的目标地址，输出信号 `hit?` 判定 PC 是否能够在 BTB 中找到对应的记录，并输出相应的目标地址。
+
+只有当一条指令既是已知的跳转指令，并且根据历史经验这次也要跳转时，硬件才会预测跳转，否则预测不跳转，继续执行下一条指令。

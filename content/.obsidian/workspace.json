@@ -8,12 +8,12 @@
         "type": "tabs",
         "children": [
           {
-            "id": "3262a0f711175315",
+            "id": "ef6c72ebf69dd0b6",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "compsci/db/_index.md",
+                "file": "phymath/infotheory/_index.md",
                 "mode": "source",
                 "source": false
               },
@@ -183,21 +183,26 @@
       "bases:新建数据库": false
     }
   },
-  "active": "3262a0f711175315",
+  "active": "ef6c72ebf69dd0b6",
   "lastOpenFiles": [
+    "phymath/infotheory/Ch-1/index.md",
+    "phymath/infotheory/Ch-1.zip",
+    "phymath/infotheory/Ch-1/Ch-1-16.png",
+    "Pasted image 20260511185412.png",
+    "Pasted image 20260511191048.png",
+    "phymath/infotheory/Ch-1/Ch-1-15.png",
+    "phymath/infotheory/Ch-1/Ch-1-16.png",
+    "phymath/infotheory/Ch-1/tmp.md",
+    "phymath/infotheory/Ch-1/Ch-1-15.png",
+    "phymath/infotheory/Ch-1/Ch-1-14.png",
+    "phymath/infotheory/Ch-1/Ch-1-13.png",
+    "phymath/infotheory/Ch-1/Ch-1-12.png",
+    "phymath/infotheory/Ch-1/Ch-1-11.png",
+    "compsci/db/Ch-12/index.md",
+    "compsci/db/Ch-4/index.md",
+    "compsci/db/Ch-1/index.md",
     "compsci/db/Ch-13/index.md",
     "compsci/db/_index.md",
-    "compsci/db/Ch-13/Ch-13-column.png",
-    "compsci/db/Ch-13/Ch-13-clock.png",
-    "compsci/db/Ch-13/Ch-13-LRU.png",
-    "compsci/db/Ch-13/Ch-13-buffer.png",
-    "compsci/db/Ch-13/Ch-13-cluster.png",
-    "compsci/db/Ch-13/Ch-13-seq.png",
-    "compsci/db/Ch-13/Ch-13-heap.png",
-    "compsci/db/Ch-13/Ch-13-slotted.png",
-    "compsci/db/Ch-12/index.md",
-    "compsci/db/Ch-13/Ch-13-varlen.png",
-    "compsci/db/Ch-13/Ch-13-fixed2.png",
     "compsci/db/Ch-13",
     "compsci/ca/Ch-1/index.md",
     "compsci/db/Ch-7.zip",
@@ -223,12 +228,7 @@
     "ttneed/xi-an/Terracotta-Warriors",
     "ttneed/memento/_index.md",
     "ttneed/weinan/_index.md",
-    "ttneed/xi-an/Shaanxi-Historical-Museum.md",
     "ttneed/xi-an/Shaanxi-Historical-Museum",
-    "ttneed/xi-an",
-    "ttneed/cloud/_index.md",
-    "ttneed/flower/_index.md",
-    "ttneed/未命名.md",
-    "compsci/dd/Ch-4"
+    "ttneed/xi-an"
   ]
 }

@@ -8,7 +8,7 @@
         "type": "tabs",
         "children": [
           {
-            "id": "ef6c72ebf69dd0b6",
+            "id": "fe605067181fb991",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -183,9 +183,16 @@
       "bases:新建数据库": false
     }
   },
-  "active": "ef6c72ebf69dd0b6",
+  "active": "fe605067181fb991",
   "lastOpenFiles": [
+    "phymath/infotheory/Ch-3/index.md",
     "phymath/infotheory/Ch-1/index.md",
+    "phymath/infotheory/Ch-3/Ch-3-1.png",
+    "phymath/infotheory/Ch-3/pasted_file_zsf0yE_image_clear_4x_gentle.png",
+    "phymath/infotheory/Ch-3/tmp.md",
+    "phymath/infotheory/_index.md",
+    "phymath/infotheory/Ch-2/index.md",
+    "phymath/infotheory/Ch-3",
     "phymath/infotheory/Ch-1.zip",
     "phymath/infotheory/Ch-1/Ch-1-16.png",
     "Pasted image 20260511185412.png",
@@ -196,8 +203,6 @@
     "phymath/infotheory/Ch-1/Ch-1-15.png",
     "phymath/infotheory/Ch-1/Ch-1-14.png",
     "phymath/infotheory/Ch-1/Ch-1-13.png",
-    "phymath/infotheory/Ch-1/Ch-1-12.png",
-    "phymath/infotheory/Ch-1/Ch-1-11.png",
     "compsci/db/Ch-12/index.md",
     "compsci/db/Ch-4/index.md",
     "compsci/db/Ch-1/index.md",
@@ -222,13 +227,8 @@
     "ttneed/xi-an/Changan-Miscellany/index.md",
     "ttneed/hangzhou/qiantang",
     "ttneed/xi-an/Shaanxi-Historical-Museum/index.md",
-    "ttneed/xi-an/Terracotta-Warriors/index.md",
-    "_index.md",
     "ttneed/xi-an/Changan-Miscellany",
     "ttneed/xi-an/Terracotta-Warriors",
-    "ttneed/memento/_index.md",
-    "ttneed/weinan/_index.md",
-    "ttneed/xi-an/Shaanxi-Historical-Museum",
-    "ttneed/xi-an"
+    "ttneed/xi-an/Shaanxi-Historical-Museum"
   ]
 }

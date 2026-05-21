@@ -8,7 +8,7 @@ comments: false
 | **[Ch-1 数字系统与信息]({{<relref "Ch-1/index.md">}})** | 已完成  | 已完成  |
 | **[Ch-2 组合逻辑电路]({{<relref "Ch-2/index.md">}})**  | 已完成  | 已完成  |
 | **[Ch-3 组合逻辑设计]({{<relref "Ch-3/index.md">}})**  | 已完成  | 已完成  |
-| Ch-4 时序逻辑电路                                      |      |      |
+| **[Ch-4 时序电路设计]({{<relref "Ch-4/index.md">}})**  |      |      |
 | Ch-5 寄存器及其传输                                     |      |      |
 
 

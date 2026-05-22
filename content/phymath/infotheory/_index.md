@@ -8,5 +8,6 @@ comments: false
 | **[Lec-2 信息的度量 2]({{<relref "Ch-2/index.md">}})**   | 已完成  | 已完成  |
 | **[Lec-3 信息的度量 3]({{<relref "Ch-3/index.md">}})**   | 已完成  | 已完成  |
 | **[Lec-4 信息的无损压缩 1]({{<relref "Ch-4/index.md">}})** | 已完成  | 已完成  |
-| Lec-5 信息的无损压缩 2                                     |      |      |
-| Lec-6 信息的无损压缩 3                                     |      |      |
+| **[Lec-5 信息的无损压缩 2]({{<relref "Ch-5/index.md">}})** | 已完成  | 已完成  |
+| **[Lec-6 信息的无损压缩 3]({{<relref "Ch-6/index.md">}})** | 已完成  | 已完成  |
+|                                                     |      |      |

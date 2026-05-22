@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "phymath/infotheory/Ch-5/index.md",
+                "file": "phymath/infotheory/_index.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "index"
+              "title": "_index"
             }
           }
         ]
@@ -78,8 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200,
-    "collapsed": true
+    "width": 200
   },
   "right": {
     "id": "c569291f788890c9",
@@ -186,30 +185,31 @@
   },
   "active": "fe605067181fb991",
   "lastOpenFiles": [
+    "phymath/infotheory/Ch-6/index.md",
+    "phymath/infotheory/Ch-6/Ch-6-4.png",
+    "phymath/infotheory/Ch-6/Ch-6-3.png",
+    "phymath/infotheory/Ch-6/Ch-6-2.png",
+    "phymath/infotheory/Ch-6/Ch-6-2.png",
+    "phymath/infotheory/Ch-5/index.md",
+    "phymath/infotheory/Ch-6/Ch-6-1.png",
+    "phymath/infotheory/_index.md",
+    "phymath/infotheory/Ch-6",
     "phymath/infotheory/Ch-5/Ch-5-5.png",
     "phymath/infotheory/Ch-5/Ch-5-4.png",
     "phymath/infotheory/Ch-5/Pasted image 20260521194526.png",
     "phymath/infotheory/Ch-5/Ch-5-3.png",
     "phymath/infotheory/Ch-5/Ch-5-2.png",
     "phymath/infotheory/Ch-4/index.md",
-    "phymath/infotheory/Ch-5/index.md",
-    "phymath/infotheory/Ch-5/Ch-5-1.png",
     "compsci/dd/Ch-4/index.md",
     "compsci/dd/_index.md",
     "ttneed/xi-an/Changan-Miscellany/index.md",
-    "compsci/dd/Ch-4/Ch-4-S'R'.png",
     "compsci/dd/Ch-3/index.md",
-    "compsci/dd/Ch-4/Ch-4-SR.png",
-    "compsci/dd/Ch-3/ch-3-fa2.png",
     "compsci/dd/Ch-5",
-    "phymath/infotheory/_index.md",
     "phymath/infotheory/Ch-5",
     "friends/_index.md",
     "_index.md",
-    "phymath/infotheory/Ch-4/Ch-4-1.png",
     "phymath/infotheory/Ch-4/tmp.md",
     "phymath/infotheory/Ch-3/index.md",
-    "Pasted image 20260518104613.png",
     "phymath/infotheory/Ch-1/index.md",
     "phymath/infotheory/Ch-4",
     "phymath/infotheory/Ch-3/tmp.md",
@@ -228,9 +228,7 @@
     "compsci/db/Ch-7/index.md",
     "compsci/ca/Ch-3/index.md",
     "compsci/ca/_index.md",
-    "tmp.md",
     "compsci/db/Ch-12",
-    "compsci/ca/Ch-3",
-    "ttneed/hangzhou/qiantang"
+    "compsci/ca/Ch-3"
   ]
 }

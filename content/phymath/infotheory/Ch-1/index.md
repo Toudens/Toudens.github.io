@@ -149,7 +149,7 @@ H(X,Y)&=E[I(X,Y)]
 \end{align}
 $$
 $$
-H(X,Y,Z)=H(X)+H(Y,Z|X)=H(X)+H(Y|Z)+H(Z|X,Y)
+H(X,Y,Z)=H(X)+H(Y,Z|X)=H(X)+H(Y|X)+H(Z|X,Y)
 $$
 
 <div align="center"> <img src="./Ch-1-5.png" width="540" /> </div>
@@ -163,7 +163,8 @@ X\sim
 x_1&x_2&\cdots&x_K\\
 p_1&p_2&\cdots&p_K
 \end{pmatrix}
-$$$$
+$$
+$$
 H(X)
 \triangleq H_K(p_1,p_2,\cdots,p_K)
 \triangleq H_K(P)

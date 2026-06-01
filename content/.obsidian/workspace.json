@@ -8,17 +8,17 @@
         "type": "tabs",
         "children": [
           {
-            "id": "fe605067181fb991",
+            "id": "4ac0fc446af820a5",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "phymath/infotheory/Ch-7/index.md",
+                "file": "未命名.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "index"
+              "title": "未命名"
             }
           }
         ]
@@ -184,24 +184,40 @@
       "bases:新建数据库": false
     }
   },
-  "active": "fe605067181fb991",
+  "active": "4ac0fc446af820a5",
   "lastOpenFiles": [
-    "phymath/infotheory/Ch-7/Ch-7-16.png",
-    "phymath/infotheory/Ch-7/Ch-7-15.png",
-    "phymath/infotheory/Ch-7/Ch-7-14.png",
-    "phymath/infotheory/Ch-7/Ch-7-13.png",
-    "phymath/infotheory/Ch-7/index.md",
-    "phymath/infotheory/Ch-7/Ch-7-14.png",
-    "phymath/infotheory/Ch-7/Ch-7-12.png",
-    "phymath/infotheory/Ch-7/Ch-7-12.png",
-    "phymath/infotheory/Ch-7/Ch-7-11.png",
-    "phymath/infotheory/Ch-7/Ch-7-10.png",
-    "phymath/infotheory/Ch-7/Ch-7-9.png",
-    "phymath/infotheory/Ch-7/Ch-7-8.png",
-    "phymath/infotheory/Ch-6/index.md",
+    "phymath/infotheory/Ch-10/index.md",
+    "未命名.md",
+    "phymath/infotheory/Ch-10/Ch-10-2.png",
+    "phymath/infotheory/Ch-10/Ch-10-1.png",
+    "phymath/infotheory/Ch-9/index.md",
+    "phymath/infotheory/Ch-10",
     "phymath/infotheory/_index.md",
-    "phymath/infotheory/Ch-7",
+    "phymath/infotheory/Ch-8/index.md",
+    "phymath/infotheory/Ch-9/Ch-9-5.png",
+    "phymath/infotheory/Ch-9/Ch-9-4.png",
+    "phymath/infotheory/Ch-9/Ch-9-3.png",
+    "phymath/infotheory/Ch-9/Ch-9-2.png",
+    "compsci/ca/Ch-2B/Ch-2-DDP.png",
+    "phymath/infotheory/Ch-9/Ch-9-1.png",
+    "phymath/infotheory/Ch-9",
+    "phymath/infotheory/Ch-10",
+    "phymath/infotheory/Ch-8/tmp.md",
+    "phymath/infotheory/Ch-8/Ch-8-3.png",
+    "phymath/infotheory/Ch-8/Ch-8-2.png",
+    "phymath/infotheory/Ch-6/index.md",
+    "compsci/db/Ch-6/index.md",
+    "tmp.md",
+    "compsci/db/Ch-4/index.md",
+    "未命名",
     "phymath/infotheory/Ch-1/index.md",
+    "compsci/db/Ch-15/index.md",
+    "compsci/db/_index.md",
+    "compsci/db/Ch-13/index.md",
+    "compsci/db/Ch-15",
+    "phymath/infotheory/Ch-7/index.md",
+    "phymath/infotheory/Ch-8",
+    "phymath/infotheory/Ch-7",
     "phymath/infotheory/Ch-4/index.md",
     "phymath/infotheory/Ch-3/index.md",
     "phymath/infotheory/Ch-5/index.md",
@@ -214,23 +230,6 @@
     "compsci/dd/Ch-3/index.md",
     "compsci/dd/Ch-5",
     "phymath/infotheory/Ch-5",
-    "friends/_index.md",
-    "_index.md",
-    "phymath/infotheory/Ch-4/tmp.md",
-    "phymath/infotheory/Ch-4",
-    "phymath/infotheory/Ch-3/tmp.md",
-    "phymath/infotheory/Ch-3",
-    "phymath/infotheory/Ch-1.zip",
-    "phymath/infotheory/Ch-1/tmp.md",
-    "compsci/db/Ch-12/index.md",
-    "compsci/db/Ch-4/index.md",
-    "compsci/db/Ch-1/index.md",
-    "compsci/db/Ch-13/index.md",
-    "compsci/db/_index.md",
-    "compsci/db/Ch-13",
-    "compsci/ca/Ch-1/index.md",
-    "compsci/db/Ch-7.zip",
-    "compsci/db/Ch-7/index.md",
-    "compsci/db/Ch-12"
+    "friends/_index.md"
   ]
 }

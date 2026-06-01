@@ -10,4 +10,6 @@ comments: false
 | **[Lec-4 信息的无损压缩 1]({{<relref "Ch-4/index.md">}})** | 已完成  | 已完成  |
 | **[Lec-5 信息的无损压缩 2]({{<relref "Ch-5/index.md">}})** | 已完成  | 已完成  |
 | **[Lec-6 信息的无损压缩 3]({{<relref "Ch-6/index.md">}})** | 已完成  | 已完成  |
-|                                                     |      |      |
+| **[Lec-7 信息的传输 1]({{<relref "Ch-7/index.md">}})**   | 已完成  | 已完成  |
+| **[Lec-8 信息的传输 2]({{<relref "Ch-8/index.md">}})**   | 已完成  | 已完成  |
+| **[Lec-9 信息的传输 3]({{<relref "Ch-9/index.md">}})**   | 已完成  | 已完成  |

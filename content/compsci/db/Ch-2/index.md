@@ -1,5 +1,5 @@
 ---
-title: Ch-2 Relational Model
+title: Ch-2 关系模型
 date: 2026-03-18
 type: docs
 weight: "2"

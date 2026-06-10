@@ -1,5 +1,5 @@
 ---
-title: Ch-4 Intermediate SQL
+title: Ch-4 SQL 进阶
 type: docs
 weight: "4"
 date: 2026-03-24

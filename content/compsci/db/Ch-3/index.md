@@ -1,5 +1,5 @@
 ---
-title: Ch-3 Intro to SQL
+title: Ch-3 SQL 基础
 date: 2026-03-18
 type: docs
 weight: "3"

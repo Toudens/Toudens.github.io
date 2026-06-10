@@ -1,5 +1,5 @@
 ---
-title: Ch-5 Advanced SQL
+title: Ch-5 SQL 高级
 type: docs
 date: 2026-03-31
 weight: "5"

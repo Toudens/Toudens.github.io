@@ -9,4 +9,4 @@ comments: false
 | **[Ch-1 量化设计与分析基础]({{<relref "Ch-1/index.md">}})**   | 已完成  | 已完成  |
 | **[Ch-2 存储结构层次设计 1]({{<relref "Ch-2A/index.md">}})** | 已完成  | 已完成  |
 | **[Ch-2 存储结构层次设计 2]({{<relref "Ch-2B/index.md">}})** | 已完成  | 已完成  |
-| **[Ch-3 指令级并行及其应用]({{<relref "Ch-3/index.md">}})**   | 已完成  | 已完成  |
+| **[Ch-3 指令级并行及其应用]({{<relref "Ch-3A/index.md">}})**  | 已完成  | 已完成  |

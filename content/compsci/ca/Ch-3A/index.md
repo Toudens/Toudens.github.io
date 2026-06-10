@@ -1,5 +1,5 @@
 ---
-title: Ch-3 指令级并行及其应用
+title: Ch-3 指令级并行及应用 1
 date: 2026-04-27
 type: docs
 weight: "4"

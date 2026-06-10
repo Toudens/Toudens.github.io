@@ -1,5 +1,5 @@
 ---
-title: Ch-7 Rel-DB Design
+title: Ch-7 关系库设计
 date: 2026-04-14
 type: docs
 weight: "7"

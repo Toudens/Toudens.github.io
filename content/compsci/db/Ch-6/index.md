@@ -1,5 +1,5 @@
 ---
-title: Ch-6 ER Model
+title: Ch-6 ER 模型
 weight: "6"
 type: docs
 date: 2026-04-09

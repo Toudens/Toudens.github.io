@@ -1,5 +1,5 @@
 ---
-title: Ch-13 Storage Structure
+title: Ch-13 存储结构
 weight: "13"
 type: docs
 date: 2025-05-06

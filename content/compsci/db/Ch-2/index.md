@@ -1,107 +1,468 @@
 ---
 title: Ch-2 关系模型
-date: 2026-03-18
-type: docs
 weight: "2"
+type: docs
+date: 2026-06-14
 ---
-## Basic Structure
 
-Formally, given sets $D_1,D_2,\cdots,D_n$ a **relation** $r$ is a subset of $D_1\times D_2\times \cdots\times D_n$ .
-Thus, a relation is a **set** of n-tuple $(a_1,a_2,\cdots,a_n)$ where each $a_i\in D_i$ .
+### 1. 关系结构
 
-$A_1,A_2,\cdots,A_n$ are attributes, $R=(A_1,A_2,\cdots,A_n)$ is a relation schema.
-A relation instance $r$ defined over schema $R$ is denoted by $r(R)$ .
-The current values a relation are specified by a **table**.
-An element $t$ of relation $r$ is called a **tuple** and is represented by a **row** in a table.
+#### 1.1 关系定义
 
-The set of allowed values for each attribute is called the **domain** of the attribute.
-Attribute values are normally required to be **atomic**, that is indivisible.
+**关系模型 (Relational Model)** 用关系表示数据。关系在直观上就是一张表，表中的列是属性，表中的行是元组。
 
-> [!NOTE] **Note**
-> 现代的数据库对此限制有所放开，例如一些大表中还可以嵌入一些小表，并非不可分割，但是在本课程中学习的经典数据库，一般认为是不可分割的。
+形式化地，若 $D_1,D_2,\cdots,D_n$ 是若干域，则关系 $r$ 是这些域的笛卡尔积的一个子集：
 
-The special value **null** is a member of every domain.
-
->[!NOTE] **Note**
-> 在C语言中，对于含有实际意义的变量，通常需要根据实际情况单独设立特殊值表示空。
-
-Order of tuples is **irrelevant** (tuples may be stored in an arbitrary order).
-**Database schema** is the logical structure of the database.
-**Database instance** is a snapshot of the data in the database at a given instant in time.
-
-## Keys and Constraint
-
-$K$ is a **superkey** of $R$ if values for $K$ are sufficient to identify a unique tuple of each possible relation $r(R)$ .
-Superkey $K$ is a **candidate key** if $K$ is minimal.
-One of the candidate keys is selected to be the **primary key**.
-
-**Foreign key** constraint from attribute $A$ of relation $r_1$ to the primary key $B$ of relation $r_2$ states that on an database instance, the value of $A$ for each tuple in $r_1$ must also be the value of $B$ for some tuple in $r_2$ .
-
-> [!NOTE] **Note**
-> 外键是一个表中的一个字段或一组字段，它的值必须匹配另一个表的主键或唯一值。
-
-**Referential integrity** constraint requires that the values appearing in specified attribute $A$ of any tuples in the referencing relation $r_1$ also appear in specified attribute $B$ of at least one tuple in the referenced relation $r_2$ .
-
-> [!NOTE] **Note**
-> 参照完整性是一组规则，这些规则确保数据库中的数据，特别是通过外键关联的数据，是一致、准确且有效的。禁止引用不存在的内容，禁止随意删除被引用的数据。外键是实现参照完整性的具体工具。（对于课本上的时刻表与课程的红线，是为了说明此处的 `time_slot_id` 并不是 `time_slot` 的完整主键，不能用标准 SQL 外键直接实现）
-
-## Relational Algebra
-
-| Operator                   | Explanation & Notation                    | Example                                                  |
-| -------------------------- | ----------------------------------------- | -------------------------------------------------------- |
-| select $\sigma$            | 横向选择符合某性质的行 $\sigma_p(r)$                 | $\sigma_{A=B\land D>5}(r)$                               |
-| project $\prod$            | 纵向选择某几列并去重 $\prod_{A_1,A_2\cdots,A_k}(r)$ | $\prod_{A,C}(r)$                                         |
-| union $\cup$               | 求并集，列应相同且可兼容 $r\cup s$                    | $r\cup s$                                                |
-| set difference $-$         | 差集，列应相同且可兼容 $r-s$                         | $r-s$                                                    |
-| Cartesian product $\times$ | 笛卡尔积，列名称要求不同 $r\times s$                  | $r\times s$                                              |
-| rename $\rho$              | 更改表的名字 $\rho _X(E)$                       | $\rho_E(\text{Employee})$                                |
-| rename $\rho$              | 更改表的名字并重命名列 $\rho_{x(A_1,A_2,...)}(E)$    | $\rho_{\text{Staff}(\text{ID,Salary})}(\text{Employee})$ |
-> [!Note] **Note**
-> 找到表 $t_1$ 中属性 $A$ 的最大值：$\prod_A t_1-\prod_{t_1.A}(\sigma_{t_1.A<t_2.A}(t_1\times\rho_{t_2}(t_1)))$ 。
-
-Multiset relational algebra 操作与上述 Relational Algebra 类似，不过没有去重步骤。
-
-## Additional Operation
-
-| Operator                | Explanation & Notation                                                                                                                                                                                    |
-| ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| set-intersection $\cap$ | 求交集，列应相同且可兼容<br>$r\cap s=r-(r-s)$                                                                                                                                                                         |
-| natural join $\text{⋈}$        | 合并两表，保留相同列值相同的行<br>$r\text{⋈}s=\prod_{r.A,r.B,r.C,s.D}(\sigma_{r.B=s.B}(r\times s))$                                                                                                                             |
-| theta join $\text{⋈}_\theta$   | 合并两表，保留符合表达式的行<br>$r\text{⋈}_\theta s=\sigma_\theta(r\times s)$                                                                                                                                                  |
-| semijoin $\text{⋉}_\theta$     | 在 $\text{⋈}_\theta$ 的基础上，只保留在 $r$ 中的列，即不合并<br>$r\text{⋉}_\theta s=\prod_R(r\text{⋈}_\theta s)$                                                                                                                                 |
-| assignment $\leftarrow$ | 将复杂的计算过程拆解为简单步骤，用于赋值临时变量<br>$\text{Temp}\leftarrow \text{Expression}$                                                                                                                                     |
-| left outer join $\text{⟕}$      | 在 $\text{⋈}$ 的基础上加入左侧的缺省行<br>$r\text{⟕}s=(r\text{⋈}s)\cup(r-\prod_R(r\text{⋈}s))\times\{(\text{null},...)\})$                                                                                                                         |
-| right outer join $\text{⟖}$     | 在 $\text{⋈}$ 的基础上加入右侧的缺省行<br>$r\text{⟖}s=(r\text{⋈}s)\cup\{(\text{null},...)\}\times(s-\prod_S(r\text{⋈}s))$                                                                                                                          |
-| full outer join $\text{⟗}$      | 在 $\text{⋈}$ 的基础上加入两侧的缺省行<br>$r\text{⟗}s=(r\text{⟕}s)\cup(r\text{⟖}s)$                                                                                                                                                                |
-| division $\div$         | 满足 $t\times s\subseteq r$ 的最大集合 $t$<br>$\text{temp}_1\leftarrow\prod_{R-S}(r)$<br>$\text{temp}_2\leftarrow\prod_{R-S}((\text{temp}_1\times s)-\prod_{R-S,S}(r))$<br>$r\div s=\text{temp}_1-\text{temp}_2$ |
-
-> [!Note] **Note**
-> natural join 满足结合律，即 $(A\text{⋈}B)\text{⋈}C=A\text{⋈}(B\text{⋈}C)$ ，同时，若不考虑列的顺序问题，natural join 同时还满足交换律，即 $A\text{⋈}B=B\text{⋈}A$ 。
-
-Comparisons with null values return the special truth value: **unknown**.
-In SQL "P is unknown" evaluates to **true** if predicate P evaluates to unknown.
-unknown or true = true/ false and known = false/ not known = known .
-
-## Generalized Projection
-
-Extends the projection operation by allowing **arithmetic functions** to be used in the projection list $\prod_{F_1,F_2,\cdots,F_n}(E)$ , where $E$ is any relational-algebra expression.
-
-Given relation instructor (ID, name, dept\_name, salary) where salary is annual salary, get the same information but with monthly salary : $\prod_{\text{ID,name,dept\_name,salary/12}}(\text{instructor})$
-
-> [!Note] **Note**
-> 在使用 generalized projection 时，经常使用"算术式 as 新列名"的方式来规定列名。
-
-## Aggregate Functions
-
-**Aggregate Function** takes a collection of values and returns a single value as a result, including **avg**, **min**, **max**, **sum**, **count**, ...
 $$
-{\small G_1,G_2,\cdots,G_n}\ {\LARGE\mathcal{G}}\ {\small F_1(A_1),F_2(A_2),\cdots,F_n(A_n)}\normalsize(E)
+r\subseteq D_1\times D_2\times\cdots\times D_n
 $$
-* $G_1,G_2,\cdots,G_n$ is a list of attributes on which to group (can be empty)
-* Each $F_i$ is an aggregate function
-* Each $A_i$ is an attribute name
 
-Result of aggregation does not have a name. Can use rename operation to give it a name. For convenience, we permit renaming as part of aggregate operation. 
+因此，关系中的每个元素都是一个 $n$ 元组：
+
 $$
-{\small \text{dept_name}}\ {\LARGE\mathcal{G}}\ {\small\text{avg(salary) as avg_sal}} (\text{instructor}) 
+(a_1,a_2,\cdots,a_n),\quad a_i\in D_i
 $$
+
+例如 `instructor` 可以由 `ID`、`name`、`dept_name`、`salary` 等属性组成；每一行对应一位教师的记录。
+
+<div align="center"> <img src="./ch-2-relation.png" width="430" /> </div>
+
+#### 1.2 模式实例
+
+**关系模式 (Relation Schema)** 描述关系的结构。
+
+若属性为 $A_1,A_2,\cdots,A_n$，关系模式可写为 $R=(A_1,A_2,\cdots,A_n)$。
+
+在具体数据库中，常把关系名和属性列表写在一起，例如：
+
+```SQL
+instructor(ID, name, dept_name, salary)
+```
+
+**关系实例 (Relation Instance)** 是某一时刻关系中实际包含的元组集合。
+
+如果关系实例定义在模式 $R$ 上，通常记为 $r(R)$。
+
+模式相对稳定，实例会随插入、删除和更新变化。类似地，**数据库模式 (Database Schema)** 是整个数据库的逻辑结构，**数据库实例 (Database Instance)** 是某一时刻数据库中的实际内容。
+
+#### 1.3 域与空值
+
+**域 (Domain)** 是某个属性允许出现的值集合。例如 `salary` 的域可以是合法工资数值集合，`dept_name` 的域可以是合法院系名称集合。
+
+经典关系模型要求属性值是 **原子值 (Atomic Value)**，也就是不可再分的单个值。这一要求使得关系操作可以把每个属性当作单独的比较和投影单位。
+
+>[!Note] **Note**
+>现代数据库中可以使用数组、JSON、嵌套记录等复杂类型，但在关系模型的基本理论中，通常先假定属性值是原子的。
+
+`null` 是一个特殊值，可出现在任意域中，用于表示未知、不存在或尚未填写。它会让比较、连接和聚集的语义变复杂，因此后续需要三值逻辑来处理。
+
+#### 1.4 无序性质
+
+关系是元组的集合，因此元组顺序没有语义。数据库可以按任意物理顺序存储元组，查询结果如果没有显式 `order by`，也不应该依赖某种固定顺序。
+
+属性通常也通过名称引用，而不是通过位置引用。实际 SQL 表虽然有列顺序，但查询语义主要依赖属性名。
+
+### 2. 键与约束
+
+#### 2.1 超键候选键
+
+**超键 (Superkey)** 是能够唯一标识关系中元组的一组属性。
+
+设 $K\subseteq R$。
+
+若任意两个元组在 $K$ 上取值相同就必然是同一个元组，则 $K$ 是 $R$ 的超键：
+
+$$
+t_1[K]=t_2[K]\Rightarrow t_1=t_2
+$$
+
+超键不要求最小。例如在 `instructor` 中，`ID` 可以唯一标识教师，那么 `{ID, name}` 也能唯一标识教师，但它包含了多余属性。
+
+**候选键 (Candidate Key)** 是最小的超键。最小的意思是不能再删去任何属性，否则就不再能唯一标识元组。
+
+**主键 (Primary Key)** 是从候选键中选出的一个键，用作关系中元组的主要标识。主键应该稳定、简洁，并且不应为空。
+
+#### 2.2 外键约束
+
+**外键 (Foreign Key)** 描述两个关系之间的引用关系。
+
+若关系 $r_1$ 的属性 $A$ 引用关系 $r_2$ 的主键 $B$，则引用值必须能在被引用关系中找到。
+
+更具体地说，$r_1$ 中每个非空 $A$ 值都应出现在 $r_2$ 的 $B$ 中。
+
+这个约束可以写成：
+
+$$
+\forall t_1\in r_1,\ \exists t_2\in r_2,\ t_1[A]=t_2[B]
+$$
+
+其中 $r_1$ 称为 **引用关系 (Referencing Relation)**。
+
+其中 $r_2$ 称为 **被引用关系 (Referenced Relation)**。
+
+**参照完整性 (Referential Integrity)** 要求引用不能指向不存在的元组。例如 `teaches.ID` 引用 `instructor.ID` 时，任意授课记录中的教师编号都必须能在教师关系中找到。
+
+#### 2.3 模式图
+
+模式图把关系、主键、外键和参照完整性画在一起，便于理解整个数据库的结构。大学数据库中，`student`、`instructor`、`course`、`section`、`takes`、`teaches` 等关系通过主键和外键连接起来。
+
+<div align="center"> <img src="./ch-2-schema.png" width="620" /> </div>
+
+图中下划线属性表示主键。箭头从引用关系指向被引用关系，表示外键和参照完整性约束。
+
+### 3. 基本代数
+
+#### 3.1 查询语言
+
+关系查询语言可以分为 **过程式 (Procedural)** 和 **非过程式 (Non-Procedural)**。关系代数属于过程式语言，因为它不仅说明要什么结果，也说明通过哪些操作一步步得到结果。
+
+三类经典纯查询语言是：
+
+| 语言 | 特点 |
+| --- | --- |
+| 关系代数 | 用操作组合表达查询过程 |
+| 元组关系演算 | 用元组变量和谓词描述结果 |
+| 域关系演算 | 用属性域变量和谓词描述结果 |
+
+这三类语言在表达能力上等价。它们不是图灵完备语言，而是专门用于表达关系查询。
+
+#### 3.2 六个基本操作
+
+**关系代数 (Relational Algebra)** 的操作以关系为输入，并产生新的关系作为输出。六个基本操作如下：
+
+| 操作 | 记号 | 含义 |
+| --- | --- | --- |
+| 选择 | $\sigma$ | 保留满足谓词的行 |
+| 投影 | $\Pi$ | 保留指定属性并去重 |
+| 并 | $\cup$ | 合并两个兼容关系 |
+| 差 | $-$ | 保留只在左侧出现的元组 |
+| 笛卡尔积 | $\times$ | 两个关系的元组两两拼接 |
+| 重命名 | $\rho$ | 给关系或属性改名 |
+
+选择操作保留满足谓词 $P$ 的元组：
+
+$$
+\sigma_P(r)=\{t\mid t\in r\land P(t)\}
+$$
+
+投影操作保留指定属性。由于关系是集合，投影后产生的重复元组会被去除：
+
+$$
+\Pi_{A_1,A_2,\cdots,A_k}(r)
+$$
+
+并、差要求两个输入关系 **兼容 (Compatible)**：属性个数相同，并且对应属性的域兼容。
+
+笛卡尔积把两个关系中的元组两两拼接，若 $r$ 和 $s$ 的属性名冲突，需要先重命名：
+
+$$
+r\times s=\{tq\mid t\in r\land q\in s\}
+$$
+
+重命名用于给中间结果命名，或在同一个关系参与多次运算时区分副本：
+
+$$
+\rho_x(E)
+$$
+
+#### 3.3 组合查询
+
+关系代数表达式可以嵌套组合。例如查询物理系教师讲授过的课程编号，可以先选择物理系教师，再与 `teaches` 做连接条件筛选，最后投影所需属性。
+
+一种写法是先做笛卡尔积，再用选择表达连接条件：
+
+$$
+\Pi_{\text{instructor.name},\text{course_id}}(\sigma_{\text{dept_name}=\text{"Physics"}\land \text{instructor.ID}=\text{teaches.ID}}(\text{instructor}\times \text{teaches}))
+$$
+
+也可以先把 `instructor` 中物理系教师过滤出来，再与 `teaches` 组合。后者通常中间结果更小：
+
+$$
+\Pi_{\text{instructor.name},\text{course_id}}(\sigma_{\text{instructor.ID}=\text{teaches.ID}}(\sigma_{\text{dept_name}=\text{"Physics"}}(\text{instructor})\times \text{teaches}))
+$$
+
+查询大学中最高工资也可以只用基本操作表达。先找出所有不是最高工资的工资值：
+
+$$
+\Pi_{\text{instructor.salary}}(\sigma_{\text{instructor.salary}<\text{d.salary}}(\text{instructor}\times\rho_d(\text{instructor})))
+$$
+
+再用所有工资减去这些非最高工资，得到最高工资：
+
+$$
+\Pi_{\text{salary}}(\text{instructor})-\Pi_{\text{instructor.salary}}(\sigma_{\text{instructor.salary}<\text{d.salary}}(\text{instructor}\times\rho_d(\text{instructor})))
+$$
+
+#### 3.4 形式定义
+
+关系代数的基本表达式可以是数据库中的一个关系，也可以是一个常量关系。
+
+若 $E_1$ 和 $E_2$ 是关系代数表达式，则以下表达式仍然是关系代数表达式：
+
+| 类型 | 表达式 |
+| --- | --- |
+| 集合操作 | $E_1\cup E_2$ |
+| 集合差 | $E_1-E_2$ |
+| 笛卡尔积 | $E_1\times E_2$ |
+| 选择 | $\sigma_P(E_1)$ |
+| 投影 | $\Pi_S(E_1)$ |
+| 重命名 | $\rho_x(E_1)$ |
+
+这个封闭性很重要：每一步操作的结果仍是关系，因此可以继续作为下一步操作的输入。
+
+### 4. 扩展运算
+
+#### 4.1 交与连接
+
+扩展运算不会增加关系代数的表达能力，但能让常见查询更简洁。
+
+**交 (Set Intersection)** 保留两个关系中都出现的元组：
+
+$$
+r\cap s=\{t\mid t\in r\land t\in s\}
+$$
+
+交可以用差表示：
+
+$$
+r\cap s=r-(r-s)
+$$
+
+**自然连接 (Natural Join)** 会在两个关系的同名属性上做相等匹配，并且同名属性只保留一份。
+
+<div align="center"> <img src="./ch-2-natural-join.png" width="430" /> </div>
+
+设 $r(R)$ 和 $s(S)$ 是两个关系，自然连接的结果模式是 $R\cup S$。
+
+如果 $R=(A,B,C,D)$，且 $S=(E,B,D)$。
+
+则公共属性是 $B$ 和 $D$。
+
+自然连接可以写成：
+
+$$
+r\bowtie s=\Pi_{r.A,r.B,r.C,r.D,s.E}(\sigma_{r.B=s.B\land r.D=s.D}(r\times s))
+$$
+
+**条件连接 (Theta Join)** 把笛卡尔积和选择合并成一个操作：
+
+$$
+r\bowtie_{\theta}s=\sigma_{\theta}(r\times s)
+$$
+
+自然连接满足交换律和结合律。若忽略属性显示顺序，$r\bowtie s$ 与 $s\bowtie r$ 等价。
+
+#### 4.2 外连接
+
+普通连接只保留匹配成功的元组，未匹配的元组会丢失。**外连接 (Outer Join)** 在连接结果之外，把某一侧或两侧未匹配的元组补回，并用 `null` 填充缺失属性。
+
+| 类型 | 记号 | 保留内容 |
+| --- | --- | --- |
+| 左外连接 | $r\mathbin{\text{⟕}}s$ | 保留左侧所有元组 |
+| 右外连接 | $r\mathbin{\text{⟖}}s$ | 保留右侧所有元组 |
+| 全外连接 | $r\mathbin{\text{⟗}}s$ | 保留两侧所有元组 |
+
+左外连接可以理解为自然连接结果加上左侧未匹配元组：
+
+$$
+r\mathbin{\text{⟕}}s=(r\bowtie s)\cup((r-\Pi_R(r\bowtie s))\times\{(\text{null},\cdots,\text{null})\})
+$$
+
+右外连接对称地补回右侧未匹配元组：
+
+$$
+r\mathbin{\text{⟖}}s=(r\bowtie s)\cup(\{(\text{null},\cdots,\text{null})\}\times(s-\Pi_S(r\bowtie s)))
+$$
+
+全外连接同时保留两侧未匹配元组：
+
+$$
+r\mathbin{\text{⟗}}s=(r\mathbin{\text{⟕}}s)\cup(r\mathbin{\text{⟖}}s)
+$$
+
+#### 4.3 半连接
+
+**半连接 (Semijoin)** 只保留左侧中至少能在右侧找到匹配的元组，不把右侧属性拼接进结果。
+
+半连接可以由条件连接和投影定义：
+
+$$
+r\ltimes_{\theta}s=\Pi_R(r\bowtie_{\theta}s)
+$$
+
+例如相关子查询中的 `exists` 常可改写为半连接。查询 2022 年授课教师姓名可表示为：
+
+$$
+\Pi_{\text{name}}(\text{instructor}\ltimes_{\text{instructor.ID}=\text{teaches.ID}}\sigma_{\text{teaches.year}=2022}(\text{teaches}))
+$$
+
+半连接的重点是“判断存在匹配”，而不是把两侧属性完整拼接出来。
+
+#### 4.4 空值逻辑
+
+涉及 `null` 的比较不会得到普通的 true 或 false，而会得到 **unknown**。SQL 因此采用三值逻辑。
+
+| 表达式 | 结果 |
+| --- | --- |
+| `unknown or true` | true |
+| `unknown or false` | unknown |
+| `unknown and true` | unknown |
+| `unknown and false` | false |
+| `not unknown` | unknown |
+
+在 `where` 条件中，结果为 unknown 的元组不会被选中。若要判断谓词本身是否为 unknown，可以使用 `is unknown`。
+
+#### 4.5 赋值除法
+
+**赋值 (Assignment)** 用于把复杂查询拆成多个临时关系。它不增加表达能力，但能让推导更清晰。
+
+**除法 (Division)** 用于表达“对所有”的查询。
+
+给定 $r(R)$ 和 $s(S)$，并且 $S\subset R$。
+
+$r\div s$ 是最大的关系 $t(R-S)$，使得：
+
+$$
+t\times s\subseteq r
+$$
+
+换句话说，结果中的每个 $t$ 都必须能和 $s$ 中每个元组组合，并且组合结果都出现在 $r$ 中。
+
+<div align="center"> <img src="./ch-2-division.png" width="360" /> </div>
+
+例如设 $r(\text{ID},\text{course_id})$ 表示学生选过的课程。
+
+设 $s(\text{course_id})$ 表示生物系开设的所有课程。
+
+则 $r\div s$ 得到选过所有生物系课程的学生。
+
+除法可用基本操作表示。先取所有可能的左侧候选：
+
+$$
+\text{temp}_1\leftarrow \Pi_{R-S}(r)
+$$
+
+再找出那些缺少某个 $s$ 元组匹配的候选：
+
+$$
+\text{temp}_2\leftarrow \Pi_{R-S}((\text{temp}_1\times s)-\Pi_{R-S,S}(r))
+$$
+
+最后从候选中删去不合格者：
+
+$$
+r\div s=\text{temp}_1-\text{temp}_2
+$$
+
+### 5. SQL 语义
+
+#### 5.1 广义投影
+
+**广义投影 (Generalized Projection)** 允许在投影列表中使用算术表达式，而不仅是属性名：
+
+$$
+\Pi_{F_1,F_2,\cdots,F_n}(E)
+$$
+
+其中 $F_i$ 可以由常量和 $E$ 中的属性组成。
+
+例如 `salary` 表示年薪时，可以投影出月薪：
+
+$$
+\Pi_{\text{ID},\text{name},\text{dept_name},\text{salary}/12}(\text{instructor})
+$$
+
+#### 5.2 聚集操作
+
+**聚集函数 (Aggregate Function)** 接收一组值并返回一个值。常见聚集函数包括 `avg`、`min`、`max`、`sum` 和 `count`。
+
+聚集操作的一般形式是：
+
+$$
+_{G_1,G_2,\cdots,G_n}\mathcal{G}_{F_1(A_1),F_2(A_2),\cdots,F_m(A_m)}(E)
+$$
+
+其中 $G_1,G_2,\cdots,G_n$ 是分组属性，可以为空。
+
+其中 $F_i(A_i)$ 表示对属性 $A_i$ 使用聚集函数 $F_i$。
+
+<div align="center"> <img src="./ch-2-aggregate.png" width="520" /> </div>
+
+按院系求平均工资可以写成：
+
+$$
+_{\text{dept_name}}\mathcal{G}_{\text{avg}(\text{salary})}(\text{instructor})
+$$
+
+聚集结果默认没有属性名，实际使用时常通过重命名给它命名：
+
+$$
+_{\text{dept_name}}\mathcal{G}_{\text{avg}(\text{salary})\ \text{as}\ \text{avg_sal}}(\text{instructor})
+$$
+
+#### 5.3 数据修改
+
+数据库内容可以通过删除、插入和更新修改。这些操作也能用赋值思想表达。
+
+| 操作 | 关系代数表达 |
+| --- | --- |
+| 删除满足 $P$ 的元组 | $r\leftarrow r-\sigma_P(r)$ |
+| 插入关系 $E$ 的结果 | $r\leftarrow r\cup E$ |
+| 更新属性值 | 删除旧元组后插入新元组 |
+
+关系代数本身主要用于查询表达；数据修改语句需要额外考虑约束检查、触发器、并发控制和日志恢复。
+
+#### 5.4 多重集语义
+
+纯关系代数使用集合语义，会自动去除重复元组。SQL 默认使用 **多重集 (Multiset)** 语义，除非显式使用 `distinct`，否则会保留重复行。
+
+多重集语义下，设元组 $t$ 在 $r$ 中出现 $m$ 次。
+
+再设同一元组在 $s$ 中出现 $n$ 次。
+
+集合操作的重复次数如下：
+
+| 操作 | 重复次数 |
+| --- | --- |
+| 并 | $m+n$ |
+| 交 | $\min(m,n)$ |
+| 差 | $\max(0,m-n)$ |
+
+选择操作保留输入中的重复次数，只要元组满足谓词。
+
+投影操作对每个输入元组产生一个输出元组，因此可能保留重复投影结果。
+
+笛卡尔积中，若左侧元组出现 $m$ 次、右侧元组出现 $n$ 次，拼接结果出现 $mn$ 次。
+
+#### 5.5 SQL 对应
+
+不含聚集的 SQL 查询可以看作选择、投影和笛卡尔积的组合：
+
+```SQL
+select A1, A2, ..., An
+from r1, r2, ..., rm
+where P;
+```
+
+它对应的多重集关系代数表达式是：
+
+$$
+\Pi_{A_1,A_2,\cdots,A_n}(\sigma_P(r_1\times r_2\times\cdots\times r_m))
+$$
+
+带分组聚集的 SQL 查询可以先做笛卡尔积和选择，再按分组属性聚集：
+
+```SQL
+select A1, A2, sum(A3)
+from r1, r2, ..., rm
+where P
+group by A1, A2;
+```
+
+它对应的关系代数表达式是：
+
+$$
+_{A_1,A_2}\mathcal{G}_{\text{sum}(A_3)}(\sigma_P(r_1\times r_2\times\cdots\times r_m))
+$$
+
+如果 `select` 中只输出部分分组属性，则可先按完整 `group by` 属性聚集，再对最终结果投影。

@@ -4,313 +4,566 @@ type: docs
 weight: "4"
 date: 2026-03-24
 ---
-### 1. Joined Relations
 
-Join operations take two relations and return another relation as a result. They are typically used as subquery expressions in the `from` clause.
+### 1. 连接关系
 
-*   **Join condition**: Defines which tuples in the two relations match, and what attributes are present in the result of the join.
-*   **Join type**: Defines how tuples in each relation that do not match any tuple in the other relation are treated. It uses `null` values to avoid loss of information.
+#### 1.1 连接基础
 
-```sql
--- inner join (Only matching tuples)
-select * from course inner join prereq on course.course_id = prereq.course_id;
+**连接关系 (Joined Relation)** 是 SQL 在 `from` 子句中组合多个关系的方式。连接操作接收两个关系，返回一个新的关系；它不仅决定哪些元组能够匹配，也决定结果中保留哪些属性。
 
--- left outer join (Keeps all tuples from the left relation)
-select * from course natural left outer join prereq;
+连接语法可以从两个角度理解：
 
--- right outer join (Keeps all tuples from the right relation)
-select count(*) from course natural right outer join prereq where prereq_id is null;
+| 角度 | 含义 | 常见写法 |
+| --- | --- | --- |
+| 连接条件 | 判断两个关系中的元组是否匹配 | `natural`、`on <predicate>`、`using (...)` |
+| 连接类型 | 处理没有匹配元组的一侧 | `inner join`、`left/right/full outer join` |
 
--- full outer join (Keeps all tuples from both relations)
-select * from course full outer join prereq using (course_id);
+**自然连接 (Natural Join)** 会自动按照两个关系中的同名属性做等值匹配，并且同名属性只在结果中保留一份。**条件连接 (Join on)** 使用 `on` 后的谓词判断是否匹配，适合属性名不同或连接条件更复杂的情况。**using 连接** 则显式指定用于匹配的一组同名属性。
+
+```SQL
+select *
+from course inner join prereq
+    on course.course_id = prereq.course_id;
+
+select *
+from course natural join prereq;
+
+select *
+from course full outer join prereq using (course_id);
 ```
 
-> [!NOTE] **Join Conditions 对应的中文概念**
-> *   `natural`：自然连接（自动匹配同名列）；
-> *   `on <predicate>`：条件连接（自定义匹配条件，表达式为真时连接）；
-> *   `using (A1, A2, ...)`：等值连接（指定同名列进行匹配）。
+>[!Note] **Note**
+>`natural join` 虽然写起来短，但它依赖同名属性自动匹配。如果两个关系后来新增了同名但语义无关的属性，查询含义可能被悄悄改变。实际写业务 SQL 时，`join ... on ...` 通常更可控。
 
-### 2. Data Types
+#### 1.2 外连接
 
-#### 2.1 Built-in Types
-SQL supports basic data types and operations for dates and times. Subtracting a date/time value from another gives an interval value.
+**内连接 (Inner Join)** 只保留两侧都能匹配的元组。若某门课程没有先修课，或某条先修课记录找不到对应课程，内连接都会丢弃这些不匹配元组。
 
-```sql
+**外连接 (Outer Join)** 用 `null` 保留不匹配的一侧，从而避免信息丢失：
+
+| 类型 | 保留内容 | 不匹配位置 |
+| --- | --- | --- |
+| `left outer join` | 保留左侧全部元组 | 右侧属性填 `null` |
+| `right outer join` | 保留右侧全部元组 | 左侧属性填 `null` |
+| `full outer join` | 保留两侧全部元组 | 缺失一侧填 `null` |
+
+```SQL
+select *
+from course natural left outer join prereq;
+
+select count(*)
+from course natural right outer join prereq
+where prereq_id is null;
+
+select *
+from course natural full outer join prereq;
+```
+
+外连接的核心不是“多连接一些表”，而是在普通连接结果之外，把没有匹配成功的元组补回结果。由于补回的元组缺少另一侧属性，只能用 `null` 表示未知或不存在。
+
+### 2. 类型系统
+
+#### 2.1 内置类型
+
+SQL 支持日期、时间、时间戳和时间间隔等内置类型。日期和时间值相减会得到 **间隔 (Interval)**，间隔也可以再加回日期、时间或时间戳。
+
+```SQL
 date '2005-7-27'
+time '09:00:30'
 time '09:00:30.75'
 timestamp '2005-7-27 09:00:30.75'
 interval '1' day
 ```
 
-#### 2.2 User Types
-SQL allows creating user-defined types and domain types. Domains are similar to types but can have constraints (such as `not null` or `check`) specified on them.
+常见时间函数包括：
 
-```sql
--- User-defined types
-create type Dollars as numeric (12,2) final;
+| 函数 | 含义 |
+| --- | --- |
+| `current_date()` | 当前日期 |
+| `current_time()` | 当前时间 |
+| `year(x)`、`month(x)`、`day(x)` | 提取日期部分 |
+| `hour(x)`、`minute(x)`、`second(x)` | 提取时间部分 |
 
--- Domains with constraints
+这些类型的意义不只是格式检查。数据库知道一个值是日期或时间后，才能正确执行比较、排序、间隔计算和函数提取。
+
+#### 2.2 自定义类型
+
+**用户定义类型 (User-Defined Type)** 可以给已有类型起一个具有业务语义的新名字。例如预算金额可以定义为 `Dollars`：
+
+```SQL
+create type Dollars as numeric(12, 2) final;
+
+create table department (
+    dept_name varchar(20),
+    building varchar(15),
+    budget Dollars
+);
+```
+
+`create type` 类似 C 语言中的 `typedef`。`final` 表示该类型不能继续派生。需要注意的是，即使两个用户定义类型底层都是 `numeric(12, 2)`，只要类型名不同，系统也会把它们视为不同类型。
+
+**域 (Domain)** 也是基于已有类型建立的新类型，但它可以附带约束，因此更适合表达“某类值必须满足什么条件”。
+
+```SQL
 create domain person_name char(20) not null;
 
 create domain degree_level varchar(10)
-    constraint degree_level_test -- the name of constraints
+    constraint degree_level_test
     check (value in ('Bachelors', 'Masters', 'Doctorate'));
 ```
 
-> [!NOTE] **Note**
-> `create type` 类似于 C 语言的 `typedef`。关键字 `final` 表示这是最基本的数据类型，不能再派生（在一些数据库实现中，派生的类型可以插入原类型字段中，可能会导致隐式多样性）。需要特别注意的是，即使底层的定义完全相同，不同的 `typedef` 名称也会被系统视为完全不同的类型，不能直接混用。
+类型偏重命名和区分，域偏重约束和检查。实际设计中，如果某个值不仅有名字，还有稳定的取值规则，使用 domain 会更清晰。
 
-#### 2.3 Large Objects
-Large objects (photos, videos, CAD files, etc.) are stored as a large collection of uninterpreted binary or character data.
-*   **blob** (binary large object): Uninterpreted binary data.
-*   **clob** (character large object): Large collection of character data.
+#### 2.3 大对象
 
+**大对象 (Large Object)** 用于保存图片、视频、CAD 文件等体积很大的数据。SQL 中常见两类大对象：
 
-| MySQL BLOB |   TinyBlob   |     Blob     |  MediumBlob  |  LargeBlob  |
-| :--------: | :----------: | :----------: | :----------: | :---------: |
-|  **Size**  | 0\~255 bytes | 0\~64K bytes | 0\~16M bytes | 0\~4G bytes |
+| 类型 | 含义 |
+| --- | --- |
+| `blob` | binary large object，未解释的二进制数据 |
+| `clob` | character large object，大型字符数据 |
 
->[!NOTE] **Note**
-> 出于性能考虑，当查询返回一个大对象时，数据库实际返回的是一个指向该对象的指针，而不是将整个大对象本身全部读取出来。
+MySQL 中常见的 BLOB 大小如下：
 
-### 3. Integrity Constraints
+| 类型 | 大小 |
+| --- | --- |
+| `TinyBlob` | 0 到 255 bytes |
+| `Blob` | 0 到 64 KB |
+| `MediumBlob` | 0 到 16 MB |
+| `LargeBlob` | 0 到 4 GB |
 
-Integrity constraints guard against accidental damage to the database, ensuring that authorized changes do not result in a loss of data consistency.
+>[!Note] **Note**
+>出于性能考虑，查询返回大对象时，数据库通常先返回指向该对象的定位信息，而不是立刻把整个大对象读入结果。应用真正需要内容时，再通过该定位信息取回完整对象。
 
-#### 3.1 Single Relation
-Constraints applied to a single relation：`not null`, `primary key`, `unique`, `check (P)`.
+### 3. 完整约束
 
-```sql
-create table student(
-	student_id int primary key,
-	name varchar(50),
-	email varchar(100) unique, -- 单列唯一约束互不影响
-	phone char(11) unique,
-	registration_date date
-);
+#### 3.1 单表约束
 
-create table enrollment(
-	enrollment_id int primary key,
-	student_id int not null,
-	course_id int not null,
-	enroll_date date,
-	foreign key (student_id) references student(student_id),
-	foreign key (course_id) references course(course_id),
-	unique (student_id,course_id) -- 组合唯一约束（笛卡尔积）
+**完整性约束 (Integrity Constraint)** 用于防止合法用户的更新破坏数据一致性。例如余额不能低于某个值、员工工资不能低于最低工资、客户电话不能为空，这些都属于完整性规则。
+
+单个关系上常见约束包括：
+
+| 约束 | 含义 |
+| --- | --- |
+| `not null` | 属性值不能为空 |
+| `primary key` | 主键，唯一且非空 |
+| `unique` | 候选键约束，要求组合值唯一 |
+| `check (P)` | 每行必须满足谓词 $P$ |
+
+```SQL
+create table section (
+    course_id varchar(8),
+    sec_id varchar(8),
+    semester varchar(6),
+    year numeric(4, 0),
+    building varchar(15),
+    room_number varchar(7),
+    time_slot_id varchar(4),
+    primary key (course_id, sec_id, semester, year),
+    check (semester in ('Fall', 'Winter', 'Spring', 'Summer'))
 );
 ```
 
-> [!NOTE] **Note**
-> *   `primary key` 声明字段必须非空，但 `unique` 声明的 `candidate key` 可以为空；
-> *   `check` 通常是对单行（一行内的各个字段）进行逻辑检验。
+`primary key` 一定隐含非空；`unique` 声明的是候选键或超键，但 SQL 允许其中出现 `null`。组合唯一约束判断的是属性组整体是否重复，不是每个属性单独不能重复。
 
-#### 3.2 Foreign Keys
-Ensures referential integrity. A value appearing in a specific attribute of one relation must also appear in the primary key attribute of another relation.
+```SQL
+create table enrollment (
+    enrollment_id int primary key,
+    student_id int not null,
+    course_id int not null,
+    enroll_date date,
+    unique (student_id, course_id)
+);
+```
 
-```sql
+#### 3.2 参照完整
+
+**参照完整性 (Referential Integrity)** 要求一个关系中出现的某组属性值，也必须出现在另一个关系的主键属性中。若 `instructor.dept_name = 'Biology'`，则 `department` 中必须存在主键为 `'Biology'` 的部门。
+
+设 $A$ 是关系 $R$ 和 $S$ 都包含的一组属性，且 $A$ 是 $S$ 的主键。如果 $R$ 中任意出现的 $A$ 值都必须同时出现在 $S$ 中，则 $A$ 是 $R$ 引用 $S$ 的 **外键 (Foreign Key)**。
+
+```SQL
 create table course (
     course_id char(5) primary key,
+    title varchar(20),
     dept_name varchar(20),
     foreign key (dept_name) references department
-        on delete cascade -- 当主表字段删除时执行 cascade
-        on update cascade -- 当主表字段更新时执行 cascade
+        on delete cascade
+        on update cascade
 );
 ```
 
-> [!NOTE] **Note**
-> `cascade` 表示级联操作（主表删除/更新时，从表跟着变）。其他替代操作还包括：`set null`（设为空）、`set default`（设为默认值）、`restricted`（拒绝违反约束的操作）。
+当被引用元组被删除或主键被更新时，系统可以采取不同动作：
 
-#### 3.3 Complex Checks
-```sql
-create table person(
-	name char(10) primary key,
-	mother char(10),
-	father char(10),
-	foreign key (father) references person,
-	foreign key (mother) references person
-);
+| 动作 | 含义 |
+| --- | --- |
+| `cascade` | 级联删除或级联更新引用方 |
+| `set null` | 将引用方外键设为 `null` |
+| `set default` | 将引用方外键设为默认值 |
+| `restrict` | 拒绝破坏参照完整性的操作 |
+
+#### 3.3 复杂约束
+
+有些约束会跨越多行或多个关系。例如每个开课记录都必须至少有一位教师，或者 `student.tot_cred` 必须等于该学生所有已通过课程学分之和。理论上，`check` 中可以写子查询：
+
+```SQL
+check (time_slot_id in (
+    select time_slot_id
+    from time_slot
+))
 ```
 
-Complex constraints that involve subqueries or multiple relations. To prevent constraint violation during insertions, constraint checking can be deferred to **transaction end**.
+但很多数据库并不支持在 `check` 中使用子查询。工程上通常通过 **触发器 (Trigger)** 或应用层逻辑实现这类复杂检查。
 
-```sql
--- Creating an assertion
+SQL 还定义了 **断言 (Assertion)**，用于表达整个数据库必须始终满足的全局约束：
+
+```SQL
 create assertion credits_earned_constraint check
-(not exists 
-    (select ID from student
-     where tot_cred <> (
-         select sum(credits) from takes natural join course
-         where student.ID=takes.ID and grade is not null and grade<>'F')
-    )
+    (not exists (
+        select ID
+        from student
+        where tot_cred <> (
+            select sum(credits)
+            from takes natural join course
+            where student.ID = takes.ID
+              and grade is not null
+              and grade <> 'F'
+        )
+    ));
+```
+
+这里用 `not exists` 表达“所有学生都满足条件”。这种写法本质上是“不存在违反条件的学生”。很多数据库没有原生实现 `assertion`，因此复杂完整性规则仍然常由触发器实现。
+
+#### 3.4 事务延迟
+
+约束检查有时不能逐条语句立刻完成。例如 `person` 表中 `father` 和 `mother` 都引用同一个 `person` 表：
+
+```SQL
+create table person (
+    ID char(10),
+    name char(40),
+    mother char(10),
+    father char(10),
+    primary key (ID),
+    foreign key (father) references person,
+    foreign key (mother) references person
 );
 ```
 
->[!NOTE] **Note**
-> *   **嵌套查询**：理论上 `check` 中可以使用子查询，但目前大多数的数据库系统都不支持；
-> *   **Assertion（断言）**：SQL 中表达全称量词（所有满足...）时，通常使用“不存在不”（`not exists`）的逻辑形式。很多数据库并没有原生实现 `assertion`，但在工程上可以通过编写触发器（`triggers`）等方式来实现复杂的完整性校验。
+如果先插入孩子，父母记录还不存在，会违反外键；如果先插入父母，又可能缺少其它相互引用关系。常见处理方式有三种：
 
-### 4. Views
+| 方法 | 适用情况 |
+| --- | --- |
+| 先插入被引用元组 | 引用方向明确、无环 |
+| 先把外键设为 `null`，之后更新 | 外键允许为空 |
+| 延迟到事务结束检查 | 多条语句合起来才满足约束 |
 
-A view provides a mechanism to hide certain data from the view of certain users. Any relation that is not of the conceptual model but is made visible to a user as a "virtual relation" is called a view.
+延迟检查体现了事务的意义：单条语句执行后数据库可以暂时处在中间状态，但事务提交时必须恢复一致。
 
-```sql
--- view definition
-create view v as <query expression>
+### 4. 视图机制
 
+#### 4.1 视图定义
+
+**视图 (View)** 是由查询表达式定义的虚拟关系。它不属于概念模型中的基本关系，却可以像普通关系一样暴露给用户。视图常用于隐藏敏感属性、简化复杂查询，或在底层结构变化时保持上层接口稳定。
+
+```SQL
 create view faculty as
     select ID, name, dept_name
     from instructor;
-    
--- Querying the view
-select name from faculty where dept_name = 'Biology';
+
+select name
+from faculty
+where dept_name = 'Biology';
 ```
 
-#### 4.1 View Expansion
-View definition is not creating a new relation. It causes the saving of an expression, which is substituted into queries using the view.
+上面的视图让用户看到教师编号、姓名和院系，但看不到工资。视图定义保存的是查询表达式，而不是立即创建一张新表。
 
->[!NOTE] **Note**
-> **视图展开（View Expansion）**：实际上就是将前一个 view 的定义直接嵌入（替换）到当前查询的语句中执行，`from` 后面也可以像使用普通表一样插入基于视图的查询。
+视图还可以基于已有视图继续定义：
 
-#### 4.2 View Updates
-Insertions, updates, or deletions on a view must be represented by corresponding operations on the underlying database relations.
+```SQL
+create view physics_fall_2009 as
+    select course.course_id, sec_id, building, room_number
+    from course, section
+    where course.course_id = section.course_id
+      and course.dept_name = 'Physics'
+      and section.semester = 'Fall'
+      and section.year = 2009;
 
-```sql
+create view physics_fall_2009_watson as
+    select course_id, room_number
+    from physics_fall_2009
+    where building = 'Watson';
+```
+
+#### 4.2 视图展开
+
+**视图展开 (View Expansion)** 是把查询中出现的视图名替换为该视图的定义。对于：
+
+```SQL
+select course_id, room_number
+from physics_fall_2009
+where building = 'Watson';
+```
+
+系统可以将它展开为：
+
+```SQL
+select course_id, room_number
+from (
+    select course.course_id, building, room_number
+    from course, section
+    where course.course_id = section.course_id
+      and course.dept_name = 'Physics'
+      and section.semester = 'Fall'
+      and section.year = 2009
+)
+where building = 'Watson';
+```
+
+进一步合并条件后，查询就回到底层关系 `course` 和 `section` 上执行。`from` 子句中出现子查询，本质上也是把一个查询结果当作临时关系使用。
+
+#### 4.3 视图更新
+
+视图更新的问题在于：对虚拟关系的插入、删除或修改，必须能唯一翻译成底层关系上的操作。简单视图通常可以更新：
+
+```SQL
+create view faculty as
+    select ID, name, dept_name
+    from instructor;
+
 insert into faculty values ('30765', 'Green', 'Music');
--- Must be translated by the system to:
-insert into instructor values ('30765', 'Green', 'Music', null);
 ```
 
->[!NOTE] **Note**
-> 对视图的插入实际上是插入原来的底表。如果原表中有未包含在视图里的列，且该列定义为 `not null`，则插入必定失败。大多数 SQL 实现仅允许对“简单视图”进行更新；
+这个插入可以翻译为：
 
-> [!Note] **simple views/updatable views**
-> * `from` 子句中只能包含一个表；
-> * `select` 子句中不能含有任何聚类函数、`distinct` 限制或表达式；
-> * 在 `select` 子句中未列出的字段均未被设置为 `not null`；
-> * 查询中不包含任何 `group by` 或 `having` 子句。
+```SQL
+insert into instructor
+values ('30765', 'Green', 'Music', null);
+```
 
-#### 4.3 Materialized views
-Materializing a view means creating a physical table containing all the tuples in the result of the query.
+如果底层 `instructor` 中未出现在视图里的属性定义为 `not null`，上面的插入就会失败。更复杂的视图可能根本无法唯一更新：
 
-```sql
+```SQL
+create view instructor_info as
+    select ID, name, building
+    from instructor, department
+    where instructor.dept_name = department.dept_name;
+```
+
+若插入 `('69987', 'White', 'Taylor')`，系统无法判断该教师属于 `Taylor` 楼里的哪一个院系。因此多数 SQL 实现只允许更新简单视图。
+
+可更新视图通常需要满足：
+
+| 条件 | 原因 |
+| --- | --- |
+| `from` 中只有一个基本关系 | 避免无法判断更新哪张表 |
+| `select` 中只包含属性名 | 表达式、聚集值无法直接写回 |
+| 未列出的属性可以设为 `null` | 插入时需要补齐底层元组 |
+| 不含 `group by` 和 `having` | 分组结果不对应单个底层元组 |
+| 不含 `distinct` | 去重后无法确定原始元组 |
+
+#### 4.4 物化视图
+
+**物化视图 (Materialized View)** 会把视图查询结果真实存成一张物理表。它牺牲存储空间和维护成本，换取查询速度。
+
+```SQL
 create materialized view departments_total_salary(dept_name, total_salary) as
-    select dept_name, sum (salary)
+    select dept_name, sum(salary)
     from instructor
     group by dept_name;
 
 select dept_name
 from departments_total_salary
-where total_salary>(select avg(total_salary) from departments_total_salary);
+where total_salary > (
+    select avg(total_salary)
+    from departments_total_salary
+);
 ```
 
-> [!NOTE] **Note**
-> 物化视图查询快捷便利，但会实际占用物理存储空间，并且需要与底表保持一致性造成开销（实际应用中通常采用增量式更新）。
+底层关系更新后，物化视图会变旧，因此系统必须维护它。维护方式可以是完全重新计算，也可以是增量更新。分析型查询中，物化视图常用于预先保存昂贵的聚集结果。
 
-> [!Note] **Logical Data Independence**
-> 很多分析型的数据库倾向于按列存储成表。虽然将全部列放到一起导致 IO 代价大，但是按列压缩方便，查询单字段效率极高。视图机制能在底层表结构修改（拆分/合并）时，为上层应用保持逻辑上的数据独立性。
+#### 4.5 数据独立
 
-### 5. Indexes
+视图还能实现 **逻辑数据独立性 (Logical Data Independence)**。例如原来有关系 `S(a, b, c)`，后来为了物理设计或列式存储，将其拆成 `S1(a, b)` 和 `S2(a, c)`。为了不修改上层查询，可以创建一个同名视图：
 
-Indices are data structures used to speed up access to records with specified values for index attributes, without looking at all records.
+```SQL
+create view S(a, b, c) as
+    select a, b, c
+    from S1 natural join S2;
+```
 
-```sql
+这样，用户仍然可以执行：
+
+```SQL
+select *
+from S
+where a = 1;
+```
+
+底层实际访问的则是 `S1 natural join S2`。视图在这里充当稳定接口，使应用不必感知底层关系被拆分或重组。
+
+### 5. 索引事务
+
+#### 5.1 索引基础
+
+**索引 (Index)** 是用于加速记录访问的物理结构。没有索引时，系统可能需要扫描整个 `student` 表；有索引时，可以先通过索引定位满足条件的记录。
+
+```SQL
 create table student (
-    ID varchar (5) primary key,
-    name varchar (20) not null
+    ID varchar(5),
+    name varchar(20) not null,
+    dept_name varchar(20),
+    tot_cred numeric(3, 0) default 0,
+    primary key (ID)
 );
 
 create index studentID_index on student(ID);
 
--- Query executed by using the index
-select * from student where ID = '12345';
+select *
+from student
+where ID = '12345';
 ```
 
-> [!NOTE] **Note**
-> *   有序结构方便查找。但在庞大的数据库系统中，普通的二分查找效率相对并不算高，底层通常使用 **百叉树（B树、B+树）** 来实现索引。
-> *   对于查询中常用的属性可以专门建立 index。需要注意的是，复合 index 中包含的属性顺序不同，建立出来的 index 也完全不同。
-> *   index 属于物理层的概念，虽然能大幅加速查询，但会占用存储空间，并且在插入、修改、删除记录时会带来额外的维护成本。
+索引适合建在查询频繁使用的属性上。复合索引中属性顺序不同，得到的索引也不同。例如 `(dept_name, ID)` 和 `(ID, dept_name)` 支持的高效访问路径并不相同。
 
-### 6. Transactions
+>[!Note] **Note**
+>索引属于物理层优化，不改变查询结果。它会占用额外存储空间，并在插入、删除、更新时带来维护成本。因此索引不是越多越好，而是要服务于高频查询和关键约束。
 
-#### 6.1 Transactions Definition
+#### 5.2 事务边界
 
-A transaction is a unit of program execution that accesses and possibly updates various data items. It must be either fully executed or rolled back as if it never occurred.
+**事务 (Transaction)** 是数据库执行的工作单元。一个事务中的操作要么全部生效，要么全部回滚，不能只完成一半。
 
-```sql
-SET AUTOCOMMIT=0;
+```SQL
+set autocommit = 0;
 
-UPDATE account SET balance=balance -100 WHERE ano='1001';
-UPDATE account SET balance=balance+100 WHERE ano='1002';
-COMMIT;
+update account
+set balance = balance - 100
+where ano = '1001';
 
-UPDATE account SET balance=balance -200 WHERE ano='1003';
-UPDATE account SET balance=balance+200 WHERE ano='1004'; 
-COMMIT;
+update account
+set balance = balance + 100
+where ano = '1002';
 
-UPDATE account SET balance=balance+balance*2.5%; -- 长事务
-COMMIT;
+commit;
 ```
 
-> [!NOTE] **Note**
-> *   **银行转账/买车票**是典型的事务边界（Transaction Boundaries）场景。
-> *   数据库中没有一条 SQL 语句能游离在事务之外。第一条语句执行就视为事务自动开始，`commit` 代表上一个事务的结束和下一个事务的开始。
-> *   包含复杂计算或耗时长的“长事务”，在执行期间可能会锁定资源并阻塞其它的事务。
+多数数据库默认每条 SQL 自动提交，因此每条语句本身就是一个事务。关闭自动提交后，事务从第一条语句隐式开始，由 `commit` 或 `rollback` 结束。
 
-#### 6.2 ACID Properties
-To preserve the integrity of data, the system must ensure:
-*   **Atomicity**: Either all operations are properly reflected or none are.
-*   **Consistency**: Execution in isolation preserves the consistency of the database. 
-*   **Isolation**: Transactions executing concurrently must be unaware of each other. 
-*   **Durability**: Changes persist successfully even if there are system failures.
+| 命令 | 含义 |
+| --- | --- |
+| `commit` | 提交当前事务，使修改永久生效 |
+| `rollback` | 回滚当前事务，撤销尚未提交的修改 |
+| `set autocommit = 0` | 关闭自动提交，手动控制事务边界 |
 
-### 7. Authorization
+事务边界需要按业务语义划分。买一张票和买多张票是否属于一个事务，订票和支付是否必须放在同一个事务中，都取决于业务希望“全有全无”的范围。事务越长，越容易持有锁并阻塞其它事务。
 
-Forms of authorization on parts of the database include **modifying data** (`Select`, `Insert`, `Update`, `Delete`) and **modifying the schema** (`Create`, `Alter`, `Drop`, `Index`, `Create view`).
+#### 5.3 ACID
 
-#### 7.1 Grant & Revoke
-The `grant` statement is used to confer authorization, and `revoke` is used to remove it.
+数据库通过 **ACID** 性质保证事务可靠执行：
 
-```sql
--- Grant statement
--- user list can be a user-id, public or a role
-grant <privilege list> on <relation name or view name> to <user list>
+| 性质 | 含义 |
+| --- | --- |
+| 原子性 (Atomicity) | 事务中的操作全做或全不做 |
+| 一致性 (Consistency) | 事务在隔离执行时保持数据库约束 |
+| 隔离性 (Isolation) | 并发事务之间看不到彼此的中间结果 |
+| 持久性 (Durability) | 事务提交后，即使系统故障，修改也不会丢失 |
 
--- Revoke statement
--- <privilege list> may be all to reovke all privileges
-revoke <privilege list> on <relation name or view name> from <user list>
+隔离性可以用事务 $T_i$ 和 $T_j$ 来理解：对 $T_i$ 而言，$T_j$ 要么像是在 $T_i$ 开始前已经完成，要么像是在 $T_i$ 完成后才开始。这个“看起来串行”的效果，是并发控制要实现的核心目标。
 
--- Granting privileges
+### 6. 权限控制
+
+#### 6.1 权限类型
+
+**授权 (Authorization)** 控制用户能访问哪些数据、能执行哪些操作。数据权限通常包括：
+
+| 权限 | 含义 |
+| --- | --- |
+| `select` | 读取数据 |
+| `insert` | 插入新数据 |
+| `update` | 修改已有数据 |
+| `delete` | 删除数据 |
+
+模式权限则控制数据库结构：
+
+| 权限 | 含义 |
+| --- | --- |
+| `create` | 创建新关系 |
+| `alter` | 增删关系中的属性 |
+| `drop` | 删除关系 |
+| `index` | 创建或删除索引 |
+| `create view` | 创建视图 |
+
+权限可以授予基本关系，也可以授予视图。对视图授予权限不会自动授予底层关系权限，这一点可以用来实现安全隔离。
+
+```SQL
+create view geo_instructor as
+    select *
+    from instructor
+    where dept_name = 'Geology';
+
+grant select on geo_instructor to geo_staff;
+```
+
+上例只允许 `geo_staff` 查询地质系教师视图，不意味着他们可以直接查询完整的 `instructor` 表。
+
+#### 6.2 授予回收
+
+`grant` 用于授予权限，`revoke` 用于回收权限：
+
+```SQL
+grant <privilege list>
+on <relation name or view name>
+to <user list>;
+
+revoke <privilege list>
+on <relation name or view name>
+from <user list>;
+```
+
+`<user list>` 可以是具体用户、角色，也可以是 `public`。`public` 表示所有有效用户，但回收 `public` 权限时，不会回收单独授予某个用户的权限。
+
+```SQL
 grant select on instructor to U1, U2, U3;
 grant select on department to public;
 grant update (budget) on department to U1, U2;
+grant all privileges on department to U1;
 
--- Revoking privileges
 revoke select on branch from U1, U2, U3;
+```
 
--- Transfer of privileges
+如果同一权限由多个授权者授予给同一用户，回收其中一条授权后，用户可能仍通过另一条授权保留权限。若某用户基于被回收的权限继续向下授权，则这些依赖权限也可能被级联回收。
+
+```SQL
 grant select on department to Amit with grant option;
+
 revoke select on department from Amit cascade;
 revoke select on department from Amit restrict;
 revoke grant option for select on department from Amit;
 ```
 
-> [!NOTE] **Note**
-> *   **`public`**：代表允许所有有效用户拥有该权限，收回时不收回单独授予的权限。
-> *   **`references`**：引用也是一种权限，比如 `grant reference (dept_name)...` 用于授权用户创建指向该表的外键。
-> *   **`with grant option`**：允许获得权限的用户将该权限继续向下级授予。取消权限时，如果使用了 `cascade`，则由此引发的下级权限也会被级联回收；如果使用了 `restrict`，则若该用户向外发放过下级权限则放弃回收。
+`with grant option` 允许获得权限的用户继续授予他人。`cascade` 会级联回收依赖权限；`restrict` 则要求没有依赖授权时才允许回收。`revoke grant option` 只取消继续授权的能力，不一定取消用户自身已有的查询权限。
 
-#### 7.2 Roles
-Roles are named sets of privileges that can be granted to users or to other roles, creating a chain of roles.
+#### 6.3 角色权限
 
-```sql
+**角色 (Role)** 是一组命名权限。与其逐个用户授予大量权限，不如把权限授予角色，再把角色授予用户。
+
+```SQL
 create role instructor;
 grant select on takes to instructor;
 grant instructor to Amit;
 
--- Chain of roles
 create role teaching_assistant;
-grant teaching_assistant to instructor; -- instructor inherits assistant's privileges
+grant teaching_assistant to instructor;
 ```
 
->[!NOTE] **Note**
-> 角色（Role）本质上就是一堆权限的集合。引入角色机制可以极大地简化权限管理。有些数据库系统还专门对 user 进行了分组（group）操作来实现类似的管理目的。
+角色还可以授予另一个角色，形成权限继承链。上例中，`instructor` 继承 `teaching_assistant` 的权限；如果再把 `instructor` 授予某个用户，该用户就间接获得助教角色中的权限。
+
+外键引用也需要权限。若用户想创建引用 `department.dept_name` 的外键，需要拥有对应的 `references` 权限：
+
+```SQL
+grant references (dept_name)
+on department
+to Mariano;
+```
+
+这是因为外键约束会让一个关系依赖另一个关系的键值，可能限制被引用关系的删除和更新行为。把引用也纳入权限系统，可以避免用户在没有授权的情况下影响其它表的维护。

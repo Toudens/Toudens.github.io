@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "b47de27f6372f02b",
+        "id": "f90ca07ebe133b0d",
         "type": "tabs",
         "children": [
           {
-            "id": "4ac0fc446af820a5",
+            "id": "ec1cacca92f0d38d",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -78,7 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 257.5
   },
   "right": {
     "id": "c569291f788890c9",
@@ -183,38 +183,40 @@
       "bases:新建数据库": false
     }
   },
-  "active": "4ac0fc446af820a5",
+  "active": "ec1cacca92f0d38d",
   "lastOpenFiles": [
-    "compsci/db/Ch-15/index.md",
+    "compsci/db/Ch-8/index.md",
     "compsci/db/_index.md",
-    "compsci/db/Ch-15/ch-15-nested.png",
-    "compsci/db/Ch-15/ch-15-join.png",
+    "compsci/db/Ch-8/ch-8-construct.png",
+    "compsci/db/Ch-8/ch-8-geometry.png",
+    "compsci/db/Ch-8/ch-8-rdf-graph.png",
+    "compsci/db/Ch-8/ch-8-xml-tree.png",
+    "compsci/db/Ch-8",
+    "compsci/db/Ch-6/index.md",
     "compsci/db/Ch-14/index.md",
+    "compsci/db/Ch-18/index.md",
+    "compsci/db/Ch-17/index.md",
+    "compsci/db/Ch-18/ch-18-locktable.png",
+    "compsci/db/Ch-2/ch-2-aggregate.png",
+    "compsci/db/Ch-2/ch-2-division.png",
+    "compsci/db/Ch-2/ch-2-natural-join.png",
+    "compsci/db/Ch-2/ch-2-schema.png",
+    "compsci/db/Ch-2/ch-2-relation.png",
+    "compsci/db/Ch-16/index.md",
+    "compsci/db/Ch-4/index.md",
+    "compsci/db/Ch-5/index.md",
+    "compsci/db/Ch-15/index.md",
     "MiniSql.md",
-    "compsci/db/Ch-15/ch-15-sort.png",
-    "compsci/db/Ch-15/ch-15-plan.png",
-    "compsci/db/Ch-15/ch-15-index-secondary.png",
-    "compsci/db/Ch-15/ch-15-index-clustering.png",
-    "compsci/db/Ch-15/ch-15-hashjoin.png",
-    "compsci/db/Ch-15/ch-15-blockjoin.png",
     "compsci/ca/Ch-3B/index.md",
     "compsci/db/Ch-14.zip",
-    "compsci/db/Ch-14/ch-14-bloom.png",
-    "compsci/db/Ch-14/ch-14-index.png",
     "compsci/db/Ch-14",
     "compsci/db/新建文件夹",
-    "compsci/db/Ch-16/index.md",
-    "compsci/db/Ch-17/index.md",
-    "compsci/db/Ch-5/index.md",
     "compsci/db/Ch-3/index.md",
     "compsci/db/Ch-2/index.md",
     "compsci/db/Ch-1/index.md",
-    "compsci/db/Ch-4/index.md",
-    "compsci/db/Ch-6/index.md",
     "compsci/db/Ch-7/index.md",
     "compsci/db/Ch-12/index.md",
     "compsci/db/Ch-13/index.md",
-    "compsci/db/Ch-18/index.md",
     "compsci/ca/Ch-3A/index.md",
     "compsci/db/Ch-17",
     "compsci/db/Ch-18",
@@ -226,9 +228,7 @@
     "compsci/ca/Ch-3B",
     "compsci/ca/新建文件夹",
     "compsci/ca/Ch-3A.zip",
-    "compsci/ca/Ch-3.zip",
     "compsci/ca/Ch-2A/index.md",
-    "讲稿.md",
-    "phymath/infotheory/_index.md"
+    "讲稿.md"
   ]
 }

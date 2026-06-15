@@ -124,7 +124,7 @@ P_1,\ K_1,\ P_2,\ K_2,\ \ldots,\ P_{n-1},\ K_{n-1},\ P_n
 $$
 其中 $K_i$ 是搜索码值，$P_i$ 是指针。内部节点中的指针指向子节点；叶节点中的指针指向记录或记录桶。叶节点还通过额外指针按搜索码 **顺序串联**，方便范围扫描。
 
-<div align="center"> <img src="./ch-14-bplus.png" width="480" /> </div>
+<div align="center"> <img src="./ch-14-Bplus.png" width="480" /> </div>
 
 #### 3.2 节点性质
 

@@ -150,7 +150,7 @@ $$
 H_\infty
 &=\lim_{N\rightarrow\infty}\frac{1}{N}H(X_1,X_2,\cdots,X_N)\\
 &=\lim_{N\rightarrow\infty}H(X_N|X_{N-1},X_{N-2},\cdots,X_1)\\
-&=\lim_{N\rightarrow\infty}H(X|N|X_{N-1},X_{N-2},\cdots,X_{N-m})\\
+&=\lim_{N\rightarrow\infty}H(X_N|X_{N-1},X_{N-2},\cdots,X_{N-m})\\
 &=H(X_{m+1}|X_m,X_{m-1}\cdots,X_1)\\
 &=\sum_{i=1}^{K^m}q(S=s_i)H(X|S=s_i)\\
 &=H(X|S)

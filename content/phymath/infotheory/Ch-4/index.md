@@ -14,12 +14,14 @@ weight: "4"
 * 信源编码包括量化、压缩、映射、变换等具体和抽象的过程
 
 $$
+\text{信源编码}
 \begin{cases}
 \text{无损编码}
 \begin{cases}
 \text{绝对无差错编码},&P_e^{(n)}=0,\forall n\\
 \text{渐进无差错编码},&P_e^{(n)}\xrightarrow{n\to\infty}0
 \end{cases}\\
+\\
 \text{有损编码 (限失真编码)}
 \end{cases}
 $$
@@ -47,8 +49,8 @@ D^N\geq K^L
 N\geq\frac{L\log K}{\log D}
 $$
 以对整数进行编码的 **整数编码** 为例：
-- 若 $\mathcal{A}=\{0,1,\cdots,9\},L=1,\mathcal{B}=\{0,1\}$ ，则 $N=\lceil\log_2{10}\rceil=4$ ，单字符 $4\text{ bit}$
-- 若 $\mathcal{A}=\{0,1,\cdots,9\},L=2,\mathcal{B}=\{0,1\}$ ，则 $N\geq\lceil\log_2100\rceil=7$ ，单字符 $3.5\text{ bit}$ 
+- 若 $\mathcal{A}=\{0,1,\cdots,9\},L=1,\mathcal{B}=\{0,1\}$ ，则 $N=\lceil\log_2{10}\rceil=4$ ，$4\text{ bit/字符}$
+- 若 $\mathcal{A}=\{0,1,\cdots,9\},L=2,\mathcal{B}=\{0,1\}$ ，则 $N\geq\lceil\log_2100\rceil=7$ ， $3.5\text{ bit/字符}$ 
 - 若 $\mathcal{A}=\{0,1,\cdots,9\},L=\infty,\mathcal{B}=\{0,1\}$ ，则单字符 $\log_210\approx3.322\text{ bit}$
 
  信源输出序列越长，**编码效率** 越高，越接近 $\log K$ ，但是在实际过程中，编码序列越长，译码的时间延迟也越长，**译码实时性** 也有所降低。

@@ -80,7 +80,7 @@ $$\begin{align}I(X;Y) &= H_{C}(X) - H_{C}(X|Y)\\&= H_{C}(Y) - H_{C}(Y|X)\\&= H_{
 
 对于离散随机变量 $X$，令 $Y = f(X)$ 是 $X \to Y$ 上的一对一函数，则 $H(X) = H(Y)$，但是对于连续随机变量，有：
 $$
-H_C(Y) = - \int p(y) \log p(y) \,\mathrm{d}y = - \int p(x) \log p(x) f'(x) \,\mathrm{d}x \neq H_C(X)
+H_C(Y) = - \int p(y) \log p(y) \,\mathrm{d}y = - \int p(x) \log \left[\frac{p(x)}{ f'(x)}\right] \,\mathrm{d}x \neq H_C(X)
 $$
 即使对于线性变换，微分熵也不具有不变性。
 

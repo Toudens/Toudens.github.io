@@ -13,3 +13,4 @@ comments: false
 | **[Lec-7 信息的传输 1]({{<relref "Ch-7/index.md">}})**   | 已完成  | 已完成  |
 | **[Lec-8 信息的传输 2]({{<relref "Ch-8/index.md">}})**   | 已完成  | 已完成  |
 | **[Lec-9 信息的传输 3]({{<relref "Ch-9/index.md">}})**   | 已完成  | 已完成  |
+| **[Lec-10 信息的传输 4]({{<relref "Ch-10/index.md">}})** | 已完成  | 已完成  |

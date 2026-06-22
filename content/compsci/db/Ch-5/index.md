@@ -1,267 +1,720 @@
 ---
 title: Ch-5 SQL 高级
-type: docs
-date: 2026-03-31
 weight: "5"
+type: docs
+date: 2026-06-15
 ---
-### 1. 数据库访问
 
-SQL 是一种**声明式语言 (Declarative Language)**，缺乏**计算完备性**（没有顺序、分支、循环结构）。同时，SQL 无法执行与数据库内容无关的**非声明式操作**，如用户交互、打印报表或图形用户界面集成。因此，我们必须借助通用编程语言来访问数据库。主要有两种方法：
-* **API (Application Program Interface)**：使用一组函数来连接并与数据库服务器通信；
-* **嵌入式 SQL (Embedded SQL)**：提供了一种程序与数据库服务器交互的方式。
-	* SQL 语句在编译时被翻译成函数调用；
-	* 运行时这些函数调用使用一个提供动态 SQL 功能的 API 来连接数据库。
-#### 1.1 JDBC API
+### 1. 程序访问
 
-**JDBC (Java Database Connectivity)** 是 Java 语言与数据库通信的标准 API。它提供了一套接口用于建立连接、发送 SQL 以及处理返回结果。与数据库通信的流程为：
-1. 打开一个与数据库的连接；
-2. 创建一个“语句”（Statement）对象；
-3. 使用 Statement 对象执行查询，以发送查询并获取结果
-4. 通过异常机制处理错误。
+#### 1.1 访问方式
 
-JDBC 支持多种功能，用于查询和更新数据，以及检索查询结果，还支持元数据检索，例如查询数据库中存在的关系（表）以及这些关系属性的名称和类型。
+SQL 是声明式语言，适合描述“要什么数据”，但它不负责通用程序中的输入输出、界面交互、报表打印和复杂控制流程。因此应用程序通常需要通过通用编程语言访问数据库。
+
+程序访问数据库主要有两种方式：
+
+| 方式 | 思路 | 代表 |
+| --- | --- | --- |
+| API | 程序调用函数连接数据库、发送 SQL、逐行读取结果 | JDBC、ODBC |
+| 嵌入式 SQL | 在宿主语言中直接写 SQL，由预处理器翻译为函数调用 | Embedded SQL、SQLJ |
+
+API 方式更灵活，SQL 字符串可以在运行时构造；嵌入式 SQL 更接近静态检查，编译前会把 SQL 语句翻译成宿主语言中的数据库调用。
+
+#### 1.2 JDBC
+
+**JDBC (Java Database Connectivity)** 是 Java 访问关系数据库的标准 API。典型流程是打开连接、创建语句对象、执行 SQL、读取结果、处理异常并关闭资源。
 
 ```java
-public static void JDBCexample(String userid, String passwd)
-{
-    try 
-    {
-        // 1. 与数据库建立连接
-        Connection conn=DriverManager.getConnection
-	        ("jdbc:oracle:thin:@db.zju.edu:2000:univdb", userid, passwd);
-        conn.setAutoCommit(false); // 关闭自动提交，用于手动事务控制
-        
-        // 2. 预编译语句
-        PreparedStatement pStmt=conn.prepareStatement
-	        ("insert into instructor values(?,?,?,?)");
-        pStmt.setString(1, "88877");
-        pStmt.setString(2, "Perry");
-        pStmt.setString(3, "Finance");
-        pStmt.setInt(4, 125000);
-        pStmt.executeUpdate(); // 执行更新操作
-        pStmt.setString(1,"88878");
-        pStmt.executeUpdate();
+Connection conn = DriverManager.getConnection(
+    "jdbc:oracle:thin:@db.example.edu:2000:univdb",
+    userid,
+    passwd
+);
 
-        // 3. Statement与结果集
-        Statement stmt=conn.createStatement();
-        ResultSet rset=stmt.executeQuery
-	        ("select dept_name, avg(salary) from instructor group by dept_name");
-        while(rset.next()) 
-        {
-            System.out.println(rset.getString("dept_name") + " " + rset.getFloat(2));
-            if (rset.wasNull()) // 通过 wasNull() 检查上一次读取的列是否为 NULL
-	            System.out.println("Got null value");
-        }
-        conn.commit(); // 提交事务 (或使用 conn.rollback() 回滚)
-        rset.close(); stmt.close(); pStmt.close(); conn.close();
-    } 
-    catch (SQLException sqle) 
-        System.out.println("SQLException : " + sqle);
+Statement stmt = conn.createStatement();
+ResultSet rset = stmt.executeQuery(
+    "select dept_name, avg(salary) from instructor group by dept_name"
+);
+
+while (rset.next()) {
+    System.out.println(rset.getString("dept_name") + " " + rset.getFloat(2));
+}
+
+rset.close();
+stmt.close();
+conn.close();
+```
+
+`ResultSet` 是结果游标。`next()` 会移动到下一行，`getString("dept_name")` 和 `getString(1)` 都可以取列值；如果读取基本类型后需要判断是否为 SQL 空值，可以调用 `wasNull()`。
+
+```java
+int a = rset.getInt("a");
+if (rset.wasNull()) {
+    System.out.println("Got null value");
 }
 ```
 
->[!Note] **Note**
->* 使用字符串作为 SQL 语句，编译时 **无法检查 SQL 语句**（可能会违反 primary key, foreign key 等约束条件），使用 embedded SQL 可以在一定程度上解决该问题；
->* 数据库中为集合，在高级程序设计语言中没有这个概念，需要通过 **循环** 从指针中读取 tuple 中的数据，以进行数据类型的转换；
->* 如果在参数设定时后面的参数没有提供则 **默认使用前面已经设置的参数**，对于上面的例子，第二次 `executeUpdate` 插入的元组为 `("88878,"Perry","Finance",125000)`
->* 使用预编译语句可以先进行语法检查，可以生成内部执行计划，更加高效，近似于函数，便于批量化处理语句。
+JDBC 默认把每条 SQL 语句当作一个独立事务并自动提交。涉及多条更新时，通常应关闭自动提交，并显式提交或回滚。
 
+```java
+conn.setAutoCommit(false);
 
-*   **防止 SQL 注入 (SQL Injection)**：是 `PreparedStatement` 最核心的优势。不要使用字符串拼接去构造查询（例如输入 `"X' or 'Y' = 'Y"` 会使 `WHERE` 永远为真导致数据全表泄露，甚至通过分号注入 `update` 语句），占位符 `?` 会在底层将参数正确转义；
-*   **元数据 (Metadata)**：可通过 `ResultSetMetaData rsmd=rset.getMetaData();` 动态获取查询结果的列名和数据类型；通过 `DatabaseMetaData` 获取数据库系统的目录；
-*   **其他特性**：JDBC 支持通过 `CallableStatement` 调用数据库函数和存储过程；支持通过 `getBlob()`/`getClob()` 处理二进制大对象 (BLOB) 和字符大对象 (CLOB)。
-#### 1.2 ODBC API
-
-**ODBC (Open Database Connectivity)** 是 C/C++ 等语言的标准底层 API。程序通过 ODBC 驱动与数据库通信，与具体使用的数据库无关，是公认的标准函数库。
-
-*   **工作流程与句柄 (Handles)**：
-    1. 分配环境句柄 (`SQLAllocEnv`) 和连接句柄 (`SQLAllocConnect`)。
-    2. 建立连接 (`SQLConnect`)，字符串参数常使用 `SQL_NTS` (Null-Terminated String)。
-    3. 分配语句句柄 (`SQLAllocStmt`) 并执行查询 (`SQLExecDirect` 或使用 `SQLPrepare` 进行预编译)。
-    4. **绑定列 (Bind Columns)**：使用 `SQLBindCol()` 将查询结果的列与 C 语言的内存变量直接绑定。
-    5. **抓取数据 (Fetch)**：通过 `SQLFetch()` 循环读取结果。
-*   **符合性级别 (Conformance Levels)**：ODBC 定义了不同的功能级别：Core（核心基本功能）、Level 1（要求支持元数据查询）和 Level 2（要求支持参数数组等高级目录信息）。
-
-#### 1.3 嵌入式 SQL (Embedded SQL)
-嵌入式 SQL 允许将 SQL 语句以特定格式直接写在**宿主语言 (Host Language)** 中，编译前由**预处理器 (Preprocessor)** 转换为宿主语言的函数调用。
-
-*   **宿主变量 (Host Variables)**：在嵌入式 SQL 中调用外部宿主语言的变量时，需加上冒号前缀 `:`。状态码存放在 **SQLCA (SQL 通信区)** 中，如 `SQLSTATE` 为 `'02000'` 代表无更多数据。
-*   **游标的使用 (Cursor)**：
-    ```c
-    EXEC SQL BEGIN DECLARE SECTION;
-        int credit_amount; char student_name[30];
-    EXEC SQL END DECLARE SECTION;
-
-    // 1. 声明游标
-    EXEC SQL declare c cursor for select name from student where tot_cred > :credit_amount;
-    EXEC SQL open c; // 2. 打开游标
-
-    // 3. 循环 fetch 取数据
-    while (SQLSTATE != '02000') {
-        EXEC SQL fetch c into :student_name;
-    }
-    EXEC SQL close c; // 4. 关闭游标
-    ```
-*   **游标更新 (Updates Through Cursor)**：可在声明时添加 `for update`，随后在遍历过程中使用 `update ... where current of c` 直接更新当前游标指向的行。
-*   **Java 中的嵌入 (SQLJ)**：通过 `#sql { ... }` 语法使用，能在编译期进行 SQL 语法检查（JDBC 只能在运行期报错）。
-
----
-
-### 2. 函数与存储过程 (Functions & Procedures)
-
-将复杂的业务逻辑封装在数据库系统中，可以大幅减少客户端与数据库之间的网络数据传输，并提升性能。
-
-#### 2.1 SQL 函数 (SQL Functions)
-函数通常返回一个值，可直接嵌入在 SQL 表达式中。
-*   **标量函数 (Scalar Function)**：返回单个值（如统计人数）。
-*   **表函数 (Table Function)**：返回一个关系表，在 SQL:2003 中引入。可以在 `FROM` 子句中通过 `TABLE()` 关键字调用。
-    ```sql
-    CREATE FUNCTION instructors_of (dept_name CHAR(20))
-        RETURNS TABLE (ID VARCHAR(5), name VARCHAR(20), salary NUMERIC(8,2))
-        RETURN TABLE (
-            SELECT ID, name, salary FROM instructor 
-            WHERE instructor.dept_name = instructors_of.dept_name
-        );
-    -- 调用方式：
-    SELECT * FROM TABLE(instructors_of('Music'));
-    ```
-
-#### 2.2 存储过程与过程化扩展 (Stored Procedures & Procedural Constructs)
-存储过程不强制返回结果集，而是通过 `IN` (输入)、`OUT` (输出) 等参数交互，需使用 `CALL` 语句执行。SQL 标准支持类似于通用编程语言的控制流结构：
-*   **复合语句**：`BEGIN ... END`。
-*   **循环语句**：`WHILE ... DO`、`REPEAT ... UNTIL`。
-*   **FOR 循环遍历**：可以直接遍历查询结果集。
-    ```sql
-    DECLARE n INTEGER DEFAULT 0;
-    FOR r AS SELECT budget FROM department WHERE dept_name = 'Music' DO
-        SET n = n - r.budget;
-    END FOR;
-    ```
-*   **条件语句**：`IF-THEN-ELSE` 与类似于 C 语言的 `CASE` 语句。
-
-#### 2.3 外部语言例程 (External Language Routines)
-为了应对高复杂度计算，SQL 允许导入使用 C、C++ 或 Java 编写的外部函数 (`LANGUAGE C EXTERNAL NAME ...`)。
-*   **安全隐患**：外部代码运行在数据库内存中，若有越界等 Bug 可能损坏数据库结构。
-*   **解决方案**：采用**沙箱技术 (Sandbox)**（如 Java 的权限限制），或让外部代码在独立的进程中运行，通过**进程间通信 (IPC)** 与数据库交互。若对效率要求极高且确信安全，也可直接在数据库系统地址空间内执行。
-
----
-
-### 3. 触发器 (Triggers)
-
-触发器是特定的数据库修改事件（`INSERT`, `DELETE`, `UPDATE`）作为副作用而自动唤醒的特殊语句，遵循 **ECA 规则 (Event-Condition-Action Rule)**。
-
-#### 3.1 触发器的应用与分类
-*   **BEFORE 触发器**：可在事件发生**前**激活，用于在数据写入前进行修改。例如，将所有空字符串 `''` 成绩在存入前强制转换为 `NULL`。
-*   **行级触发器 (Row-level)**：使用 `FOR EACH ROW`，针对受影响的每一行执行。
-*   **语句级触发器 (Statement-level)**：使用 `FOR EACH STATEMENT`。在批量更新大量行时效率极高，它通过引用 **过渡表 (Transition Tables)** 来处理所有受影响的行，而不是逐行循环。
-
-```sql
--- 触发器示例：维护学分总和
-CREATE TRIGGER credits_earned
-AFTER UPDATE OF takes ON grade        -- Event (事件): 更新 grade 列
-REFERENCING NEW ROW AS nrow           -- 引用新旧值
-REFERENCING OLD ROW AS orow
-FOR EACH ROW                          -- 行级触发器
-WHEN nrow.grade <> 'F' AND nrow.grade IS NOT NULL  -- Condition (条件)
-     AND (orow.grade = 'F' OR orow.grade IS NULL)
-BEGIN ATOMIC
-    UPDATE student                    -- Action (动作)
-    SET tot_cred = tot_cred + (SELECT credits FROM course WHERE course.course_id = nrow.course_id)
-    WHERE student.ID = nrow.ID;
-END;
+try {
+    // multiple updates
+    conn.commit();
+} catch (SQLException e) {
+    conn.rollback();
+}
 ```
 
-#### 3.2 何时不应使用触发器 (When Not To Use)
-尽管触发器强大，但由于可能导致**连锁执行 (Cascading execution)**（A 触发 B，B 触发 C），极难调试并可能引发死锁和关键事务失败。现代开发建议寻找替代方案：
-1.  **维护汇总数据**：不要用触发器每次更新去维护总数表，现代数据库提供原生的 **物化视图 (Materialized Views)**，自动且高效。
-2.  **数据库复制同步**：不要用触发器去记录增量表（Delta relations），应使用数据库底层的**系统复制机制 (Replication)**。
-3.  **防止意外执行**：在做数据备份恢复或远程数据加载时，必须提前禁用触发器。
+#### 1.3 预编译语句
 
----
+`PreparedStatement` 会先把 SQL 模板交给数据库编译，参数位置用 `?` 表示。之后可以反复绑定参数并执行。
 
-### 4. 递归查询 (Recursive Queries)
+```java
+PreparedStatement pStmt = conn.prepareStatement(
+    "insert into instructor values (?, ?, ?, ?)"
+);
 
-没有迭代或递归的常规非递归 SQL，只能执行固定次数的 `JOIN`，因此它无法应对树状或图状等深度未知的结构（如寻找**传递闭包 Transitive Closure**）。
+pStmt.setString(1, "88877");
+pStmt.setString(2, "Perry");
+pStmt.setString(3, "Finance");
+pStmt.setInt(4, 125000);
+pStmt.executeUpdate();
 
-#### 4.1 递归 CTE (WITH RECURSIVE)
-SQL:1999 引入了递归视图定义。它包含两部分：**锚成员 (Anchor Member)** 负责定义起始条件；**递归成员 (Recursive Member)** 负责引用自身并向下一层级遍历。两者通过 `UNION` 合并。
+pStmt.setString(1, "88878");
+pStmt.executeUpdate();
+```
 
-```sql
--- 寻找所有课程的直接与间接先修课 (传递闭包)
-WITH RECURSIVE rec_prereq(course_id, prereq_id) AS (
-    -- 1. 锚成员：非递归，查找最基础的直接先修课关系
-    SELECT course_id, prereq_id FROM prereq
-    
-    UNION
-    
-    -- 2. 递归成员：将当前的递归表自身(rp)与底表(p)做 JOIN，不断查找深层间接关系
-    SELECT rp.course_id, p.prereq_id
-    FROM rec_prereq AS rp, prereq AS p
-    WHERE rp.prereq_id = p.course_id
+第二次执行只改了第一个参数，其余参数仍沿用前面绑定的值，所以插入的是同名同院系同工资的另一位教师。
+
+预编译语句的核心作用是避免 SQL 注入。不要把用户输入直接拼接进 SQL 字符串，否则输入 `X' or 'Y' = 'Y` 会让条件恒真：
+
+```SQL
+select *
+from instructor
+where name = 'X' or 'Y' = 'Y';
+```
+
+更严重时，攻击者还可以尝试用分号拼接更新语句。使用参数绑定后，用户输入会被当作普通字符串值处理，而不是 SQL 语法的一部分。
+
+#### 1.4 元数据
+
+JDBC 可以读取结果集元数据和数据库元数据。`ResultSetMetaData` 描述查询结果的列名、列数和类型。
+
+```java
+ResultSetMetaData rsmd = rset.getMetaData();
+
+for (int i = 1; i <= rsmd.getColumnCount(); i++) {
+    System.out.println(rsmd.getColumnName(i));
+    System.out.println(rsmd.getColumnTypeName(i));
+}
+```
+
+`DatabaseMetaData` 描述数据库目录结构，例如有哪些表、某张表有哪些列、列的类型是什么。
+
+```java
+DatabaseMetaData dbmd = conn.getMetaData();
+ResultSet rs = dbmd.getColumns(null, "univdb", "department", "%");
+```
+
+JDBC 还支持 `CallableStatement` 调用数据库函数和存储过程；对大对象可以通过 `getBlob()`、`getClob()` 读取，再用字节数组或流处理。
+
+#### 1.5 ODBC
+
+**ODBC (Open Database Connectivity)** 是 C、C++、C# 等语言常用的数据库访问 API。应用程序调用 ODBC 接口，具体数据库厂商提供驱动库，驱动负责和数据库服务器通信。
+
+ODBC 的基本流程是分配环境句柄、分配连接句柄、建立连接、分配语句句柄、执行 SQL、绑定结果列、循环抓取结果。
+
+```c
+SQLAllocEnv(&env);
+SQLAllocConnect(env, &conn);
+SQLConnect(conn, "db.example.edu", SQL_NTS, "user", SQL_NTS, "pass", SQL_NTS);
+
+SQLAllocStmt(conn, &stmt);
+SQLExecDirect(stmt, sqlquery, SQL_NTS);
+SQLBindCol(stmt, 1, SQL_C_CHAR, deptname, 80, &lenOut1);
+SQLBindCol(stmt, 2, SQL_C_FLOAT, &salary, 0, &lenOut2);
+
+while (SQLFetch(stmt) == SQL_SUCCESS) {
+    printf("%s %g\n", deptname, salary);
+}
+```
+
+`SQLBindCol()` 把查询结果列绑定到 C 语言变量。每次 `SQLFetch()` 抓取一行时，属性值会自动写入对应变量；变长字段还会把实际长度写入长度变量，负长度通常表示该列为 `null`。
+
+ODBC 也支持预编译语句：`SQLPrepare()` 编译 SQL 模板，`SQLBindParameter()` 绑定参数，`SQLExecute()` 执行。它同样可以避免把用户输入拼接成 SQL 字符串。
+
+ODBC 定义了不同符合性级别。Core 提供核心功能，Level 1 要求支持元数据查询，Level 2 进一步支持参数数组和更详细的目录信息。SQL CLI 标准与 ODBC 类似，但细节略有差异。
+
+#### 1.6 嵌入 SQL
+
+嵌入式 SQL 把 SQL 语句写入宿主语言。预处理器会识别 `EXEC SQL`，并在编译前把 SQL 语句转换为宿主语言函数调用。
+
+```c
+EXEC SQL BEGIN DECLARE SECTION;
+    int credit_amount;
+    char si[6];
+    char sn[30];
+EXEC SQL END DECLARE SECTION;
+```
+
+宿主变量在 SQL 中使用时要加冒号，表示它来自宿主语言而不是数据库属性。
+
+```c
+EXEC SQL declare c cursor for
+    select ID, name
+    from student
+    where tot_cred > :credit_amount;
+
+EXEC SQL open c;
+EXEC SQL fetch c into :si, :sn;
+EXEC SQL close c;
+```
+
+`open` 会执行查询并把结果保存在临时关系中，`fetch` 每次把一行结果写入宿主变量。SQL 通信区中的 `SQLSTATE` 用于报告状态，例如 `'02000'` 表示没有更多数据。
+
+游标也可以用于更新当前行。声明游标时写 `for update`，随后用 `where current of c` 指向当前抓取的元组。
+
+```SQL
+update instructor
+set salary = salary + 1000
+where current of c;
+```
+
+Java 中的嵌入式 SQL 通常称为 SQLJ。它比普通 JDBC 更静态，部分 SQL 错误能在编译阶段发现；JDBC 更动态，错误往往到运行时才暴露。
+
+### 2. 过程扩展
+
+#### 2.1 函数过程
+
+SQL 的过程化扩展允许把业务逻辑放入数据库中执行。这样可以减少应用程序与数据库之间的往返，也能让多个应用共享同一套规则。
+
+函数通常返回一个值，可以出现在 SQL 表达式中。例如定义一个函数，返回某个院系的教师数量：
+
+```SQL
+create function dept_count(dept_name varchar(20))
+returns integer
+begin
+    declare d_count integer;
+
+    select count(*)
+    into d_count
+    from instructor
+    where instructor.dept_name = dept_count.dept_name;
+
+    return d_count;
+end;
+```
+
+调用时可以像普通函数一样使用：
+
+```SQL
+select dept_name, budget
+from department
+where dept_count(dept_name) > 12;
+```
+
+存储过程不一定返回表达式值，通常通过 `in` 和 `out` 参数交换数据，并用 `call` 调用。
+
+```SQL
+create procedure dept_count_proc(
+    in dept_name varchar(20),
+    out d_count integer
 )
-SELECT * FROM rec_prereq;
+begin
+    select count(*)
+    into d_count
+    from instructor
+    where instructor.dept_name = dept_count_proc.dept_name;
+end;
+
+call dept_count_proc('Physics', d_count);
 ```
 
----
+函数和过程既可以在 SQL 过程内部调用，也可以通过嵌入式 SQL 或动态 SQL 调用。
 
-### 5. 高级聚合与 OLAP (Advanced Aggregation & OLAP)
+#### 2.2 表函数
 
-#### 5.1 排名与窗口函数 (Ranking & Windowing)
-传统 `GROUP BY` 会把多行压缩为单行，而窗口函数允许针对某行相关联的“窗口”进行计算聚合，同时保留原生数据行。
+SQL:2003 引入了返回关系的表函数。表函数可以出现在 `from` 子句中，像普通关系一样参与查询。
 
-*   **排名函数 (Ranking)**：
-    *   `RANK()`：遇到并列时，名次会跳跃（有空缺，如 1, 1, 3）。
-    *   `DENSE_RANK()`：遇到并列时，名次不跳跃（无空缺，如 1, 1, 2）。
-    *   其他包括：`PERCENT_RANK()` (百分比)、`CUME_DIST()` (累积分布)、`ROW_NUMBER()` (强制唯一序号)、`NTILE(n)` (将数据分成 n 个桶/四分位数)。
-    *   支持 `NULLS FIRST` 或 `NULLS LAST` 定义 NULL 值的排序位置。
-*   **窗口框架 (Window Frame)**：可定义相对当前行的计算范围。
-    ```sql
-    -- 计算移动平均 (前一行、当前行、后一行的平均)
-    SELECT date, AVG(value) OVER (
-        ORDER BY date
-        ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING 
-    ) AS moving_avg_sales FROM sales;
-    
-    -- 计算账户累计余额 (从开头加到当前行)
-    SELECT account_number, date_time, SUM(value) OVER (
-        PARTITION BY account_number
-        ORDER BY date_time
-        ROWS UNBOUNDED PRECEDING
-    ) AS balance FROM transaction;
-    ```
-
-#### 5.2 联机分析处理 (OLAP)
-OLAP 支持多维数据的交互式聚合与分析。数据模型由 **维度属性 (Dimension)**（如时间、颜色）和 **度量属性 (Measure)**（如销售额）构成，统称 **数据立方体 (Data Cube)**。
-
-*   **扩展聚合关键字**：
-    *   `CUBE(A, B, C)`：生成 $2^n$ 种全组合的分组汇总并集（包括空集总计）。
-    *   `ROLLUP(A, B, C)`：生成所有前缀的分组汇总并集（如 `(A,B,C)`, `(A,B)`, `(A)`, `()`），特别适用于年-月-日或分类层级数据的聚合。
-*   **处理汇总的 NULL 值**：聚合产生的总计字段会被置为 `NULL`。使用 `GROUPING(列名)` 可区分它是汇总产生的 `NULL`（返回 1）还是原本的真实 `NULL`（返回 0）。配合 `DECODE()` 可以将其美化输出为 `'ALL'`。
-
-#### 5.3 OLAP 操作与实现架构
-*   **常用分析操作**：
-    *   **Pivoting (旋转/透视)**：变换维度在交叉表中的行列位置。
-    *   **Slicing (切片)** / **Dicing (切块)**：固定一个或多个维度的值来截取局部数据。
-    *   **Rollup (上卷)** / **Drill down (下钻)**：改变颗粒度（例如从国家级下钻至城市级）。
-*   **实现架构**：分为基于多维数组内存的 **MOLAP**、基于关系数据库和复杂 SQL 的 **ROLAP**，以及结合两者的混合型 **HOLAP**。
-
----
-
-### 6. 其他高级特性 (Other Advanced Features)
-
-#### 6.1 合并语句 (Merge Statement)
-`MERGE` 语句（也称为 UPSERT）可以在单一的原子事务中，根据两个表的匹配条件同时执行批量的 `INSERT`、`UPDATE` 或 `DELETE` 操作。
-
-```sql
--- 将流水账 (funds_received) 批量合并到账户主表 (account) 中
-MERGE INTO account AS A 
-USING (SELECT * FROM funds_received) AS F 
-ON (A.account_number = F.account_number) 
-WHEN MATCHED THEN
-    -- 如果存在对应账户，则直接累加余额
-    UPDATE SET balance = balance + F.amount
-WHEN NOT MATCHED THEN
-    -- 如果不存在，则插入新开户记录
-    INSERT (account_number, balance) VALUES (F.account_number, F.amount);
+```SQL
+create function instructors_of(dept_name char(20))
+returns table (
+    ID varchar(5),
+    name varchar(20),
+    dept_name varchar(20),
+    salary numeric(8,2)
+)
+return table (
+    select ID, name, dept_name, salary
+    from instructor
+    where instructor.dept_name = instructors_of.dept_name
+);
 ```
-*   **优势**：在宿主语言中，传统做法是先 `SELECT` 查询再用 `IF` 决定发 `INSERT` 还是 `UPDATE`。`MERGE` 将该过程全部交由数据库内核处理，不仅极大精简了代码，更避免了高并发场景下的数据冲突。
+
+调用时用 `table(...)` 把函数结果当作关系：
+
+```SQL
+select *
+from table(instructors_of('Music'));
+```
+
+表函数适合把一段可复用查询封装起来，尤其适合返回多行多列结果的逻辑。
+
+#### 2.3 控制结构
+
+SQL 标准提供类似通用语言的过程控制结构，但实际数据库常有自己的方言。复合语句用 `begin ... end` 包裹多条语句，局部变量可以在复合语句内部声明。
+
+`while` 和 `repeat` 用于循环：
+
+```SQL
+declare n integer default 0;
+
+while n < 10 do
+    set n = n + 1;
+end while;
+
+repeat
+    set n = n - 1;
+until n = 0
+end repeat;
+```
+
+`for` 循环可以遍历一个查询结果集：
+
+```SQL
+declare n integer default 0;
+
+for r as
+    select budget
+    from department
+    where dept_name = 'Music'
+do
+    set n = n - r.budget;
+end for;
+```
+
+条件语句包括 `if-then-else` 和 `case`。过程化扩展让数据库内部可以表达分支和循环，但也会把一部分业务逻辑绑定到数据库系统中，迁移时要注意方言差异。
+
+#### 2.4 外部例程
+
+SQL:1999 允许用 C、C++、Java 等外部语言编写函数或过程，再在数据库中声明。
+
+```SQL
+create procedure dept_count_proc(
+    in dept_name varchar(20),
+    out count integer
+)
+language C
+external name '/usr/app/bin/dept_count_proc';
+```
+
+外部语言更适合复杂计算，也可能更高效。但如果外部代码直接加载到数据库进程地址空间中，越界访问、内存破坏或恶意代码都可能影响数据库安全。
+
+常见保护方式有两种：一种是在沙箱中运行，例如使用受限 Java 环境；另一种是让外部例程运行在独立进程中，通过进程间通信传递参数和结果。前者和后者都牺牲一定性能，直接在数据库地址空间执行则更快但风险更高。
+
+### 3. 触发器
+
+#### 3.1 基本结构
+
+**触发器 (Trigger)** 是数据库修改事件发生时由系统自动执行的语句。它遵循 ECA 规则：事件 Event 指 `insert`、`delete` 或 `update`；条件 Condition 判断是否触发动作；动作 Action 是实际执行的 SQL 逻辑。
+
+设计触发器时要明确三件事：在哪类事件后或前触发，触发条件是什么，触发后执行什么动作。
+
+```SQL
+create trigger account_trigger
+after update of balance on account
+referencing new row as nrow
+referencing old row as orow
+for each row
+when nrow.balance - orow.balance >= 200000
+  or orow.balance - nrow.balance >= 50000
+begin atomic
+    insert into account_log
+    values (nrow.account_number, nrow.balance - orow.balance, current_time);
+end;
+```
+
+`referencing old row` 和 `referencing new row` 用来访问更新前后的行。删除只有旧行，插入只有新行，更新同时有旧行和新行。
+
+#### 3.2 约束维护
+
+触发器可以补充表达 SQL 约束难以直接表达的规则。例如 `section.time_slot_id` 可能无法直接引用 `time_slot`，因为 `time_slot_id` 不是 `time_slot` 的主键。可以在插入 `section` 时检查对应时间段是否存在。
+
+```SQL
+create trigger timeslot_check1
+after insert on section
+referencing new row as nrow
+for each row
+when nrow.time_slot_id not in (
+    select time_slot_id
+    from time_slot
+)
+begin atomic
+    rollback;
+end;
+```
+
+删除 `time_slot` 时也要检查是否还被 `section` 引用。如果删除的是某个 `time_slot_id` 的最后一个元组，并且该值仍在 `section` 中出现，就回滚删除。
+
+```SQL
+create trigger timeslot_check2
+after delete on time_slot
+referencing old row as orow
+for each row
+when orow.time_slot_id not in (
+        select time_slot_id
+        from time_slot
+    )
+  and orow.time_slot_id in (
+        select time_slot_id
+        from section
+    )
+begin atomic
+    rollback;
+end;
+```
+
+触发器也可以在事件发生前执行，用来规范写入值。例如把空字符串成绩改成 `null`：
+
+```SQL
+create trigger setnull_trigger
+before update of grade on takes
+referencing new row as nrow
+for each row
+when nrow.grade = ' '
+begin atomic
+    set nrow.grade = null;
+end;
+```
+
+#### 3.3 学分维护
+
+触发器常见用途是维护冗余汇总字段。下面例子在学生某门课成绩从不及格或空值变成及格时，把课程学分加入 `student.tot_cred`。
+
+```SQL
+create trigger credits_earned
+after update of grade on takes
+referencing new row as nrow
+referencing old row as orow
+for each row
+when nrow.grade <> 'F'
+  and nrow.grade is not null
+  and (orow.grade = 'F' or orow.grade is null)
+begin atomic
+    update student
+    set tot_cred = tot_cred + (
+        select credits
+        from course
+        where course.course_id = nrow.course_id
+    )
+    where student.ID = nrow.ID;
+end;
+```
+
+这个条件避免了重复加学分：只有从“不计入学分”的状态转为“计入学分”的状态时才更新总学分。
+
+#### 3.4 语句触发
+
+行级触发器使用 `for each row`，会对受影响的每一行执行一次动作。语句级触发器使用 `for each statement`，一条 SQL 语句无论影响多少行都只触发一次。
+
+语句级触发器可以通过过渡表访问本次语句影响的所有行。
+
+```SQL
+create trigger grade_trigger
+after update of grade on takes
+referencing new table as new_table
+for each statement
+when exists (
+    select avg(grade)
+    from new_table
+    group by course_id, sec_id, semester, year
+    having avg(grade) < 60
+)
+begin atomic
+    rollback;
+end;
+```
+
+当一条语句更新大量行时，语句级触发器通常比逐行触发更高效，也更适合检查整体性质。
+
+#### 3.5 使用边界
+
+触发器会自动执行，因此很容易产生隐式副作用。过度使用触发器会让程序行为难以追踪，尤其是一个触发器引发另一个触发器时，可能形成连锁执行。
+
+过去常用触发器维护汇总数据或复制增量表，但现在更推荐使用物化视图和数据库复制机制。触发器仍适合表达局部、紧密依附于表修改的约束和派生维护。
+
+导入备份数据或复制远端更新时，触发器可能被意外触发，所以这类批处理任务常需要临时禁用触发器。触发器中的错误也可能导致关键事务失败。
+
+### 4. 递归查询
+
+#### 4.1 递归 CTE
+
+没有递归或迭代时，SQL 查询只能写出固定次数的连接。因此对于先修关系、组织上下级关系这类深度未知的问题，普通查询无法覆盖任意层数。
+
+SQL:1999 引入递归公共表表达式。递归 CTE 通常由锚成员和递归成员组成：锚成员给出初始结果，递归成员引用自身生成更深层结果，两部分用 `union` 合并。
+
+```SQL
+with recursive rec_prereq(course_id, prereq_id) as (
+    select course_id, prereq_id
+    from prereq
+
+    union
+
+    select rec_prereq.course_id, prereq.prereq_id
+    from rec_prereq, prereq
+    where rec_prereq.prereq_id = prereq.course_id
+)
+select *
+from rec_prereq;
+```
+
+`rec_prereq` 表示 `prereq` 关系的传递闭包，即某门课程的直接和间接先修课程。
+
+#### 4.2 递归能力
+
+递归查询的能力来自“不断把已知结果继续扩展”。对先修课程来说，第一轮得到直接先修课，第二轮得到先修课的先修课，之后继续扩展，直到没有新元组产生。
+
+非递归 SQL 可以手写有限层连接，例如连接两次、三次或四次，但层数一旦超过预设连接次数，查询就会失效。递归 CTE 能把“层数未知”的遍历交给数据库执行。
+
+另一个典型例子是员工和经理关系。若 `manager(employee_name, manager_name)` 保存直接汇报关系，可以递归求出所有直接或间接汇报关系。
+
+```SQL
+with recursive empl(employee_name, manager_name) as (
+    select employee_name, manager_name
+    from manager
+
+    union
+
+    select manager.employee_name, empl.manager_name
+    from manager, empl
+    where manager.manager_name = empl.employee_name
+)
+select *
+from empl;
+```
+
+递归查询必须注意终止条件。使用 `union` 会自动去重，有助于在有限图上收敛；若使用 `union all`，则需要额外避免循环导致无限生成。
+
+### 5. 高级聚合
+
+#### 5.1 排名函数
+
+排名函数和 `order by` 配合使用。`rank()` 会给排序后的元组分配名次；若存在并列，下一名会跳过空缺名次。
+
+```SQL
+select ID,
+       rank() over (order by GPA desc) as s_rank
+from student_grades
+order by s_rank;
+```
+
+如果两名学生并列第一，下一名的 `rank()` 是 3。`dense_rank()` 不留下空缺，下一名是 2。
+
+排名也可以在分区内计算。下面查询给每个院系内部的学生 GPA 排名：
+
+```SQL
+select ID,
+       dept_name,
+       rank() over (
+           partition by dept_name
+           order by GPA desc
+       ) as dept_rank
+from dept_grades
+order by dept_name, dept_rank;
+```
+
+排名函数在 `group by` 和聚集之后执行。它比简单的 `limit n` 更一般，因为它可以求每个分区内部的前若干名。
+
+其它常见排名函数如下：
+
+| 函数 | 含义 |
+| --- | --- |
+| `percent_rank()` | 返回相对排名百分比 |
+| `cume_dist()` | 返回小于等于当前值的元组比例 |
+| `row_number()` | 给每行唯一序号，并列时顺序可能不确定 |
+| `ntile(n)` | 按排序结果把每个分区分成 $n$ 个桶 |
+
+```SQL
+select ID,
+       ntile(4) over (order by GPA desc) as quartile
+from student_grades;
+```
+
+排序时可以指定空值位置，例如 `nulls first` 或 `nulls last`。
+
+#### 5.2 窗口计算
+
+窗口函数不会像 `group by` 那样把多行压缩为一行，而是在保留原始行的同时，对与当前行相关的一组行进行计算。
+
+移动平均是窗口计算的典型例子。给定 `sales(date, value)`，可以对每一天计算前一天、当天和后一天的销售平均或总和。
+
+```SQL
+select date,
+       sum(value) over (
+           order by date
+           rows between 1 preceding and 1 following
+       ) as moving_sum
+from sales;
+```
+
+窗口边界可以有多种形式。`rows unbounded preceding` 表示从分区第一行到当前行；`rows between unbounded preceding and current row` 表示同样的累计窗口；`range between 10 preceding and current row` 表示按排序值范围而不是物理行数取窗口。
+
+窗口也可以与分区结合。下面查询对每个账户按交易时间计算累计余额：
+
+```SQL
+select account_number,
+       date_time,
+       sum(value) over (
+           partition by account_number
+           order by date_time
+           rows unbounded preceding
+       ) as balance
+from transaction
+order by account_number, date_time;
+```
+
+这里 `partition by account_number` 把不同账户分开，`order by date_time` 确定账户内部交易顺序，窗口从该账户第一笔交易累计到当前交易。
+
+#### 5.3 OLAP 基础
+
+**OLAP (Online Analytical Processing)** 用于交互式多维数据分析。能按多个维度查看和汇总的数据称为多维数据。
+
+多维数据通常包含两类属性：
+
+| 属性 | 含义 | 示例 |
+| --- | --- | --- |
+| 维度属性 | 观察和分组的角度 | 商品名、颜色、尺码、日期 |
+| 度量属性 | 可以聚集的数值 | 销售数量、销售额 |
+
+交叉表把一个维度放在行标题，一个维度放在列标题，其它维度可以固定在表头，每个单元格保存某个度量的聚集值。数据立方体是交叉表的多维推广，交叉表可以看作数据立方体的一个二维视图。
+
+维度常带有层次结构。例如时间可以按小时、日期、星期、月份、季度、年份查看；商品可以按商品、类别、品牌查看。沿层次从细粒度到粗粒度汇总称为上卷，从粗粒度回到细粒度称为下钻。
+
+#### 5.4 cube
+
+`cube` 会对给定属性集合的每个子集分别执行 `group by`，再把结果合并。若有 $n$ 个分组属性，则共有 $2^n$ 种分组。
+
+```SQL
+select item_name, color, size, sum(number)
+from sales
+group by cube(item_name, color, size);
+```
+
+上面查询等价于对下列分组结果求并：
+
+| 分组 |
+| --- |
+| `(item_name, color, size)` |
+| `(item_name, color)` |
+| `(item_name, size)` |
+| `(color, size)` |
+| `(item_name)` |
+| `(color)` |
+| `(size)` |
+| `()` |
+
+不出现在某个分组中的属性，在结果中会以 `null` 表示“所有值汇总”。这会和数据中真实存在的 `null` 混淆，因此 SQL 提供 `grouping()` 函数区分两者。
+
+```SQL
+select item_name,
+       color,
+       size,
+       sum(number),
+       grouping(item_name) as item_name_flag,
+       grouping(color) as color_flag,
+       grouping(size) as size_flag
+from sales
+group by cube(item_name, color, size);
+```
+
+`grouping(A)` 对汇总产生的空值返回 1，对普通值或真实空值返回 0。可以配合 `decode()` 或 `case` 把汇总空值显示为 `all`。
+
+#### 5.5 rollup
+
+`rollup` 只生成指定属性列表的所有前缀分组，适合层次型维度。
+
+```SQL
+select item_name, color, size, sum(number)
+from sales
+group by rollup(item_name, color, size);
+```
+
+它生成的分组为：
+
+| 分组 |
+| --- |
+| `(item_name, color, size)` |
+| `(item_name, color)` |
+| `(item_name)` |
+| `()` |
+
+若有商品类别表 `itemcategory(item_name, category)`，可以按类别和商品做层次汇总：
+
+```SQL
+select category, item_name, sum(number)
+from sales, itemcategory
+where sales.item_name = itemcategory.item_name
+group by rollup(category, item_name);
+```
+
+多个 `rollup` 和 `cube` 可以同时出现在一个 `group by` 子句中。每个结构生成一组分组列表，最终分组集合是这些列表的笛卡尔积。
+
+```SQL
+select item_name, color, size, sum(number)
+from sales
+group by rollup(item_name), rollup(color, size);
+```
+
+它生成 `{(item_name),()}` 与 `{(color,size),(color),()}` 的组合，因此会得到 `(item_name,color,size)`、`(item_name,color)`、`(item_name)`、`(color,size)`、`(color)` 和 `()`。
+
+#### 5.6 OLAP 操作
+
+常见 OLAP 操作如下：
+
+| 操作 | 含义 |
+| --- | --- |
+| Pivoting | 改变交叉表使用的行列维度 |
+| Slicing | 固定一个维度值，查看一个切片 |
+| Dicing | 固定多个维度值，查看一个子立方体 |
+| Rollup | 从细粒度上卷到粗粒度 |
+| Drill down | 从粗粒度下钻到细粒度 |
+
+OLAP 实现也有不同路线。MOLAP 用多维数组存储数据立方体，查询快但预计算和空间开销大；ROLAP 只依赖关系数据库和 SQL 聚合，空间更灵活；HOLAP 把常用汇总放在多维结构中，底层明细和其它汇总仍放在关系数据库中。
+
+早期 OLAP 系统会预计算所有聚集，但 $n$ 个维度会产生 $2^n$ 种分组，时间和空间代价都可能很高。实际系统通常只预计算一部分汇总，其它汇总从已有汇总继续计算。例如 `(item_name,color)` 可以从 `(item_name,color,size)` 的汇总继续聚集得到。
+
+大多数聚集可以这样分解计算，但 `median` 这类不可分解聚集较难从粗粒度或已有汇总中直接得到。
+
+### 6. 合并语句
+
+#### 6.1 merge
+
+`merge` 用于批量处理“匹配则更新，不匹配则插入”的场景，也常被称为 upsert。它把原本需要应用程序先查询、再分支决定更新或插入的逻辑交给数据库执行。
+
+```SQL
+merge into account as A
+using (
+    select *
+    from funds_received
+) as F
+on A.account_number = F.account_number
+when matched then
+    update set balance = balance + F.amount;
+```
+
+如果系统支持 `when not matched`，还可以在没有匹配账户时插入新账户。
+
+```SQL
+merge into account as A
+using funds_received as F
+on A.account_number = F.account_number
+when matched then
+    update set balance = balance + F.amount
+when not matched then
+    insert (account_number, balance)
+    values (F.account_number, F.amount);
+```
+
+`merge` 的优势是把批量匹配、更新和插入放在单条语句中完成，语义更集中，也更容易由数据库系统保证并发执行时的一致性。

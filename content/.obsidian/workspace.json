@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "phymath/infotheory/Ch-9/index.md",
+                "file": "phymath/infotheory/Appendix/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -186,6 +186,9 @@
   },
   "active": "3411fcb52e1da7fb",
   "lastOpenFiles": [
+    "phymath/infotheory/Ch-9/index.md",
+    "phymath/infotheory/Appendix/index.md",
+    "phymath/infotheory/Appendix",
     "phymath/infotheory/_index.md",
     "phymath/infotheory/Ch-4/index.md",
     "phymath/infotheory/Ch-3/index.md",
@@ -228,9 +231,6 @@
     "compsci/db/Ch-14.zip",
     "compsci/db/Ch-14",
     "compsci/db/新建文件夹",
-    "compsci/db/Ch-1/index.md",
-    "compsci/db/Ch-7/index.md",
-    "compsci/db/Ch-17",
-    "compsci/db/Ch-18"
+    "compsci/db/Ch-17"
   ]
 }

@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "phymath/infotheory/Appendix/index.md",
+                "file": "compsci/dd/Ch-4/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -78,8 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200,
-    "collapsed": true
+    "width": 200
   },
   "right": {
     "id": "c569291f788890c9",
@@ -186,10 +185,12 @@
   },
   "active": "3411fcb52e1da7fb",
   "lastOpenFiles": [
-    "phymath/infotheory/Ch-9/index.md",
-    "phymath/infotheory/Appendix/index.md",
-    "phymath/infotheory/Appendix",
+    "gened/ecolaw/1.png",
+    "gened/ecolaw/_index.md",
     "phymath/infotheory/_index.md",
+    "phymath/infotheory/Appendix/index.md",
+    "phymath/infotheory/Ch-9/index.md",
+    "phymath/infotheory/Appendix",
     "phymath/infotheory/Ch-4/index.md",
     "phymath/infotheory/Ch-3/index.md",
     "phymath/infotheory/Ch-2/index.md",
@@ -210,7 +211,6 @@
     "compsci/ca/Ch-5/Ch-5-msi-cpu.png",
     "compsci/ca/Ch-5/Ch-5-moesi-relation.png",
     "compsci/ca/Ch-5/Ch-5-distributed.png",
-    "compsci/ca/Ch-5/Ch-5-directory.png",
     "compsci/ca/Ch-5/index.md",
     "compsci/ca/Ch-5",
     "compsci/ca/新建文件夹",
@@ -226,8 +226,6 @@
     "compsci/db/Ch-16/index.md",
     "compsci/db/Ch-4/index.md",
     "compsci/db/Ch-5/index.md",
-    "compsci/db/Ch-15/index.md",
-    "MiniSql.md",
     "compsci/db/Ch-14.zip",
     "compsci/db/Ch-14",
     "compsci/db/新建文件夹",

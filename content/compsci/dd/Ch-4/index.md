@@ -23,11 +23,11 @@ type: docs
 ### 2. 锁存器
 #### 2.1 SR/S'R' 锁存器
 
-<div align="center"> <img src="./ch-4-SR.png" width="380" /> </div>
+<div align="center"> <img src="./Ch-4-SR.png" width="380" /> </div>
 
 SR 锁存器通过两个 **或非门** 实现。在四种状态中 $(S,R)=(1,1)$ 输入是 **未定义的**，虽然此时 $(Q,\overline{Q})=(0,0)$ 状态是确定的，但是当下一步输入变为 $(S,R)=(0,0)$ 时，由于电路延迟的存在，无法确定 $S$ 和 $R$ 哪一个先变为 $0$ ，导致无法确定下一状态。因此在实际电路设计中，一般避免使用这种未定义的状态。
 
-<div align="center"> <img src="./ch-4-S'R'.png" width="380" /> </div>
+<div align="center"> <img src="./Ch-4-S'R'.png" width="380" /> </div>
 
 S'R' 锁存器通过两个 **与非门** 实现。同样在四种状态中 $(\overline{S},\overline{R})=(0,0)$ 输入是未定义的。
 

@@ -13,15 +13,30 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "compsci/dd/Ch-4/index.md",
+                "file": "图像信息处理-考点详细讲义.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "index"
+              "title": "图像信息处理-考点详细讲义"
+            }
+          },
+          {
+            "id": "357893633f268459",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "compsci/_index.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "_index"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -183,11 +198,35 @@
       "bases:新建数据库": false
     }
   },
-  "active": "3411fcb52e1da7fb",
+  "active": "357893633f268459",
   "lastOpenFiles": [
+    "compsci/ds/_index.md",
+    "compsci/dm/_index.md",
+    "phymath/infotheory/_index.md",
+    "compsci/dip/_index.md",
+    "compsci/dip/Summary/index.md",
+    "图像信息处理-考点详细讲义.md",
+    "考点.md",
+    "compsci/_index.md",
+    "compsci/dip/Summary",
+    "compsci/dip/Ch-1/index.md",
+    "cs25_db_reference_answers.md",
+    "2223答案.md",
+    "README.md",
+    "MiniSQL_3240102910_朱航逸.md",
+    "Pasted image 20260628213756.png",
+    "Pasted image 20260628212631.png",
+    "Pasted image 20260628212621.png",
+    "Pasted image 20260628212559.png",
+    "Pasted image 20260628212432.png",
+    "Pasted image 20260628212418.png",
+    "Pasted image 20260628212327.png",
+    "Pasted image 20260628212317.png",
+    "compsci/dd/Ch-4/index.md",
+    "compsci/ds",
+    "compsci/未命名.md",
     "gened/ecolaw/1.png",
     "gened/ecolaw/_index.md",
-    "phymath/infotheory/_index.md",
     "phymath/infotheory/Appendix/index.md",
     "phymath/infotheory/Ch-9/index.md",
     "phymath/infotheory/Appendix",
@@ -199,36 +238,13 @@
     "Claude-minisql.md",
     "compsci/db/Ch-19/index.md",
     "compsci/db/Ch-19/ch-19-fuzzy-checkpoint.png",
-    "compsci/db/Ch-19/ch-19-aries-structures.png",
     "compsci/db/Ch-3/index.md",
-    "compsci/db/Ch-19/ch-19-buffer.png",
-    "compsci/db/Ch-19/ch-19-data-access.png",
-    "compsci/db/Ch-19/ch-19-clr.png",
-    "compsci/db/Ch-19/ch-19-aries-passes.png",
     "compsci/db/Ch-19",
-    "compsci/db/Ch-2/index.md",
-    "compsci/ca/Ch-3B/index.md",
-    "compsci/ca/Ch-5/Ch-5-msi-cpu.png",
-    "compsci/ca/Ch-5/Ch-5-moesi-relation.png",
-    "compsci/ca/Ch-5/Ch-5-distributed.png",
-    "compsci/ca/Ch-5/index.md",
     "compsci/ca/Ch-5",
     "compsci/ca/新建文件夹",
-    "compsci/db/_index.md",
-    "compsci/ca/Ch-4/index.md",
     "compsci/ca/Ch-4",
-    "compsci/db/Ch-8/index.md",
     "compsci/db/Ch-8",
-    "compsci/db/Ch-6/index.md",
-    "compsci/db/Ch-14/index.md",
-    "compsci/db/Ch-18/index.md",
-    "compsci/db/Ch-17/index.md",
-    "compsci/db/Ch-16/index.md",
-    "compsci/db/Ch-4/index.md",
-    "compsci/db/Ch-5/index.md",
     "compsci/db/Ch-14.zip",
-    "compsci/db/Ch-14",
-    "compsci/db/新建文件夹",
-    "compsci/db/Ch-17"
+    "compsci/db/Ch-14"
   ]
 }

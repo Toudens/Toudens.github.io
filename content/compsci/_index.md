@@ -47,6 +47,11 @@ comments: false
     class="aspect-auto md:aspect-[1.8/1] max-md:min-h-[250px]" 
     style="background: radial-gradient(ellipse at 50% 80%,rgba(0,0,0,0),hsla(0,0%,100%,0));" 
   >}}
-  <!-- 在这里继续补充你剩下的其他课程卡片 -->
 
+  {{< hextra/feature-card 
+      title="数据结构基础" 
+    link="/compsci/ds" 
+    class="aspect-auto md:aspect-[1.8/1] max-md:min-h-[250px]" 
+    style="background: radial-gradient(ellipse at 50% 80%,rgba(0,0,0,0),hsla(0,0%,100%,0));" 
+  >}}
 </div>

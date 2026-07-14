@@ -14,4 +14,3 @@ comments: false
 | **[Lec-8 信息的传输 2]({{<relref "Ch-8/index.md">}})**    | 已完成  | 已完成  |
 | **[Lec-9 信息的传输 3]({{<relref "Ch-9/index.md">}})**    | 已完成  | 已完成  |
 | **[Lec-10 信息的传输 4]({{<relref "Ch-10/index.md">}})**  | 已完成  | 已完成  |
-| **[Appendix 判断题]({{<relref "Appendix/index.md">}})** | 已完成  | 已完成  |

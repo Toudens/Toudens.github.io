@@ -1,7 +1,8 @@
 ---
-weight: "6"
-title: 偷一偷在西安
+title: 偷一偷在南昌
+weight: "7"
 ---
+
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Zhi+Mang+Xing&display=swap');
 
@@ -114,23 +115,23 @@ title: 偷一偷在西安
 <div class="polaroid-gallery">
 {{< cards >}}
   {{< hextra/feature-card
-    title="陕西历史博物馆"
-    link="/ttneed/xi-an/shaanxi-historical-museum"
-    image="https://toudens-images.s3.bitiful.net/xi-an/Shaanxi-Historical-Museum/08.jpg?w=1200&q=100&fmt=webp&no-wait=on"
+    title="江西省美术馆"
+    link="/ttneed/nanchang/art-museum"
+    image="https://toudens-images.s3.bitiful.net/nanchang/art/0.jpg?w=1200&q=100&fmt=webp"
     class="art-card"
     imageClass="custom-bg-full"
   >}}
   {{< hextra/feature-card
-    title="秦始皇陵博物馆"
-    link="/ttneed/xi-an/terracotta-warriors"
-    image="https://toudens-images.s3.bitiful.net/xi-an/Terracotta-Warriors/02.jpg?w=1200&q=100&fmt=webp&no-wait=on"
+    title="滕王阁"
+    link="/ttneed/nanchang/tengwang"
+    image="https://toudens-images.s3.bitiful.net/nanchang/tengwang/2.jpg?w=1200&q=100&fmt=webp"
     class="art-card"
     imageClass="custom-bg-full"
   >}}
   {{< hextra/feature-card
-    title="长安拾遗"
-    link="/ttneed/xi-an/changan-miscellany"
-    image="https://toudens-images.s3.bitiful.net/xi-an/Changan-Miscellany/01.jpg?w=1200&q=100&fmt=webp&no-wait=on"
+    title="江西小炒(不是)"
+    link="/ttneed/nanchang/delicacies"
+    image="https://toudens-images.s3.bitiful.net/nanchang/tengwang/2.jpg?w=1200&q=100&fmt=webp"
     class="art-card"
     imageClass="custom-bg-full"
   >}}

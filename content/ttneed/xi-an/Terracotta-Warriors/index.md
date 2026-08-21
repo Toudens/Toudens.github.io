@@ -1,5 +1,5 @@
 ---
-title: 兵马俑
+title: 秦始皇陵博物馆
 weight: "2"
 date: 2026-04-25
 type: docs

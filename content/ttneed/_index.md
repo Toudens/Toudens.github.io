@@ -3,6 +3,7 @@ title: 偷一偷QwQ
 comments: false
 weight: "4"
 ---
+
 \
 {{< travel-map >}}
 [
@@ -19,6 +20,7 @@ weight: "4"
   {"name": "青岛", "value": 1},
   {"name": "大连", "value": 1},
   {"name": "北京", "value": 1},
+  { "name": "南昌", "value": 2,  "url": "/ttneed/nanchang/"},
   { "name": "武汉", "value": 2,  "url": "/ttneed/wuhan/"},
   { "name": "杭州", "value": 2, "url": "/ttneed/hangzhou/" },
   { "name": "渭南", "value": 2, "url": "/ttneed/weinan/" }
@@ -177,6 +179,13 @@ weight: "4"
     title="西安"
     link="/ttneed/xi-an"
     image="https://toudens-images.s3.bitiful.net/xi-an/Changan-Miscellany/01.jpg?w=1200&q=100&fmt=webp&no-wait=on" 
+    class="art-card"
+    imageClass="custom-bg-full"
+  >}}
+  {{< hextra/feature-card
+    title="南昌"
+    link="/ttneed/nanchang"
+    image="https://toudens-images.s3.bitiful.net/nanchang/art/0.jpg?w=1200&q=100&fmt=webp&no-wait=on" 
     class="art-card"
     imageClass="custom-bg-full"
   >}}

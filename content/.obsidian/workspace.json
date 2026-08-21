@@ -4,39 +4,24 @@
     "type": "split",
     "children": [
       {
-        "id": "bcd0a98154eb9ae7",
+        "id": "fe14ed66691236db",
         "type": "tabs",
         "children": [
           {
-            "id": "3411fcb52e1da7fb",
+            "id": "ef8da3909b104221",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "图像信息处理-考点详细讲义.md",
+                "file": "ttneed/nanchang/other/index.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "图像信息处理-考点详细讲义"
-            }
-          },
-          {
-            "id": "357893633f268459",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "compsci/_index.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "_index"
+              "title": "index"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -56,7 +41,9 @@
               "type": "file-explorer",
               "state": {
                 "sortOrder": "alphabetical",
-                "autoReveal": false
+                "autoReveal": false,
+                "showSearch": false,
+                "searchQuery": ""
               },
               "icon": "lucide-folder-closed",
               "title": "文件列表"
@@ -198,53 +185,53 @@
       "bases:新建数据库": false
     }
   },
-  "active": "357893633f268459",
+  "active": "ef8da3909b104221",
   "lastOpenFiles": [
-    "compsci/ds/_index.md",
-    "compsci/dm/_index.md",
-    "phymath/infotheory/_index.md",
-    "compsci/dip/_index.md",
-    "compsci/dip/Summary/index.md",
-    "图像信息处理-考点详细讲义.md",
-    "考点.md",
-    "compsci/_index.md",
-    "compsci/dip/Summary",
-    "compsci/dip/Ch-1/index.md",
-    "cs25_db_reference_answers.md",
-    "2223答案.md",
+    "ttneed/xi-an/Changan-Miscellany/index.md",
+    "ttneed/xi-an/Shaanxi-Historical-Museum/index.md",
+    "ttneed/nanchang/other/index.md",
+    "ttneed/nanchang/tengwang/index.md",
+    "ttneed/nanchang/_index.md",
+    "ttneed/nanchang/other",
+    "ttneed/nanchang/delicacies/index.md",
+    "ttneed/nanchang/art-museum/index.md",
+    "ttneed/nanchang/delicacies",
+    "2026-08-22.md",
+    "ttneed/nanchang/tengwang/未命名",
+    "ttneed/hangzhou/liangzhu/index.md",
+    "ttneed/hangzhou/qiantang/index.md",
+    "ttneed/hangzhou/_index.md",
+    "ttneed/_index.md",
+    "ttneed/xi-an/_index.md",
+    "ttneed/cloud/_index.md",
+    "ttneed/weinan/_index.md",
+    "ttneed/memento/_index.md",
+    "_index.md",
+    "phymath/_index.md",
+    "ttneed/xi-an/Terracotta-Warriors/index.md",
+    "ttneed/nanchang/tengwang",
+    "ttneed/nanchang/art-museum",
+    "南昌.md",
+    "ttneed/nanchang",
     "README.md",
-    "MiniSQL_3240102910_朱航逸.md",
-    "Pasted image 20260628213756.png",
-    "Pasted image 20260628212631.png",
-    "Pasted image 20260628212621.png",
-    "Pasted image 20260628212559.png",
-    "Pasted image 20260628212432.png",
-    "Pasted image 20260628212418.png",
-    "Pasted image 20260628212327.png",
-    "Pasted image 20260628212317.png",
-    "compsci/dd/Ch-4/index.md",
-    "compsci/ds",
-    "compsci/未命名.md",
-    "gened/ecolaw/1.png",
-    "gened/ecolaw/_index.md",
-    "phymath/infotheory/Appendix/index.md",
-    "phymath/infotheory/Ch-9/index.md",
-    "phymath/infotheory/Appendix",
-    "phymath/infotheory/Ch-4/index.md",
-    "phymath/infotheory/Ch-3/index.md",
-    "phymath/infotheory/Ch-2/index.md",
-    "phymath/infotheory/Ch-1/index.md",
-    "claude_write_order_with_code.md",
-    "Claude-minisql.md",
+    "Tableau_Project1_完整复现指导.md",
+    "Tableau_最终达标版逐步教程.md",
+    "Tableau_Project1_详细操作教程与截图清单.md",
+    "phymath/infotheory/_index.md",
     "compsci/db/Ch-19/index.md",
-    "compsci/db/Ch-19/ch-19-fuzzy-checkpoint.png",
-    "compsci/db/Ch-3/index.md",
-    "compsci/db/Ch-19",
-    "compsci/ca/Ch-5",
-    "compsci/ca/新建文件夹",
-    "compsci/ca/Ch-4",
-    "compsci/db/Ch-8",
-    "compsci/db/Ch-14.zip",
-    "compsci/db/Ch-14"
+    "compsci/dip/Ch-2/output_3-5.bmp",
+    "compsci/dip/Ch-2/output_3-4.bmp",
+    "compsci/dip/Ch-2/output_3-2.bmp",
+    "compsci/dip/Ch-2/output_2-5.bmp",
+    "compsci/dip/Ch-2/output_2-3.bmp",
+    "compsci/dip/Ch-2/output_2-2.bmp",
+    "compsci/dip/Ch-2/output_1-4.bmp",
+    "compsci/dip/Ch-2/output_1-3.bmp",
+    "compsci/dip/Ch-2/output_1-2.bmp",
+    "compsci/dip/Ch-2/output_1-1.bmp",
+    "compsci/dip/Summary",
+    "compsci/ds",
+    "phymath/infotheory/Appendix",
+    "compsci/db/Ch-19"
   ]
 }

@@ -129,9 +129,16 @@ weight: "7"
     imageClass="custom-bg-full"
   >}}
   {{< hextra/feature-card
-    title="江西小炒(不是)"
+    title="江西小炒"
     link="/ttneed/nanchang/delicacies"
-    image="https://toudens-images.s3.bitiful.net/nanchang/tengwang/2.jpg?w=1200&q=100&fmt=webp"
+    image="https://toudens-images.s3.bitiful.net/nanchang/food/0.jpg?w=1200&q=100&fmt=webp"
+    class="art-card"
+    imageClass="custom-bg-full"
+  >}}
+  {{< hextra/feature-card
+    title="南昌散景"
+    link="/ttneed/nanchang/other"
+    image="https://toudens-images.s3.bitiful.net/nanchang/other/1.jpg?w=1200&q=100&fmt=webp"
     class="art-card"
     imageClass="custom-bg-full"
   >}}

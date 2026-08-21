@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "ttneed/nanchang/other/index.md",
+                "file": "ttneed/nanchang/_index.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "index"
+              "title": "_index"
             }
           }
         ]
@@ -187,9 +187,9 @@
   },
   "active": "ef8da3909b104221",
   "lastOpenFiles": [
+    "ttneed/nanchang/other/index.md",
     "ttneed/xi-an/Changan-Miscellany/index.md",
     "ttneed/xi-an/Shaanxi-Historical-Museum/index.md",
-    "ttneed/nanchang/other/index.md",
     "ttneed/nanchang/tengwang/index.md",
     "ttneed/nanchang/_index.md",
     "ttneed/nanchang/other",

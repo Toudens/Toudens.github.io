@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "ttneed/nanchang/_index.md",
+                "file": "ttneed/nanchang/other/index.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "_index"
+              "title": "index"
             }
           }
         ]
@@ -187,13 +187,15 @@
   },
   "active": "ef8da3909b104221",
   "lastOpenFiles": [
+    "ttneed/nanchang/nanchang163/index.md",
+    "ttneed/nanchang/_index.md",
+    "ttneed/nanchang/delicacies/index.md",
     "ttneed/nanchang/other/index.md",
+    "ttneed/nanchang/nanchang163",
     "ttneed/xi-an/Changan-Miscellany/index.md",
     "ttneed/xi-an/Shaanxi-Historical-Museum/index.md",
     "ttneed/nanchang/tengwang/index.md",
-    "ttneed/nanchang/_index.md",
     "ttneed/nanchang/other",
-    "ttneed/nanchang/delicacies/index.md",
     "ttneed/nanchang/art-museum/index.md",
     "ttneed/nanchang/delicacies",
     "2026-08-22.md",
@@ -218,7 +220,6 @@
     "Tableau_最终达标版逐步教程.md",
     "Tableau_Project1_详细操作教程与截图清单.md",
     "phymath/infotheory/_index.md",
-    "compsci/db/Ch-19/index.md",
     "compsci/dip/Ch-2/output_3-5.bmp",
     "compsci/dip/Ch-2/output_3-4.bmp",
     "compsci/dip/Ch-2/output_3-2.bmp",
@@ -231,7 +232,6 @@
     "compsci/dip/Ch-2/output_1-1.bmp",
     "compsci/dip/Summary",
     "compsci/ds",
-    "phymath/infotheory/Appendix",
-    "compsci/db/Ch-19"
+    "phymath/infotheory/Appendix"
   ]
 }

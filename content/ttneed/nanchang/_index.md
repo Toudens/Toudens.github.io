@@ -143,6 +143,13 @@ weight: "7"
     imageClass="custom-bg-full"
   >}}
   {{< hextra/feature-card
+    title="南昌海洋馆"
+    link="/ttneed/nanchang/ocean-park"
+    image="https://toudens-images.s3.bitiful.net/nanchang/ocean/DSC01110.JPG?w=1200&q=100&fmt=webp"
+    class="art-card"
+    imageClass="custom-bg-full"
+  >}}
+  {{< hextra/feature-card
     title="南昌散景"
     link="/ttneed/nanchang/other"
     image="https://toudens-images.s3.bitiful.net/nanchang/other/1.jpg?w=1200&q=100&fmt=webp"

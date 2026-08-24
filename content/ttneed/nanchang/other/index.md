@@ -12,7 +12,8 @@ weight: "10"
 
 ![八一大桥](https://toudens-images.s3.bitiful.net/nanchang/other/DSC01074.JPG?w=1600&q=100&fmt=webp&no-wait=on "八一大桥")
 
+![八一大桥](https://toudens-images.s3.bitiful.net/nanchang/other/DSC01297.JPG?w=1600&q=100&fmt=webp&no-wait=on "八一大桥")
+
 ![南昌之眼](https://toudens-images.s3.bitiful.net/nanchang/other/DSC01070.JPG?w=1600&q=100&fmt=webp&no-wait=on "南昌之眼")
 
-
-
+![滕王阁夜景](https://toudens-images.s3.bitiful.net/nanchang/tengwang/DSC01293.JPG?w=1600&q=100&fmt=webp&no-wait=on "滕王阁夜景")

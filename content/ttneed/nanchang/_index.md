@@ -150,6 +150,13 @@ weight: "7"
     imageClass="custom-bg-full"
   >}}
   {{< hextra/feature-card
+    title="海昏侯国遗址"
+    link="/ttneed/nanchang/haihun"
+    image="https://toudens-images.s3.bitiful.net/nanchang/haihun/DSC01253.JPG?w=1200&q=100&fmt=webp"
+    class="art-card"
+    imageClass="custom-bg-full"
+  >}}
+  {{< hextra/feature-card
     title="南昌散景"
     link="/ttneed/nanchang/other"
     image="https://toudens-images.s3.bitiful.net/nanchang/other/1.jpg?w=1200&q=100&fmt=webp"

@@ -157,6 +157,20 @@ weight: "7"
     imageClass="custom-bg-full"
   >}}
   {{< hextra/feature-card
+    title="江西省博物馆"
+    link="/ttneed/nanchang/jx-museum"
+    image="https://toudens-images.s3.bitiful.net/nanchang/jx-museum/DSC01342.JPG?w=1600&q=100&fmt=webp"
+    class="art-card"
+    imageClass="custom-bg-full"
+  >}}
+  {{< hextra/feature-card
+    title="八一馆"
+    link="/ttneed/nanchang/81"
+    image="https://toudens-images.s3.bitiful.net/nanchang/81/DSC01385.JPG?w=1600&q=100&fmt=webp"
+    class="art-card"
+    imageClass="custom-bg-full"
+  >}}
+  {{< hextra/feature-card
     title="南昌散景"
     link="/ttneed/nanchang/other"
     image="https://toudens-images.s3.bitiful.net/nanchang/other/1.jpg?w=1200&q=100&fmt=webp"

@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "ttneed/nanchang/other/index.md",
+                "file": "ttneed/nanchang/_index.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "index"
+              "title": "_index"
             }
           }
         ]
@@ -187,15 +187,19 @@
   },
   "active": "ef8da3909b104221",
   "lastOpenFiles": [
-    "ttneed/nanchang/tengwang/index.md",
+    "ttneed/nanchang/81/index.md",
     "ttneed/nanchang/_index.md",
-    "ttneed/nanchang/haihun/index.md",
+    "ttneed/nanchang/jx-museum/index.md",
+    "ttneed/nanchang/delicacies/index.md",
+    "ttneed/nanchang/jx-museum",
     "ttneed/nanchang/art-museum/index.md",
+    "ttneed/nanchang/other/index.md",
+    "ttneed/nanchang/81",
+    "ttneed/nanchang/tengwang/index.md",
+    "ttneed/nanchang/haihun/index.md",
     "ttneed/nanchang/ocean-park/index.md",
     "ttneed/nanchang/haihun",
-    "ttneed/nanchang/delicacies/index.md",
     "ttneed/nanchang/nanchang163/index.md",
-    "ttneed/nanchang/other/index.md",
     "ttneed/nanchang/ocean-park",
     "ttneed/nanchang/nanchang163",
     "ttneed/xi-an/Changan-Miscellany/index.md",
@@ -218,10 +222,7 @@
     "ttneed/nanchang/tengwang",
     "ttneed/nanchang/art-museum",
     "南昌.md",
-    "ttneed/nanchang",
     "README.md",
-    "Tableau_Project1_完整复现指导.md",
-    "Tableau_最终达标版逐步教程.md",
     "compsci/dip/Ch-2/output_3-5.bmp",
     "compsci/dip/Ch-2/output_3-4.bmp",
     "compsci/dip/Ch-2/output_3-2.bmp",
@@ -231,7 +232,6 @@
     "compsci/dip/Ch-2/output_1-4.bmp",
     "compsci/dip/Ch-2/output_1-3.bmp",
     "compsci/dip/Ch-2/output_1-2.bmp",
-    "compsci/dip/Ch-2/output_1-1.bmp",
-    "compsci/dip/Summary"
+    "compsci/dip/Ch-2/output_1-1.bmp"
   ]
 }

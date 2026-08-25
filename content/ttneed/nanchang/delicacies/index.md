@@ -27,3 +27,7 @@ weight: "3"
 <img src="https://toudens-images.s3.bitiful.net/nanchang/food/DSC01184.JPG?w=1600&q=100&fmt=webp" width="80%" /> 
 
 <img src="https://toudens-images.s3.bitiful.net/nanchang/food/DSC01172.JPG?w=1600&q=100&fmt=webp" width="80%" /> 
+
+<img src="https://toudens-images.s3.bitiful.net/nanchang/food/IMG_20260825_184239.jpg?w=1600&q=100&fmt=webp" width="80%" /> 
+
+<img src="https://toudens-images.s3.bitiful.net/nanchang/food/IMG_20260825_192921.jpg?w=1600&q=100&fmt=webp" width="80%" /> 

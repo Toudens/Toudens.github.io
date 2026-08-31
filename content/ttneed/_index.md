@@ -32,15 +32,16 @@ weight: "4"
 
   .polaroid-gallery {
     margin-top: 2rem;
-    padding: 1rem;
-    max-width: 1100px;
-    margin-left: auto !important;
-    margin-right: auto !important;
+    width: 100%;
+    max-width: none;
+    padding: 0;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
   }
 
   .polaroid-gallery > div {
     display: grid !important;
-    grid-template-columns: repeat(3, 1fr) !important; 
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
     gap: 2.5rem 1.5rem !important;
   }
 
@@ -112,12 +113,8 @@ weight: "4"
   }
 
   /* --- 交互与布局 --- */
-  .polaroid-gallery > div > :nth-child(3n+1) { transform: rotate(-2deg); }
-  .polaroid-gallery > div > :nth-child(3n+2) { transform: rotate(1.5deg) translateY(-8px); }
-  .polaroid-gallery > div > :nth-child(3n+3) { transform: rotate(-1deg) translateY(5px); }
-
   .art-card:hover {
-    transform: rotate(0deg) scale(1.06) translateY(-10px) !important;
+    transform: scale(1.06) translateY(-10px) !important;
     z-index: 100 !important;
     box-shadow: 0 20px 40px rgba(0,0,0,0.15) !important;
   }

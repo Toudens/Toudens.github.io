@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "fe14ed66691236db",
+        "id": "7125c51534b007d3",
         "type": "tabs",
         "children": [
           {
-            "id": "ef8da3909b104221",
+            "id": "66d12e78b0658a83",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "compsci/ml/Ch-1/index.md",
+                "file": "compsci/ml/Ch-2/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -186,10 +186,13 @@
       "bases:新建数据库": false
     }
   },
-  "active": "ef8da3909b104221",
+  "active": "66d12e78b0658a83",
   "lastOpenFiles": [
-    "compsci/ml/_index.md",
     "compsci/ml/Ch-1/index.md",
+    "compsci/ml/Ch-2/index.md",
+    "compsci/ml/_index.md",
+    "compsci/ml/Ch-2",
+    "compsci/ml/Ch-1/未命名",
     "compsci/ds/_index.md",
     "compsci/ca/Ch-1/index.md",
     "compsci/_index.md",
@@ -213,9 +216,7 @@
     "ttneed/xi-an/Changan-Miscellany/index.md",
     "ttneed/xi-an/Shaanxi-Historical-Museum/index.md",
     "ttneed/nanchang/other",
-    "ttneed/nanchang/delicacies",
     "2026-08-22.md",
-    "ttneed/nanchang/tengwang/未命名",
     "ttneed/hangzhou/liangzhu/index.md",
     "ttneed/hangzhou/qiantang/index.md",
     "ttneed/hangzhou/_index.md",
@@ -223,7 +224,6 @@
     "ttneed/xi-an/_index.md",
     "ttneed/cloud/_index.md",
     "ttneed/weinan/_index.md",
-    "ttneed/memento/_index.md",
     "compsci/dip/Ch-2/output_3-5.bmp",
     "compsci/dip/Ch-2/output_3-4.bmp",
     "compsci/dip/Ch-2/output_3-2.bmp",

@@ -54,4 +54,12 @@ comments: false
     class="aspect-auto md:aspect-[1.8/1] max-md:min-h-[250px]" 
     style="background: radial-gradient(ellipse at 50% 80%,rgba(0,0,0,0),hsla(0,0%,100%,0));" 
   >}}
+  
+{{< hextra/feature-card 
+      title="机器学习" 
+    link="/compsci/ml" 
+    class="aspect-auto md:aspect-[1.8/1] max-md:min-h-[250px]" 
+    style="background: radial-gradient(ellipse at 50% 80%,rgba(0,0,0,0),hsla(0,0%,100%,0));" 
+  >}}
+  
 </div>

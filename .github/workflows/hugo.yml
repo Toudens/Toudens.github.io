@@ -39,9 +39,8 @@ jobs:
           extended: true
           
       - name: Install dependencies
-        run: |
-          hugo mod get
-          hugo mod tidy
+        # Keep the theme version pinned in go.mod/go.sum, matching local previews.
+        run: go mod download
 
       - name: Build with Hugo
         run: |

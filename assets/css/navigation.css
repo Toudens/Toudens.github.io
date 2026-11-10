@@ -102,8 +102,43 @@
 .toudens-topbar .hextra-search-input::-webkit-search-decoration,
 .toudens-topbar .hextra-search-input::-webkit-search-results-button,
 .toudens-topbar .hextra-search-input::-webkit-search-results-decoration { -webkit-appearance: none; display: none; }
-.toudens-search kbd { position: absolute; top: 50%; right: 10px; left: auto; margin: 0; transform: translateY(-50%); }
+.toudens-search kbd { position: absolute; display: flex; align-items: center; gap: 4px; top: 50%; right: 12px; left: auto; margin: 0; padding: 2px 5px; border: 1px solid var(--site-line); border-radius: 4px; color: var(--site-muted); font-size: 10px; line-height: 16px; pointer-events: none; transform: translateY(-50%); }
 .toudens-topbar .hextra-search-input:focus-visible { outline: 1px solid var(--site-ink); outline-offset: 2px; }
+/* Own the dropdown styling instead of depending on theme search utilities. */
+.toudens-search .hextra-search-results {
+  position: absolute;
+  z-index: 60;
+  top: calc(100% + 12px);
+  right: 0;
+  box-sizing: border-box;
+  width: min(440px, calc(100vw - 24px));
+  max-width: none;
+  max-height: min(440px, calc(100dvh - var(--site-header-bottom) - 32px));
+  min-height: 0;
+  margin: 0;
+  padding: 16px;
+  overflow: auto;
+  overscroll-behavior: contain;
+  list-style: none;
+  border: 1px solid var(--site-line);
+  border-radius: var(--site-radius);
+  background: var(--site-panel);
+  color: var(--site-ink);
+  box-shadow: 0 12px 32px rgb(0 0 0 / .12);
+}
+.dark .toudens-search .hextra-search-results { box-shadow: 0 14px 36px rgb(0 0 0 / .4); }
+.toudens-search .hextra-search-results[class~="hx:hidden"] { display: none; }
+.toudens-search .hextra-search-results li { margin: 0; overflow-wrap: anywhere; }
+.toudens-search .hextra-search-results a { display: block; padding: 12px; border-radius: 8px; color: var(--site-ink); text-decoration: none; scroll-margin: 16px; }
+.toudens-search .hextra-search-results a:hover,
+.toudens-search .hextra-search-results .hextra-search-active { background: var(--site-hover); }
+.toudens-search .hextra-search-prefix { margin: 18px 12px 6px; padding: 0 0 8px; border-bottom: 1px solid var(--site-line); color: var(--site-muted); font-size: 12px; line-height: 1.7; overflow-wrap: anywhere; }
+.toudens-search .hextra-search-prefix:first-child { margin-top: 0; }
+.toudens-search .hextra-search-title { font-size: 15px; font-weight: 600; line-height: 1.6; }
+.toudens-search .hextra-search-excerpt { display: -webkit-box; margin-top: 5px; overflow: hidden; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; color: var(--site-muted); font-size: 13px; line-height: 1.7; }
+.toudens-search .hextra-search-match { color: var(--site-ink); font-weight: 650; }
+.toudens-search .hextra-search-no-result { display: block; padding: 18px 12px; color: var(--site-muted); font-size: 14px; text-align: center; }
+.toudens-search .hextra-search-status { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .toudens-menu-button { display: none; padding: 8px; border: 1px solid var(--site-line); border-radius: 9px; background: var(--site-panel); color: var(--site-ink); cursor: pointer; }
 .toudens-page { flex: 1; min-height: 0; padding: var(--site-page-gap) 28px; }
 .toudens-page > .hextra-max-page-width { gap: 24px; height: 100%; max-width: 1256px; margin-inline: 0 auto; align-items: flex-start; }

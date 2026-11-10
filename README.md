@@ -200,3 +200,5 @@ draft: false
 在项目根目录运行 `hugo serve` 可本地预览，地址以终端实际输出为准；当前常用地址是 `http://localhost:1313/`。大幅修改模板后若浏览器还显示旧结构，先完整刷新页面。
 
 线上使用 `.github/workflows/hugo.yml` 构建并发布；推送到 `main` 或 `master` 后触发。构建通过 `go mod download` 下载 `go.mod` / `go.sum` 锁定的主题依赖，不在部署时自动升级主题；升级应在本地单独完成并确认搜索模板兼容。文章、导航和搜索索引都在构建时生成，新内容需要随站点重新构建发布。
+
+自定义域名另由 `.github/workflows/deploy.yml` 调用服务器脚本部署。站内搜索的输入框和脚本加载器保存在 `layouts/_partials/search.html`、`layouts/_partials/scripts/search.html`，与 `assets/js/flexsearch.js` 配套，避免服务器主题版本变化时被替换成不兼容的弹窗按钮。

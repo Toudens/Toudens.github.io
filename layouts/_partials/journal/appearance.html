@@ -1,0 +1,11 @@
+{{- $themes := slice (dict "id" "light" "name" "浅色") (dict "id" "dark" "name" "深色") (dict "id" "system" "name" "跟随系统") -}}
+<div class="toudens-appearance-control" data-theme="system">
+  <button class="hextra-theme-toggle toudens-theme-button" type="button" data-state="closed" data-location="bottom-right" aria-label="切换主题" aria-expanded="false" aria-haspopup="menu">
+    {{ range $themes }}<span class="toudens-theme-value" data-theme-value="{{ .id }}">{{ partial "journal/icon.html" .id }}<span>{{ .name }}</span></span>{{ end }}
+  </button>
+  <ul class="hextra-theme-toggle-options toudens-theme-options hx:hidden" role="menu" aria-label="外观模式" style="position: fixed; inset: auto auto 0 0; margin: 0;">
+    {{ range $themes }}
+      <li role="none"><button type="button" role="menuitemradio" data-item="{{ .id }}" aria-checked="{{ eq .id `system` }}" tabindex="-1">{{ partial "journal/icon.html" .id }}<span>{{ .name }}</span></button></li>
+    {{ end }}
+  </ul>
+</div>

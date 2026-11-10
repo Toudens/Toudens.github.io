@@ -1,0 +1,20 @@
+{{- $current := .current -}}
+{{- $level := .level -}}
+<ul>
+  {{ range .node.Pages.ByWeight }}
+    {{ if or .Draft .Params.sidebar.exclude }}{{ continue }}{{ end }}
+    {{ $active := eq .RelPermalink $current.RelPermalink }}
+    {{ $open := or $active (.IsAncestor $current) (and (eq $level 0) (eq .Section "mathtech")) }}
+    <li{{ if $open }} class="open"{{ end }}>
+      <div class="toudens-tree-row">
+        <a href="{{ .RelPermalink }}"{{ if $active }} class="hextra-sidebar-active-item" aria-current="page"{{ end }}>{{ .LinkTitle }}</a>
+        {{ if .Pages }}
+          <button class="hextra-sidebar-collapsible-button" type="button" aria-label="展开或收起{{ .LinkTitle }}" aria-expanded="{{ $open }}">{{ partial "journal/icon.html" "chevron" }}</button>
+        {{ end }}
+      </div>
+      {{ if .Pages }}
+        <div class="toudens-tree-children">{{ partial "journal/tree.html" (dict "node" . "current" $current "level" (add $level 1)) }}</div>
+      {{ end }}
+    </li>
+  {{ end }}
+</ul>

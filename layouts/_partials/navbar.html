@@ -1,0 +1,21 @@
+<header class="hextra-nav-container toudens-topbar">
+  <nav aria-label="页面工具">
+    <button type="button" class="hextra-hamburger-menu toudens-menu-button" aria-label="展开导航" aria-expanded="false" aria-controls="toudens-sidebar">
+      {{ partial "journal/icon.html" "menu" }}
+    </button>
+    <ol class="toudens-location" aria-label="当前位置">
+      {{ if not .IsHome }}
+        {{ range .Ancestors.Reverse }}
+          <li><a href="{{ .RelPermalink }}">{{ if .IsHome }}首页{{ else }}{{ .LinkTitle }}{{ end }}</a></li>
+        {{ end }}
+      {{ end }}
+      <li aria-current="page"><span>{{ if .IsHome }}首页{{ else }}{{ .Title }}{{ end }}</span></li>
+    </ol>
+    {{ if site.Params.search.enable | default true }}
+      <div class="toudens-search">
+        {{ partial "search.html" (dict "location" "navbar") }}
+        <span class="toudens-search-icon">{{ partial "journal/icon.html" "search" }}</span>
+      </div>
+    {{ end }}
+  </nav>
+</header>

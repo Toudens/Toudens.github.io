@@ -1,5 +1,5 @@
 ---
-title: "偷一偷的朋友们"
+title: "友邻小站"
 width: "full"
 ---
 

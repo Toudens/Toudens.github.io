@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.Language.Lang }}" dir="{{ partial `utils/hugo-compat/language-direction.html` .Site.Language | default `ltr` }}">
+  {{- partial "head.html" . -}}
+  <body class="toudens-site">
+    <a class="toudens-skip" href="#content">跳到正文</a>
+    {{ partial "navbar.html" . }}
+    {{ partial "journal/sidebar.html" . }}
+    <div class="toudens-workspace{{ if eq .Section `travel` }} toudens-workspace-travel{{ end }}">
+      <div class="toudens-page">
+        {{ block "main" . }}{{ end }}
+      </div>
+      {{ if or (eq .Site.Params.footer.enable nil) .Site.Params.footer.enable }}
+        {{ .Store.Set "enableFooterSwitches" false }}
+        {{ partial "footer.html" . }}
+      {{ end }}
+    </div>
+    {{ partial "scripts.html" . }}
+  </body>
+</html>

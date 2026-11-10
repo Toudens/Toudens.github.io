@@ -1,0 +1,20 @@
+{{- /* A cover can be a page-bundle image, a site path, or an existing image-host URL. */ -}}
+{{- $src := .Params.cover | default "" -}}
+{{- $alt := printf "%s的封面" .Title -}}
+{{- if not $src -}}
+  {{- /* New posts still get a cover when the author has not selected one yet. */ -}}
+  {{- $images := findRE `(?i)<img[^>]+src=["'][^"']+["']|!\[[^\]]*\]\([^\s)]+` .RawContent 1 -}}
+  {{- with $images -}}
+    {{- $src = index . 0 | replaceRE `(?i)^<img[^>]+src=["']([^"']+)["']$` "$1" | replaceRE `^!\[[^\]]*\]\((.+)$` "$1" -}}
+  {{- end -}}
+{{- end -}}
+{{- if not $src -}}
+  {{- $src = "images/Tou.jpg" | relURL -}}
+{{- else if not (or (hasPrefix $src "https://") (hasPrefix $src "http://") (hasPrefix $src "/")) -}}
+  {{- with .Resources.GetMatch (strings.TrimPrefix "./" $src) -}}
+    {{- $src = .RelPermalink -}}
+  {{- else -}}
+    {{- $src = printf "%s%s" .RelPermalink (strings.TrimPrefix "./" $src) -}}
+  {{- end -}}
+{{- end -}}
+{{- return (dict "src" $src "alt" $alt) -}}

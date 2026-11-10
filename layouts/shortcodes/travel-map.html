@@ -81,9 +81,9 @@ document.addEventListener("DOMContentLoaded", function() {
                     roam: false,
                     selectedMode: false, 
 
-                    /* 布局保持之前优化的比例 */
+                    /* 完整容纳地图边界，并为东北等边缘区域留出空隙。 */
                     layoutCenter: ['50%', '50%'],
-                    layoutSize: '135%',
+                    layoutSize: '120%',
                     aspectScale: 0.75, 
 
                     // 1. 彻底禁用默认状态下的文字标签

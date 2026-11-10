@@ -1,0 +1,27 @@
+{{- $entries := .Inner | transform.Unmarshal -}}
+{{- $carouselID := printf "travel-highlights-%d" .Ordinal -}}
+<section class="journal-carousel travel-carousel not-prose" aria-label="游记与相册" aria-roledescription="轮播" data-carousel>
+  <div class="journal-track" id="{{ $carouselID }}" tabindex="0" aria-label="游记与相册；可左右滑动或使用方向键切换">
+    {{ range $index, $entry := $entries }}
+      <article class="journal-slide" data-slide aria-roledescription="幻灯片" aria-label="第 {{ add $index 1 }} 项，共 {{ len $entries }} 项">
+        <a class="journal-story" href="{{ $entry.link | relURL }}" aria-labelledby="{{ $carouselID }}-title-{{ $index }}">
+          <img class="journal-cover" src="{{ $entry.image }}" alt="{{ $entry.title }}的封面" loading="lazy" decoding="async" />
+          <div class="journal-caption">
+            <h3 id="{{ $carouselID }}-title-{{ $index }}">{{ $entry.title }}</h3>
+            <span class="journal-read">查看记录 <span aria-hidden="true">↗</span></span>
+          </div>
+        </a>
+      </article>
+    {{ end }}
+  </div>
+  <div class="journal-carousel-controls" data-carousel-controls hidden>
+    <p class="journal-counter" aria-live="polite" aria-atomic="true"><span data-carousel-current>01</span><span aria-hidden="true"> / </span><span class="journal-sr-only">，共 </span>{{ printf "%02d" (len $entries) }}<span class="journal-sr-only"> 项</span></p>
+    <div class="journal-dots" aria-label="选择游记或相册">
+      {{ range $index, $entry := $entries }}<button class="journal-dot" type="button" data-carousel-go="{{ $index }}" aria-label="查看{{ $entry.title }}" aria-controls="{{ $carouselID }}"{{ if eq $index 0 }} aria-current="true"{{ end }}></button>{{ end }}
+    </div>
+    <div class="journal-arrows">
+      <button type="button" data-carousel-prev aria-controls="{{ $carouselID }}" aria-label="上一项"><span aria-hidden="true">←</span></button>
+      <button type="button" data-carousel-next aria-controls="{{ $carouselID }}" aria-label="下一项"><span aria-hidden="true">→</span></button>
+    </div>
+  </div>
+</section>

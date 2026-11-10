@@ -48,7 +48,7 @@ enableInlineShortcodes = true
 #  base = "https://unpkg.com/katex@0.16.11/dist/"
 
   
-[params.flexsearch]
+[params.search.flexsearch]
   index = "content"
   tokenize = "forward"
 
@@ -93,47 +93,28 @@ enableInlineShortcodes = true
 # 菜单配置
 [menu]
   [[menu.main]]
-    identifier = "phymath"
-    name = "数理方法"
-    pageRef = "/phymath"
+    identifier = "mathtech"
+    name = "数理技术"
+    pageRef = "/mathtech"
     weight = 1
-  
+
   [[menu.main]]
-    identifier = "compsci"
-    name = "计算机科学"
-    pageRef = "/compsci"
+    identifier = "papers"
+    name = "论文阅读"
+    pageRef = "/papers"
     weight = 2
 
   [[menu.main]]
-    identifier = "gened"
-    name = "通识课程"
-    pageRef = "/gened"
+    identifier = "travel"
+    name = "旅行影集"
+    pageRef = "/travel"
     weight = 3
-  
-  [[menu.main]]
-    identifier = "ttneed"
-    name = "偷一偷QwQ"
-    pageRef = "/ttneed"
-    weight = 4
-  
+
   [[menu.main]]
     identifier = "friends"
-    name = "友情链接"
+    name = "友邻小站"
     pageRef = "/friends"
-    weight = 5
-  
-  [[menu.main]]
-    name = "搜索"
-    weight = 6
-    [menu.main.params]
-      type = "search"
-  
-  [[menu.main]]
-    name = "GitHub"
-    weight = 7
-    url = "https://github.com/Toudens/Toudens.github.io"
-    [menu.main.params]
-      icon = "github"
+    weight = 4
 
 [params.comments]
   enable = true

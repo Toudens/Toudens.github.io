@@ -4,21 +4,19 @@
     "type": "split",
     "children": [
       {
-        "id": "7125c51534b007d3",
+        "id": "1cf860028d76f6c8",
         "type": "tabs",
         "children": [
           {
-            "id": "66d12e78b0658a83",
+            "id": "0453e28a1ef89566",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "image",
               "state": {
-                "file": "compsci/ml/Ch-2/index.md",
-                "mode": "source",
-                "source": false
+                "file": "papers/DDPM/DDPM-fig1-samples.png"
               },
-              "icon": "lucide-file",
-              "title": "index"
+              "icon": "lucide-image",
+              "title": "DDPM-fig1-samples"
             }
           }
         ]
@@ -80,8 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200,
-    "collapsed": true
+    "width": 200
   },
   "right": {
     "id": "c569291f788890c9",
@@ -186,53 +183,53 @@
       "bases:新建数据库": false
     }
   },
-  "active": "66d12e78b0658a83",
+  "active": "0453e28a1ef89566",
   "lastOpenFiles": [
-    "compsci/ml/Ch-1/index.md",
-    "compsci/ml/Ch-2/index.md",
-    "compsci/ml/_index.md",
-    "compsci/ml/Ch-2",
-    "compsci/ml/Ch-1/未命名",
-    "compsci/ds/_index.md",
-    "compsci/ca/Ch-1/index.md",
-    "compsci/_index.md",
-    "ttneed/nanchang/_index.md",
-    "compsci/ml/Ch-1",
-    "compsci/ml",
-    "ttneed/nanchang/81/index.md",
-    "ttneed/nanchang/jx-museum/index.md",
-    "ttneed/nanchang/delicacies/index.md",
-    "ttneed/nanchang/jx-museum",
-    "ttneed/nanchang/art-museum/index.md",
-    "ttneed/nanchang/other/index.md",
-    "ttneed/nanchang/81",
-    "ttneed/nanchang/tengwang/index.md",
-    "ttneed/nanchang/haihun/index.md",
-    "ttneed/nanchang/ocean-park/index.md",
-    "ttneed/nanchang/haihun",
-    "ttneed/nanchang/nanchang163/index.md",
-    "ttneed/nanchang/ocean-park",
-    "ttneed/nanchang/nanchang163",
-    "ttneed/xi-an/Changan-Miscellany/index.md",
-    "ttneed/xi-an/Shaanxi-Historical-Museum/index.md",
-    "ttneed/nanchang/other",
-    "2026-08-22.md",
-    "ttneed/hangzhou/liangzhu/index.md",
-    "ttneed/hangzhou/qiantang/index.md",
-    "ttneed/hangzhou/_index.md",
-    "ttneed/_index.md",
-    "ttneed/xi-an/_index.md",
-    "ttneed/cloud/_index.md",
-    "ttneed/weinan/_index.md",
-    "compsci/dip/Ch-2/output_3-5.bmp",
-    "compsci/dip/Ch-2/output_3-4.bmp",
-    "compsci/dip/Ch-2/output_3-2.bmp",
-    "compsci/dip/Ch-2/output_2-5.bmp",
-    "compsci/dip/Ch-2/output_2-3.bmp",
-    "compsci/dip/Ch-2/output_2-2.bmp",
-    "compsci/dip/Ch-2/output_1-4.bmp",
-    "compsci/dip/Ch-2/output_1-3.bmp",
-    "compsci/dip/Ch-2/output_1-2.bmp",
-    "compsci/dip/Ch-2/output_1-1.bmp"
+    "papers/DDPM/index.md",
+    "compsci/p/DDPM/index.md",
+    "mathtech/_index.md",
+    "travel/xi-an/Shaanxi-Historical-Museum/index.md",
+    "travel/xi-an/Terracotta-Warriors/index.md",
+    "travel/memento/rain/index.md",
+    "travel/xi-an/Changan-Miscellany/index.md",
+    "travel/nanchang/nanchang163/index.md",
+    "travel/nanchang/tengwang/index.md",
+    "travel/nanchang/haihun/index.md",
+    "travel/nanchang/other/index.md",
+    "travel/nanchang/ocean-park/index.md",
+    "travel/nanchang/jx-museum/index.md",
+    "travel/nanchang/delicacies/index.md",
+    "travel/nanchang/81/index.md",
+    "travel/nanchang/art-museum/index.md",
+    "travel/hangzhou/liangzhu/index.md",
+    "travel/hangzhou/qiantang/index.md",
+    "travel/xi-an/Terracotta-Warriors",
+    "travel/xi-an/_index.md",
+    "travel/xi-an/Shaanxi-Historical-Museum",
+    "travel/xi-an/Changan-Miscellany",
+    "travel/memento/_index.md",
+    "travel/memento/rain",
+    "travel/wuhan/_index.md",
+    "travel/weinan/_index.md",
+    "travel/nanchang/_index.md",
+    "travel/nanchang/other",
+    "travel/nanchang/nanchang163",
+    "travel/nanchang/tengwang",
+    "travel/nanchang/haihun",
+    "travel/nanchang/ocean-park",
+    "travel/nanchang/jx-museum",
+    "travel/flower/_index.md",
+    "travel/hangzhou/_index.md",
+    "travel/cloud/_index.md",
+    "papers/DDPM/DDPM-fig2-process.png",
+    "papers/DDPM/DDPM-fig1-samples.png",
+    "papers/DDPM/DDPM-algorithms.png",
+    "mathtech/infotheory/Ch-9/Ch-9-5.png",
+    "mathtech/infotheory/Ch-9/Ch-9-3.png",
+    "mathtech/infotheory/Ch-9/Ch-9-4.png",
+    "mathtech/infotheory/Ch-9/Ch-9-2.png",
+    "mathtech/infotheory/Ch-9/Ch-9-1.png",
+    "mathtech/infotheory/Ch-8/Ch-8-3.png",
+    "mathtech/infotheory/Ch-8/Ch-8-2.png"
   ]
 }

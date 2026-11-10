@@ -1,2 +1,16 @@
 <!-- 引入刚才写好的鼠标点击烟花特效 -->
 <script src="/js/fireworks.js" defer></script>
+{{ if or .IsHome (.HasShortcode "travel-carousel") }}
+  {{ $journalStyle := resources.Get "css/journal.css" | minify | fingerprint }}
+  <link rel="stylesheet" href="{{ $journalStyle.RelPermalink }}" integrity="{{ $journalStyle.Data.Integrity }}" />
+{{ end }}
+{{ if .HasShortcode "travel-carousel" }}
+  {{ $journalScript := resources.Get "js/journal-carousel.js" | minify | fingerprint }}
+  <script src="{{ $journalScript.RelPermalink }}" integrity="{{ $journalScript.Data.Integrity }}" defer></script>
+{{ end }}
+{{ $navigationStyle := resources.Get "css/navigation.css" | minify | fingerprint }}
+<link rel="stylesheet" href="{{ $navigationStyle.RelPermalink }}" integrity="{{ $navigationStyle.Data.Integrity }}" />
+{{ if .HasShortcode "travel-album-card" }}
+  {{ $galleryStyle := resources.Get "css/travel-gallery.css" | minify | fingerprint }}
+  <link rel="stylesheet" href="{{ $galleryStyle.RelPermalink }}" integrity="{{ $galleryStyle.Data.Integrity }}" />
+{{ end }}

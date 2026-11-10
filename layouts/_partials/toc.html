@@ -1,0 +1,5 @@
+{{- if and .IsSection (or (eq .Section "friends") (and .Pages (in (slice "mathtech" "papers" "travel") .Section))) -}}
+  {{ partial "journal/timeline.html" . }}
+{{- else -}}
+  {{ partial "journal/article-toc.html" . }}
+{{- end -}}

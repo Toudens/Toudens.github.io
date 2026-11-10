@@ -1,0 +1,29 @@
+{{- /* Latest known update per article, using Lastmod (which falls back to Date). */ -}}
+{{- $articles := slice -}}
+{{- $categories := dict "mathtech" "数理技术" "papers" "论文阅读" "travel" "旅行影集" -}}
+{{- range site.Pages -}}
+  {{- $isAlbum := and .IsSection (not .Pages) .Content -}}
+  {{- if and (not .Draft) (isset $categories .Section) (or .IsPage $isAlbum) -}}
+    {{- $articles = $articles | append . -}}
+  {{- end -}}
+{{- end -}}
+{{- $articles = first 12 (sort $articles "Lastmod" "desc") -}}
+<nav class="hextra-toc toudens-timeline hx:order-last hx:hidden hx:shrink-0 hx:xl:block hx:print:hidden" aria-label="全站文章更新日志">
+  <div class="hextra-scrollbar">
+    <h2 class="toudens-timeline-heading">更新日志<span>最近 {{ len $articles }} 篇</span></h2>
+    <ul class="toudens-timeline-list">
+      {{ range $articles }}
+        <li>
+          <a href="{{ .RelPermalink }}">
+            <span class="toudens-timeline-meta">
+              {{ if .Lastmod.IsZero }}<span>日期未注明</span>{{ else }}<time datetime="{{ .Lastmod.Format `2006-01-02` }}">{{ .Lastmod.Format "2006.01.02" }}</time>{{ end }}
+              {{ if and (not .Date.IsZero) (.Lastmod.After .Date) }}<span>更新</span>{{ else if not .Lastmod.IsZero }}<span>发布</span>{{ end }}
+            </span>
+            <span class="toudens-timeline-title">{{ .LinkTitle }}</span>
+            <span class="toudens-updates-category">{{ index $categories .Section }}</span>
+          </a>
+        </li>
+      {{ end }}
+    </ul>
+  </div>
+</nav>

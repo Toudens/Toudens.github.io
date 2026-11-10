@@ -1,0 +1,42 @@
+{{- $page := . -}}
+{{- $root := .FirstSection -}}
+<aside id="toudens-sidebar" class="hextra-sidebar-container toudens-sidebar hx:max-md:[transform:translate3d(0,-100%,0)]" aria-label="站点导航">
+  <a class="toudens-brand" href="{{ site.Home.RelPermalink }}" aria-label="返回首页">
+    <span>{{ site.Title }}</span>
+  </a>
+  <nav class="toudens-module toudens-categories" aria-label="主栏目">
+    {{ range site.Menus.main }}
+      {{ $active := eq $page.Section .Identifier }}
+      {{ $href := .URL }}
+      {{ with .Page }}{{ $href = .RelPermalink }}{{ end }}
+      <a href="{{ $href }}"{{ if $active }} class="is-current"{{ end }}{{ if eq $page.RelPermalink $href }} aria-current="page"{{ end }}>
+        {{ partial "journal/icon.html" .Identifier }}<span>{{ .Name }}</span>
+      </a>
+    {{ end }}
+  </nav>
+  <div class="hextra-scrollbar toudens-tree-scroll">
+    {{ if .IsHome }}
+      {{ $articles := where site.RegularPages "Section" "in" (slice "mathtech" "papers" "travel") }}
+      {{ $articles = where $articles "Draft" false }}
+      {{ with first 6 (sort $articles "Lastmod" "desc") }}
+        <nav class="toudens-module toudens-tree" aria-label="最近更新">
+          <p class="toudens-module-label">最近更新</p>
+          <ul>{{ range . }}<li><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></li>{{ end }}</ul>
+        </nav>
+      {{ end }}
+    {{ else }}
+      {{ with $root }}
+        {{ if .Pages }}
+          <nav class="toudens-module toudens-tree" aria-label="{{ .Title }}文章目录">
+            <a class="toudens-module-label" href="{{ .RelPermalink }}">{{ .Title }}</a>
+            {{ partial "journal/tree.html" (dict "node" . "current" $page "level" 0) }}
+          </nav>
+        {{ end }}
+      {{ end }}
+    {{ end }}
+  </div>
+  <div class="toudens-module toudens-appearance">
+    <span>外观</span>
+    {{ partial "journal/appearance.html" . }}
+  </div>
+</aside>

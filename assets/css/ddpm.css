@@ -1,0 +1,49 @@
+/* Loaded only by the DDPM article. Keep the site's shared column widths. */
+.content p,
+.content li {
+  text-wrap: pretty;
+}
+
+.content h3,
+.content h4 {
+  text-wrap: balance;
+}
+
+.content .ddpm-sentence-end {
+  white-space: nowrap;
+}
+
+.content p.ddpm-balance-end {
+  text-wrap: balance;
+}
+
+.content .ddpm-figure {
+  margin: 1.25rem 0;
+  text-align: center;
+}
+
+.content .ddpm-figure img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+
+.content .ddpm-figure figcaption {
+  margin-top: 0.4rem;
+  color: var(--site-muted);
+  font-size: 0.875em;
+  line-height: 1.5;
+  text-align: center;
+}
+
+/* Long equations scroll within their own row instead of widening the page. */
+.content mjx-container[display="true"] {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-block: 0.2em;
+}
+

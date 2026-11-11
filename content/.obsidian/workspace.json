@@ -11,12 +11,14 @@
             "id": "0453e28a1ef89566",
             "type": "leaf",
             "state": {
-              "type": "image",
+              "type": "markdown",
               "state": {
-                "file": "papers/DDPM/DDPM-fig1-samples.png"
+                "file": "papers/DDPM/index.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-image",
-              "title": "DDPM-fig1-samples"
+              "icon": "lucide-file",
+              "title": "index"
             }
           }
         ]
@@ -78,7 +80,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 200,
+    "collapsed": true
   },
   "right": {
     "id": "c569291f788890c9",
@@ -185,6 +188,8 @@
   },
   "active": "0453e28a1ef89566",
   "lastOpenFiles": [
+    "papers/_index.md",
+    "papers/DDPM/DDPM-fig1-samples.png",
     "papers/DDPM/index.md",
     "compsci/p/DDPM/index.md",
     "mathtech/_index.md",
@@ -220,9 +225,7 @@
     "travel/nanchang/jx-museum",
     "travel/flower/_index.md",
     "travel/hangzhou/_index.md",
-    "travel/cloud/_index.md",
     "papers/DDPM/DDPM-fig2-process.png",
-    "papers/DDPM/DDPM-fig1-samples.png",
     "papers/DDPM/DDPM-algorithms.png",
     "mathtech/infotheory/Ch-9/Ch-9-5.png",
     "mathtech/infotheory/Ch-9/Ch-9-3.png",

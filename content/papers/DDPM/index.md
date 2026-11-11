@@ -74,7 +74,7 @@ $$
 >
 > 对两个变量的线性组合展开平方，有：
 >
-> $$\begin{aligned}\operatorname{Var}(aX+bY)&=a^2\operatorname{Var}(X)+b^2\operatorname{Var}(Y)\\&\quad+2ab\operatorname{Cov}(X,Y).\end{aligned}$$
+> $$\operatorname{Var}(aX+bY)=a^2\operatorname{Var}(X)+b^2\operatorname{Var}(Y)+2ab\operatorname{Cov}(X,Y).$$
 >
 > 独立变量的协方差为零，因此两个独立标准高斯变量组合后，方差为 $a^2+b^2$。
 
@@ -156,7 +156,7 @@ $$
 
 #### 3.1 随机采样
 
-真正希望学习的是 $q(x_{t-1}\mid x_t)$：看到当前噪声图后，前一步可能是什么。它依赖未知的数据分布，通常无法直接计算。DDPM 用一个由网络确定均值的高斯分布来近似它：
+反向过程需要根据 $x_t$ 生成合理的前一步。DDPM 用高斯分布近似真实的反向分布 $q(x_{t-1}\mid x_t)$：
 
 $$
 p_\theta(x_{t-1}\mid x_t)
@@ -164,16 +164,54 @@ p_\theta(x_{t-1}\mid x_t)
 \qquad t>1.
 $$
 
-每步只加入少量噪声，使局部高斯近似较为合理。从这个模型分布中抽样，就是：
+$\mu_\theta$ 是模型预测的**条件均值**，对应前一步各种可能状态的平均位置。网络预测累计噪声 $\epsilon_\theta(x_t,t)$，再计算：
+
+$$
+\boxed{\mu_\theta(x_t,t)
+=\frac1{\sqrt{\alpha_t}}
+\left(x_t-\frac{\beta_t}{\sqrt{1-\bar\alpha_t}}\epsilon_\theta(x_t,t)\right)}.
+$$
+
+$1/\sqrt{\alpha_t}$ 撤销前向过程的缩放。算出均值后，再从它附近采样：
 
 $$
 x_{t-1}=\mu_\theta(x_t,t)+\sigma_tz,
 \qquad z\sim\mathcal N(0,I).
 $$
 
-均值给出合理的中心位置，随机项表达中心附近的不确定性。比如只知道一个模糊轮廓，可能有多种纹理都符合它；采样让这些可能性有机会出现在生成结果中。扰动大小由 $\sigma_t$ 控制，后续网络继续对所得状态去噪。
+同一张噪声图可能来自不同的原图和加噪记录。即使网络给出最佳噪声预测，也无法确定这次实际加入的是哪一份噪声，因此算出的是前一步的平均位置；$\sigma_tz$ 再从这个位置附近抽取一种可能状态。
 
-例如，设 $x_t\sim\mathcal N(0,1)$，目标转移分布为 $\mathcal N(0.9x_t,0.19)$。只取均值会使输出方差变成 $0.81$，完整采样则得到 $0.81+0.19=1$。随机项在这里补上了目标分布所需的波动；对一般图像，它的大小同样应服务于反向分布的建模。
+> [!Note] **全方差公式**
+> 总方差由“条件均值之间的方差”和“条件内部方差的平均”组成：
+>
+> $$\operatorname{Var}(Y)=\operatorname{Var}(\mathbb E[Y\mid X])+\mathbb E[\operatorname{Var}(Y\mid X)].$$
+>
+> **证明：** 记 $m=\mathbb E[Y\mid X]$。先按条件取平均，再取总体平均，结果不变，因此：
+>
+> $$\begin{aligned}\mathbb E[\operatorname{Var}(Y\mid X)]&=\mathbb E[Y^2]-\mathbb E[m^2],\\\operatorname{Var}(m)&=\mathbb E[m^2]-(\mathbb E[Y])^2.\end{aligned}$$
+>
+> 两式相加，右边即为 $\operatorname{Var}(Y)$，得证。
+
+这里取 $X=x_t$、$Y=x_{t-1}^{(i)}$，两部分分别是：
+
+- **条件均值之间的方差**：不同 $x_t$ 对应的前一步条件均值之间的方差。网络学准时，近似为 $\operatorname{Var}(\mu_\theta^{(i)}(x_t,t))$。
+- **条件内部方差的平均**：固定 $x_t$ 后，前一步像素在其条件均值周围仍有的方差，再对不同 $x_t$ 取平均。这是 $\sigma_t^2$ 要近似的部分。
+
+因此，网络学到正确条件均值时，全方差公式给出：
+
+$$
+\operatorname{Var}(\mu_\theta^{(i)}(x_t,t))
+\approx\operatorname{Var}(x_{t-1}^{(i)})-\mathbb E_q[\operatorname{Var}(x_{t-1}^{(i)}\mid x_t)].
+$$
+
+均值只保留平均位置，随机采样再恢复这个位置周围的波动。加入独立噪声后，生成结果 $y_{t-1}$ 的方差为：
+
+$$
+\operatorname{Var}(y_{t-1}^{(i)})
+=\operatorname{Var}(\mu_\theta^{(i)}(x_t,t))+\sigma_t^2.
+$$
+
+当 $\sigma_t^2$ 接近该分量的平均条件方差时，就能补回缺少的波动，使总体方差接近目标。具体数值取决于数据分布，实际模型需要选择或学习这个方差。
 
 #### 3.2 后验分布
 
@@ -251,15 +289,13 @@ $$
 \left(x_t-\frac{\beta_t}{\sqrt{1-\bar\alpha_t}}\epsilon\right).
 $$
 
-这启发我们让网络预测累计噪声，记为 $\epsilon_\theta(x_t,t)$，再据此计算模型均值：
+将 $\epsilon$ 换成网络预测的累计噪声 $\epsilon_\theta(x_t,t)$，就得到前面使用的模型均值 $\mu_\theta$。若已知实际加入的单步噪声 $\epsilon_t$，则可以精确求逆：
 
 $$
-\boxed{\mu_\theta(x_t,t)
-=\frac1{\sqrt{\alpha_t}}
-\left(x_t-\frac{\beta_t}{\sqrt{1-\bar\alpha_t}}\epsilon_\theta(x_t,t)\right)}.
+x_{t-1}=\frac{x_t-\sqrt{\beta_t}\,\epsilon_t}{\sqrt{\alpha_t}}.
 $$
 
-训练时噪声由我们抽取，目标值现成可得。网络输入 $x_t,t$ 并输出噪声预测；预测越接近目标，算出的均值就越接近后验均值。这种关系稍后会转化为训练损失。
+单步求逆使用 $\epsilon_t$，模型均值使用累计噪声预测，所以两式的噪声系数不同。训练时累计噪声由我们抽取，目标值现成可得；噪声预测越准确，对应的均值误差也越小。
 
 也可以把网络输出换算成原图估计：
 
@@ -284,14 +320,14 @@ $$
 
 $\beta_t=1-\alpha_t$ 由加噪日程给定，$\tilde\beta_t$ 则来自刚才算出的条件后验。两者满足 $\tilde\beta_t<\beta_t$，在累计噪声较大时通常很接近，靠近清晰图像的一端差别更明显。早期实验中，两种固定选择得到了相似的生成效果。
 
-$\tilde\beta_t$ 描述的是**同时知道 $x_t$ 和原图 $x_0$ 时**的不确定性。生成时只知道 $x_t$，原图还有多种可能，这会带来额外的波动；固定方差就是对这种较复杂情况的一种简化。
+$\tilde\beta_t$ 描述已知 $x_t,x_0$ 时的后验方差。生成时只知道 $x_t$，还需要考虑原图的多种可能。
 
 两个选择各有一个理想参照：原始数据为标准高斯时，真实反向方差恰为 $\beta_tI$；原图为固定点时，条件后验方差则为 $\tilde\beta_tI$。
 
 > [!Note] **全协方差公式**
 > 一个变量的波动可以拆成“各条件内部的波动”和“条件均值之间的波动”：
 >
-> $$\begin{aligned}\operatorname{Cov}(Y\mid X)&=\mathbb E[\operatorname{Cov}(Y\mid X,Z)\mid X]\\&\quad+\operatorname{Cov}(\mathbb E[Y\mid X,Z]\mid X).\end{aligned}$$
+> $$\operatorname{Cov}(Y\mid X)=\mathbb E[\operatorname{Cov}(Y\mid X,Z)\mid X]+\operatorname{Cov}(\mathbb E[Y\mid X,Z]\mid X).$$
 >
 > 在这里，令 $Y=x_{t-1}$、$X=x_t$、$Z=x_0$，并将后验均值中 $x_0$ 的系数记为 $c_t$，便有：
 >
@@ -299,9 +335,11 @@ $\tilde\beta_t$ 描述的是**同时知道 $x_t$ 和原图 $x_0$ 时**的不确�
 >
 > $$\operatorname{Cov}(x_{t-1}\mid x_t)=\tilde\beta_tI+c_t^2\operatorname{Cov}(x_0\mid x_t).$$
 >
-> 第二项正是“尚不能确定原图”的影响。因此，已知原图的后验方差与生成时需要的反向方差并不相同。
+> 第二项表示原图尚未确定所带来的额外波动。
 
-固定方差后，网络只需预测均值，分布之间的比较也能化成均值误差，从而简化建模和优化。两种选择都可以使用；后续也可以让网络学习方差。它们影响每一步的转移分布，生成时仍需逐步运行反向链。
+真实反向协方差随 $x_t$ 变化，其中的 $\operatorname{Cov}(x_0\mid x_t)$ 依赖未知的数据分布，难以直接计算。
+
+**固定方差**将它简化为只随 $t$ 变化的 $\sigma_t^2I$，计算和优化都较简单；**学习方差**则让网络预测各分量的条件波动，表达更灵活，需要相应的训练目标。两种方法都在拟合反向分布。
 
 ### 4. 训练与生成
 
@@ -327,7 +365,7 @@ $$
 > [!Note] **平方误差为什么学到条件均值**
 > 固定输入 $u=(x_t,t)$，令 $c=\mathbb E[\epsilon\mid u]$。对任意预测值 $m$，展开平方可得：
 >
-> $$\begin{aligned}\mathbb E[\|\epsilon-m\|^2\mid u]&=\mathbb E[\|\epsilon-c\|^2\mid u]\\&\quad+\|c-m\|^2.\end{aligned}$$
+> $$\mathbb E[\|\epsilon-m\|^2\mid u]=\mathbb E[\|\epsilon-c\|^2\mid u]+\|c-m\|^2.$$
 >
 > 交叉项因 $\mathbb E[\epsilon-c\mid u]=0$ 而消失。第一项与 $m$ 无关，因此最优预测为：
 >
@@ -340,12 +378,9 @@ $$
 生成时不再提供原图，也不更新参数。先抽取 $x_T\sim\mathcal N(0,I)$，再从 $t=T$ 到 $1$ 重复：
 
 $$
-\begin{aligned}
 x_{t-1}
-&=\frac1{\sqrt{\alpha_t}}
-\left(x_t-\frac{\beta_t}{\sqrt{1-\bar\alpha_t}}\epsilon_\theta(x_t,t)\right)\\
-&\quad+\sigma_tz.
-\end{aligned}
+=\frac1{\sqrt{\alpha_t}}
+\left(x_t-\frac{\beta_t}{\sqrt{1-\bar\alpha_t}}\epsilon_\theta(x_t,t)\right)+\sigma_tz.
 $$
 
 当 $t>1$ 时，每次重新抽取 $z\sim\mathcal N(0,I)$；最后一步令 $z=0$，输出均值。**反向传播**是训练参数的方法，**反向扩散**是生成样本的过程，两者发生在不同阶段。
@@ -458,14 +493,14 @@ $$
 对 $t\ge2$，后验与模型都是协方差为标量乘 $I$ 的高斯分布，其 KL 可以直接写出：
 
 $$
-\begin{aligned}
 L_{t-1}
-&=\frac{\|\tilde\mu_t-\mu_\theta\|^2}{2\sigma_t^2}\\
-&\quad+\frac D2\left(\frac{\tilde\beta_t}{\sigma_t^2}-1+\log\frac{\sigma_t^2}{\tilde\beta_t}\right).
-\end{aligned}
+=\frac{\|\tilde\mu_t-\mu_\theta\|^2}{2\sigma_t^2}
++\frac D2\left(\frac{\tilde\beta_t}{\sigma_t^2}-1+\log\frac{\sigma_t^2}{\tilde\beta_t}\right).
 $$
 
-方差固定后，第二行与 $\theta$ 无关，因此优化分布差异就等价于优化均值误差。将两个均值的噪声表达式相减：
+第一项衡量均值的差异，第二项衡量方差的差异，两部分共同构成训练损失。若学习方差，方差相关项也需要参与优化；简化噪声损失本身没有方差预测项，需要另有相应的概率目标来训练方差分支。
+
+采用固定方差后，第二项与 $\theta$ 无关，优化分布差异就等价于优化均值误差。将两个均值的噪声表达式相减：
 
 $$
 \tilde\mu_t-\mu_\theta
@@ -549,11 +584,9 @@ score 是对输入图像求导得到的对数密度梯度。把图像空间中�
 已知原图时，加噪分布是高斯，对它求导很容易：
 
 $$
-\begin{aligned}
 \nabla_{x_t}\log q(x_t\mid x_0)
-&=-\frac{x_t-\sqrt{\bar\alpha_t}x_0}{1-\bar\alpha_t}\\
-&=-\frac{\epsilon}{\sqrt{1-\bar\alpha_t}}.
-\end{aligned}
+=-\frac{x_t-\sqrt{\bar\alpha_t}x_0}{1-\bar\alpha_t}
+=-\frac{\epsilon}{\sqrt{1-\bar\alpha_t}}.
 $$
 
 网络学到的最优噪声预测是 $\mathbb E[\epsilon\mid x_t,t]$，恰好可以换算成边缘分布的 score。因此定义：

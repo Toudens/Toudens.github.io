@@ -8,7 +8,7 @@ weight: "5"
   {{< travel-album-card
     title="良渚博物院"
     link="/travel/hangzhou/liangzhu"
-    image="https://toudens-images.s3.bitiful.net/liangzhu/DSC00622.jpg?w=1200&q=80&fmt=webp"
+    image="https://toudens-images.s3.bitiful.net/liangzhu/DSC00622.jpg?w=1200&q=100&fmt=webp"
   >}}
   {{< travel-album-card
     title="钱塘夜景"

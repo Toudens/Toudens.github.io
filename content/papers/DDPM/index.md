@@ -10,6 +10,31 @@ articleStyle: ddpm
 
 {{< article-summary >}}
 DDPM 要解决的是如何从随机噪声生成图像。全文先设计逐步加噪的过程，使图像分布接近容易采样的标准高斯；再借助训练时已知的原图，推导反向后验，为网络提供学习目标。关键结论是：预测反向过程的均值，可以转化为预测加入的噪声；调整各步权重后，变分训练目标也可简化为噪声预测的平方误差。网络学会预测噪声后，就能从高斯噪声出发，按预测均值与设定方差逐步采样，生成图像。后面的分数匹配解释去噪与概率梯度的联系，实验和应用则展示生成效果，以及这套方法如何用于渐进生成、压缩和插值。（由 GPT-6 总结）
+
+**关键公式**
+
+$$
+\alpha_t=1-\beta_t,\qquad\bar\alpha_t=\prod_{s=1}^t\alpha_s,\qquad\epsilon_t,\epsilon,z\sim\mathcal N(0,I).
+$$
+
+$$
+\begin{aligned}
+x_t&=\sqrt{\alpha_t}\,x_{t-1}+\sqrt{\beta_t}\,\epsilon_t,\\
+x_t&=\sqrt{\bar\alpha_t}\,x_0+\sqrt{1-\bar\alpha_t}\,\epsilon.
+\end{aligned}
+$$
+
+$$
+L_{\mathrm{simple}}=\mathbb E_{x_0,t,\epsilon}\!\left[\|\epsilon-\epsilon_\theta(x_t,t)\|^2\right].
+$$
+
+$$
+\begin{aligned}
+\mu_\theta(x_t,t)&=\frac1{\sqrt{\alpha_t}}\left(x_t-\frac{\beta_t}{\sqrt{1-\bar\alpha_t}}\epsilon_\theta(x_t,t)\right),\\
+x_{t-1}&=\mu_\theta(x_t,t)+\sigma_tz.
+\end{aligned}
+$$
+
 {{< /article-summary >}}
 
 ### 1. 基本思路
@@ -403,49 +428,70 @@ $\hat x_0$ 估计最终的清晰原图，$\mu_\theta$ 则用于生成相邻的�
 
 #### 3.4 方差选择
 
-均值的来源已经明确，还需确定采样项 $\sigma_tz$ 的大小。这里 $\sigma_t^2$ 是**模型采用的反向方差**，可以预先固定，让网络只学习均值。下面是它的两种可选设定，均用于 $t>1$。
+加噪日程中的 $\alpha_t,\beta_t$ 预先固定，采样方差 $\sigma_t^2$ 也可由它们算出。下面按一维推导 $t>1$ 时的两种选择。
 
-**采用后验方差。** 直接使用上一节算出的结果：
+**两部分波动。** 固定 $x_t$，按可能的原图分组：每组内部的后验方差都是 $\tilde\beta_t$，不同组的均值则由下式给出：
+
+$$
+\tilde\mu_t(x_t,x_0)=\frac{\sqrt{\bar\alpha_{t-1}}\beta_t}{1-\bar\alpha_t}x_0+\frac{\sqrt{\alpha_t}(1-\bar\alpha_{t-1})}{1-\bar\alpha_t}x_t.
+$$
+
+在固定 $x_t$ 的条件下应用全方差公式，再代入后验方差和均值：
+
+$$
+\begin{aligned}
+\operatorname{Var}(x_{t-1}\mid x_t)
+&=\mathbb E[\operatorname{Var}(x_{t-1}\mid x_t,x_0)\mid x_t]+\operatorname{Var}(\mathbb E[x_{t-1}\mid x_t,x_0]\mid x_t)\\
+&=\underbrace{\tilde\beta_t}_{\text{类内方差}}+\underbrace{\operatorname{Var}(\tilde\mu_t(x_t,x_0)\mid x_t)}_{\text{类间均值的方差}}\\
+&=\tilde\beta_t+\operatorname{Var}\!\left(\frac{\sqrt{\bar\alpha_{t-1}}\beta_t}{1-\bar\alpha_t}x_0\,\middle|\,x_t\right)\\
+&=\tilde\beta_t+\frac{\bar\alpha_{t-1}\beta_t^2}{(1-\bar\alpha_t)^2}\operatorname{Var}(x_0\mid x_t).
+\end{aligned}
+$$
+
+后两步先去掉均值中固定的 $x_t$ 项，再使用 $\operatorname{Var}(aX+b)=a^2\operatorname{Var}(X)$。两部分分别对应同一原图下的波动，以及原图尚未确定带来的均值差异。
+
+**采用后验方差。** 取类内部分：
 
 $$
 \sigma_t^2=\tilde\beta_t=\frac{1-\bar\alpha_{t-1}}{1-\bar\alpha_t}\beta_t.
 $$
 
-它在已知原图时是精确的后验方差；如果数据只有一张固定原图，它也就是真实反向方差。一般的生成任务包含许多原图，只知道 $x_t$ 时还存在原图未确定带来的波动，因此将它用于生成是一种固定近似。
+原图确定时，$\operatorname{Var}(x_0\mid x_t)=0$，这就是真实反向方差；一般生成任务采用这个值，相当于省略了类间项。
 
-**采用前向方差。** 另一种做法是沿用加噪日程中的数值：
+**采用前向方差。** 以 $x_0\sim\mathcal N(0,1)$ 为参照，此时原图的条件方差为：
+
+$$
+\operatorname{Var}(x_0\mid x_t)=1-\bar\alpha_t.
+$$
+
+> [!Note] **条件方差的计算**
+> 已知 $x_0\sim\mathcal N(0,1)$、$x_t\mid x_0\sim\mathcal N(\sqrt{\bar\alpha_t}x_0,1-\bar\alpha_t)$。由贝叶斯公式，将两个高斯密度相乘，再对 $x_0$ 配方：
+>
+> $$\begin{aligned}q(x_0\mid x_t)&\propto\exp\!\left[-\frac12\left(x_0^2+\frac{(x_t-\sqrt{\bar\alpha_t}x_0)^2}{1-\bar\alpha_t}\right)\right]\\&\propto\exp\!\left[-\frac{(x_0-\sqrt{\bar\alpha_t}x_t)^2}{2(1-\bar\alpha_t)}\right].\end{aligned}$$
+>
+> 配方后省去只含固定 $x_t$ 的因子。对照高斯密度，条件均值为 $\sqrt{\bar\alpha_t}x_t$，条件方差为 $1-\bar\alpha_t$。
+>
+> 此时 $x_0,x_t$ 联合服从高斯分布，两端都是标准高斯，协方差为 $\sqrt{\bar\alpha_t}$。交换两者，均值和协方差不变，联合分布也不变，因此前后向条件分布形式相同。同一过程的前后向使用相同的 $\bar\alpha_t$，才能保留这份关联。
+
+将它代入类间项，两部分之和为：
+
+$$
+\begin{aligned}
+\operatorname{Var}(x_{t-1}\mid x_t)
+&=\underbrace{\tilde\beta_t}_{\text{类内}}+\underbrace{\frac{\bar\alpha_{t-1}\beta_t^2}{1-\bar\alpha_t}}_{\text{类间}}\\
+&=\frac{\beta_t(1-\bar\alpha_{t-1}+\bar\alpha_{t-1}\beta_t)}{1-\bar\alpha_t}=\beta_t.
+\end{aligned}
+$$
+
+化简使用了 $1-\beta_t=\alpha_t$ 和 $\alpha_t\bar\alpha_{t-1}=\bar\alpha_t$。因此，标准高斯参照下，计入类间波动后的反向方差恰好是 $\beta_t$，得到第二种设定：
 
 $$
 \sigma_t^2=\beta_t=1-\alpha_t.
 $$
 
-它的依据是标准高斯这一参照情形：若 $x_0\sim\mathcal N(0,I)$，前向过程使各步仍为标准高斯，真实反向分布恰为：
+对图像向量，两种采样协方差分别为 $\tilde\beta_tI$ 和 $\beta_tI$，标准高斯参照相应为 $\mathcal N(0,I)$。真实图像生成采用这两种固定近似；加噪后期接近标准高斯，使后一种选择也有实际依据。
 
-$$
-q(x_{t-1}\mid x_t)=\mathcal N\!\left(x_{t-1};\sqrt{\alpha_t}x_t,\beta_tI\right).
-$$
-
-所以在这种情况下，反向方差也等于 $\beta_t$。对真实图像，它同样是固定近似；加噪后期的分布接近标准高斯，也使这个参照有实际意义。
-
-> [!Note] **标准高斯参照下的配方**
-> 此时 $q(x_{t-1})=\mathcal N(0,I)$。将它与单步加噪密度代入贝叶斯公式，展开并配方：
->
-> $$\begin{aligned}-2\log q(x_{t-1}\mid x_t)&=\|x_{t-1}\|^2+\frac{\|x_t-\sqrt{\alpha_t}x_{t-1}\|^2}{\beta_t}+C\\&=\frac{\|x_{t-1}-\sqrt{\alpha_t}x_t\|^2}{\beta_t}+C'.\end{aligned}$$
->
-> $C,C'$ 与 $x_{t-1}$ 无关。对照高斯密度，即可读出均值 $\sqrt{\alpha_t}x_t$ 和协方差 $\beta_tI$。
-
-两种取值满足 $\tilde\beta_t<\beta_t$；当累计噪声较大时通常接近，在清晰图像附近差别更明显。早期实验中，两种固定选择得到了相似的生成效果。
-
-> [!Note] **全协方差公式**
-> 与前面的全方差分解相同，先固定原图，再考虑不同原图对应的均值波动，可得：
->
-> $$\operatorname{Cov}(x_{t-1}\mid x_t)=\tilde\beta_tI+\frac{\bar\alpha_{t-1}\beta_t^2}{(1-\bar\alpha_t)^2}\operatorname{Cov}(x_0\mid x_t).$$
->
-> 第一项是已知原图时的后验协方差；第二项来自原图尚未确定，系数是后验均值中 $x_0$ 系数的平方。
-
-真实反向协方差随 $x_t$ 变化，其中的 $\operatorname{Cov}(x_0\mid x_t)$ 依赖未知的数据分布，难以直接计算。
-
-**固定方差**将它简化为只随 $t$ 变化的 $\sigma_t^2I$，两种取值都可由加噪日程预先算好，训练便集中在噪声预测上；**学习方差**则让网络额外预测条件波动，需要相应的概率训练目标。选好 $\sigma_t^2$ 后，它与预测均值一起确定每步的采样分布。
+两种取值满足 $\tilde\beta_t<\beta_t$，累计噪声较大时通常接近，在清晰图像附近差别更明显。原始 DDPM 的实验中，两种固定选择得到了相似的生成效果。
 
 ### 4. 训练与生成
 

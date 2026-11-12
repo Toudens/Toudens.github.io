@@ -188,6 +188,8 @@
   },
   "active": "0453e28a1ef89566",
   "lastOpenFiles": [
+    "papers/DDPM/DDPM-overview.svg",
+    "papers/DDPM/DDPM-overview.png",
     "papers/_index.md",
     "papers/DDPM/DDPM-fig1-samples.png",
     "papers/DDPM/index.md",
@@ -224,7 +226,6 @@
     "travel/nanchang/ocean-park",
     "travel/nanchang/jx-museum",
     "travel/flower/_index.md",
-    "travel/hangzhou/_index.md",
     "papers/DDPM/DDPM-fig2-process.png",
     "papers/DDPM/DDPM-algorithms.png",
     "mathtech/infotheory/Ch-9/Ch-9-5.png",
@@ -232,7 +233,6 @@
     "mathtech/infotheory/Ch-9/Ch-9-4.png",
     "mathtech/infotheory/Ch-9/Ch-9-2.png",
     "mathtech/infotheory/Ch-9/Ch-9-1.png",
-    "mathtech/infotheory/Ch-8/Ch-8-3.png",
-    "mathtech/infotheory/Ch-8/Ch-8-2.png"
+    "mathtech/infotheory/Ch-8/Ch-8-3.png"
   ]
 }

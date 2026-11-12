@@ -189,7 +189,7 @@ $$
 
 #### 3.1 随机采样
 
-反向过程需要根据 $x_t$ 生成合理的前一步。DDPM 用高斯分布近似真实的反向分布 $q(x_{t-1}\mid x_t)$：
+即使当前图像 $x_t$ 已知且固定，前一步 $x_{t-1}$ 仍有多种可能：不同的前一步可以配合不同噪声，得到同一个 $x_t$。反向过程要描述这些可能状态的分布，并从中抽取一个。DDPM 用高斯分布近似真实的反向分布 $q(x_{t-1}\mid x_t)$：
 
 $$
 p_\theta(x_{t-1}\mid x_t)
@@ -197,7 +197,7 @@ p_\theta(x_{t-1}\mid x_t)
 \qquad t>1.
 $$
 
-$\mu_\theta$ 是模型预测的**条件均值**，对应前一步各种可能状态的平均位置；$\sigma_t$ 是采样的标准差，$\sigma_t^2$ 才是方差。网络输入 $x_t,t$，输出累计噪声的预测 $\epsilon_\theta(x_t,t)$，再将它换算成均值：
+$\mu_\theta$ 给出这些可能状态的**平均位置**，$\sigma_t$ 描述各分量围绕均值的分散程度。网络输入 $x_t,t$，输出累计噪声的预测 $\epsilon_\theta(x_t,t)$，再将它换算成均值：
 
 $$
 \boxed{\mu_\theta(x_t,t)
@@ -212,23 +212,37 @@ x_{t-1}=\mu_\theta(x_t,t)+\sigma_tz,
 \qquad z\sim\mathcal N(0,I).
 $$
 
-同一张噪声图可能来自不同的原图和加噪记录。即使网络给出最佳噪声预测，也无法确定这次实际加入的是哪一份噪声，因此算出的是前一步的平均位置；$\sigma_tz$ 再从这个位置附近抽取一种可能状态。
+平方误差训练使网络学习可能噪声的条件平均值，因此即使网络学准，算出的也是前一步的均值。$\sigma_t$ 决定采样的分散程度，随机抽取的 $z$ 决定这次具体取到哪里；这样得到一个可能的 $x_{t-1}$，供下一步继续去噪。
+
+下面用全方差公式解释只输出均值会少掉哪些波动。这里考察许多次生成的总体统计：每次输入的 $x_t$ 都是固定的，不同次生成可以有不同的 $x_t$。
 
 > [!Note] **全方差公式**
 > 总方差由“条件均值之间的方差”和“条件内部方差的平均”组成：
 >
 > $$\operatorname{Var}(Y)=\operatorname{Var}(\mathbb E[Y\mid X])+\mathbb E[\operatorname{Var}(Y\mid X)].$$
 >
-> **证明：** 记 $m=\mathbb E[Y\mid X]$。先按条件取平均，再取总体平均，结果不变，因此：
+> **证明：** 记 $\mu=\mathbb E[Y]$。将总偏差拆成“条件均值的偏差”和“条件内部的残差”：
 >
-> $$\begin{aligned}\mathbb E[\operatorname{Var}(Y\mid X)]&=\mathbb E[Y^2]-\mathbb E[m^2],\\\operatorname{Var}(m)&=\mathbb E[m^2]-(\mathbb E[Y])^2.\end{aligned}$$
+> $$Y-\mu=(\mathbb E[Y\mid X]-\mu)+(Y-\mathbb E[Y\mid X]).$$
 >
-> 两式相加，右边即为 $\operatorname{Var}(Y)$，得证。
+> 两边平方后取期望：
+>
+> $$\begin{aligned}\operatorname{Var}(Y)&=\mathbb E[(\mathbb E[Y\mid X]-\mu)^2]+\mathbb E[(Y-\mathbb E[Y\mid X])^2]\\&\quad+2\mathbb E[(\mathbb E[Y\mid X]-\mu)(Y-\mathbb E[Y\mid X])].\end{aligned}$$
+>
+> 给定 $X$ 时，$\mathbb E[Y\mid X]-\mu$ 已确定，而残差的条件均值为零，因此交叉项消失：
+>
+> $$\begin{aligned}&\mathbb E[(\mathbb E[Y\mid X]-\mu)(Y-\mathbb E[Y\mid X])]\\&\quad=\mathbb E\!\left[(\mathbb E[Y\mid X]-\mu)\underbrace{\mathbb E[Y-\mathbb E[Y\mid X]\mid X]}_{0}\right]=0.\end{aligned}$$
+>
+> 因为 $\mathbb E[\mathbb E[Y\mid X]]=\mu$，剩下的第一项是条件均值的方差；第二项先按 $X$ 取条件期望，就是条件方差的平均。于是：
+>
+> $$\operatorname{Var}(Y)=\operatorname{Var}(\mathbb E[Y\mid X])+\mathbb E[\operatorname{Var}(Y\mid X)].$$
+>
+> 可加性来自交叉项为零，不要求这两部分相互独立。
 
-这里取 $X=x_t$、$Y=x_{t-1}^{(i)}$，两部分分别是：
+这里以整张 $x_t$ 为已知信息，只考察前一步的第 $i$ 个像素通道，即取 $X=x_t$、$Y=x_{t-1}^{(i)}$。两部分分别是：
 
 - **条件均值之间的方差**：不同 $x_t$ 对应的前一步条件均值之间的方差。网络学准时，近似为 $\operatorname{Var}(\mu_\theta^{(i)}(x_t,t))$。
-- **条件内部方差的平均**：固定 $x_t$ 后，前一步像素在其条件均值周围仍有的方差，再对不同 $x_t$ 取平均。这是 $\sigma_t^2$ 要近似的部分。
+- **条件内部方差的平均**：固定一张 $x_t$，计算可能的前一步像素围绕均值的方差，再对不同 $x_t$ 取平均。固定的 $\sigma_t^2$ 用来近似这部分波动。
 
 因此，网络学到正确条件均值时，全方差公式给出：
 

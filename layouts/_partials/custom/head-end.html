@@ -10,11 +10,11 @@
 {{ end }}
 {{ $navigationStyle := resources.Get "css/navigation.css" | minify | fingerprint }}
 <link rel="stylesheet" href="{{ $navigationStyle.RelPermalink }}" integrity="{{ $navigationStyle.Data.Integrity }}" />
+{{ $articleAnchors := resources.Get "js/article-anchors.js" | minify | fingerprint }}
+<script src="{{ $articleAnchors.RelPermalink }}" integrity="{{ $articleAnchors.Data.Integrity }}" defer></script>
 {{ if eq .Params.articleStyle "ddpm" }}
   {{ $articleStyle := resources.Get "css/ddpm.css" | minify | fingerprint }}
   <link rel="stylesheet" href="{{ $articleStyle.RelPermalink }}" integrity="{{ $articleStyle.Data.Integrity }}" />
-  {{ $articleScript := resources.Get "js/ddpm-typography.js" | minify | fingerprint }}
-  <script src="{{ $articleScript.RelPermalink }}" integrity="{{ $articleScript.Data.Integrity }}" defer></script>
 {{ end }}
 {{ if .HasShortcode "travel-album-card" }}
   {{ $galleryStyle := resources.Get "css/travel-gallery.css" | minify | fingerprint }}

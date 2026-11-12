@@ -1,6 +1,6 @@
 {{- $page := . -}}
 {{- $root := .FirstSection -}}
-<aside id="toudens-sidebar" class="hextra-sidebar-container toudens-sidebar hx:max-md:[transform:translate3d(0,-100%,0)]" aria-label="站点导航">
+<aside id="toudens-sidebar" class="hextra-sidebar-container toudens-sidebar" aria-label="站点导航">
   <a class="toudens-brand" href="{{ site.Home.RelPermalink }}" aria-label="返回首页">
     <span>{{ site.Title }}</span>
   </a>
@@ -40,3 +40,4 @@
     {{ partial "journal/appearance.html" . }}
   </div>
 </aside>
+<div class="toudens-sidebar-backdrop" aria-hidden="true" hidden></div>

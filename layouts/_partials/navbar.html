@@ -1,7 +1,8 @@
 <header class="hextra-nav-container toudens-topbar">
   <nav aria-label="页面工具">
     <button type="button" class="hextra-hamburger-menu toudens-menu-button" aria-label="展开导航" aria-expanded="false" aria-controls="toudens-sidebar">
-      {{ partial "journal/icon.html" "menu" }}
+      <span class="toudens-menu-open">{{ partial "journal/icon.html" "menu" }}</span>
+      <span class="toudens-menu-close">{{ partial "journal/icon.html" "close" }}</span>
     </button>
     <ol class="toudens-location" aria-label="当前位置">
       {{ if not .IsHome }}

@@ -1,0 +1,22 @@
+{{- $body := replaceRE `(?s)\{\{<\s*article-summary\s*>\}\}.*?\{\{<\s*/article-summary\s*>\}\}` "" .Page.RawContent -}}
+{{- $imageCount := add (len (findRE `(?i)<img\b[^>]*>` $body)) (len (findRE `!\[[^\]]*\]\([^)]+\)` $body)) -}}
+{{- $formulaCount := div (len (findRE `\$\$` $body)) 2 -}}
+{{- $text := replaceRE `(?s)\$\$.*?\$\$` "" $body -}}
+{{- $text = replaceRE `\$[^$\n]+\$` "" $text -}}
+{{- $text = replaceRE `(?m)^>\s*\[![^\]]+\]` "" $text -}}
+{{- $text = replaceRE `!?\[([^\]]*)\]\([^)]+\)` "$1" $text | plainify -}}
+{{- $wordCount := len (findRE `[\p{Han}]|[A-Za-z0-9]+(?:['’-][A-Za-z0-9]+)*` $text) -}}
+{{- $minutes := add (div (float $wordCount) 250.0) (mul (float $formulaCount) 0.5) -}}
+{{- $readingTime := mul (int (math.Ceil (div $minutes 5.0))) 5 -}}
+<aside class="ddpm-summary" aria-label="文章概览">
+  <p class="ddpm-summary-title">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M8 3h8l4 4v14H4V3h4Zm8 0v5h4M8 12h8m-8 4h8" /></svg>
+    Summary
+  </p>
+  <div class="ddpm-summary-body">{{ .Page.RenderString (dict "display" "block") .Inner }}</div>
+  <div class="ddpm-summary-stats">
+    <span title="正文汉字及英文单词，不含公式">正文约 {{ lang.FormatNumber 0 $wordCount }} 字</span>
+    <span>{{ $imageCount }} 张图片</span>
+    <span title="按每分钟 250 字，并为每个行间公式预留约半分钟估算">预计阅读约 {{ $readingTime }} 分钟</span>
+  </div>
+</aside>

@@ -140,9 +140,16 @@
 .toudens-search .hextra-search-no-result { display: block; padding: 18px 12px; color: var(--site-muted); font-size: 14px; text-align: center; }
 .toudens-search .hextra-search-status { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .toudens-menu-button { display: none; padding: 8px; border: 1px solid var(--site-line); border-radius: 9px; background: var(--site-panel); color: var(--site-ink); cursor: pointer; }
+.toudens-menu-button:hover { background: var(--site-hover); }
+.toudens-menu-button .toudens-menu-close,
+.toudens-menu-button[aria-expanded="true"] .toudens-menu-open { display: none; }
+.toudens-menu-button[aria-expanded="true"] .toudens-menu-close { display: block; }
+.toudens-sidebar-backdrop { position: fixed; inset: var(--site-header-bottom) 0 0; z-index: 20; background: rgb(0 0 0 / .18); }
+.toudens-sidebar-backdrop[hidden] { display: none; }
+.dark .toudens-sidebar-backdrop { background: rgb(0 0 0 / .4); }
 .toudens-page { flex: 1; min-height: 0; padding: var(--site-page-gap) 28px; }
 .toudens-page > .hextra-max-page-width { gap: 24px; height: 100%; max-width: 1256px; margin-inline: 0 auto; align-items: flex-start; }
-.toudens-page > .hextra-max-page-width > article { display: block; height: 100%; min-height: 0; overflow: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: var(--site-line) transparent; padding: 0; border: 1px solid var(--site-line); border-radius: var(--site-radius); background: var(--site-panel); }
+.toudens-page > .hextra-max-page-width > article { position: relative; display: block; height: 100%; min-height: 0; overflow: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: var(--site-line) transparent; padding: 0; border: 1px solid var(--site-line); border-radius: var(--site-radius); background: var(--site-panel); }
 .toudens-page article > main { max-width: 880px; margin-inline: 0; padding: 24px 36px 40px; }
 .toudens-page .hextra-toc { position: static; align-self: flex-start; width: 264px; height: 100%; padding: 0; }
 .toudens-page .hextra-toc:not(:has(ul)) { display: none; }
@@ -222,9 +229,24 @@
 }
 @media (max-width: 1279px) {
   .toudens-page .hextra-toc { display: none; }
+  .toudens-workspace { margin-left: 0; }
+  .toudens-site .toudens-topbar { margin-inline: 28px; padding: 0 14px; }
+  .toudens-topbar nav { gap: 12px; }
+  .toudens-menu-button { display: block; flex-shrink: 0; }
+  .toudens-location { margin-left: 0; }
+  .toudens-site .toudens-sidebar {
+    inset: calc(var(--site-header-bottom) + 16px) auto 16px 28px;
+    width: 280px;
+    max-width: calc(100vw - 56px);
+    height: calc(100dvh - var(--site-header-bottom) - 32px);
+    transform: translateX(calc(-100% - 28px));
+    visibility: hidden;
+    transition: transform .2s ease;
+  }
+  .toudens-site .toudens-sidebar[aria-hidden="false"] { transform: translateX(0); visibility: visible; }
 }
 @media (max-width: 1023px) and (min-width: 768px) {
-  :root { --site-sidebar-width: 272px; }
+  .toudens-site .toudens-topbar { margin-inline: 20px; }
   .toudens-site .toudens-sidebar { padding-inline: 10px; }
   .toudens-brand { gap: 8px; font-size: 20px; }
   .toudens-location { margin-left: 20px; }
@@ -243,9 +265,7 @@
   .toudens-search { width: clamp(120px, 35vw, 200px); margin-right: 0; }
   .toudens-topbar .hextra-search-input { padding-right: 10px; }
   .toudens-topbar kbd { display: none; }
-  .toudens-site .toudens-sidebar { inset: var(--site-header-bottom) 0 0; width: 100%; height: calc(100dvh - var(--site-header-bottom)); padding: 18px; border: 0; transform: translateY(-120%); transition: transform .2s ease; }
-  .toudens-site .toudens-sidebar[aria-hidden="true"] { visibility: hidden; }
-  .toudens-site .toudens-sidebar[aria-hidden="false"] { transform: translateY(0); visibility: visible; }
+  .toudens-site .toudens-sidebar { inset-inline-start: 12px; width: calc(100vw - 24px); max-width: none; padding: 18px; }
   .toudens-categories { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .toudens-page { padding: 16px 12px 24px; }
   .toudens-page article > main { padding: 20px 18px 32px; }
@@ -255,7 +275,7 @@
 }
 @media print {
   .toudens-site { display: block; height: auto; overflow: visible; }
-  .toudens-sidebar, .toudens-topbar, .toudens-skip { display: none !important; }
+  .toudens-sidebar, .toudens-sidebar-backdrop, .toudens-topbar, .toudens-skip { display: none !important; }
   .toudens-workspace { display: block; margin: 0; }
   .toudens-page { padding: 0; }
   .toudens-page > .hextra-max-page-width { height: auto; }

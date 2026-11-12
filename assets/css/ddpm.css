@@ -1,19 +1,52 @@
 /* Loaded only by the DDPM article. Keep the site's shared column widths. */
-.content p,
-.content li {
-  text-wrap: pretty;
+.content .ddpm-summary {
+  margin: 1.25rem 0 1.75rem;
+  padding: 1rem 1.125rem;
+  border: 1px solid var(--site-line);
+  border-radius: 8px;
+  background: var(--site-hover);
+  color: var(--site-ink);
+  font-size: 0.9375rem;
+  line-height: 1.75;
+}
+
+.content .ddpm-summary p {
+  margin: 0;
+}
+
+.content .ddpm-summary-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--site-muted);
+  font-weight: 600;
+}
+
+.content .ddpm-summary-body {
+  margin-top: 0.625rem;
+}
+
+.content .ddpm-summary-body p + p {
+  margin-top: 0.5rem;
+}
+
+.content .ddpm-summary-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1rem;
+  margin-top: 0.875rem;
+  padding-top: 0.625rem;
+  border-top: 1px solid var(--site-line);
+  color: var(--site-muted);
+  font-size: 0.8125rem;
+}
+
+.content .ddpm-summary-stats span {
+  white-space: nowrap;
 }
 
 .content h3,
 .content h4 {
-  text-wrap: balance;
-}
-
-.content .ddpm-sentence-end {
-  white-space: nowrap;
-}
-
-.content p.ddpm-balance-end {
   text-wrap: balance;
 }
 

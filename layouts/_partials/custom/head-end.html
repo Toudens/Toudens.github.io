@@ -12,9 +12,13 @@
 <link rel="stylesheet" href="{{ $navigationStyle.RelPermalink }}" integrity="{{ $navigationStyle.Data.Integrity }}" />
 {{ $articleAnchors := resources.Get "js/article-anchors.js" | minify | fingerprint }}
 <script src="{{ $articleAnchors.RelPermalink }}" integrity="{{ $articleAnchors.Data.Integrity }}" defer></script>
-{{ if eq .Params.articleStyle "ddpm" }}
+{{ if or (eq .Params.articleStyle "ddpm") (.HasShortcode "article-summary") }}
   {{ $articleStyle := resources.Get "css/ddpm.css" | minify | fingerprint }}
   <link rel="stylesheet" href="{{ $articleStyle.RelPermalink }}" integrity="{{ $articleStyle.Data.Integrity }}" />
+{{ end }}
+{{ if eq .Params.articleStyle "attention" }}
+  {{ $attentionStyle := resources.Get "css/attention.css" | minify | fingerprint }}
+  <link rel="stylesheet" href="{{ $attentionStyle.RelPermalink }}" integrity="{{ $attentionStyle.Data.Integrity }}" />
 {{ end }}
 {{ if .HasShortcode "travel-album-card" }}
   {{ $galleryStyle := resources.Get "css/travel-gallery.css" | minify | fingerprint }}

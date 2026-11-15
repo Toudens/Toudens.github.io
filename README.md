@@ -101,6 +101,8 @@ draft: false
 
 栏目目录为 `mathtech/`（数理技术）、`papers/`（论文阅读）、`travel/`（旅行影集）和 `friends/`（友邻小站）。`index.md` 是普通文章；`_index.md` 是栏目或分组页，两者用途不同。
 
+论文阅读按专题组织首页入口和左侧目录，统一在 `data/paper_topics.yaml` 维护。已完成文章填写 `page`（如 `/papers/DDIM`）和论文名 `paper`，标题与链接由文章自动取得；规划条目填写 `title` 和 `paper`，仅在首页显示为无链接文字。同一文章可加入多个专题，正文仍只保留一份。首页用 `paper-topic id="diffusion"` 等短代码选择专题；左侧专题名称跳转到首页对应位置，箭头展开或收起文章列表。
+
 ## 4. 正文图片与文字长度
 
 日常插图使用相对路径，图片与文章同目录：
@@ -165,7 +167,7 @@ draft: false
 
 | 位置 | 当前规则 |
 | --- | --- |
-| 栏目左侧文章树 | 根据内容目录自动生成；按 `weight` 排序；草稿和配置了 `sidebar.exclude` 的项目不显示 |
+| 栏目左侧文章树 | 数理与旅行根据内容目录生成，按 `weight` 排序；论文按 `data/paper_topics.yaml` 专题顺序生成；草稿和配置了 `sidebar.exclude` 的文章不显示 |
 | 首页轮播 | 三个内容栏目中的非草稿普通文章，按 `lastmod` 倒序取最新 `6` 篇 |
 | 首页左侧最近更新 | 同样取最新 `6` 篇普通文章 |
 | 右侧更新日志 | 三个内容栏目中的非草稿普通文章，以及有正文但无子页面的相册分组页，按 `lastmod` 倒序取最新 `12` 篇 |
@@ -190,6 +192,7 @@ draft: false
 | 首页选哪些文章、显示几篇 | `layouts/magazine-home.html` |
 | 更新日志文章范围、数量、日期显示 | `layouts/_partials/journal/timeline.html` |
 | 左侧文章树、首页左侧最近更新 | `layouts/_partials/journal/sidebar.html`、`tree.html` |
+| 论文专题首页及侧栏的分组、文章顺序 | `data/paper_topics.yaml`；渲染见 `layouts/shortcodes/paper-topic.html`、`layouts/_partials/journal/papers-tree.html` |
 | 封面路径及默认图规则 | `layouts/_partials/journal/cover.html` |
 | 顶栏搜索与当前位置结构 | `layouts/_partials/navbar.html`；样式在 `navigation.css` |
 | 四个栏目名称和站名 | `hugo.toml`，栏目标题还需同步各栏目 `_index.md`，首页和更新日志中的栏目标签也有对应映射 |

@@ -1,0 +1,26 @@
+/* Keep connected explanations close while retaining the site's text size and colors. */
+.toudens-page .content > p {
+  margin-top: 1rem;
+}
+
+.toudens-page .content > h3 {
+  margin-top: 1.75rem;
+}
+
+.toudens-page .content > h4 {
+  margin-top: 1.25rem;
+}
+
+.toudens-page .content > h3 + h4,
+.toudens-page .content > h3 + p,
+.toudens-page .content > h4 + p {
+  margin-top: 0.75rem;
+}
+
+.toudens-page .content > mjx-container[display="true"] {
+  margin-block: 0.75rem;
+}
+
+.toudens-page .content > .ddpm-figure {
+  margin-block: 1rem;
+}

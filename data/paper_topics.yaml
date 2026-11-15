@@ -1,0 +1,20 @@
+- id: diffusion
+  title: 扩散模型
+  items:
+    - page: /papers/DDPM
+      paper: Denoising Diffusion Probabilistic Models
+    - page: /papers/Transformer
+      paper: Attention Is All You Need
+    - page: /papers/DDIM
+      paper: Denoising Diffusion Implicit Models
+    - title: 无分类器引导 CFG
+      paper: Classifier-Free Diffusion Guidance
+    - title: 潜空间扩散模型 LDM
+      paper: High-Resolution Image Synthesis with Latent Diffusion Models
+    - title: 扩散 Transformer DiT
+      paper: Scalable Diffusion Models with Transformers
+- id: llm
+  title: 大语言模型
+  items:
+    - page: /papers/Transformer
+      paper: Attention Is All You Need

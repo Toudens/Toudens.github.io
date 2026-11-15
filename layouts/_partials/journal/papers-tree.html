@@ -1,0 +1,37 @@
+{{- $current := .current -}}
+{{- $root := .root -}}
+<ul>
+  {{ range site.Data.paper_topics }}
+    {{ $articles := slice }}
+    {{ $active := false }}
+    {{ range .items }}
+      {{ with .page }}
+        {{ with site.GetPage . }}
+          {{ if and (not .Draft) (not .Params.sidebar.exclude) }}
+            {{ $articles = $articles | append . }}
+            {{ if eq .RelPermalink $current.RelPermalink }}{{ $active = true }}{{ end }}
+          {{ end }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+    {{ $open := or $active (eq $current.RelPermalink $root.RelPermalink) }}
+    {{ $panelID := printf "paper-nav-%s" .id }}
+    <li class="toudens-paper-topic{{ if $open }} open{{ end }}">
+      <div class="toudens-tree-row">
+        <a href="{{ $root.RelPermalink }}#paper-topic-{{ .id }}">{{ .title }}</a>
+        {{ if $articles }}
+          <button class="hextra-sidebar-collapsible-button" type="button" aria-label="展开或收起{{ .title }}" aria-controls="{{ $panelID }}" aria-expanded="{{ $open }}">{{ partial "journal/icon.html" "chevron" }}</button>
+        {{ end }}
+      </div>
+      {{ if $articles }}
+        <div class="toudens-tree-children" id="{{ $panelID }}">
+          <ul>
+            {{ range $articles }}
+              <li><a href="{{ .RelPermalink }}"{{ if eq .RelPermalink $current.RelPermalink }} class="hextra-sidebar-active-item" aria-current="page"{{ end }}>{{ .LinkTitle }}</a></li>
+            {{ end }}
+          </ul>
+        </div>
+      {{ end }}
+    </li>
+  {{ end }}
+</ul>

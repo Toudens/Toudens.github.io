@@ -1,0 +1,14 @@
+{{- $topicID := .Get "id" -}}
+{{- range where site.Data.paper_topics "id" $topicID -}}
+{{- $id := printf "paper-topic-%s" .id -}}
+<section class="paper-topic" aria-labelledby="{{ $id }}">
+  <h2 id="{{ $id }}">{{ .title }}</h2>
+  <ul>
+    {{- range .items -}}
+      {{- $article := false -}}
+      {{- with .page }}{{ $article = site.GetPage . }}{{ end -}}
+      <li>{{ if $article }}{{ if not $article.Draft }}<a href="{{ $article.RelPermalink }}">{{ $article.LinkTitle }}</a>{{ else }}{{ $article.LinkTitle }}{{ end }}{{ else }}{{ .title }}{{ end }} — {{ .paper }}</li>
+    {{ end }}
+  </ul>
+</section>
+{{- end -}}

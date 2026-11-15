@@ -29,7 +29,11 @@
         {{ if .Pages }}
           <nav class="toudens-module toudens-tree" aria-label="{{ .Title }}文章目录">
             <a class="toudens-module-label" href="{{ .RelPermalink }}">{{ .Title }}</a>
-            {{ partial "journal/tree.html" (dict "node" . "current" $page "level" 0) }}
+            {{ if eq .Section "papers" }}
+              {{ partial "journal/papers-tree.html" (dict "root" . "current" $page) }}
+            {{ else }}
+              {{ partial "journal/tree.html" (dict "node" . "current" $page "level" 0) }}
+            {{ end }}
           </nav>
         {{ end }}
       {{ end }}

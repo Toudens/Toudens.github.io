@@ -70,6 +70,7 @@
 .toudens-tree li.open > .toudens-tree-row button svg { transform: rotate(90deg); }
 .toudens-tree-children { display: none; margin: 4px 0 4px 8px; padding-left: 6px; border-left: 1px solid var(--site-line); }
 .toudens-tree li.open > .toudens-tree-children { display: block; }
+.toudens-site .toudens-paper-topic > .toudens-tree-row > a { color: var(--site-ink); font-weight: 600; }
 .toudens-appearance { display: flex; flex-shrink: 0; align-items: center; justify-content: space-between; gap: 8px; padding: 12px 4px 0; border-top: 1px solid var(--site-line); color: var(--site-muted); font-size: 14px; }
 .toudens-theme-button { padding: 6px 8px; color: var(--site-ink); font-size: 14px; border: 1px solid var(--site-line); border-radius: 8px; }
 .toudens-theme-button:hover { background: var(--site-hover); }
@@ -175,6 +176,22 @@
 .toudens-site .hextra-footer > div:last-child { padding-block: 24px; }
 .toudens-site .section-entry-grid .hextra-feature-card { background: var(--site-panel); border-color: var(--site-line); border-radius: 12px; }
 .toudens-site .section-entry-grid .hextra-feature-card:hover { background: var(--site-hover); border-color: var(--site-muted); }
+.toudens-site .paper-topic {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  margin-top: 24px;
+  padding: 20px clamp(16px, 3vw, 24px);
+  border: 1px solid var(--site-line);
+  border-radius: 12px;
+  background: var(--site-panel);
+  color: var(--site-ink);
+}
+.toudens-site .paper-topic h2 { margin: 0 0 12px; padding: 0; border: 0; font-size: 20px; font-weight: 650; line-height: 1.5; }
+.toudens-site .paper-topic ul { margin: 0; padding-left: 1.25em; list-style: disc; }
+.toudens-site .paper-topic li { margin: 8px 0 0; padding: 0; line-height: 1.8; overflow-wrap: anywhere; }
+.toudens-site .paper-topic li:first-child { margin-top: 0; }
+.toudens-site .paper-topic a { color: var(--site-ink); text-underline-offset: 3px; }
 .toudens-site .journal-home, .toudens-site .journal-carousel {
   --journal-background: var(--site-canvas);
   --journal-ink: var(--site-ink);

@@ -1,5 +1,5 @@
 {{- $topicID := .Get "id" -}}
-{{- range where site.Data.paper_topics "id" $topicID -}}
+{{- range where hugo.Data.paper_topics "id" $topicID -}}
 {{- $id := printf "paper-topic-%s" .id -}}
 <section class="paper-topic" aria-labelledby="{{ $id }}">
   <h2 id="{{ $id }}">{{ .title }}</h2>

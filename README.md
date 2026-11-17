@@ -52,7 +52,7 @@ S = min(浏览器窗口宽度, 1560)
 | `1280px` 及以上 | 左侧导航常驻，可显示右侧栏；有右侧栏时，当前位置和搜索框分别成框，搜索框与右侧栏对齐 |
 | 小于 `1280px` | 左侧导航默认折叠，由顶栏按钮展开为 `280px` 宽的浮层；右侧栏隐藏，正文不再预留左侧栏空间，文字区按最大宽度居中 |
 | `768～1023px` | 页面左右留白各 `20px`，正文左右内边距各 `24px` |
-| 小于 `768px` | 导航浮层距窗口左右各 `12px`；页面左右留白各 `12px`，正文左右内边距各 `18px` |
+| 小于 `768px` | 导航浮层仍为 `280px` 宽、距左侧 `12px`，极窄窗口下随可用宽度缩小；页面左右留白各 `12px`，正文左右内边距各 `18px` |
 | 小于等于 `540px` | 胶片相册入口由两列变为一列 |
 
 正文框和右侧栏可以分别滚动，外框留在原位。调整长度时，不必让文章刚好塞进一屏。
@@ -92,6 +92,8 @@ draft: false
 | `weight` | 同级左侧文章树排序，数值越小越靠前；首页及更新日志不按它排序 |
 | `cover` | 首页轮播封面；同目录写文件名即可，也支持 `/images/xxx.jpg` 或完整图床 URL |
 | `coverPosition` | 可选，控制首页封面构图位置，如 `"50% 35%"`，默认 `"50% 50%"` |
+| `coverFit` | 可选，`contain` 为无额外内边距、完整显示封面，适合专门排版的原理图；`cover` 为铺满图片区并裁切边缘，适合照片 |
+| `coverMobile` | 可选，手机封面文件；小于 `768px` 时替换主封面，路径规则与 `cover` 相同，适合为流程图另做方形或竖向排版 |
 | `draft` | `true` 为草稿；正常构建不发布草稿 |
 | `comments` | 可选，`false` 关闭该页评论 |
 
@@ -101,7 +103,7 @@ draft: false
 
 栏目目录为 `mathtech/`（数理技术）、`papers/`（论文阅读）、`travel/`（旅行影集）和 `friends/`（友邻小站）。`index.md` 是普通文章；`_index.md` 是栏目或分组页，两者用途不同。
 
-论文阅读按专题组织首页入口和左侧目录，统一在 `data/paper_topics.yaml` 维护。已完成文章填写 `page`（如 `/papers/DDIM`）和论文名 `paper`，标题与链接由文章自动取得；规划条目填写 `title` 和 `paper`，仅在首页显示为无链接文字。同一文章可加入多个专题，正文仍只保留一份。首页用 `paper-topic id="diffusion"` 等短代码选择专题；左侧专题名称跳转到首页对应位置，箭头展开或收起文章列表。
+论文阅读首页按专题组织入口，在 `data/paper_topics.yaml` 维护。已完成文章填写 `page`（如 `/papers/DDIM`）和论文名 `paper`，标题与链接由文章自动取得；规划条目填写 `title` 和 `paper`，仅在首页显示为无链接文字。同一文章可加入多个专题，正文仍只保留一份。首页用 `paper-topic id="diffusion"` 等短代码选择专题；左侧目录独立按文章 `weight` 排序，平铺实际文章，每篇只列一次。
 
 ## 4. 正文图片与文字长度
 
@@ -139,7 +141,7 @@ draft: false
 | --- | --- |
 | 首页每张幻灯片高度 | 桌面 `clamp(440px, 62svh, 700px)`；手机 `clamp(380px, 56svh, 510px)` |
 | 首页摄影封面 | `object-fit: cover`，铺满画面，可能裁掉边缘；重要主体尽量留在画面中央 |
-| 首页论文／数理封面 | `object-fit: contain`，完整展示；预留标题区高度 `110px`，图片左右另有内边距 |
+| 首页论文／数理封面 | 默认 `object-fit: contain`，完整展示；预留标题区高度 `110px`，图片左右另有内边距。显式设置 `coverFit` 时取消额外内边距，标题区按实际内容占高；`contain` 完整显示，`cover` 可裁切边缘 |
 | 旅行影集总页轮播 | 高度 `clamp(320px, 42vw, 480px)`；手机 `300px` |
 | 城市胶片入口 | 默认两列，列间距 `26px`、行间距 `30px`；封面区域比例 `3:2`，使用 `cover` 裁切 |
 | 胶片入口较窄窗口 | 小于等于 `1100px` 时列间距 `18px`、行间距 `22px`；小于等于 `540px` 时单列 |
@@ -167,7 +169,7 @@ draft: false
 
 | 位置 | 当前规则 |
 | --- | --- |
-| 栏目左侧文章树 | 数理与旅行根据内容目录生成，按 `weight` 排序；论文按 `data/paper_topics.yaml` 专题顺序生成；草稿和配置了 `sidebar.exclude` 的文章不显示 |
+| 栏目左侧文章树 | 数理与旅行根据内容目录生成；论文平铺栏目内的实际文章，每篇只列一次；均按 `weight` 排序，草稿和配置了 `sidebar.exclude` 的文章不显示 |
 | 首页轮播 | 三个内容栏目中的非草稿普通文章，按 `lastmod` 倒序取最新 `6` 篇 |
 | 首页左侧最近更新 | 同样取最新 `6` 篇普通文章 |
 | 右侧更新日志 | 三个内容栏目中的非草稿普通文章，以及有正文但无子页面的相册分组页，按 `lastmod` 倒序取最新 `12` 篇 |
@@ -176,6 +178,8 @@ draft: false
 右侧更新日志显示在首页、有子页面的内容栏目页和友邻小站页；普通数理／论文文章保留阅读目录。旅行内容的普通文章目录目前隐藏。
 
 **只修改正文，不会自动更新 `lastmod`。** 需要让旧文章回到最近更新的前面时，手动填写新的 `lastmod`。日志只显示每篇文章最近一次已知日期，不保存历次修改记录。
+
+使用 `article-summary` 的文章在概览底部显示正文字数、图片数、预计阅读时间与最近更新时间。阅读时间统一按正文每分钟 `150` 字估算，向上取整到 `5` 分钟；字数不含公式，公式块数量不另加时。最近更新时间取 `lastmod`，未填写时使用发布日期。
 
 用 `_index.md` 建立的独立相册分组页目前可进入右侧更新日志，但不会进入只收录普通文章的首页轮播；希望进入首页的新相册推荐使用独立目录加 `index.md`。
 
@@ -192,7 +196,7 @@ draft: false
 | 首页选哪些文章、显示几篇 | `layouts/magazine-home.html` |
 | 更新日志文章范围、数量、日期显示 | `layouts/_partials/journal/timeline.html` |
 | 左侧文章树、首页左侧最近更新 | `layouts/_partials/journal/sidebar.html`、`tree.html` |
-| 论文专题首页及侧栏的分组、文章顺序 | `data/paper_topics.yaml`；渲染见 `layouts/shortcodes/paper-topic.html`、`layouts/_partials/journal/papers-tree.html` |
+| 论文专题首页与侧栏文章列表 | 首页专题及其顺序在 `data/paper_topics.yaml` 维护，由 `layouts/shortcodes/paper-topic.html` 渲染；侧栏由 `layouts/_partials/journal/papers-tree.html` 按文章 `weight` 生成 |
 | 封面路径及默认图规则 | `layouts/_partials/journal/cover.html` |
 | 顶栏搜索与当前位置结构 | `layouts/_partials/navbar.html`；样式在 `navigation.css` |
 | 四个栏目名称和站名 | `hugo.toml`，栏目标题还需同步各栏目 `_index.md`，首页和更新日志中的栏目标签也有对应映射 |
@@ -202,6 +206,8 @@ draft: false
 修改布局、配色时同时照顾浅色、深色和窄屏。颜色优先使用 `--site-panel`、`--site-ink`、`--site-muted`、`--site-line` 等变量；胶片使用自己的 `--film-*` 变量。
 
 ## 8. 预览与发布
+
+使用 Hugo Extended 0.156.0 或更新版本，GitHub Pages 构建固定为 0.165.0。站点模板通过 `hugo.Data` 读取 `data/`，避免使用已弃用的 `site.Data`。
 
 在项目根目录运行 `hugo serve` 可本地预览，地址以终端实际输出为准；当前常用地址是 `http://localhost:1313/`。大幅修改模板后若浏览器还显示旧结构，先完整刷新页面。
 

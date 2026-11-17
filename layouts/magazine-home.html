@@ -18,9 +18,12 @@
         <div class="journal-track" id="latest-stories" tabindex="0" aria-label="最新文章；可左右滑动或使用方向键切换">
           {{ range $index, $page := . }}
             {{ $cover := partial "journal/cover.html" $page }}
-            <article class="journal-slide{{ if in (slice "mathtech" "papers") $page.Section }} journal-slide-paper{{ end }}" data-slide aria-roledescription="幻灯片" aria-label="第 {{ add $index 1 }} 篇，共 {{ len $featured }} 篇">
+            <article class="journal-slide{{ if in (slice "mathtech" "papers") $page.Section }} journal-slide-paper{{ end }}{{ if in (slice "contain" "cover") $page.Params.coverFit }} journal-slide-fitted{{ end }}{{ if eq $page.Params.coverFit "cover" }} journal-slide-cropped{{ end }}" data-slide aria-roledescription="幻灯片" aria-label="第 {{ add $index 1 }} 篇，共 {{ len $featured }} 篇">
               <a class="journal-story" href="{{ $page.RelPermalink }}" aria-labelledby="slide-title-{{ $index }}">
-                <img class="journal-cover" src="{{ $cover.src }}" alt="{{ $cover.alt }}" style="object-position: {{ $page.Params.coverPosition | default `50% 50%` }};" {{ if eq $index 0 }}fetchpriority="high" loading="eager"{{ else }}loading="lazy"{{ end }} decoding="async" />
+                <picture class="journal-cover-frame">
+                  {{ with $cover.mobile }}<source media="(max-width: 767px)" srcset="{{ . }}" />{{ end }}
+                  <img class="journal-cover" src="{{ $cover.src }}" alt="{{ $cover.alt }}" style="object-position: {{ $page.Params.coverPosition | default `50% 50%` }};" {{ if eq $index 0 }}fetchpriority="high" loading="eager"{{ else }}loading="lazy"{{ end }} decoding="async" />
+                </picture>
                 <div class="journal-caption">
                   <div class="journal-story-meta">
                     <span>{{ index (dict "mathtech" "数理技术" "papers" "论文阅读" "travel" "旅行影集") $page.Section }}</span>

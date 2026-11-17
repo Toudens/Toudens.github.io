@@ -17,4 +17,12 @@
     {{- $src = printf "%s%s" .RelPermalink (strings.TrimPrefix "./" $src) -}}
   {{- end -}}
 {{- end -}}
-{{- return (dict "src" $src "alt" $alt) -}}
+{{- $mobile := .Params.coverMobile | default "" -}}
+{{- if and $mobile (not (or (hasPrefix $mobile "https://") (hasPrefix $mobile "http://") (hasPrefix $mobile "/"))) -}}
+  {{- with .Resources.GetMatch (strings.TrimPrefix "./" $mobile) -}}
+    {{- $mobile = .RelPermalink -}}
+  {{- else -}}
+    {{- $mobile = printf "%s%s" .RelPermalink (strings.TrimPrefix "./" $mobile) -}}
+  {{- end -}}
+{{- end -}}
+{{- return (dict "src" $src "alt" $alt "mobile" $mobile) -}}

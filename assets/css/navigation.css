@@ -70,7 +70,6 @@
 .toudens-tree li.open > .toudens-tree-row button svg { transform: rotate(90deg); }
 .toudens-tree-children { display: none; margin: 4px 0 4px 8px; padding-left: 6px; border-left: 1px solid var(--site-line); }
 .toudens-tree li.open > .toudens-tree-children { display: block; }
-.toudens-site .toudens-paper-topic > .toudens-tree-row > a { color: var(--site-ink); font-weight: 600; }
 .toudens-appearance { display: flex; flex-shrink: 0; align-items: center; justify-content: space-between; gap: 8px; padding: 12px 4px 0; border-top: 1px solid var(--site-line); color: var(--site-muted); font-size: 14px; }
 .toudens-theme-button { padding: 6px 8px; color: var(--site-ink); font-size: 14px; border: 1px solid var(--site-line); border-radius: 8px; }
 .toudens-theme-button:hover { background: var(--site-hover); }
@@ -209,6 +208,7 @@
 .toudens-site .journal-track { border-radius: var(--site-radius); }
 .toudens-site .journal-slide { background: #252525; }
 .toudens-site .journal-slide-paper { background: #e9e9e9; }
+.toudens-site .journal-slide-fitted { background: #fff; }
 .toudens-site .journal-caption { background: rgb(40 40 40 / .68); }
 @media (min-width: 1280px) {
   /* Two independent panels align with the article and the visible right rail. */
@@ -283,8 +283,7 @@
   .toudens-search { width: clamp(120px, 35vw, 200px); margin-right: 0; }
   .toudens-topbar .hextra-search-input { padding-right: 10px; }
   .toudens-topbar kbd { display: none; }
-  .toudens-site .toudens-sidebar { inset-inline-start: 12px; width: calc(100vw - 24px); max-width: none; padding: 18px; }
-  .toudens-categories { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .toudens-site .toudens-sidebar { inset-inline-start: 12px; max-width: calc(100vw - 24px); }
   .toudens-page { padding: 16px 12px 24px; }
   .toudens-page article > main { padding: 20px 18px 32px; }
   .toudens-site .journal-home { padding: 16px 12px 20px; }

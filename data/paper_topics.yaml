@@ -7,14 +7,42 @@
       paper: Attention Is All You Need
     - page: /papers/DDIM
       paper: Denoising Diffusion Implicit Models
-    - title: 无分类器引导 CFG
+    - page: /papers/CFG
       paper: Classifier-Free Diffusion Guidance
-    - title: 潜空间扩散模型 LDM
+    - page: /papers/LDM
       paper: High-Resolution Image Synthesis with Latent Diffusion Models
-    - title: 扩散 Transformer DiT
+    - page: /papers/ControlNet
+      paper: Adding Conditional Control to Text-to-Image Diffusion Models
+    - page: /papers/DiT
       paper: Scalable Diffusion Models with Transformers
+    - title: 流匹配 Flow Matching
+      paper: Flow Matching for Generative Modeling
+    - title: 整流流 Rectified Flow
+      paper: "Flow Straight and Fast: Learning to Generate and Transfer Data with Rectified Flow"
+    - title: 多模态扩散 Transformer SD3
+      paper: Scaling Rectified Flow Transformers for High-Resolution Image Synthesis
 - id: llm
   title: 大语言模型
   items:
     - page: /papers/Transformer
       paper: Attention Is All You Need
+    - title: 生成式预训练 GPT
+      paper: Improving Language Understanding by Generative Pre-Training
+    - title: 上下文学习 GPT-3
+      paper: Language Models are Few-Shot Learners
+    - title: 训练规模与数据 Chinchilla
+      paper: Training Compute-Optimal Large Language Models
+    - title: 基础语言模型 LLaMA
+      paper: "LLaMA: Open and Efficient Foundation Language Models"
+    - title: 低秩微调 LoRA
+      paper: "LoRA: Low-Rank Adaptation of Large Language Models"
+    - title: 指令微调与对齐 InstructGPT
+      paper: Training language models to follow instructions with human feedback
+    - title: 直接偏好优化 DPO
+      paper: "Direct Preference Optimization: Your Language Model is Secretly a Reward Model"
+    - title: 检索增强生成 RAG
+      paper: Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks
+    - title: 思维链 CoT
+      paper: Chain-of-Thought Prompting Elicits Reasoning in Large Language Models
+    - title: 推理强化学习 DeepSeek-R1
+      paper: "DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning"

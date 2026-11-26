@@ -4,6 +4,8 @@ type: docs
 date: 2026-11-26
 weight: 110
 cover: GPT-fig1-inputs.png
+coverMobile: GPT-fig1-architecture.png
+coverFit: figure
 draft: false
 ---
 

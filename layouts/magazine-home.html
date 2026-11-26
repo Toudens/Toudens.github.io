@@ -18,7 +18,8 @@
         <div class="journal-track" id="latest-stories" tabindex="0" aria-label="最新文章；可左右滑动或使用方向键切换">
           {{ range $index, $page := . }}
             {{ $cover := partial "journal/cover.html" $page }}
-            <article class="journal-slide{{ if in (slice "mathtech" "papers") $page.Section }} journal-slide-paper{{ end }}{{ if in (slice "contain" "cover") $page.Params.coverFit }} journal-slide-fitted{{ end }}{{ if eq $page.Params.coverFit "cover" }} journal-slide-cropped{{ end }}" data-slide aria-roledescription="幻灯片" aria-label="第 {{ add $index 1 }} 篇，共 {{ len $featured }} 篇">
+            {{ $fit := $page.Params.coverFit }}
+            <article class="journal-slide{{ if in (slice "mathtech" "papers") $page.Section }} journal-slide-paper{{ end }}{{ if in (slice "contain" "cover" "figure") $fit }} journal-slide-fitted{{ end }}{{ if eq $fit "cover" }} journal-slide-cropped{{ end }}{{ if eq $fit "figure" }} journal-slide-figure{{ end }}" data-slide aria-roledescription="幻灯片" aria-label="第 {{ add $index 1 }} 篇，共 {{ len $featured }} 篇">
               <a class="journal-story" href="{{ $page.RelPermalink }}" aria-labelledby="slide-title-{{ $index }}">
                 <picture class="journal-cover-frame">
                   {{ with $cover.mobile }}<source media="(max-width: 767px)" srcset="{{ . }}" />{{ end }}

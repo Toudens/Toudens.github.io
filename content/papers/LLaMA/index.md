@@ -4,6 +4,7 @@ type: docs
 date: 2026-11-26
 weight: 140
 cover: LLaMA-fig1-training-loss.svg
+coverFit: figure
 draft: false
 ---
 

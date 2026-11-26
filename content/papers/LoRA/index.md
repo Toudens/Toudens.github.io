@@ -4,7 +4,7 @@ type: docs
 date: 2026-11-26
 weight: 150
 cover: lora-figure-1.svg
-coverFit: contain
+coverFit: figure
 articleStyle: attention
 draft: false
 ---

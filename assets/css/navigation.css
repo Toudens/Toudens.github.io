@@ -210,6 +210,26 @@
 .toudens-site .journal-slide-paper { background: #e9e9e9; }
 .toudens-site .journal-slide-fitted { background: #fff; }
 .toudens-site .journal-caption { background: rgb(40 40 40 / .68); }
+.toudens-site .journal-slide-figure .journal-cover-frame {
+  padding: 28px 32px;
+  background: #fff;
+}
+.dark .toudens-site .journal-slide-figure .journal-cover-frame { background: #f0f0f0; }
+.toudens-site .journal-slide-figure .journal-caption {
+  padding: 16px 26px 18px;
+  color: var(--site-ink);
+  background: var(--site-canvas);
+  border-color: var(--site-line);
+  backdrop-filter: none;
+}
+.toudens-site .journal-slide-figure .journal-story-meta { color: var(--site-muted); letter-spacing: 0; }
+.toudens-site .journal-slide-figure .journal-caption h3 { font-size: 30px; letter-spacing: 0; }
+.toudens-site .journal-slide-figure .journal-read { font-size: 14px; gap: 10px; letter-spacing: 0; }
+@media (max-width: 767px) {
+  .toudens-site .journal-slide-figure .journal-cover-frame { padding: 18px 12px; }
+  .toudens-site .journal-slide-figure .journal-caption { padding: 14px 16px; }
+  .toudens-site .journal-slide-figure .journal-caption h3 { font-size: 23px; }
+}
 @media (min-width: 1280px) {
   /* Two independent panels align with the article and the visible right rail. */
   .toudens-site:is(:has(.toudens-timeline ul), :has(.toudens-workspace:not(.toudens-workspace-travel) .hextra-toc ul)) .toudens-topbar {

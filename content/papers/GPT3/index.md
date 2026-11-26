@@ -3,7 +3,8 @@ title: 上下文学习 GPT-3
 type: docs
 date: 2026-11-26
 weight: 120
-cover: GPT3-fig1-1-context.png
+cover: GPT3-fig1-2-in-context.png
+coverFit: figure
 draft: false
 ---
 
@@ -138,5 +139,5 @@ GPT‑3 在公开网络文本上预训练，评测题和答案也可能已经出
 
 ### 参考资料
 
-1. Brown et al. *Language Models are Few-Shot Learners*. NeurIPS 2020. [arXiv:2005.14165](https://arxiv.org/abs/2005.14165)。模型与评测见第 2 节，任务结果和数据重合分析见第 3、4 节，附录 G 展示实际提示。封面取自[原论文图 1.1](https://ar5iv.labs.arxiv.org/html/2005.14165#S1.F1)。
+1. Brown et al. *Language Models are Few-Shot Learners*. NeurIPS 2020. [arXiv:2005.14165](https://arxiv.org/abs/2005.14165)。模型与评测见第 2 节，任务结果和数据重合分析见第 3、4 节，附录 G 展示实际提示。封面取自[原论文图 1.2](https://ar5iv.labs.arxiv.org/html/2005.14165#S1.F2)。
 2. Lilian Weng. *Prompt Engineering*. 2023. [Lilian's Blog](https://lilianweng.github.io/posts/2023-03-15-prompt-engineering/#few-shot)。少样本一节用具体提示说明示例怎样传递任务要求，并整理了例子的选择和顺序对结果的影响。

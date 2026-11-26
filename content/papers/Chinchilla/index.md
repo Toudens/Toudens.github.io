@@ -4,6 +4,8 @@ type: docs
 date: 2026-11-26
 weight: 130
 cover: Chinchilla-fig1-predictions.svg
+coverMobile: Chinchilla-fig-a3-tokens-parameters.svg
+coverFit: figure
 draft: false
 ---
 
@@ -128,6 +130,6 @@ Gopher 有 2800 亿参数，训练了约 3000 亿 token。论文用同档训练�
 
 ### 参考资料
 
-1. Hoffmann et al. *Training Compute-Optimal Large Language Models*. NeurIPS 2022. [论文 PDF](https://proceedings.neurips.cc/paper_files/paper/2022/file/c1e2faff6f588870935f114ebe04a3e5-Paper-Conference.pdf)。第 3 节介绍三种分配方法，第 4 节比较 Chinchilla 与 Gopher；[封面取自原论文 Figure 1](https://arxiv.org/html/2203.15556v1#S1.F1)。
+1. Hoffmann et al. *Training Compute-Optimal Large Language Models*. NeurIPS 2022. [论文 PDF](https://proceedings.neurips.cc/paper_files/paper/2022/file/c1e2faff6f588870935f114ebe04a3e5-Paper-Conference.pdf)。第 3 节介绍三种分配方法，第 4 节比较 Chinchilla 与 Gopher。桌面封面取自[图 1](https://arxiv.org/html/2203.15556v1#S1.F1)，手机封面取自[附录图 A3](https://arxiv.org/html/2203.15556v1#A4.F3)。
 2. Google DeepMind. *An Empirical Analysis of Compute-Optimal Large Language Model Training*. 2022. [研究博客](https://deepmind.google/blog/an-empirical-analysis-of-compute-optimal-large-language-model-training/)。作者团队解释为何在 Gopher 的预算下选择更小的模型和更多的训练 token。
 3. Besiroglu et al. *Chinchilla Scaling: A Replication Attempt*. Epoch AI, 2024. [研究博客](https://epoch.ai/blog/chinchilla-scaling-a-replication-attempt)。复查参数化损失拟合及其对预算分配预测的影响。

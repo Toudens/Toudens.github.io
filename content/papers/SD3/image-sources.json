@@ -1,0 +1,18 @@
+{
+  "architecture-loss.jpg": {
+    "paper_version": "arXiv:2403.03206v1",
+    "figure": "Figure 4, left panel",
+    "figure_page": "https://arxiv.org/html/2403.03206v1#S5.F4",
+    "download_url": "https://arxiv.org/html/2403.03206v1/img/archs_squeezed/val_loss_level_avg.jpg",
+    "sha256": "0d4f16463223d75f957a7d6b5fa61a3ae834dcbcd4363e87d3eea6bb7bffc26a",
+    "transformations": []
+  },
+  "architecture-fid-clip.jpg": {
+    "paper_version": "arXiv:2403.03206v1",
+    "figure": "Figure 4, right panel",
+    "figure_page": "https://arxiv.org/html/2403.03206v1#S5.F4",
+    "download_url": "https://arxiv.org/html/2403.03206v1/img/archs_squeezed/clip_fid_sampler_default_ema_True.jpg",
+    "sha256": "3105f646e37fd84e54f986a335ae9c2523d3b5edc2ca14dfb3949321aac41c51",
+    "transformations": []
+  }
+}

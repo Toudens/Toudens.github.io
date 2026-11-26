@@ -1,5 +1,7 @@
 {{- $body := replaceRE `(?s)\{\{<\s*article-summary\s*>\}\}.*?\{\{<\s*/article-summary\s*>\}\}` "" .Page.RawContent -}}
-{{- $imageCount := add (len (findRE `(?i)<img\b[^>]*>` $body)) (len (findRE `!\[[^\]]*\]\([^)]+\)` $body)) -}}
+{{- /* Count a diagram shown in two color schemes once. */ -}}
+{{- $lightBody := replaceRE `(?is)<a\b[^>]*class="paper-diagram-dark"[^>]*>.*?</a>` "" $body -}}
+{{- $imageCount := add (len (findRE `(?i)<img\b[^>]*>` $lightBody)) (len (findRE `!\[[^\]]*\]\([^)]+\)` $lightBody)) -}}
 {{- $text := replaceRE `(?s)\$\$.*?\$\$` "" $body -}}
 {{- $text = replaceRE `\$[^$\n]+\$` "" $text -}}
 {{- $text = replaceRE `(?m)^>\s*\[![^\]]+\]` "" $text -}}

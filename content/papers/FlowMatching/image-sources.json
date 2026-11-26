@@ -1,0 +1,28 @@
+{
+  "FM-fig14-super-resolution.png": {
+    "paper": "Flow Matching for Generative Modeling",
+    "paper_version": "arXiv:2210.02747v2",
+    "figure": "Figure 14, first comparison panel: ImageNet validation image, 64 x 64 input and 256 x 256 conditional generation",
+    "figure_page": "https://arxiv.org/html/2210.02747v2#A6.F14",
+    "download_url": "https://arxiv.org/html/2210.02747v2/figures/upsampled/upsample_8.png",
+    "sha256": "d7660486dbcaef82c7f0fe48f2e9d67d8c8b19f80117116ecb150f3d62827b3b",
+    "bytes": 240769,
+    "width": 518,
+    "height": 260,
+    "transformations": [],
+    "note": "Home cover. The input and the Flow Matching OT output were published together as a single image file. Original colors and framing retained."
+  },
+  "FM-fig3-ot.png": {
+    "paper": "Flow Matching for Generative Modeling",
+    "paper_version": "arXiv:2210.02747v2",
+    "figure": "Figure 3, right OT panel",
+    "figure_page": "https://arxiv.org/html/2210.02747v2#S4.F3",
+    "download_url": "https://arxiv.org/html/2210.02747v2/figures/2d_traj/2d_traj_ot.png",
+    "sha256": "5e8fa2bed5aac8bffb778c62ec8e7188f216f423c872c62100ad4ffc1d2b42a3",
+    "bytes": 48038,
+    "width": 600,
+    "height": 600,
+    "transformations": [],
+    "note": "Downloaded directly from the image asset referenced by the arXiv HTML. Original file bytes preserved; no crop, redraw, conversion, or screenshot."
+  }
+}

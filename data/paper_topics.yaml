@@ -15,11 +15,11 @@
       paper: Adding Conditional Control to Text-to-Image Diffusion Models
     - page: /papers/DiT
       paper: Scalable Diffusion Models with Transformers
-    - title: 流匹配 Flow Matching
+    - page: /papers/FlowMatching
       paper: Flow Matching for Generative Modeling
-    - title: 整流流 Rectified Flow
+    - page: /papers/RectifiedFlow
       paper: "Flow Straight and Fast: Learning to Generate and Transfer Data with Rectified Flow"
-    - title: 多模态扩散 Transformer SD3
+    - page: /papers/SD3
       paper: Scaling Rectified Flow Transformers for High-Resolution Image Synthesis
 - id: llm
   title: 大语言模型

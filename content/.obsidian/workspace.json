@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "papers/DDPM/index.md",
+                "file": "hw4.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "index"
+              "title": "hw4"
             }
           }
         ]
@@ -188,15 +188,31 @@
   },
   "active": "0453e28a1ef89566",
   "lastOpenFiles": [
+    "papers/SD3/joint-attention.png",
+    "papers/SD3/image-sources.json",
+    "papers/SD3/architecture-fid-clip.jpg",
+    "papers/FlowMatching/image-sources.json",
+    "papers/RectifiedFlow/rectified-flow-figure-3b.png",
+    "papers/RectifiedFlow/rectified-flow-figure-3a.png",
+    "papers/RectifiedFlow/rectified-flow-figure-1.jpeg",
+    "papers/FlowMatching/FM-fig3-ot.png",
+    "papers/FlowMatching/index.md",
+    "papers/SD3/architecture-loss.jpg",
+    "papers/SD3/index.md",
+    "papers/RectifiedFlow/index.md",
+    "papers/SD3/mmdit.png",
+    "papers/RectifiedFlow/rectification.png",
+    "papers/FlowMatching/flow-paths.png",
+    "papers/SD3",
+    "papers/RectifiedFlow",
+    "papers/FlowMatching",
+    "papers/DDIM/index.md",
+    "hw4.md",
+    "papers/DDPM/index.md",
     "papers/Transformer/transformer-attention.png",
-    "papers/Transformer/transformer-architecture.png",
     "papers/Transformer/index.md",
     "papers/Transformer",
-    "papers/DDPM/DDPM-overview.svg",
-    "papers/DDPM/DDPM-overview.png",
     "papers/_index.md",
-    "papers/DDPM/DDPM-fig1-samples.png",
-    "papers/DDPM/index.md",
     "compsci/p/DDPM/index.md",
     "mathtech/_index.md",
     "travel/xi-an/Shaanxi-Historical-Museum/index.md",
@@ -215,24 +231,8 @@
     "travel/hangzhou/liangzhu/index.md",
     "travel/hangzhou/qiantang/index.md",
     "travel/xi-an/Terracotta-Warriors",
-    "travel/xi-an/_index.md",
     "travel/xi-an/Shaanxi-Historical-Museum",
     "travel/xi-an/Changan-Miscellany",
-    "travel/memento/_index.md",
-    "travel/memento/rain",
-    "travel/wuhan/_index.md",
-    "travel/weinan/_index.md",
-    "travel/nanchang/_index.md",
-    "travel/nanchang/other",
-    "travel/nanchang/nanchang163",
-    "travel/nanchang/tengwang",
-    "travel/nanchang/haihun",
-    "travel/nanchang/ocean-park",
-    "papers/DDPM/DDPM-fig2-process.png",
-    "papers/DDPM/DDPM-algorithms.png",
-    "mathtech/infotheory/Ch-9/Ch-9-5.png",
-    "mathtech/infotheory/Ch-9/Ch-9-3.png",
-    "mathtech/infotheory/Ch-9/Ch-9-4.png",
-    "mathtech/infotheory/Ch-9/Ch-9-2.png"
+    "travel/memento/rain"
   ]
 }

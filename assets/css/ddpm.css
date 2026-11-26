@@ -71,6 +71,27 @@
   text-align: center;
 }
 
+/* A worked example sits at reading scale; dense figures from papers keep their own sizing. */
+.content .paper-diagram > a {
+  display: block;
+  width: min(100%, var(--diagram-width, 372px));
+  margin-inline: auto;
+}
+.content .paper-diagram > .paper-diagram-dark,
+.dark .content .paper-diagram > .paper-diagram-light {
+  display: none;
+}
+.dark .content .paper-diagram > .paper-diagram-dark {
+  display: block;
+}
+.content .paper-diagram figcaption {
+  max-width: 34rem;
+  margin: .35rem auto 0;
+  font-size: .8125rem;
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+
 /* Long equations scroll within their own row instead of widening the page. */
 .content mjx-container[display="true"] {
   display: block;

@@ -295,4 +295,4 @@ $$
 ### 参考资料
 
 1. Xingchao Liu, Chengyue Gong, Qiang Liu. *Flow Straight and Fast: Learning to Generate and Transfer Data with Rectified Flow*. ICLR 2023. [论文](https://arxiv.org/abs/2209.03003)。训练与 Reflow 见 §2，边缘分布、运输代价及拉直性质见 §3，CIFAR-10 对照见 §5.2、Table 1 及附录 A。
-2. [Rectified Flow 官方实现](https://github.com/gnobitab/RectifiedFlow)。包含图像生成、Reflow 和蒸馏的训练代码。
+2. Liu et al. *Rectified Flow 官方实现*. [GitHub](https://github.com/gnobitab/RectifiedFlow)。包含图像生成、Reflow 和蒸馏的训练代码。

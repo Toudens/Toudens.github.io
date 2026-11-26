@@ -460,6 +460,6 @@ CFG 明显改善了表中的 FID，但它也改变生成分布的覆盖程度。
 ### 参考资料
 
 1. Rombach et al. *High-Resolution Image Synthesis with Latent Diffusion Models*. CVPR 2022. [论文主页](https://arxiv.org/abs/2112.10752)；[CVPR 正文](https://openaccess.thecvf.com/content/CVPR2022/papers/Rombach_High-Resolution_Image_Synthesis_With_Latent_Diffusion_Models_CVPR_2022_paper.pdf)。框架见 §3，压缩权衡见 §4.1，条件任务见 §4.3—4.5；本文配图取自 Figure 1、3、6，生成与效率结果取自 Table 2、3、6、7。
-2. 原论文 [补充材料](https://openaccess.thecvf.com/content/CVPR2022/supplemental/Rombach_High-Resolution_Image_Synthesis_CVPR_2022_supplemental.pdf)。§C.1 讨论潜尺度与高分辨率生成；Table 8 给出自编码器重建；§D.2、Table 15—17 说明条件网络和张量配置；§D.3 说明评估协议；§F 说明第一阶段目标、KL 抽样、缩放及量化前的连续表示，§G 讨论精细像素任务的局限。
+2. Rombach et al. *High-Resolution Image Synthesis with Latent Diffusion Models: Supplementary Material*. CVPR 2022. [补充材料](https://openaccess.thecvf.com/content/CVPR2022/supplemental/Rombach_High-Resolution_Image_Synthesis_CVPR_2022_supplemental.pdf)。§C.1 讨论潜尺度与高分辨率生成；Table 8 给出自编码器重建；§D.2、Table 15—17 说明条件网络和张量配置；§D.3 说明评估协议；§F 说明第一阶段目标、KL 抽样、缩放及量化前的连续表示，§G 讨论精细像素任务的局限。
 3. CompVis. [latent-diffusion 官方实现](https://github.com/CompVis/latent-diffusion)。自编码器与扩散模型分别位于 `ldm/models/autoencoder.py`、`ldm/models/diffusion/ddpm.py`，文本模型配置见 `configs/latent-diffusion/txt2img-1p4B-eval.yaml`。
 4. CompVis. [Stable Diffusion 官方实现](https://github.com/CompVis/stable-diffusion)。SD v1 的 CLIP 条件编码与缩放设置见模型说明和 `configs/stable-diffusion/v1-inference.yaml`。

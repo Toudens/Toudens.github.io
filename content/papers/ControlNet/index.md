@@ -258,5 +258,5 @@ Figure 8 比较的是不同结构训练后的结果；[第 4.4 节的苹果实�
 ### 参考资料
 
 1. Zhang, Rao, Agrawala. *Adding Conditional Control to Text-to-Image Diffusion Models*. ICCV 2023. [arXiv:2302.05543](https://arxiv.org/abs/2302.05543)，[CVF 正式版](https://openaccess.thecvf.com/content/ICCV2023/html/Zhang_Adding_Conditional_Control_to_Text-to-Image_Diffusion_Models_ICCV_2023_paper.html)。本文图 1–3、训练设置与实验数据的主要来源。
-2. [ControlNet 官方实现](https://github.com/lllyasviel/ControlNet)，其中 [cldm/cldm.py](https://github.com/lllyasviel/ControlNet/blob/main/cldm/cldm.py) 给出条件编码、零卷积和多尺度注入，[Canny 演示](https://github.com/lllyasviel/ControlNet/blob/main/gradio_canny2image.py) 展示 CFG 两路的控制设置。
+2. Zhang et al. *ControlNet 官方实现*. [GitHub](https://github.com/lllyasviel/ControlNet)。[cldm/cldm.py](https://github.com/lllyasviel/ControlNet/blob/main/cldm/cldm.py) 给出条件编码、零卷积和多尺度注入；[Canny 演示](https://github.com/lllyasviel/ControlNet/blob/main/gradio_canny2image.py) 展示 CFG 两路的控制设置。
 3. Rombach et al. *High-Resolution Image Synthesis with Latent Diffusion Models*. CVPR 2022. [arXiv:2112.10752](https://arxiv.org/abs/2112.10752)。潜空间扩散和文本条件主干。

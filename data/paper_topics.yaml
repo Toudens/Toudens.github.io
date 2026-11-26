@@ -26,15 +26,15 @@
   items:
     - page: /papers/Transformer
       paper: Attention Is All You Need
-    - title: 生成式预训练 GPT
+    - page: /papers/GPT
       paper: Improving Language Understanding by Generative Pre-Training
-    - title: 上下文学习 GPT-3
+    - page: /papers/GPT3
       paper: Language Models are Few-Shot Learners
-    - title: 训练规模与数据 Chinchilla
+    - page: /papers/Chinchilla
       paper: Training Compute-Optimal Large Language Models
-    - title: 基础语言模型 LLaMA
+    - page: /papers/LLaMA
       paper: "LLaMA: Open and Efficient Foundation Language Models"
-    - title: 低秩微调 LoRA
+    - page: /papers/LoRA
       paper: "LoRA: Low-Rank Adaptation of Large Language Models"
     - title: 指令微调与对齐 InstructGPT
       paper: Training language models to follow instructions with human feedback

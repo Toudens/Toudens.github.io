@@ -261,4 +261,5 @@ $$
 
 1. Esser et al. *Scaling Rectified Flow Transformers for High-Resolution Image Synthesis*. [ICML 2024 正式版](https://proceedings.mlr.press/v235/esser24a.html)；[arXiv 全文](https://arxiv.org/html/2403.03206v1)。时间采样见 §3.1、Table 1–2；图文架构见 §4、Figure 2、附录 B.2；架构、描述与生成实验见 §5、Figure 4、Table 3–6；分辨率偏移见 §5.3.2。
 2. Stability AI. [SD3 参考推理实现](https://github.com/Stability-AI/sd3-ref)。可对照潜表示、采样时刻、MM-DiT 和文本条件在一次生成中的调用顺序。
-3. Lipman et al. *Flow Matching for Generative Modeling*. [论文](https://arxiv.org/abs/2210.02747)。Liu, Gong, Liu. *Flow Straight and Fast*. [论文](https://arxiv.org/abs/2209.03003)。两篇分别说明条件速度监督与直线路径的学习。
+3. Lipman et al. *Flow Matching for Generative Modeling*. ICLR 2023. [arXiv:2210.02747](https://arxiv.org/abs/2210.02747)。条件速度监督的来源。
+4. Liu, Gong, Liu. *Flow Straight and Fast: Learning to Generate and Transfer Data with Rectified Flow*. ICLR 2023. [arXiv:2209.03003](https://arxiv.org/abs/2209.03003)。直线路径与整流训练的来源。
